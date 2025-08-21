@@ -1,6 +1,6 @@
 extends Node2D
 
-const BULLET = preload("res://TSCN/bullet.tscn")
+const BULLET = preload("res://Scenes/bullet.tscn")
 
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())

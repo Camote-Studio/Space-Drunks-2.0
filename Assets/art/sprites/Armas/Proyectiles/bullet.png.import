@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csx38ksyydehh"
-path="res://.godot/imported/Punch2.png-6c90428175d00bcb3851960a2927536c.ctex"
+uid="uid://cruufcspx1yey"
+path="res://.godot/imported/bullet.png-72f591905875ca65fb1efae667f6c844.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Punch2.png"
-dest_files=["res://.godot/imported/Punch2.png-6c90428175d00bcb3851960a2927536c.ctex"]
+source_file="res://Assets/art/sprites/Armas/Proyectiles/bullet.png"
+dest_files=["res://.godot/imported/bullet.png-72f591905875ca65fb1efae667f6c844.ctex"]
 
 [params]
 

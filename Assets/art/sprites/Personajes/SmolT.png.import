@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhsyhat33qf13"
-path="res://.godot/imported/BIGd.png-ae0a4d586f94c834ff49a846d06656ff.ctex"
+uid="uid://cjvvb4lk2yv8t"
+path="res://.godot/imported/SmolT.png-a0d518dc9bccdbbdec29dbcd778f485a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/BIGd.png"
-dest_files=["res://.godot/imported/BIGd.png-ae0a4d586f94c834ff49a846d06656ff.ctex"]
+source_file="res://Assets/art/sprites/Personajes/SmolT.png"
+dest_files=["res://.godot/imported/SmolT.png-a0d518dc9bccdbbdec29dbcd778f485a.ctex"]
 
 [params]
 

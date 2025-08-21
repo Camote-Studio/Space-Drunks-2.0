@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blex0n2rdxghj"
-path="res://.godot/imported/Punch1.png-ee47bbacb457786aedc4d393a01666e5.ctex"
+uid="uid://b6y5plhwwt642"
+path="res://.godot/imported/alien_sprite.png-e8d25b026efad014a35c1ccaf3fed639.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Punch1.png"
-dest_files=["res://.godot/imported/Punch1.png-ee47bbacb457786aedc4d393a01666e5.ctex"]
+source_file="res://Assets/art/sprites/Personajes/alien_sprite.png"
+dest_files=["res://.godot/imported/alien_sprite.png-e8d25b026efad014a35c1ccaf3fed639.ctex"]
 
 [params]
 

@@ -1,14 +1,14 @@
 [gd_scene load_steps=17 format=3 uid="uid://t8t1xbgjp2hy"]
 
-[ext_resource type="Texture2D" uid="uid://cj8im74rqdyp0" path="res://background/floor.png" id="1_jto8a"]
-[ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://GD/character_body_2d.gd" id="1_yqug6"]
-[ext_resource type="Texture2D" uid="uid://cjvvb4lk2yv8t" path="res://Sprites/SmolT.png" id="2_akswe"]
-[ext_resource type="PackedScene" uid="uid://tytkyjl3qajp" path="res://TSCN/gun.tscn" id="3_wkdwt"]
-[ext_resource type="Script" uid="uid://pf3j3f0ukca0" path="res://GD/enemie_1.gd" id="4_akswe"]
-[ext_resource type="Texture2D" uid="uid://0mx71mgpebym" path="res://Sprites/ovni_enemie_1.png" id="5_x6sy4"]
-[ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://GD/player_2.gd" id="6_08ug1"]
-[ext_resource type="Texture2D" uid="uid://dhsyhat33qf13" path="res://Sprites/BIGd.png" id="7_jto8a"]
-[ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://TSCN/sword.tscn" id="9_1m887"]
+[ext_resource type="Texture2D" uid="uid://cj8im74rqdyp0" path="res://Assets/art/background/floor.png" id="1_jto8a"]
+[ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_yqug6"]
+[ext_resource type="Texture2D" uid="uid://cjvvb4lk2yv8t" path="res://Assets/art/sprites/Personajes/SmolT.png" id="2_akswe"]
+[ext_resource type="PackedScene" uid="uid://tytkyjl3qajp" path="res://Scenes/gun.tscn" id="3_wkdwt"]
+[ext_resource type="Script" uid="uid://pf3j3f0ukca0" path="res://Scripts/enemie_1.gd" id="4_akswe"]
+[ext_resource type="Texture2D" uid="uid://0mx71mgpebym" path="res://Assets/art/sprites/Enemigos/ovni_enemie_1.png" id="5_x6sy4"]
+[ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="6_08ug1"]
+[ext_resource type="Texture2D" uid="uid://dhsyhat33qf13" path="res://Assets/art/sprites/Personajes/BIGd.png" id="7_jto8a"]
+[ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://Scenes/sword.tscn" id="9_1m887"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
 radius = 11.0
