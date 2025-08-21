@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://084pu62akfh2"]
+
+[ext_resource type="Texture2D" uid="uid://cj8im74rqdyp0" path="res://Assets/art/background/floor.png" id="1_amooc"]
+
+[node name="Nivel1Fase1" type="Node2D"]
+
+[node name="Backgrounds" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(2, 1)
+texture = ExtResource("1_amooc")
+centered = false
