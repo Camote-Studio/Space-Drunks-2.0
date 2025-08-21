@@ -1,0 +1,140 @@
+[gd_scene load_steps=17 format=3 uid="uid://t8t1xbgjp2hy"]
+
+[ext_resource type="Texture2D" uid="uid://cj8im74rqdyp0" path="res://background/floor.png" id="1_jto8a"]
+[ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://GD/character_body_2d.gd" id="1_yqug6"]
+[ext_resource type="Texture2D" uid="uid://cjvvb4lk2yv8t" path="res://Sprites/SmolT.png" id="2_akswe"]
+[ext_resource type="PackedScene" uid="uid://tytkyjl3qajp" path="res://TSCN/gun.tscn" id="3_wkdwt"]
+[ext_resource type="Script" uid="uid://pf3j3f0ukca0" path="res://GD/enemie_1.gd" id="4_akswe"]
+[ext_resource type="Texture2D" uid="uid://0mx71mgpebym" path="res://Sprites/ovni_enemie_1.png" id="5_x6sy4"]
+[ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://GD/player_2.gd" id="6_08ug1"]
+[ext_resource type="Texture2D" uid="uid://dhsyhat33qf13" path="res://Sprites/BIGd.png" id="7_jto8a"]
+[ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://TSCN/sword.tscn" id="9_1m887"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
+radius = 11.0
+height = 38.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08ug1"]
+radius = 16.0312
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jto8a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
+radius = 27.0
+height = 90.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
+size = Vector2(1160, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpm8x"]
+size = Vector2(1160, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmac2"]
+size = Vector2(15, 652)
+
+[node name="GameWorld" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(567.75, 313.25)
+scale = Vector2(1.83071, 1.65267)
+texture = ExtResource("1_jto8a")
+
+[node name="Player_1" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(573, 324)
+script = ExtResource("1_yqug6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player_1"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_akswe")
+
+[node name="Camera2D" type="Camera2D" parent="Player_1"]
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_1"]
+position = Vector2(-1, 21)
+shape = SubResource("CapsuleShape2D_yqug6")
+
+[node name="Gun" parent="Player_1" instance=ExtResource("3_wkdwt")]
+position = Vector2(-2, 18)
+
+[node name="ProgressBar_alien_1" type="ProgressBar" parent="Player_1"]
+modulate = Color(1, 1, 0, 1)
+offset_left = -49.0
+offset_top = -61.0
+offset_right = 44.0
+offset_bottom = -46.0
+value = 100.0
+show_percentage = false
+
+[node name="Enemie_1" type="CharacterBody2D" parent="."]
+position = Vector2(367, 193)
+script = ExtResource("4_akswe")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemie_1"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_x6sy4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemie_1"]
+shape = SubResource("CircleShape2D_08ug1")
+
+[node name="Area2D" type="Area2D" parent="Enemie_1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemie_1/Area2D"]
+shape = SubResource("CircleShape2D_jto8a")
+
+[node name="gun_timer" type="Timer" parent="Enemie_1"]
+
+[node name="ProgressBar_enemy_1" type="ProgressBar" parent="Enemie_1"]
+modulate = Color(1, 0, 0, 1)
+offset_left = -49.0
+offset_top = -61.0
+offset_right = 44.0
+offset_bottom = -46.0
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Player_2" type="CharacterBody2D" parent="." groups=["player_2"]]
+script = ExtResource("6_08ug1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player_2"]
+position = Vector2(680, 304)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_jto8a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_2"]
+position = Vector2(680, 316)
+shape = SubResource("CapsuleShape2D_1m887")
+
+[node name="ProgressBar_alien_2" type="ProgressBar" parent="Player_2"]
+modulate = Color(1, 1, 0, 1)
+offset_left = 634.0
+offset_top = 215.0
+offset_right = 727.0
+offset_bottom = 230.0
+value = 100.0
+show_percentage = false
+
+[node name="sword" parent="Player_2" instance=ExtResource("9_1m887")]
+position = Vector2(713, 310)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(570, 124)
+shape = SubResource("RectangleShape2D_1m887")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(576, 474)
+shape = SubResource("RectangleShape2D_tpm8x")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-2.5, 316)
+shape = SubResource("RectangleShape2D_nmac2")
+
+[connection signal="timeout" from="Enemie_1/gun_timer" to="Enemie_1" method="_on_gun_timer_timeout"]
