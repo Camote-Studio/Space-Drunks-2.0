@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp1plrdyiywox"]
+
+[ext_resource type="Texture2D" uid="uid://bkwdwtyxnwitn" path="res://Assets/art/background/Space.jpg" id="1_1ofkd"]
+
+[node name="MenuBackground" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(577, 328)
+scale = Vector2(1.86928, 1.58824)
+texture = ExtResource("1_1ofkd")
