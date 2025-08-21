@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b040jrwoqx1yo"]
+
+[ext_resource type="Script" uid="uid://dn3tgpp6qko0h" path="res://GD/gun_enemy_1.gd" id="1_0xf5e"]
+[ext_resource type="Texture2D" uid="uid://cruufcspx1yey" path="res://Sprites/bullet.png" id="1_ivctt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xf5e"]
+radius = 11.0454
+
+[node name="gun_enemy_1" type="Node2D" groups=["gun_enemy"]]
+script = ExtResource("1_0xf5e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.792169, 0.124575, 0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_ivctt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0xf5e")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
