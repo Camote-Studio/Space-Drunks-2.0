@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjvvb4lk2yv8t"
-path="res://.godot/imported/SmolT.png-2afe0b875937093eabdbf9bc4d5f3f2e.ctex"
+uid="uid://cj8im74rqdyp0"
+path="res://.godot/imported/floor.png-293188955ff234ae21712ad32044a707.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/SmolT.png"
-dest_files=["res://.godot/imported/SmolT.png-2afe0b875937093eabdbf9bc4d5f3f2e.ctex"]
+source_file="res://Assets/art/background/floor.png"
+dest_files=["res://.godot/imported/floor.png-293188955ff234ae21712ad32044a707.ctex"]
 
 [params]
 

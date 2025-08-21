@@ -1,10 +1,9 @@
 extends Node2D
 
-const PUNCH_1 = preload("res://TSCN/punch.tscn")
-const PUNCH_2 = preload("res://TSCN/punch_2.tscn")
+const PUNCH_1 = preload("res://Scenes/punch.tscn")
+const PUNCH_2 = preload("res://Scenes/punch_2.tscn")
 @onready var marker_2d: Marker2D = $Marker2D
 @onready var marker_2d_2: Marker2D = $Marker2D2
-
 @export var mode_random: bool = true
 var next_seq := 1
 

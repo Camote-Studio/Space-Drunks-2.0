@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var speed := 300
 var player: CharacterBody2D = null
-const BULLET_ENEMY_1 = preload("res://TSCN/gun_enemy_1.tscn")
+const BULLET_ENEMY_1 = preload("res://Scenes/gun_enemy_1.tscn")
 
 # --- Parámetros de comportamiento ---
 var min_range := 250.0      # si está más cerca que esto, se aleja

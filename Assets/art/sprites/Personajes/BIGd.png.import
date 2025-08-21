@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhqi54jg8qvgb"
-path="res://.godot/imported/gUN1.png-9d0584f77b467fa3112d58088dfbe429.ctex"
+uid="uid://dhsyhat33qf13"
+path="res://.godot/imported/BIGd.png-a36f356afc07af3f9c34b7a5784ada6c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/gUN1.png"
-dest_files=["res://.godot/imported/gUN1.png-9d0584f77b467fa3112d58088dfbe429.ctex"]
+source_file="res://Assets/art/sprites/Personajes/BIGd.png"
+dest_files=["res://.godot/imported/BIGd.png-a36f356afc07af3f9c34b7a5784ada6c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cruufcspx1yey"
-path="res://.godot/imported/bullet.png-6b56c7898a9b46a3c3db58585f0f8e0d.ctex"
+uid="uid://bgjxtcher56h1"
+path="res://.godot/imported/ALABARDA.png-9a48874878aa1d68269b90f545730435.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/bullet.png"
-dest_files=["res://.godot/imported/bullet.png-6b56c7898a9b46a3c3db58585f0f8e0d.ctex"]
+source_file="res://Assets/art/sprites/Armas/ALABARDA.png"
+dest_files=["res://.godot/imported/ALABARDA.png-9a48874878aa1d68269b90f545730435.ctex"]
 
 [params]
 

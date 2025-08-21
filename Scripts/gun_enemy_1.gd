@@ -1,6 +1,6 @@
 extends Node2D
 var SPEED := 200
-@onready var progress_bar_alien_1: ProgressBar = $CharacterBody2D/ProgressBar_alien_1
+@onready var progress_bar_alien_1: ProgressBar = $Player_1/ProgressBar_alien_1
 @onready var progress_bar_alien_2: ProgressBar = $Player_2/ProgressBar_alien_2
 
 var alien : CharacterBody2D

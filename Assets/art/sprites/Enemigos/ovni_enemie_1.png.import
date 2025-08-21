@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwkjwsuumx1xw"
-path="res://.godot/imported/gun.png-f03d1d536b56ce558fcdc5faeba8bfd6.ctex"
+uid="uid://0mx71mgpebym"
+path="res://.godot/imported/ovni_enemie_1.png-e415f7f4972e876e50b539efb62d21f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/gun.png"
-dest_files=["res://.godot/imported/gun.png-f03d1d536b56ce558fcdc5faeba8bfd6.ctex"]
+source_file="res://Assets/art/sprites/Enemigos/ovni_enemie_1.png"
+dest_files=["res://.godot/imported/ovni_enemie_1.png-e415f7f4972e876e50b539efb62d21f0.ctex"]
 
 [params]
 
