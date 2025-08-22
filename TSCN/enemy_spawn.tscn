@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsxmlfrj88uac"]
+[gd_scene load_steps=3 format=3 uid="uid://bsxmlfrj88uac"]
+
+[ext_resource type="Script" uid="uid://b6j4o0rk5hkm3" path="res://GD/enemy_spawn.gd" id="1_8vvut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_liclx"]
 
 [node name="Enemy_spawn" type="Area2D"]
+script = ExtResource("1_8vvut")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_liclx")
+
+[node name="spawn_timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]

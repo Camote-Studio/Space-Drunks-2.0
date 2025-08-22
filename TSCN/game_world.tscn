@@ -1,24 +1,17 @@
-[gd_scene load_steps=50 format=3 uid="uid://t8t1xbgjp2hy"]
+[gd_scene load_steps=45 format=3 uid="uid://t8t1xbgjp2hy"]
 
 [ext_resource type="Script" uid="uid://c20j8hgyb2dig" path="res://GD/game_world.gd" id="1_8d0et"]
-[ext_resource type="Texture2D" uid="uid://cj8im74rqdyp0" path="res://background/floor.png" id="1_jto8a"]
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://GD/character_body_2d.gd" id="1_yqug6"]
 [ext_resource type="Texture2D" uid="uid://c0rk3ue3gcaf6" path="res://Sprites/floor_2.webp" id="2_4asma"]
 [ext_resource type="Texture2D" uid="uid://cjvvb4lk2yv8t" path="res://Sprites/SmolT.png" id="2_akswe"]
+[ext_resource type="Texture2D" uid="uid://cw30hmjk8bsb5" path="res://background/bar_background (1).png" id="2_nswfa"]
+[ext_resource type="Texture2D" uid="uid://b56ujtckpkkl5" path="res://background/background_floor.png" id="3_jqqi2"]
 [ext_resource type="PackedScene" uid="uid://tytkyjl3qajp" path="res://TSCN/gun.tscn" id="3_wkdwt"]
-[ext_resource type="Script" uid="uid://pf3j3f0ukca0" path="res://GD/enemie_1.gd" id="4_akswe"]
-[ext_resource type="Texture2D" uid="uid://0mx71mgpebym" path="res://Sprites/ovni_enemie_1.png" id="5_x6sy4"]
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://GD/player_2.gd" id="6_08ug1"]
 [ext_resource type="Texture2D" uid="uid://dhsyhat33qf13" path="res://Sprites/BIGd.png" id="7_jto8a"]
-[ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Sprites/explosion_1.png" id="8_3jlc6"]
 [ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://TSCN/sword.tscn" id="9_1m887"]
-[ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Sprites/explosion_2.png" id="9_lq2so"]
 [ext_resource type="Script" uid="uid://cpufpisex7oqp" path="res://GD/portal.gd" id="10_nmac2"]
-[ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Sprites/explosion_3.png" id="10_w2gad"]
 [ext_resource type="Texture2D" uid="uid://bg7a0x7n1spia" path="res://Sprites/portal.png" id="11_4asma"]
-[ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Sprites/explosion_4.png" id="11_8ofq8"]
-[ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Sprites/explosion_5.png" id="12_uvlkj"]
-[ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Sprites/explosion_6.png" id="13_mqfl8"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://GD/camera_2d.gd" id="13_n6wrj"]
 [ext_resource type="AudioStream" uid="uid://7t50crxvlos8" path="res://Audio/ready-set-go-sound-268353.mp3" id="14_o87y8"]
 [ext_resource type="AudioStream" uid="uid://cp7oc7mocyiuy" path="res://Audio/Hideki Naganuma - JACK DA FUNK - Bomb Rush Cyberfunk OST.mp3" id="15_5ckil"]
@@ -28,55 +21,20 @@
 [ext_resource type="Texture2D" uid="uid://78uicu7sheov" path="res://complements_sprites/coin_1.png" id="23_8d0et"]
 [ext_resource type="Texture2D" uid="uid://dn3imkkyfogyt" path="res://complements_sprites/coin_2.png" id="24_74kcl"]
 [ext_resource type="Texture2D" uid="uid://c5udsfo1kf8ja" path="res://complements_sprites/coin_3.png" id="25_3ssdm"]
+[ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://complements_sprites/arrow_with_go_text.png" id="25_cfgxb"]
 [ext_resource type="Texture2D" uid="uid://bd3b6n6yc4blk" path="res://complements_sprites/coin_4.png" id="26_ufeic"]
 [ext_resource type="Texture2D" uid="uid://cyuhv8fianx7e" path="res://complements_sprites/coin_5.png" id="27_q00ib"]
+[ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://TSCN/enemy_spawn.tscn" id="28_0ic24"]
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://complements_sprites/coin_6.png" id="28_jy7da"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://complements_sprites/coin_7.png" id="29_408q8"]
+[ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://TSCN/enemy_spawn_2.tscn" id="30_nswfa"]
+[ext_resource type="Texture2D" uid="uid://rq0mwrl4053j" path="res://Sprites/box_1.png" id="31_jqqi2"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://GD/offscreen_peek_hud.gd" id="32_thxnh"]
 [ext_resource type="Shader" uid="uid://qdkcfbufhu31" path="res://GD/game_world.gdshader" id="33_8d0et"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
 radius = 11.0
 height = 38.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_hrlvl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_x6sy4")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_3jlc6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_lq2so")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_w2gad")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_8ofq8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_uvlkj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_mqfl8")
-}],
-"loop": true,
-"name": &"explosion",
-"speed": 8.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_08ug1"]
-radius = 16.0312
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_jto8a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
 radius = 27.0
@@ -200,10 +158,38 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/Sprite2D3:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0ic24"]
+resource_name = "arrow_go"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Sprite2D3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.604459, 0.804371),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ckil"]
 _data = {
 &"RESET": SubResource("Animation_o87y8"),
+&"arrow_go": SubResource("Animation_0ic24"),
 &"start_animation": SubResource("Animation_n6wrj")
 }
 
@@ -244,9 +230,15 @@ script = ExtResource("1_8d0et")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2735.75, 313.25)
-scale = Vector2(8.65905, 1.65267)
-texture = ExtResource("1_jto8a")
+position = Vector2(2750, 5.11195)
+scale = Vector2(4.58333, 0.716705)
+texture = ExtResource("2_nswfa")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2751.6, 391.5)
+scale = Vector2(6.82831, 1.0035)
+texture = ExtResource("3_jqqi2")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -268,47 +260,6 @@ shape = SubResource("CapsuleShape2D_yqug6")
 
 [node name="Gun" parent="Player_1" instance=ExtResource("3_wkdwt")]
 position = Vector2(-2, 18)
-
-[node name="Enemie_1" type="CharacterBody2D" parent="." groups=["enemy_1"]]
-position = Vector2(1325, 204)
-script = ExtResource("4_akswe")
-
-[node name="Sprite2D" type="AnimatedSprite2D" parent="Enemie_1"]
-texture_filter = 1
-scale = Vector2(0.2, 0.2)
-sprite_frames = SubResource("SpriteFrames_hrlvl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemie_1"]
-shape = SubResource("CircleShape2D_08ug1")
-
-[node name="Area2D" type="Area2D" parent="Enemie_1"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemie_1/Area2D"]
-shape = SubResource("CircleShape2D_jto8a")
-
-[node name="gun_timer" type="Timer" parent="Enemie_1"]
-
-[node name="Label" type="Label" parent="Enemie_1"]
-visible = false
-texture_filter = 1
-offset_left = -21.0
-offset_top = -52.0
-offset_right = 19.0
-offset_bottom = -29.0
-text = "0"
-horizontal_alignment = 1
-
-[node name="ProgressBar_enemy" type="ProgressBar" parent="Enemie_1"]
-visible = false
-modulate = Color(1, 0, 0, 1)
-offset_left = -42.0
-offset_top = -46.0
-offset_right = 51.0
-offset_bottom = -31.0
-value = 100.0
-show_percentage = false
-
-[node name="explosion_timer" type="Timer" parent="Enemie_1"]
 
 [node name="Player_2" type="CharacterBody2D" parent="." groups=["player_2"]]
 position = Vector2(-389, 66)
@@ -488,6 +439,13 @@ sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
 frame_progress = 0.515691
 
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+position = Vector2(1073, 140)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("25_cfgxb")
+
 [node name="starts_audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_o87y8")
 volume_db = 10.0
@@ -498,7 +456,31 @@ attenuation = 0.15932
 stream = ExtResource("15_5ckil")
 volume_db = -15.0
 
-[connection signal="animation_finished" from="Enemie_1/Sprite2D" to="Enemie_1" method="_on_sprite_2d_animation_finished"]
-[connection signal="timeout" from="Enemie_1/gun_timer" to="Enemie_1" method="_on_gun_timer_timeout"]
-[connection signal="timeout" from="Enemie_1/explosion_timer" to="Enemie_1" method="_on_explosion_timer_timeout"]
+[node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
+position = Vector2(0, -32)
+
+[node name="enemy_spawn_2" parent="." instance=ExtResource("30_nswfa")]
+position = Vector2(-1, 0)
+
+[node name="Box" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Box"]
+position = Vector2(615, 409)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("31_jqqi2")
+
+[node name="Box2" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Box2"]
+position = Vector2(2016, 361)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("31_jqqi2")
+
+[node name="Box3" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Box3"]
+position = Vector2(1215, 320)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("31_jqqi2")
+
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]
