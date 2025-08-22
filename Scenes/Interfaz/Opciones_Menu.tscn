@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0jbneopgj5as"]
+
+[ext_resource type="PackedScene" uid="uid://sd77axdv10ou" path="res://Scenes/Backgrounds/menu_opciones_background.tscn" id="1_eqj40"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="2_pnniq"]
+
+[node name="OpcionesMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuOpcionesBackground" parent="." instance=ExtResource("1_eqj40")]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_top = 38.0
+offset_right = 47.0
+offset_bottom = 61.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_pnniq")
+theme_override_font_sizes/font_size = 56
+text = "OPTIONS"
