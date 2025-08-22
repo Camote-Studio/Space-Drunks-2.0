@@ -23,5 +23,5 @@ func _on_sombra_time_timeout() -> void:
 		get_tree().change_scene_to_file("res://Scenes/game_world.tscn") 
 	
 	elif tipo_boton == 'options' :
-		get_tree().change_scene_to_file("") #Agregar escena options
+		get_tree().change_scene_to_file("res://Scenes/Interfaz/Opciones_Menu.tscn") 
 		
