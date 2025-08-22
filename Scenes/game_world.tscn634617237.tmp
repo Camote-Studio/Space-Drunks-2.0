@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://t8t1xbgjp2hy"]
+[gd_scene load_steps=45 format=3 uid="uid://t8t1xbgjp2hy"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_yqug6"]
@@ -29,7 +29,6 @@
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="29_408q8"]
 [ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/enemy_spawn_2.tscn" id="30_nswfa"]
 [ext_resource type="Texture2D" uid="uid://rq0mwrl4053j" path="res://Assets/art/sprites/complements_sprites/box_1.png" id="31_jqqi2"]
-[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_gf2tg"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="32_thxnh"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="33_8d0et"]
 
@@ -459,9 +458,11 @@ volume_db = -15.0
 
 [node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
 position = Vector2(0, -32)
+script = null
 
 [node name="enemy_spawn_2" parent="." instance=ExtResource("30_nswfa")]
 position = Vector2(-1, 0)
+script = null
 
 [node name="Box" type="Node2D" parent="."]
 
@@ -483,7 +484,5 @@ texture = ExtResource("31_jqqi2")
 position = Vector2(1215, 320)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("31_jqqi2")
-
-[node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]
