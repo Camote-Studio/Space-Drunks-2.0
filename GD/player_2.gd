@@ -1,7 +1,8 @@
 extends CharacterBody2D
 signal damage(value: float)
 var speed := 400
-@onready var bar_2: ProgressBar = $ProgressBar_alien_2
+@onready var bar_2: ProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
+
 
 
 func _ready() -> void:

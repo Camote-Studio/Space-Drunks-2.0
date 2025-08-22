@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsxrf7s0exvt7"]
+
+[ext_resource type="Script" uid="uid://pf3j3f0ukca0" path="res://GD/enemie_1.gd" id="1_nfho0"]
+[ext_resource type="Texture2D" uid="uid://0mx71mgpebym" path="res://Sprites/ovni_enemie_1.png" id="2_8tpct"]
+[ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Sprites/explosion_1.png" id="3_bfh5f"]
+[ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Sprites/explosion_2.png" id="4_uax2x"]
+[ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Sprites/explosion_3.png" id="5_6ttx6"]
+[ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Sprites/explosion_4.png" id="6_7yqfu"]
+[ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Sprites/explosion_5.png" id="7_h4hlk"]
+[ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Sprites/explosion_6.png" id="8_pv470"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hrlvl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8tpct")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bfh5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uax2x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6ttx6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7yqfu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h4hlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pv470")
+}],
+"loop": true,
+"name": &"explosion",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08ug1"]
+radius = 16.0312
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jto8a"]
+
+[node name="Enemie_1" type="CharacterBody2D" groups=["enemy_1"]]
+script = ExtResource("1_nfho0")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_hrlvl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_08ug1")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jto8a")
+
+[node name="gun_timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+visible = false
+texture_filter = 1
+offset_left = -21.0
+offset_top = -52.0
+offset_right = 19.0
+offset_bottom = -29.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="ProgressBar_enemy" type="ProgressBar" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+offset_left = -42.0
+offset_top = -46.0
+offset_right = 51.0
+offset_bottom = -31.0
+value = 100.0
+show_percentage = false
+
+[node name="explosion_timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
+[connection signal="timeout" from="gun_timer" to="." method="_on_gun_timer_timeout"]
+[connection signal="timeout" from="explosion_timer" to="." method="_on_explosion_timer_timeout"]

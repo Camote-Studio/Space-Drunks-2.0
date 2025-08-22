@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://tytkyjl3qajp"]
+[gd_scene load_steps=4 format=3 uid="uid://tytkyjl3qajp"]
 
 [ext_resource type="Script" uid="uid://dgwsvxmmyugph" path="res://GD/gun.gd" id="1_pey2u"]
 [ext_resource type="Texture2D" uid="uid://dhqi54jg8qvgb" path="res://Sprites/gUN1.png" id="2_pey2u"]
+[ext_resource type="AudioStream" uid="uid://hs5wadwnl64m" path="res://Audio/lasergun-35817_[cut_1sec].mp3" id="3_u8tnj"]
 
 [node name="Gun" type="Node2D"]
 scale = Vector2(0.2, 0.2)
@@ -9,3 +10,11 @@ script = ExtResource("1_pey2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pey2u")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="lasergun" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_u8tnj")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
