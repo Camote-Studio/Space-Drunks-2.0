@@ -150,8 +150,11 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 func _report_dead() -> void:
 	if reported_dead: return
 	reported_dead = true
+	remove_from_group("enemy_1") # <- importante
 	emit_signal("died")
 	queue_free()
+
+
 
 func _on_AnimatedSprite2D_animation_finished() -> void:
 	if anim.animation == "explosion":

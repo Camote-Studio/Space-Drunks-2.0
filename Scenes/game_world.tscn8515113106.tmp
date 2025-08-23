@@ -242,7 +242,6 @@ position = Vector2(293, 248)
 position = Vector2(-389, 66)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 86)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2741.5, 124)
@@ -420,6 +419,12 @@ attenuation = 0.15932
 stream = ExtResource("15_5ckil")
 volume_db = -15.0
 
+[node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
+position = Vector2(0, -32)
+
+[node name="enemy_spawn_2" parent="." instance=ExtResource("30_nswfa")]
+position = Vector2(-1, 0)
+
 [node name="Box" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Box"]
@@ -442,9 +447,5 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("31_jqqi2")
 
 [node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
-
-[node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
-
-[node name="enemy_spawn_2" parent="." instance=ExtResource("30_nswfa")]
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]

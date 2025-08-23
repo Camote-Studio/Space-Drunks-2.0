@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bqkuka33kxcqu"]
 
-[ext_resource type="Texture2D" uid="uid://blex0n2rdxghj" path="res://Sprites/Punch1.png" id="1_71g2a"]
+[ext_resource type="Texture2D" uid="uid://blex0n2rdxghj" path="res://Assets/art/sprites/Armas/Punch1.png" id="1_71g2a"]
 
 [node name="Punch" type="Node2D"]
 

@@ -182,11 +182,12 @@ func _die() -> void:
 	dead = true
 	label.visible = false
 	velocity = Vector2.ZERO
-	area.monitoring = false
+	# Cambiar monitoreo y colisión de forma diferida para evitar el error
+	area.set_deferred("monitoring", false)
 	punch_timer.stop()
 	var col := get_node_or_null("CollisionShape2D")
 	if col:
-		col.disabled = true
+		col.set_deferred("disabled", true)
 	if sprite_2d and sprite_2d.sprite_frames and sprite_2d.sprite_frames.has_animation("explosion"):
 		sprite_2d.sprite_frames.set_animation_loop("explosion", false)
 		sprite_2d.frame = 0
@@ -195,6 +196,7 @@ func _die() -> void:
 			explosion_timer.stop()
 	else:
 		explosion_timer.start(0.3)
+
 
 
 func _on_sprite_2d_animation_finished() -> void:

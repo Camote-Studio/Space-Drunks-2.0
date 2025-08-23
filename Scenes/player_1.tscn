@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2uks060bx75"]
+
+[ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_p0e4v"]
+[ext_resource type="Texture2D" uid="uid://cjvvb4lk2yv8t" path="res://Assets/art/sprites/Personajes/SmolT.png" id="2_c4k0l"]
+[ext_resource type="PackedScene" uid="uid://tytkyjl3qajp" path="res://Scenes/gun.tscn" id="3_aatkl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
+radius = 11.0
+height = 38.0
+
+[node name="Player_1" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_p0e4v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_c4k0l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 21)
+shape = SubResource("CapsuleShape2D_yqug6")
+
+[node name="Gun" parent="." instance=ExtResource("3_aatkl")]
+position = Vector2(-2, 18)

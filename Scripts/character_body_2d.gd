@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal damage(value: float)
 var speed := 400
 @onready var bar: ProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
@@ -12,6 +13,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
 	velocity = direction * speed
+	
+	# Flip horizontal cuando va hacia la izquierda
+	if abs(direction.x) > 0.05:
+		sprite_2d.flip_h = direction.x < 0
+
 	move_and_slide()
 
 func _on_damage(amount: float) -> void:
