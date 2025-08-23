@@ -5,7 +5,7 @@ signal died
 
 var speed := 300
 var player: CharacterBody2D = null
-const BULLET_ENEMY_1 = preload("res://Scenes/Enemies/enemie_1.tscn")
+const BULLET_ENEMY_1 = preload("res://Scenes/gun_enemy_1.tscn")
 @onready var label: Label = $Label
 @onready var bar_3: ProgressBar = $ProgressBar_enemy
 @onready var anim: AnimatedSprite2D = $Sprite2D
@@ -153,7 +153,6 @@ func _report_dead() -> void:
 	remove_from_group("enemy_1") # <- importante
 	emit_signal("died")
 	queue_free()
-
 
 
 func _on_AnimatedSprite2D_animation_finished() -> void:
