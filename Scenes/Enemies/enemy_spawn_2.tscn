@@ -11,6 +11,6 @@ script = ExtResource("1_5trip")
 shape = SubResource("RectangleShape2D_ocked")
 
 [node name="spawn_timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
 
 [connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]

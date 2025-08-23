@@ -7,6 +7,11 @@ func _process(delta: float) -> void:
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if (body.is_in_group("enemy_1") or body.is_in_group("enemy_2")) and body.has_signal("damage"):
-		body.emit_signal("damage", 100.0)
+		body.emit_signal("damage", 30.0)
 		queue_free()
-		
+	elif body.is_in_group("enemy_3") and body.has_signal("damage"):
+		body.emit_signal("damage", 10.0)
+		queue_free()
+	elif body.is_in_group("enemy_4") and body.has_signal("damage"):
+		body.emit_signal("damage", 10.0)
+		queue_free()

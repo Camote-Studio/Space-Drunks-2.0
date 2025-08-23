@@ -6,7 +6,7 @@ signal died
 var speed := 150.0
 var player: CharacterBody2D = null
 @onready var label: Label = $Label
-@onready var bar_4: ProgressBar = $ProgressBar_enemy_2
+@onready var bar_5: ProgressBar = $ProgressBar_enemy_3
 @onready var area: Area2D = $Area2D
 @onready var sfx_hit: AudioStreamPlayer2D = $hit
 @onready var explosion_timer: Timer = $explosion_timer
@@ -51,7 +51,7 @@ func _ready() -> void:
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		player = players[0]
-	add_to_group("enemy_2")
+	add_to_group("enemy_3")
 	_label_base_pos = label.position
 	label.visible = false
 	rng.randomize()
@@ -113,7 +113,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		target_in_range = body as CharacterBody2D
 	if body.is_in_group("player_1_bullet"):
-		emit_signal("damage", 10.0)
+		emit_signal("damage", 30.0)
 		if body.has_method("queue_free"):
 			body.queue_free()
 
@@ -147,8 +147,8 @@ func _on_punch_timer_timeout() -> void:
 	_attack_lock = false
 
 func _on_damage(amount: float) -> void:
-	if bar_4:
-		bar_4.value = clamp(bar_4.value - amount, bar_4.min_value, bar_4.max_value)
+	if bar_5:
+		bar_5.value = clamp(bar_5.value - amount, bar_5.min_value, bar_5.max_value)
 	_stack_value += amount
 	label.text = str(int(_stack_value))
 	label.visible = true
@@ -171,7 +171,7 @@ func _on_damage(amount: float) -> void:
 	t.parallel().tween_property(label, "modulate:a", 0.0, 0.32).set_delay(0.04)
 	_stack_timer.start(0.4)
 	random_pitch_variations_gun()
-	if not dead and bar_4 and bar_4.value <= bar_4.min_value:
+	if not dead and bar_5 and bar_5.value <= bar_5.min_value:
 		_die()
 
 func _on_stack_timeout() -> void:

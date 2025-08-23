@@ -1,0 +1,105 @@
+[gd_scene load_steps=14 format=3 uid="uid://batawvymfltb3"]
+
+[ext_resource type="Texture2D" uid="uid://cv8kpsuyk8cko" path="res://Assets/art/sprites/Enemigos/ALien_Cuchillas.png" id="1_coqv0"]
+[ext_resource type="Script" uid="uid://cg6qf3lakb3u3" path="res://Scripts/enemie_4.gd" id="1_qes82"]
+[ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Assets/art/sprites/Particulas/explosion_1.png" id="3_vndqv"]
+[ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Assets/art/sprites/Particulas/explosion_2.png" id="4_fbg5n"]
+[ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Assets/art/sprites/Particulas/explosion_3.png" id="5_ix744"]
+[ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Assets/art/sprites/Particulas/explosion_4.png" id="6_v5ojg"]
+[ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="7_2e22m"]
+[ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="8_31sr6"]
+[ext_resource type="PackedScene" uid="uid://dpv3uo1xu4wsv" path="res://Scenes/gun__enemie_gravity.tscn" id="9_xlltn"]
+[ext_resource type="AudioStream" uid="uid://hs5wadwnl64m" path="res://Assets/sfx/lasergun-35817_[cut_1sec].mp3" id="10_vndqv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8q5kh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_coqv0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vndqv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fbg5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ix744")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_v5ojg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2e22m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_31sr6")
+}],
+"loop": true,
+"name": &"explosion",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a1fw3"]
+height = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_puqnj"]
+radius = 29.0689
+
+[node name="enemie_4" type="CharacterBody2D" groups=["enemy_4"]]
+script = ExtResource("1_qes82")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_8q5kh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("CapsuleShape2D_a1fw3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 12)
+shape = SubResource("CircleShape2D_puqnj")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -23.0
+offset_top = -79.0
+offset_right = 17.0
+offset_bottom = -56.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="ProgressBar_enemy_4" type="ProgressBar" parent="."]
+visible = false
+offset_left = -36.0
+offset_top = -67.0
+offset_right = 37.0
+offset_bottom = -54.0
+show_percentage = false
+
+[node name="explosion_timer" type="Timer" parent="."]
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Gun__enemie_gravity" parent="." instance=ExtResource("9_xlltn")]
+
+[node name="gun_timer" type="Timer" parent="."]
+wait_time = 4.5
+
+[node name="lasergun" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_vndqv")
+volume_db = 10.0
+
+[connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="explosion_timer" to="." method="_on_explosion_timer_timeout"]
+[connection signal="timeout" from="gun_timer" to="." method="_on_gun_timer_timeout"]
