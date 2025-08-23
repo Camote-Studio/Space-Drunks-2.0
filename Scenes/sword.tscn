@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b616wuo0wkbh5"]
 
-[ext_resource type="Script" uid="uid://b1to0rt30kmy8" path="res://GD/sword.gd" id="1_h6h3u"]
-[ext_resource type="Texture2D" uid="uid://bgjxtcher56h1" path="res://Sprites/ALABARDA.png" id="1_o6uxs"]
+[ext_resource type="Script" uid="uid://b1to0rt30kmy8" path="res://Scripts/sword.gd" id="1_h6h3u"]
+[ext_resource type="Texture2D" uid="uid://bgjxtcher56h1" path="res://Assets/art/sprites/Armas/ALABARDA.png" id="1_o6uxs"]
 
 [node name="sword" type="Node2D"]
 script = ExtResource("1_h6h3u")

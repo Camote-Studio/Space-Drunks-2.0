@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4fwndsghnvmc"]
+
+[ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
+[ext_resource type="Texture2D" uid="uid://dhsyhat33qf13" path="res://Assets/art/sprites/Personajes/BIGd.png" id="2_n0kdt"]
+[ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://Scenes/sword.tscn" id="3_eus2p"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
+radius = 27.0
+height = 90.0
+
+[node name="Player_2" type="CharacterBody2D" groups=["player_2"]]
+script = ExtResource("1_a3adp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(680, 304)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_n0kdt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(680, 316)
+shape = SubResource("CapsuleShape2D_1m887")
+
+[node name="sword" parent="." instance=ExtResource("3_eus2p")]
+position = Vector2(713, 310)

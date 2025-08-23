@@ -16,18 +16,26 @@ func random_pitch_variations_gun():
 	$lasergun.play()
 
 func _process(delta: float) -> void:
-	look_at(get_global_mouse_position())
-	rotation_degrees = wrap(rotation_degrees,0,360)
-	if rotation_degrees > 90 and rotation_degrees < 270:
-		scale.x = -0.2
-	else:
-		scale.x = 0.2
+	# Ahora volteamos el sprite del arma en base a si el sprite del jugador está volteado.
+	# get_parent().get_node("Sprite2D") accede al nodo del sprite del jugador.
+	var player_sprite_is_flipped = get_parent().get_node("Sprite2D").flip_h
+	
+	# Simplemente asigna el valor de flip_h del jugador al sprite del arma.
+	$Sprite2D.flip_h = player_sprite_is_flipped
+
 	if Input.is_action_just_pressed("fired") and can_fire:
 		random_pitch_variations_gun()
 		var bullet_instance = BULLET.instantiate()
 		get_tree().root.add_child(bullet_instance)
+
 		bullet_instance.global_position = global_position
-		bullet_instance.rotation = rotation
+		
+		# La rotación de la bala debe coincidir con la dirección de la escala del jugador.
+		if player_sprite_is_flipped:
+			bullet_instance.rotation_degrees = 180
+		else:
+			bullet_instance.rotation_degrees = 0
+			
 		can_fire = false
 		$Timer.start()
 
