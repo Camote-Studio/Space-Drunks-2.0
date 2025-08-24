@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b1to0rt30kmy8" path="res://Scripts/sword.gd" id="1_h6h3u"]
 [ext_resource type="Texture2D" uid="uid://bgjxtcher56h1" path="res://Assets/art/sprites/Armas/ALABARDA.png" id="1_o6uxs"]
 
-[node name="sword" type="Node2D"]
+[node name="sword" type="Node2D" groups=["puño_player2"]]
 script = ExtResource("1_h6h3u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
