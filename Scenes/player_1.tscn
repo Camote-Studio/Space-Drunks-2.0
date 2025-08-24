@@ -518,7 +518,7 @@ position = Vector2(-1, 21)
 shape = SubResource("CapsuleShape2D_yqug6")
 
 [node name="Gun" parent="." instance=ExtResource("3_aatkl")]
-position = Vector2(-2, 18)
+position = Vector2(18, 22)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -0.999999)
