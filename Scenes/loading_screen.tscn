@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=3 uid="uid://dw65f8fcosxel"]
+
+[ext_resource type="Script" uid="uid://moutb7mi83ay" path="res://Scripts/Intefaz/parallax_backgroundMENU.gd" id="1_1godw"]
+[ext_resource type="Script" path="res://Scripts/loading_screen.gd" id="1_m2hk5"]
+[ext_resource type="Script" path="res://Scripts/loading_interface.gd" id="2_1opfs"]
+[ext_resource type="Texture2D" uid="uid://cbpn3c0nx2q3x" path="res://Assets/art/background/Menu/Fondo1.png" id="2_yisgd"]
+[ext_resource type="Texture2D" uid="uid://baxvhijclryjn" path="res://Assets/art/background/Menu/Estrellas grandes.png" id="3_gegoj"]
+[ext_resource type="Texture2D" uid="uid://cx64k3o3kdvrw" path="res://Assets/art/background/Menu/Estrellas chicas.png" id="4_m2hk5"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="5_1opfs"]
+[ext_resource type="Script" path="res://Scripts/loading_animation.gd" id="8_xbrhi"]
+
+[sub_resource type="Animation" id="Animation_xbrhi"]
+resource_name = "loading_screen"
+length = 4.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Loading_interface/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.01, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(389, 253), Vector2(390, 290), Vector2(390, 342), Vector2(390, 290), Vector2(389, 253)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Loading_interface/Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.55, 1.52, 2.48, 3.51, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Cargando", "Cargando.", "Cargando..", "Cargando...", "Cargando..", "Cargando."]
+}
+
+[sub_resource type="Animation" id="Animation_iom8t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Loading_interface/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(389, 253)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Loading_interface/Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Cargando"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nw6gx"]
+_data = {
+&"RESET": SubResource("Animation_iom8t"),
+&"loading_screen": SubResource("Animation_xbrhi")
+}
+
+[node name="Loading_screen" type="Node2D"]
+script = ExtResource("1_m2hk5")
+
+[node name="Loading_interface" type="CanvasLayer" parent="."]
+script = ExtResource("2_1opfs")
+next_scene_path = "uid://t8t1xbgjp2hy"
+
+[node name="Control" type="Control" parent="Loading_interface"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Parallax" type="Node2D" parent="Loading_interface"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Loading_interface/Parallax"]
+scroll_ignore_camera_zoom = true
+script = ExtResource("1_1godw")
+
+[node name="Espacio" type="ParallaxLayer" parent="Loading_interface/Parallax/ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1149, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Loading_interface/Parallax/ParallaxBackground/Espacio"]
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_yisgd")
+centered = false
+
+[node name="Estrellas Grandes" type="ParallaxLayer" parent="Loading_interface/Parallax/ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(1153.92, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Loading_interface/Parallax/ParallaxBackground/Estrellas Grandes"]
+scale = Vector2(0.600521, 0.599074)
+texture = ExtResource("3_gegoj")
+centered = false
+
+[node name="Estrellas Pequeñas" type="ParallaxLayer" parent="Loading_interface/Parallax/ParallaxBackground"]
+motion_mirroring = Vector2(1153.92, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Loading_interface/Parallax/ParallaxBackground/Estrellas Pequeñas"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_m2hk5")
+centered = false
+
+[node name="Label" type="Label" parent="Loading_interface"]
+offset_left = 389.0
+offset_top = 253.0
+offset_right = 789.0
+offset_bottom = 338.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_1opfs")
+theme_override_font_sizes/font_size = 60
+text = "Cargando"
+
+[node name="Loading_animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nw6gx")
+}
+autoplay = "loading_screen"
+script = ExtResource("8_xbrhi")
+
+[connection signal="animation_finished" from="Loading_animation" to="Loading_animation" method="_on_animation_finished"]
