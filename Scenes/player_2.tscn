@@ -12,13 +12,13 @@ height = 90.0
 script = ExtResource("1_a3adp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(680, 304)
+position = Vector2(0, -6)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_n0kdt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(680, 316)
+position = Vector2(5, -2)
 shape = SubResource("CapsuleShape2D_1m887")
 
 [node name="sword" parent="." instance=ExtResource("3_eus2p")]
-position = Vector2(713, 310)
+position = Vector2(16, -4)
