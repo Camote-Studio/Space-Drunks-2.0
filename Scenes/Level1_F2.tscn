@@ -225,7 +225,7 @@ texture = ExtResource("2_571jo")
 [node name="Player_1" parent="." instance=ExtResource("3_vti5k")]
 position = Vector2(528, 271)
 
-[node name="Player_2" parent="." groups=["player"] instance=ExtResource("4_ne1v2")]
+[node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
 position = Vector2(521, 406)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
