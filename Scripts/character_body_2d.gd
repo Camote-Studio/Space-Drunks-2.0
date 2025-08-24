@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal damage(amount: float, source: String)
 
-var speed := 400
+var speed := 200
 @onready var bar: ProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -21,12 +21,7 @@ var rotation_speed := 3.0
 var float_lerp_speed := 2.0
 var return_lerp_speed := 3.0
 
-var original_layer
-var original_mask
-
 func _ready() -> void:
-	original_layer = collision_layer
-	original_mask = collision_mask
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 	animated_sprite.play("idle")
@@ -45,9 +40,14 @@ func _physics_process(delta: float) -> void:
 	if direction == Vector2.ZERO:
 		animated_sprite.play("idle")
 	else:
-		animated_sprite.play("caminar")
-		if abs(direction.x) > 0.05:
+		if abs(direction.x) > abs(direction.y):
+			# Movimiento horizontal
+			animated_sprite.play("caminar")
 			animated_sprite.flip_h = direction.x < 0
+		elif direction.y < 0:
+			animated_sprite.play("caminar_subir")
+		elif direction.y > 0:
+			animated_sprite.play("caminar_bajar")
 
 	if not floating:
 		move_and_slide()
@@ -92,15 +92,18 @@ func _handle_floating(delta: float) -> void:
 	global_position.y = lerp(global_position.y, target_y, current_lerp_speed * delta)
 	rotation += current_rotation_speed * delta
 
+	# Desactivar colisiones mientras flota
 	set_collision_layer(0)
 	set_collision_mask(0)
 
+	# Reducir el timer de invulnerabilidad
 	invul_timer -= delta
 
+	# Terminar efecto al regresar completamente
 	if invul_timer <= 0.0 and abs(global_position.y - float_start_y) < 1.0:
 		floating = false
 		invulnerable = false
-		rotation = 0
+		rotation = 0.0
 		global_position.y = float_start_y
-		set_collision_layer(original_layer)
-		set_collision_mask(original_mask)
+		set_collision_layer(1)
+		set_collision_mask(1)

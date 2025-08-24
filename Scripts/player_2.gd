@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 # Señal con 'source' opcional para no romper _on_damage
-signal damage(value: float)
+signal damage(amount: float, source: String)
 
 # --- Variables de movimiento ---
-var speed := 400
+var speed := 220
 var controls_inverted := false
 var invert_duration := 2.0
 var invert_timer := 0.0
@@ -61,10 +61,12 @@ func _physics_process(delta: float) -> void:
 	if direction == Vector2.ZERO:
 		animated_sprite.play("idle")
 	else:
-		animated_sprite.play("caminar")
-		if abs(direction.x) > 0.05:
+		if abs(direction.x) > abs(direction.y):
+			# Movimiento horizontal
+			animated_sprite.play("caminar")
 			animated_sprite.flip_h = direction.x < 0
-
+		elif direction.y < 0:
+			animated_sprite.play("caminar_subir")
 	move_and_slide()
 
 # --- Función de flotación ---
