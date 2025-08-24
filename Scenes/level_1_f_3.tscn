@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://b0kmfdbxre0tx"]
 
-[ext_resource type="Texture2D" uid="uid://baa00cu03lfdo" path="res://Assets/art/background/BACKGROUND_3.png" id="1_ersxc"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
+[ext_resource type="Texture2D" uid="uid://dt4w2krqhrqhn" path="res://Scripts/BG_ESTACIONAMIENTO.png" id="2_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c2uks060bx75" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="3_c5os2"]
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_d1i85"]
@@ -213,9 +213,9 @@ script = ExtResource("1_gupyi")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(634, 327.5)
-scale = Vector2(1.25, 2.17667)
-texture = ExtResource("1_ersxc")
+position = Vector2(817, 301.25)
+scale = Vector2(0.4085, 0.448529)
+texture = ExtResource("2_gupyi")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
 visible = false
@@ -225,16 +225,16 @@ script = ExtResource("3_d1i85")
 polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
 [node name="Player_1" parent="." instance=ExtResource("2_sv6kg")]
-position = Vector2(528, 271)
+position = Vector2(278, 340)
 
 [node name="Player_2" parent="." instance=ExtResource("3_c5os2")]
-position = Vector2(516, 446)
+position = Vector2(266, 481)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 152)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2743, 25)
+position = Vector2(2742, 85)
 shape = SubResource("RectangleShape2D_b0kl2")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
