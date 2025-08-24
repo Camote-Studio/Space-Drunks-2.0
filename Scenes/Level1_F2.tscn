@@ -234,8 +234,13 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 [node name="Player_1" parent="." instance=ExtResource("3_vti5k")]
 position = Vector2(354, 366)
 
+<<<<<<< HEAD
 [node name="Player_2" parent="." groups=["player"] instance=ExtResource("4_ne1v2")]
 position = Vector2(431, 442)
+=======
+[node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
+position = Vector2(521, 406)
+>>>>>>> ZtanQ2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 152)
