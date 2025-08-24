@@ -1,6 +1,6 @@
 extends Area2D
 
-const ENEMY = preload("res://Scenes/enemie_5.tscn")
+const ENEMY = preload("res://Scenes/Enemies/enemie_1.tscn")
 
 @export var cam_path: NodePath
 

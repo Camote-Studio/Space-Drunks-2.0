@@ -26,12 +26,12 @@
 [ext_resource type="Texture2D" uid="uid://csgwwryruo50m" path="res://Assets/art/sprites/complements_sprites/GIBEL.png" id="20_2cfp8"]
 [ext_resource type="Texture2D" uid="uid://buyk5u1o0yp5g" path="res://Assets/art/sprites/complements_sprites/Ominit.png" id="21_ju7et"]
 [ext_resource type="AudioStream" uid="uid://b5r4hqdgthv4k" path="res://Assets/sfx/bar-sound-30383.mp3" id="23_vgkdw"]
-[ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Assets/art/sprites/Particulas/explosion_1.png" id="24_ddho7"]
-[ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Assets/art/sprites/Particulas/explosion_2.png" id="25_rg4wm"]
-[ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Assets/art/sprites/Particulas/explosion_3.png" id="26_nbj3j"]
-[ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Assets/art/sprites/Particulas/explosion_4.png" id="27_86qjk"]
-[ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="28_b2oo7"]
-[ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="29_2cfp8"]
+[ext_resource type="Texture2D" uid="uid://f6h17j78fk7n" path="res://Assets/art/sprites/Particulas/EXPLO_1.png" id="24_lxjpj"]
+[ext_resource type="Texture2D" uid="uid://jwwhfgs4q7a8" path="res://Assets/art/sprites/Particulas/EXPLO_2.png" id="25_g7s15"]
+[ext_resource type="Texture2D" uid="uid://b3djxqrgdb402" path="res://Assets/art/sprites/Particulas/EXPLO_3.png" id="26_bojpb"]
+[ext_resource type="Texture2D" uid="uid://b8hwhwq3kb6bc" path="res://Assets/art/sprites/Particulas/EXPLO_4.png" id="27_en26f"]
+[ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="28_62vsh"]
+[ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="29_o6ca6"]
 [ext_resource type="Texture2D" uid="uid://cv8kpsuyk8cko" path="res://Assets/art/sprites/Enemigos/ALien_Cuchillas.png" id="30_b2oo7"]
 [ext_resource type="Texture2D" uid="uid://bj8kvsqukofap" path="res://Assets/art/sprites/Armas/gUN2.png" id="31_2cfp8"]
 [ext_resource type="Texture2D" uid="uid://ckvb4w6t1iqik" path="res://Assets/art/sprites/Enemigos/FINALboz.png" id="32_ju7et"]
@@ -1160,22 +1160,22 @@ _data = {
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("24_ddho7")
+"texture": ExtResource("24_lxjpj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("25_rg4wm")
+"texture": ExtResource("25_g7s15")
 }, {
 "duration": 1.0,
-"texture": ExtResource("26_nbj3j")
+"texture": ExtResource("26_bojpb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("27_86qjk")
+"texture": ExtResource("27_en26f")
 }, {
 "duration": 1.0,
-"texture": ExtResource("28_b2oo7")
+"texture": ExtResource("28_62vsh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("29_2cfp8")
+"texture": ExtResource("29_o6ca6")
 }],
 "loop": true,
 "name": &"default",
@@ -1357,9 +1357,9 @@ stream = ExtResource("23_vgkdw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(1483, 79)
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ju7et")
 autoplay = "default"
+frame_progress = 0.826774
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 visible = false
