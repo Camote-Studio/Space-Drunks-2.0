@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://doypp8bxp7xwd"]
+
+[ext_resource type="Script" uid="uid://dsnkh1ca8yhpt" path="res://Scripts/Intefaz/pausa.gd" id="1_hcvwa"]
+[ext_resource type="Texture2D" uid="uid://do1elbfuu5pbn" path="res://Assets/art/background/PAUSA.png" id="2_podca"]
+
+[node name="Pausa" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_hcvwa")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_podca")
+expand_mode = 1

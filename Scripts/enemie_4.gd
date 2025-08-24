@@ -13,7 +13,7 @@ var player: CharacterBody2D = null
 @onready var punch_timer: Timer = $Punch_timer
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 
-const BULLET_ENEMY_1 := preload("res://Scenes/gun_enemy_1.tscn")
+const BULLET_ENEMY_1 := preload("res://Scenes/gun_enemy_2.tscn")
 
 # “Anillo” de distancias (huye si está muy cerca, se acerca suave si está lejos)
 var min_range := 70.0

@@ -145,7 +145,7 @@ func _on_stack_timeout() -> void:
 	label.visible = false
 
 func _on_damage_enemy_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player_1_bullet"):
+	if body.is_in_group("player_1_bullet") or body.is_in_group("puño_player2") :
 		$AnimationPlayer.play("hit")
 		emit_signal("damage", 10.0)
 
