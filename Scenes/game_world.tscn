@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://t8t1xbgjp2hy"]
+[gd_scene load_steps=42 format=3 uid="uid://t8t1xbgjp2hy"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/enemy_spawn.tscn" id="28_0ic24"]
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="28_jy7da"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="29_408q8"]
+[ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="30_8yf3i"]
 [ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/enemy_spawn_2.tscn" id="30_nswfa"]
 [ext_resource type="Texture2D" uid="uid://rq0mwrl4053j" path="res://Assets/art/sprites/complements_sprites/box_1.png" id="31_jqqi2"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_gf2tg"]
@@ -532,6 +533,8 @@ texture_filter = 1
 position = Vector2(1073, 140)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("25_cfgxb")
+
+[node name="Pausa" parent="." instance=ExtResource("30_8yf3i")]
 
 [node name="starts_audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_o87y8")
