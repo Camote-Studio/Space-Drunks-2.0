@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 [gd_scene load_steps=12 format=3 uid="uid://cghbt360u5otd"]
 
 [ext_resource type="Script" uid="uid://moutb7mi83ay" path="res://Scripts/Intefaz/parallax_backgroundMENU.gd" id="1_1godw"]
 [ext_resource type="Script" uid="uid://b2sky472x1re1" path="res://Scripts/loading_screen.gd" id="1_m2hk5"]
 [ext_resource type="Script" uid="uid://plq5eboaorat" path="res://Scripts/loading_interface.gd" id="2_1opfs"]
+=======
+[gd_scene load_steps=12 format=3 uid="uid://dw65f8fcosxel"]
+
+[ext_resource type="Script" uid="uid://moutb7mi83ay" path="res://Scripts/Intefaz/parallax_backgroundMENU.gd" id="1_1godw"]
+[ext_resource type="Script" path="res://Scripts/loading_screen.gd" id="1_m2hk5"]
+[ext_resource type="Script" path="res://Scripts/loading_interface.gd" id="2_1opfs"]
+>>>>>>> ZtanQ2
 [ext_resource type="Texture2D" uid="uid://cbpn3c0nx2q3x" path="res://Assets/art/background/Menu/Fondo1.png" id="2_yisgd"]
 [ext_resource type="Texture2D" uid="uid://baxvhijclryjn" path="res://Assets/art/background/Menu/Estrellas grandes.png" id="3_gegoj"]
 [ext_resource type="Texture2D" uid="uid://cx64k3o3kdvrw" path="res://Assets/art/background/Menu/Estrellas chicas.png" id="4_m2hk5"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="5_1opfs"]
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://b6n7l0ti4iffw" path="res://Scripts/loading_animation.gd" id="8_xbrhi"]
+=======
+[ext_resource type="Script" path="res://Scripts/loading_animation.gd" id="8_xbrhi"]
+>>>>>>> ZtanQ2
 
 [sub_resource type="Animation" id="Animation_xbrhi"]
 resource_name = "loading_screen"

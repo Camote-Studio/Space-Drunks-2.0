@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://etrjcddrjr8b"]
+[gd_scene load_steps=43 format=3 uid="uid://etrjcddrjr8b"]
 
 [ext_resource type="Script" uid="uid://bbnxeayo55flo" path="res://Scripts/cinematic.gd" id="1_8jfr5"]
 [ext_resource type="Texture2D" uid="uid://di04auyf1hqbe" path="res://Assets/art/background/Sin_titulo-2.png" id="1_81woh"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://ckvb4w6t1iqik" path="res://Assets/art/sprites/Enemigos/FINALboz.png" id="32_ju7et"]
 [ext_resource type="Texture2D" uid="uid://pp8a2uy8ep1o" path="res://Assets/art/sprites/Enemigos/DukaLIEN_2.png" id="32_lxjpj"]
 [ext_resource type="Texture2D" uid="uid://dib0ibvxgvi7y" path="res://Assets/art/sprites/Enemigos/PulpAlien.png" id="36_g7s15"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="38_g7s15"]
 
 [sub_resource type="Animation" id="Animation_8jfr5"]
 resource_name = "Cine"
@@ -1439,3 +1440,6 @@ texture = ExtResource("36_g7s15")
 position = Vector2(1201, 502)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("17_en51e")
+
+[node name="Sombras_transición" parent="." instance=ExtResource("38_g7s15")]
+layout_mode = 0
