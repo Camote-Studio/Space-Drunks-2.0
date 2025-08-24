@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Obtenemos la dirección del sprite del jugador.
-	var player_sprite_is_flipped = get_parent().get_node("Sprite2D").flip_h
+	var player_sprite_is_flipped = get_parent().get_node("AnimatedSprite2D").flip_h
 
 	# Ajustamos la posición de los Marker2D según la dirección
 	if player_sprite_is_flipped:
