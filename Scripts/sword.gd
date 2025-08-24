@@ -14,11 +14,16 @@ func _process(delta: float) -> void:
 	# Obtenemos la dirección del sprite del jugador.
 	var player_sprite_is_flipped = get_parent().get_node("Sprite2D").flip_h
 
+	# Ajustamos la posición de los Marker2D según la dirección
+	if player_sprite_is_flipped:
+		marker_2d.position.x = -abs(marker_2d.position.x)
+		marker_2d_2.position.x = -abs(marker_2d_2.position.x)
+	else:
+		marker_2d.position.x = abs(marker_2d.position.x)
+		marker_2d_2.position.x = abs(marker_2d_2.position.x)
+
 	if Input.is_action_just_pressed("fired_2"):
-		# Determinamos la dirección del ataque para que el golpe se mueva y rote correctamente.
-		var attack_direction = 1
-		if player_sprite_is_flipped:
-			attack_direction = -1
+		var attack_direction = -1 if player_sprite_is_flipped else 1
 
 		if mode_random:
 			if randi() % 2 == 0:
@@ -32,6 +37,7 @@ func _process(delta: float) -> void:
 			else:
 				_spawn_punch(PUNCH_2, marker_2d_2, attack_direction)
 				next_seq = 1
+
 
 func _spawn_punch(scene: PackedScene, marker: Marker2D, dir: int) -> void:
 	var punch = scene.instantiate()
