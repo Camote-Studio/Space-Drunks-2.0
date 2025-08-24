@@ -169,10 +169,6 @@
 [ext_resource type="Texture2D" uid="uid://c2m65rncesrwd" path="res://Assets/art/sprites/Personajes/BIGB/frame_77_delay-0.03s.png" id="90_fcbx1"]
 [ext_resource type="Texture2D" uid="uid://df3ttwj07e2uy" path="res://Assets/art/sprites/Personajes/BIGB/frame_78_delay-0.07s.png" id="91_qixq7"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
-radius = 27.0
-height = 90.0
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_rn5h7"]
 animations = [{
 "frames": [{
@@ -684,8 +680,19 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
+radius = 27.0
+height = 90.0
+
 [node name="Player_2" type="CharacterBody2D" groups=["player_2"]]
 script = ExtResource("1_a3adp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -11)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_rn5h7")
+animation = &"caminar"
+frame_progress = 0.0584951
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -2)
@@ -694,10 +701,3 @@ shape = SubResource("CapsuleShape2D_1m887")
 [node name="sword" parent="." instance=ExtResource("3_eus2p")]
 z_index = 1
 position = Vector2(16, -4)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, -11)
-scale = Vector2(0.3, 0.3)
-sprite_frames = SubResource("SpriteFrames_rn5h7")
-animation = &"caminar"
-frame_progress = 0.0584951
