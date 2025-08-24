@@ -58,6 +58,7 @@ func _spawn_punch(scene: PackedScene, marker: Marker2D, dir: int) -> void:
 	var area: Area2D = punch.get_node_or_null("Area2D")
 	if area:
 		area.monitoring = true
+		area.add_to_group("puño_player2")
 
 	var ci := _find_canvas_item(punch)
 	var tween := create_tween()
@@ -86,3 +87,4 @@ func _find_canvas_item(n: Node) -> CanvasItem:
 		if r:
 			return r
 	return null
+	
