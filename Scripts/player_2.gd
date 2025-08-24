@@ -1,11 +1,10 @@
 extends CharacterBody2D
 
 # Señal con 'source' opcional para no romper _on_damage
-signal damage(value: float)
-signal muerte
+signal damage(amount: float, source: String)
 
 # --- Variables de movimiento ---
-var speed := 400
+var speed := 220
 var controls_inverted := false
 var invert_duration := 2.0
 var invert_timer := 0.0
@@ -33,7 +32,7 @@ func _ready() -> void:
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 	animated_sprite.play("idle")
-	
+
 func _physics_process(delta: float) -> void:
 	# Si está muerto, no procesa nada de movimiento ni animación
 	if dead:
@@ -62,10 +61,12 @@ func _physics_process(delta: float) -> void:
 	if direction == Vector2.ZERO:
 		animated_sprite.play("idle")
 	else:
-		animated_sprite.play("caminar")
-		if abs(direction.x) > 0.05:
+		if abs(direction.x) > abs(direction.y):
+			# Movimiento horizontal
+			animated_sprite.play("caminar")
 			animated_sprite.flip_h = direction.x < 0
-
+		elif direction.y < 0:
+			animated_sprite.play("caminar_subir")
 	move_and_slide()
 
 # --- Función de flotación ---
@@ -110,7 +111,7 @@ func _handle_floating(delta: float) -> void:
 # --- Función que recibe daño ---
 func _on_damage(amount: float, source: String = "") -> void:
 	# Ignorar si ya está muerto
-	if dead :
+	if dead:
 		return
 
 	if bar_2:
@@ -159,16 +160,10 @@ func _die() -> void:
 
 	# Animación de muerte (sin loop)
 	if animated_sprite:
-		#$AnimationPlayer.play("explosion_death")
+		$AnimationPlayer.play("explosion_death")
 		animated_sprite.play("death")
 		if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
 			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
-			
-	if is_in_group("players"):
-		remove_from_group("players")
-		
-	emit_signal("muerte")  # Notifica al GameManager
-		
 
 func _on_death_finished() -> void:
 	# Asegurar que se quede en el último frame de "death"
