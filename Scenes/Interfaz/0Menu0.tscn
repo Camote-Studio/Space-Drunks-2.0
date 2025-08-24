@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4wyasp8w20no"]
+
+[ext_resource type="Script" uid="uid://3leniu2qoiv1" path="res://Scripts/Intefaz/0_menu_0.gd" id="1_43v56"]
+[ext_resource type="Texture2D" uid="uid://coh2ir7k0cofh" path="res://Assets/art/background/Menu/wa.png" id="2_pn4p7"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="3_jykc7"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="4_5i3i0"]
+
+[node name="0Menu0" type="Node2D"]
+script = ExtResource("1_43v56")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.742912, 0.80798)
+texture = ExtResource("2_pn4p7")
+centered = false
+
+[node name="Sombras_transición" parent="." instance=ExtResource("3_jykc7")]
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 232.0
+offset_top = 353.0
+offset_right = 1027.0
+offset_bottom = 424.0
+theme_override_fonts/font = ExtResource("4_5i3i0")
+theme_override_font_sizes/font_size = 50
+text = "Presiona start para jugar"
