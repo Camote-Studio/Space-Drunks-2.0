@@ -2,6 +2,10 @@ extends Control
 
 var tipo_boton = null
 
+func _ready() -> void:
+	var music = preload("res://Assets/music/624874__sonically_sound__retro-funk-20032022-1714.wav")
+	SoundEffectManager.music_player.stream = music
+	SoundEffectManager.music_player.play()
 
 func _on_start_pressed() -> void:
 	tipo_boton = "start"
@@ -20,7 +24,7 @@ func _on_quit_pressed() -> void:
 
 func _on_sombra_time_timeout() -> void:
 	if tipo_boton == 'start' :
-		get_tree().change_scene_to_file("res://Scenes/game_world.tscn") 
+		get_tree().change_scene_to_file("res://Scenes/loading_screen.tscn") 
 	
 	elif tipo_boton == 'options' :
 		get_tree().change_scene_to_file("res://Scenes/Interfaz/Opciones_Menu.tscn") 

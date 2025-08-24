@@ -106,7 +106,7 @@ shape = SubResource("CircleShape2D_08ug1")
 shape = SubResource("CircleShape2D_jto8a")
 
 [node name="gun_timer" type="Timer" parent="."]
-wait_time = 3.5
+wait_time = 5.0
 
 [node name="Label" type="Label" parent="."]
 visible = false

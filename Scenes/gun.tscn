@@ -12,10 +12,11 @@ script = ExtResource("1_pey2u")
 texture = ExtResource("2_pey2u")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.0
 
 [node name="lasergun" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_t6ynv")
-volume_db = 20.0
+volume_db = 10.0
+bus = &"SoundEffect"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
