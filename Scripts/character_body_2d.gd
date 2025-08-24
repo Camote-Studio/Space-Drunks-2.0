@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal damage(value: float)
 var speed := 400
 @onready var bar: ProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var controls_inverted := false
 var invert_duration := 2.0 
 var invert_timer := 0.0
@@ -20,6 +20,7 @@ var return_lerp_speed := 3.0
 func _ready() -> void:
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
+	animated_sprite.play("idle")
 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
@@ -29,11 +30,14 @@ func _physics_process(delta: float) -> void:
 		invert_timer -= delta
 		if invert_timer <= 0.0:
 			controls_inverted = false 
-	velocity = direction * speed
 	
-	# Flip horizontal cuando va hacia la izquierda
-	if abs(direction.x) > 0.05:
-		sprite_2d.flip_h = direction.x < 0
+	velocity = direction * speed
+	if direction == Vector2.ZERO:
+		animated_sprite.play("idle")
+	else:
+		animated_sprite.play("caminar")  # 👈 tu animación de caminar
+		if abs(direction.x) > 0.05:
+			animated_sprite.flip_h = direction.x < 0
 
 	if not floating:
 		move_and_slide()
