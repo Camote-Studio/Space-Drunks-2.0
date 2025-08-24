@@ -82,6 +82,7 @@ func _ready() -> void:
 		connect("damage", Callable(self, "_on_damage"))
 
 func _physics_process(delta: float) -> void:
+	_update_target()
 	if dead or player == null:
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -223,3 +224,19 @@ func _on_explosion_timer_timeout() -> void:
 		reported_dead = true
 		emit_signal("died")
 	queue_free()
+func _update_target() -> void:
+	var players := []
+	players += get_tree().get_nodes_in_group("player")
+	players += get_tree().get_nodes_in_group("player_2")
+
+	var nearest: Node2D = null
+	var nearest_dist := INF
+
+	for p in players:
+		if p and p is Node2D:
+			var dist = global_position.distance_to(p.global_position)
+			if dist < nearest_dist:
+				nearest_dist = dist
+				nearest = p
+
+	player = nearest
