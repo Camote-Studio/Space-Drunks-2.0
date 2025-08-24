@@ -18,10 +18,10 @@ func random_pitch_variations_gun():
 func _process(delta: float) -> void:
 	# Ahora volteamos el sprite del arma en base a si el sprite del jugador está volteado.
 	# get_parent().get_node("Sprite2D") accede al nodo del sprite del jugador.
-	var player_sprite_is_flipped = get_parent().get_node("Sprite2D").flip_h
+	var player_sprite_is_flipped = get_parent().get_node("AnimatedSprite2D").flip_h
 	
 	# Simplemente asigna el valor de flip_h del jugador al sprite del arma.
-	$Sprite2D.flip_h = player_sprite_is_flipped
+	$"../AnimatedSprite2D".flip_h = player_sprite_is_flipped
 
 	if Input.is_action_just_pressed("fired") and can_fire:
 		random_pitch_variations_gun()

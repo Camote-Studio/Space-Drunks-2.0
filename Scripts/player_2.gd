@@ -20,12 +20,13 @@ var return_lerp_speed := 3.0
 
 # --- Nodos ---
 @onready var bar_2: ProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # --- Funciones de Godot ---
 func _ready() -> void:
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
+	animated_sprite.play("idle")
 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
@@ -39,10 +40,16 @@ func _physics_process(delta: float) -> void:
 			controls_inverted = false
 
 	velocity = direction * speed
+	if direction == Vector2.ZERO:
+		animated_sprite.play("idle")
+	else:
+		animated_sprite.play("caminar")  # 👈 tu animación de caminar
+		if abs(direction.x) > 0.05:
+			animated_sprite.flip_h = direction.x < 0
+	
 
 	# Flip horizontal al moverse a la izquierda/derecha
-	if abs(direction.x) > 0.05:
-		sprite_2d.flip_h = direction.x < 0
+
 
 	# Movimiento normal o flotante
 	if not floating:
