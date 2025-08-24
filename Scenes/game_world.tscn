@@ -353,7 +353,7 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 position = Vector2(329, 277)
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
-position = Vector2(-354, 83)
+position = Vector2(305, 417)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 3
