@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 # Señal con 'source' opcional para no romper _on_damage
 signal damage(value: float)
+signal muerte
 
 # --- Variables de movimiento ---
 var speed := 400
@@ -32,7 +33,7 @@ func _ready() -> void:
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 	animated_sprite.play("idle")
-
+	
 func _physics_process(delta: float) -> void:
 	# Si está muerto, no procesa nada de movimiento ni animación
 	if dead:
@@ -109,7 +110,7 @@ func _handle_floating(delta: float) -> void:
 # --- Función que recibe daño ---
 func _on_damage(amount: float, source: String = "") -> void:
 	# Ignorar si ya está muerto
-	if dead:
+	if dead :
 		return
 
 	if bar_2:
@@ -158,10 +159,16 @@ func _die() -> void:
 
 	# Animación de muerte (sin loop)
 	if animated_sprite:
-		$AnimationPlayer.play("explosion_death")
+		#$AnimationPlayer.play("explosion_death")
 		animated_sprite.play("death")
 		if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
 			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
+			
+	if is_in_group("players"):
+		remove_from_group("players")
+		
+	emit_signal("muerte")  # Notifica al GameManager
+		
 
 func _on_death_finished() -> void:
 	# Asegurar que se quede en el último frame de "death"
