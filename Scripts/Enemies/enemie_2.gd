@@ -21,13 +21,15 @@ var punch_cooldown := 0.6
 var lunge_dist := 38.0
 var lunge_time := 0.12
 
-var accel := 1600.0
-var side_amp := 20.0
-var up_amp := 10.0
-var walk_freq := 1.4
-var up_freq := 1.8
+var accel := 1200.0
+var side_amp := 90.0
+var up_amp := 60.0
+var walk_freq := 1.6
+var up_freq := 2.1
 var walk_phase := 0.0
 var walk_seed := 0.0
+var calm_start := 120.0
+var calm_end := 80.0
 
 var _stack_value := 0.0
 var _label_base_pos := Vector2.ZERO
@@ -40,7 +42,6 @@ var rng := RandomNumberGenerator.new()
 var pitch_variations := [0.9, 1.1, 1.3]
 var _attack_lock := false
 var pitch_variations_gun = [0.8, 1.5, 2.5]
-var face_sign := 1.0
 
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi()%pitch_variations_gun.size()]
@@ -72,10 +73,12 @@ func _ready() -> void:
 	_stack_timer.connect("timeout", Callable(self, "_on_stack_timeout"))
 	if sprite_2d and not sprite_2d.is_connected("animation_finished", Callable(self, "_on_sprite_2d_animation_finished")):
 		sprite_2d.connect("animation_finished", Callable(self, "_on_sprite_2d_animation_finished"))
+
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 
 func _physics_process(delta: float) -> void:
+	_update_target()
 	if dead or player == null:
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -83,28 +86,26 @@ func _physics_process(delta: float) -> void:
 	var to_player := player.global_position - global_position
 	var dist := to_player.length()
 	var dir := to_player.normalized()
-	var target_vel := Vector2.ZERO
+	var tangent := Vector2(-dir.y, dir.x)
 	walk_phase += delta
-	var offset := Vector2.ZERO
-	if dist > max_range * 0.9:
-		var phase := walk_phase * TAU
-		offset = Vector2(sin(phase * walk_freq + walk_seed) * side_amp, sin(phase * up_freq + walk_seed * 0.73) * up_amp)
+	var calm = clamp((dist - calm_end) / max(1.0, calm_start - calm_end), 0.12, 1.0)
+	var offset = tangent * (sin(walk_phase * TAU * walk_freq + walk_seed) * side_amp * calm)
+	offset += Vector2(0, 1) * (sin(walk_phase * TAU * up_freq + walk_seed * 0.73) * up_amp * calm)
+	var target_vel := Vector2.ZERO
 	if _attack_lock:
 		target_vel = Vector2.ZERO
 	else:
 		if dist > max_range:
 			target_vel = dir * speed + offset
 		elif dist < min_range:
-			target_vel = -dir * (speed * 0.8)
+			target_vel = dir * (speed * 0.15) + offset * 0.25
 		else:
-			target_vel = dir * (speed * 0.55) + offset * 0.4
-	if target_vel.length() > speed:
-		target_vel = target_vel.normalized() * speed
+			target_vel = dir * (speed * 0.35) + offset * 0.6
+		if target_vel.length() > speed:
+			target_vel = target_vel.normalized() * speed
 	velocity = velocity.move_toward(target_vel, accel * delta)
 	rotation = 0.0
-	if abs(dir.x) > 0.1:
-		face_sign = sign(dir.x)
-	sprite_2d.flip_h = face_sign < 0.0
+	sprite_2d.flip_h = dir.x < 0.0
 	move_and_slide()
 	if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead:
 		_do_punch(dir)
@@ -182,11 +183,11 @@ func _die() -> void:
 	dead = true
 	label.visible = false
 	velocity = Vector2.ZERO
-	area.set_deferred("monitoring", false)
+	area.monitoring = false
 	punch_timer.stop()
 	var col := get_node_or_null("CollisionShape2D")
 	if col:
-		col.set_deferred("disabled", true)
+		col.disabled = true
 	if sprite_2d and sprite_2d.sprite_frames and sprite_2d.sprite_frames.has_animation("explosion"):
 		sprite_2d.sprite_frames.set_animation_loop("explosion", false)
 		sprite_2d.frame = 0
@@ -195,6 +196,7 @@ func _die() -> void:
 			explosion_timer.stop()
 	else:
 		explosion_timer.start(0.3)
+
 
 func _on_sprite_2d_animation_finished() -> void:
 	if sprite_2d.animation == "explosion":
@@ -210,3 +212,17 @@ func _on_explosion_timer_timeout() -> void:
 		reported_dead = true
 		emit_signal("died")
 	queue_free()
+func _update_target() -> void:
+	var players := []
+	players += get_tree().get_nodes_in_group("player")
+	players += get_tree().get_nodes_in_group("player_2")
+	var nearest: CharacterBody2D = null
+	var nearest_dist := INF
+
+	for p in players:
+		if p and p is Node2D:
+			var dist = global_position.distance_to(p.global_position)
+			if dist < nearest_dist:
+				nearest_dist = dist
+				nearest = p
+	player = nearest

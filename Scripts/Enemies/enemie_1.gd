@@ -67,6 +67,7 @@ func _ready() -> void:
 	strafe_timer.start()
 
 func _physics_process(delta: float) -> void:
+	_update_target()
 	if dead or player == null:
 		if dead:
 			velocity = Vector2.ZERO
@@ -99,6 +100,7 @@ func _on_strafe_swap() -> void:
 	strafe_timer.wait_time = swap_interval
 
 func _on_gun_timer_timeout() -> void:
+	_update_target()
 	if dead or player == null:
 		return
 	var to_player: Vector2 = player.global_position - global_position
@@ -150,10 +152,8 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 func _report_dead() -> void:
 	if reported_dead: return
 	reported_dead = true
-	remove_from_group("enemy_1") # <- importante
 	emit_signal("died")
 	queue_free()
-
 
 func _on_AnimatedSprite2D_animation_finished() -> void:
 	if anim.animation == "explosion":
@@ -161,3 +161,19 @@ func _on_AnimatedSprite2D_animation_finished() -> void:
 
 func _on_explosion_timer_timeout() -> void:
 	_report_dead()
+
+# cuando el enemigo esta cerca funcion
+func _update_target() -> void:
+	var players := []
+	players += get_tree().get_nodes_in_group("player")
+	players += get_tree().get_nodes_in_group("player_2")
+	var nearest: CharacterBody2D = null
+	var nearest_dist := INF
+
+	for p in players:
+		if p and p is Node2D:
+			var dist = global_position.distance_to(p.global_position)
+			if dist < nearest_dist:
+				nearest_dist = dist
+				nearest = p
+	player = nearest

@@ -1,12 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://cnl10kue3lo6a"]
 
 [ext_resource type="PackedScene" uid="uid://cp1plrdyiywox" path="res://Scenes/Backgrounds/Menu_background.tscn" id="1_fp1c3"]
-[ext_resource type="Texture2D" uid="uid://c55ftuadbwufu" path="res://Assets/art/sprites/Interfaz/Bottle_menu.png" id="1_jsn1s"]
 [ext_resource type="Script" uid="uid://ck6giv4ro3lu6" path="res://Scripts/Intefaz/menu.gd" id="1_qbx0g"]
 [ext_resource type="Texture2D" uid="uid://cbpn3c0nx2q3x" path="res://Assets/art/background/Menu/Fondo1.png" id="2_1xh45"]
-[ext_resource type="Texture2D" uid="uid://ddl7e7uubl6i3" path="res://Assets/art/sprites/Interfaz/Bottle_menu_pressed.png" id="2_fp1c3"]
 [ext_resource type="Script" uid="uid://moutb7mi83ay" path="res://Scripts/Intefaz/parallax_backgroundMENU.gd" id="2_mm3o3"]
-[ext_resource type="Texture2D" uid="uid://bih1njcgtuxpr" path="res://Assets/art/sprites/Interfaz/Bottle_menu_hover.png" id="3_erq20"]
 [ext_resource type="Texture2D" uid="uid://baxvhijclryjn" path="res://Assets/art/background/Menu/Estrellas grandes.png" id="3_i7q02"]
 [ext_resource type="Texture2D" uid="uid://cx64k3o3kdvrw" path="res://Assets/art/background/Menu/Estrellas chicas.png" id="4_mm3o3"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="5_erq20"]
@@ -14,7 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://cjvvb4lk2yv8t" path="res://Assets/art/sprites/Personajes/SmolT.png" id="6_poija"]
 [ext_resource type="Texture2D" uid="uid://dhsyhat33qf13" path="res://Assets/art/sprites/Personajes/BIGd.png" id="7_qo1tt"]
 [ext_resource type="AudioStream" uid="uid://1dk6hearttkc" path="res://Assets/music/624874__sonically_sound__retro-funk-20032022-1714.wav" id="8_qo1tt"]
+[ext_resource type="Texture2D" uid="uid://dq21b1oy4geks" path="res://Assets/art/sprites/Interfaz/botella_1.png" id="9_mm3o3"]
+[ext_resource type="Texture2D" uid="uid://c4tjccgcl8xd" path="res://Assets/art/sprites/Interfaz/botella_2.png" id="10_2qgrd"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="10_t8o0a"]
+[ext_resource type="Texture2D" uid="uid://dkd2a5xr6b4qh" path="res://Assets/art/sprites/Interfaz/botella_3.png" id="11_w4fob"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -82,49 +82,50 @@ DRUNKS"
 
 [node name="Start" type="TextureButton" parent="."]
 layout_mode = 2
-offset_left = 386.25
-offset_top = 261.001
-offset_right = 1226.25
-offset_bottom = 2396.0
-rotation = 1.5708
-scale = Vector2(0.15, 0.15)
-texture_normal = ExtResource("1_jsn1s")
-texture_pressed = ExtResource("2_fp1c3")
-texture_hover = ExtResource("3_erq20")
+offset_left = 40.0
+offset_top = 260.0
+offset_right = 880.0
+offset_bottom = 2395.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("9_mm3o3")
+texture_pressed = ExtResource("10_2qgrd")
+texture_hover = ExtResource("11_w4fob")
 
 [node name="Label" type="Label" parent="Start"]
 layout_mode = 0
-offset_left = 390.0
-offset_top = 1905.0
-offset_right = 1280.0
-offset_bottom = 2084.0
-rotation = -1.5708
+offset_left = 72.0
+offset_top = 116.0
+offset_right = 962.0
+offset_bottom = 477.0
+rotation = -0.235619
+scale = Vector2(0.4, 0.4)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_erq20")
 theme_override_font_sizes/font_size = 128
-text = "Start Game"
+text = "Start
+ Game"
 
 [node name="Options" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 385.25
-offset_top = 379.001
-offset_right = 1225.25
-offset_bottom = 2514.0
-rotation = 1.5708
-scale = Vector2(0.15, 0.15)
-texture_normal = ExtResource("1_jsn1s")
-texture_pressed = ExtResource("2_fp1c3")
-texture_hover = ExtResource("3_erq20")
+offset_left = 128.0
+offset_top = 383.0
+offset_right = 968.0
+offset_bottom = 2518.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("9_mm3o3")
+texture_pressed = ExtResource("10_2qgrd")
+texture_hover = ExtResource("11_w4fob")
 
 [node name="Label" type="Label" parent="Options"]
 layout_mode = 0
-offset_left = 390.0
-offset_top = 1755.0
-offset_right = 1280.0
-offset_bottom = 1934.0
-rotation = -1.5708
+offset_left = 48.0
+offset_top = 156.0
+offset_right = 938.0
+offset_bottom = 335.0
+rotation = -0.235619
+scale = Vector2(0.4, 0.4)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -134,23 +135,23 @@ text = "Options"
 
 [node name="Quit" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 389.501
-offset_top = 489.002
-offset_right = 1229.5
-offset_bottom = 2624.0
-rotation = 1.5708
-scale = Vector2(0.15, 0.15)
-texture_normal = ExtResource("1_jsn1s")
-texture_pressed = ExtResource("2_fp1c3")
-texture_hover = ExtResource("3_erq20")
+offset_left = 221.0
+offset_top = 502.0
+offset_right = 1061.0
+offset_bottom = 2637.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("9_mm3o3")
+texture_pressed = ExtResource("10_2qgrd")
+texture_hover = ExtResource("11_w4fob")
 
 [node name="Label" type="Label" parent="Quit"]
 layout_mode = 0
-offset_left = 390.0
-offset_top = 1610.0
-offset_right = 1280.0
-offset_bottom = 1789.0
-rotation = -1.5708
+offset_left = 108.0
+offset_top = 140.0
+offset_right = 998.0
+offset_bottom = 319.0
+rotation = -0.235619
+scale = Vector2(0.4, 0.4)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
