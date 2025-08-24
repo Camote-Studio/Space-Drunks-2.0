@@ -1,8 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=33 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Texture2D" uid="uid://baa00cu03lfdo" path="res://Assets/art/background/BACKGROUND_3.png" id="1_ersxc"]
+[ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c2uks060bx75" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="3_c5os2"]
+[ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_d1i85"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="6_tii1t"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="7_efrga"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="8_6nii4"]
@@ -17,8 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="17_eeksg"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="18_m74wh"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="19_fnwrx"]
-[ext_resource type="PackedScene" uid="uid://c76e4r2yxqn47" path="res://Scenes/enemie_5.tscn" id="20_sv6kg"]
-[ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="21_c5os2"]
+[ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="21_c5os2"]
+[ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
+[ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
 size = Vector2(5503, 20)
@@ -31,6 +34,38 @@ size = Vector2(1232.99, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15ly5"]
 size = Vector2(5497, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bdxm"]
+shader = ExtResource("8_6nii4")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3k20b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_s0j4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_a7g42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qtle1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_tv5bt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_uxxvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_eeksg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_m74wh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="Animation" id="Animation_o87y8"]
 length = 0.001
@@ -169,45 +204,25 @@ _data = {
 &"start_animation": SubResource("Animation_n6wrj")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bdxm"]
-shader = ExtResource("8_6nii4")
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3k20b"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_s0j4o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_a7g42")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_qtle1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_tv5bt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_uxxvr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_eeksg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_m74wh")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}]
-
 [node name="Level1_F3" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_gupyi")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(776.5, 321.5)
-scale = Vector2(1.5127, 2.19667)
+position = Vector2(634, 327.5)
+scale = Vector2(1.25, 2.17667)
 texture = ExtResource("1_ersxc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
+visible = false
+script = ExtResource("3_d1i85")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ParallaxBackground/StaticBody2D"]
+polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
 [node name="Player_1" parent="." instance=ExtResource("2_sv6kg")]
 position = Vector2(528, 271)
@@ -242,21 +257,9 @@ position = Vector2(0, 112)
 position = Vector2(2744.5, 474)
 shape = SubResource("RectangleShape2D_15ly5")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 303)
-zoom = Vector2(1.5, 1.5)
-position_smoothing_enabled = true
-script = ExtResource("6_tii1t")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_5ckil")
-}
-
-[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player", "main_cam")]
+[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("7_efrga")
 player = NodePath("../Player_1")
-main_cam = NodePath("../Camera2D")
 
 [node name="Peek" type="Control" parent="OffscreenPeekHUD"]
 layout_mode = 3
@@ -369,8 +372,21 @@ position = Vector2(1073, 140)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("19_fnwrx")
 
-[node name="enemie_5" parent="." instance=ExtResource("20_sv6kg")]
-position = Vector2(1141, 328)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 303)
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+script = ExtResource("6_tii1t")
 
-[node name="Final_Boss" parent="." instance=ExtResource("21_c5os2")]
-position = Vector2(1346, 378)
+[node name="enemie_spawn_6" parent="." instance=ExtResource("22_tii1t")]
+cam_path = NodePath("../Camera2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5ckil")
+}
+
+[node name="Enemies_final" parent="." instance=ExtResource("21_c5os2")]
+
+[node name="Final_Boss" parent="." instance=ExtResource("22_gupyi")]
+position = Vector2(2739, 382)
