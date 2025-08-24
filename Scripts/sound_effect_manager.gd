@@ -6,5 +6,5 @@ func _ready():
 	add_child(music_player)
 	music_player.bus = "Music"  
 	music_player.autoplay = false
-	music_player.stream = load("res://Assets/music/Hideki Naganuma - JACK DA FUNK - Bomb Rush Cyberfunk OST.mp3") 
+	music_player.stream = load("res://Assets/music/funk-house-retro-groovy-dance-216533.mp3") 
 	music_player.play()
