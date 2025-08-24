@@ -15,3 +15,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	elif body.is_in_group("enemy_4") and body.has_signal("damage"):
 		body.emit_signal("damage", 10.0)
 		queue_free()
+	elif body.is_in_group("enemy_5") and body.has_signal("damage"):
+		body.emit_signal("damage", 20.0)
+		queue_free()
+	elif body.is_in_group("boss") and body.has_signal("damage"):
+		body.emit_signal("damage", 10.0)
+		queue_free()

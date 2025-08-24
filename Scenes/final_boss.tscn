@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://cy7nosfcmj6l0"]
+
+[ext_resource type="Script" uid="uid://dhr4nudsalkcc" path="res://Scripts/final_boss.gd" id="1_blxqn"]
+[ext_resource type="Texture2D" uid="uid://ckvb4w6t1iqik" path="res://Assets/art/sprites/Enemigos/FINALboz.png" id="1_xchk6"]
+[ext_resource type="PackedScene" uid="uid://cj0wechyf4nf1" path="res://Scenes/poison_cloud.tscn" id="2_6vmjv"]
+[ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Assets/art/sprites/Particulas/explosion_1.png" id="4_8i2ud"]
+[ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Assets/art/sprites/Particulas/explosion_2.png" id="5_5uamw"]
+[ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Assets/art/sprites/Particulas/explosion_3.png" id="6_mxp2g"]
+[ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Assets/art/sprites/Particulas/explosion_4.png" id="7_wvg44"]
+[ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="8_nfcs1"]
+[ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="9_l5jvj"]
+[ext_resource type="AudioStream" uid="uid://bmhyjsn2qfnwt" path="res://Assets/sfx/gross-slimy-goo-foley-2-164290.mp3" id="10_5uamw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_60rb2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xchk6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8i2ud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5uamw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mxp2g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wvg44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nfcs1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_l5jvj")
+}],
+"loop": true,
+"name": &"explosion",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okwr3"]
+radius = 56.0
+height = 208.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xchk6"]
+radius = 142.618
+
+[node name="Final_Boss" type="CharacterBody2D" groups=["boss"]]
+scale = Vector2(0.9, 0.9)
+script = ExtResource("1_blxqn")
+poison_scene = ExtResource("2_6vmjv")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_60rb2")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, -20)
+shape = SubResource("CapsuleShape2D_okwr3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(12, -1)
+shape = SubResource("CircleShape2D_xchk6")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -5.0
+offset_top = -181.0
+offset_right = 35.0
+offset_bottom = -139.0
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar_boss" type="ProgressBar" parent="."]
+modulate = Color(1, 0.270588, 1, 1)
+offset_left = -103.333
+offset_top = -223.333
+offset_right = 129.667
+offset_bottom = -196.333
+max_value = 300.0
+value = 300.0
+show_percentage = false
+
+[node name="explosion_timer" type="Timer" parent="."]
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_5uamw")
+volume_db = 20.0
+
+[node name="Punch_timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="explosion_timer" to="." method="_on_explosion_timer_timeout"]
+[connection signal="timeout" from="Punch_timer" to="." method="_on_punch_timer_timeout"]
