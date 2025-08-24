@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c668cr3fwfjdu"]
+
+[ext_resource type="Script" uid="uid://cf8yfejjcrya5" path="res://Scripts/enemies_final.gd" id="1_l1ce5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_li7en"]
+
+[node name="Enemies_final" type="Area2D"]
+script = ExtResource("1_l1ce5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_li7en")
