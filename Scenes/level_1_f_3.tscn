@@ -228,7 +228,7 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 position = Vector2(528, 271)
 
 [node name="Player_2" parent="." instance=ExtResource("3_c5os2")]
-position = Vector2(-161, 87)
+position = Vector2(516, 446)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 152)
