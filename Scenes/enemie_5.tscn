@@ -1,0 +1,108 @@
+[gd_scene load_steps=14 format=3 uid="uid://c76e4r2yxqn47"]
+
+[ext_resource type="Script" uid="uid://cpq2ljmtr2kto" path="res://Scripts/enemie_5.gd" id="1_wc0u5"]
+[ext_resource type="Texture2D" uid="uid://dib0ibvxgvi7y" path="res://Assets/art/sprites/Enemigos/PulpAlien.png" id="2_alp1c"]
+[ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Assets/art/sprites/Particulas/explosion_1.png" id="3_u5rox"]
+[ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Assets/art/sprites/Particulas/explosion_2.png" id="4_4t7w7"]
+[ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Assets/art/sprites/Particulas/explosion_3.png" id="5_bk5c7"]
+[ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Assets/art/sprites/Particulas/explosion_4.png" id="6_1d60g"]
+[ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="7_8j5hs"]
+[ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="8_4ldwa"]
+[ext_resource type="AudioStream" uid="uid://cmp0uxkr0orbl" path="res://Assets/sfx/506326__thevoicesgames__retro-explosion-1.wav" id="9_bo13f"]
+[ext_resource type="AudioStream" uid="uid://bmhyjsn2qfnwt" path="res://Assets/sfx/gross-slimy-goo-foley-2-164290.mp3" id="10_alp1c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdxtc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_alp1c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_u5rox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4t7w7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bk5c7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1d60g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8j5hs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4ldwa")
+}],
+"loop": true,
+"name": &"explosion",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_osmr5"]
+radius = 6.0
+height = 52.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xqvy2"]
+radius = 39.0128
+
+[node name="enemie_5" type="CharacterBody2D" groups=["enemy_5"]]
+script = ExtResource("1_wc0u5")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_cdxtc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-23, -2)
+shape = SubResource("CapsuleShape2D_osmr5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-23, 2)
+shape = SubResource("CircleShape2D_xqvy2")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -26.0
+offset_top = -95.0
+offset_right = 14.0
+offset_bottom = -72.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar_enemy_5" type="ProgressBar" parent="."]
+visible = false
+offset_left = -68.0
+offset_top = -80.0
+offset_right = 2.0
+offset_bottom = -73.0
+show_percentage = false
+
+[node name="explosion_timer" type="Timer" parent="."]
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_bo13f")
+volume_db = 20.0
+
+[node name="Punch_timer" type="Timer" parent="."]
+
+[node name="attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_alp1c")
+volume_db = 20.0
+
+[connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="explosion_timer" to="." method="_on_explosion_timer_timeout"]
+[connection signal="timeout" from="Punch_timer" to="." method="_on_punch_timer_timeout"]
