@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_dfrea"]
 [ext_resource type="PackedScene" uid="uid://c2uks060bx75" path="res://Scenes/player_1.tscn" id="3_vti5k"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="4_ne1v2"]
-[ext_resource type="Script" uid="uid://cpufpisex7oqp" path="res://Scripts/Level1/portal.gd" id="5_x2do0"]
+[ext_resource type="Script" uid="uid://b3h6fo1lgsbnj" path="res://Scripts/portal_2.gd" id="6_2ltu8"]
 [ext_resource type="Texture2D" uid="uid://bg7a0x7n1spia" path="res://Assets/art/sprites/Portales/portal.png" id="6_wxuq6"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="7_e2b77"]
 [ext_resource type="PackedScene" uid="uid://b0djmgwpwxxuu" path="res://Scenes/enemy_spawn_3.tscn" id="8_wxuq6"]
@@ -264,18 +264,18 @@ position = Vector2(0, 112)
 position = Vector2(2744.5, 474)
 shape = SubResource("RectangleShape2D_e2b77")
 
-[node name="Portal" type="Node2D" parent="." groups=["portal"]]
+[node name="Portal_2" type="Node2D" parent="." groups=["portal"]]
 position = Vector2(-3, 143)
-script = ExtResource("5_x2do0")
+script = ExtResource("6_2ltu8")
 
-[node name="Sprite2D" type="Sprite2D" parent="Portal"]
+[node name="Sprite2D" type="Sprite2D" parent="Portal_2"]
 position = Vector2(5414, 290)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_wxuq6")
 
-[node name="Area2D" type="Area2D" parent="Portal"]
+[node name="Area2D" type="Area2D" parent="Portal_2"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal_2/Area2D"]
 position = Vector2(5421, 288)
 shape = SubResource("CapsuleShape2D_1evay")
 
@@ -460,4 +460,4 @@ texture = ExtResource("24_2ltu8")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D4/StaticBody2D2"]
 polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 32.5, 97.5, 32.5, 115, 5, 115, -42.5, 105, -65, 85, -127.5, 65, -150, 42.5, -162.5, 10)
 
-[connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Portal_2/Area2D" to="Portal_2" method="_on_area_2d_body_entered"]
