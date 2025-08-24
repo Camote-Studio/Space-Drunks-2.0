@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnl10kue3lo6a"]
+[gd_scene load_steps=15 format=3 uid="uid://cnl10kue3lo6a"]
 
 [ext_resource type="PackedScene" uid="uid://cp1plrdyiywox" path="res://Scenes/Backgrounds/Menu_background.tscn" id="1_fp1c3"]
 [ext_resource type="Script" uid="uid://ck6giv4ro3lu6" path="res://Scripts/Intefaz/menu.gd" id="1_qbx0g"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://chewttxhidfl0" path="res://Assets/art/background/Menu/Fondo2.png" id="6_i7q02"]
 [ext_resource type="Texture2D" uid="uid://cjvvb4lk2yv8t" path="res://Assets/art/sprites/Personajes/SmolT.png" id="6_poija"]
 [ext_resource type="Texture2D" uid="uid://dhsyhat33qf13" path="res://Assets/art/sprites/Personajes/BIGd.png" id="7_qo1tt"]
-[ext_resource type="AudioStream" uid="uid://1dk6hearttkc" path="res://Assets/music/624874__sonically_sound__retro-funk-20032022-1714.wav" id="8_qo1tt"]
 [ext_resource type="Texture2D" uid="uid://dq21b1oy4geks" path="res://Assets/art/sprites/Interfaz/botella_1.png" id="9_mm3o3"]
 [ext_resource type="Texture2D" uid="uid://c4tjccgcl8xd" path="res://Assets/art/sprites/Interfaz/botella_2.png" id="10_2qgrd"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="10_t8o0a"]
@@ -168,10 +167,6 @@ texture = ExtResource("6_poija")
 position = Vector2(877, 420)
 scale = Vector2(0.4, 0.349)
 texture = ExtResource("7_qo1tt")
-
-[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_qo1tt")
-autoplay = true
 
 [node name="Sombras_transición" parent="." instance=ExtResource("10_t8o0a")]
 visible = false
