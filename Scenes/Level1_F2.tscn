@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=36 format=3 uid="uid://82ef3cmon8x5"]
 
-[ext_resource type="Texture2D" uid="uid://d1q4q4nh7vd50" path="res://Assets/art/background/Dance.png" id="1_hhmxk"]
-[ext_resource type="Texture2D" uid="uid://dr8b1i5w8dv2o" path="res://Assets/art/background/floor2.png" id="2_571jo"]
+[ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
+[ext_resource type="Texture2D" uid="uid://cogb4fvu0xhth" path="res://Assets/art/background/BACKGROUND_2.png" id="2_2ltu8"]
+[ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_dfrea"]
 [ext_resource type="PackedScene" uid="uid://c2uks060bx75" path="res://Scenes/player_1.tscn" id="3_vti5k"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="4_ne1v2"]
 [ext_resource type="Script" uid="uid://cpufpisex7oqp" path="res://Scripts/Level1/portal.gd" id="5_x2do0"]
@@ -22,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="20_jrhcu"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="21_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://d0vmf7ddix762" path="res://Scenes/enemy_spawn_4.tscn" id="22_gdlfp"]
+[ext_resource type="Texture2D" uid="uid://5ky34t7mdciu" path="res://Assets/art/sprites/complements_sprites/B0t_Parlante.png" id="24_2ltu8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq78c"]
 size = Vector2(5503, 20)
@@ -210,29 +212,36 @@ animations = [{
 
 [node name="Level1F2" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(2755.5, -1.2179)
-scale = Vector2(7.01788, 1.10266)
-texture = ExtResource("1_hhmxk")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_i54yl")
+cam_path = NodePath("../Camera2D")
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(2750, 443)
-scale = Vector2(7.17601, 1.77907)
-texture = ExtResource("2_571jo")
+position = Vector2(623.5, 368)
+scale = Vector2(0.31075, 0.55098)
+texture = ExtResource("2_2ltu8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
+visible = false
+script = ExtResource("3_dfrea")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ParallaxBackground/StaticBody2D"]
+polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
 [node name="Player_1" parent="." instance=ExtResource("3_vti5k")]
-position = Vector2(528, 271)
+position = Vector2(354, 366)
 
 [node name="Player_2" parent="." groups=["player"] instance=ExtResource("4_ne1v2")]
-position = Vector2(521, 406)
+position = Vector2(431, 442)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 152)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2743, 25)
+position = Vector2(2742, 142)
 shape = SubResource("RectangleShape2D_wq78c")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
@@ -244,6 +253,7 @@ shape = SubResource("RectangleShape2D_x2do0")
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+z_index = 4
 position = Vector2(5507.51, 146.503)
 rotation = 1.56824
 shape = SubResource("RectangleShape2D_wxuq6")
@@ -252,7 +262,8 @@ shape = SubResource("RectangleShape2D_wxuq6")
 position = Vector2(0, 112)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4/StaticBody2D2"]
-position = Vector2(2744.5, 474)
+z_index = 4
+position = Vector2(2750, 453)
 shape = SubResource("RectangleShape2D_e2b77")
 
 [node name="Portal" type="Node2D" parent="." groups=["portal"]]
@@ -406,5 +417,49 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("21_6ftvt")
 
 [node name="enemy_spawn_4" parent="." instance=ExtResource("22_gdlfp")]
+
+[node name="B0tParlante" type="Sprite2D" parent="."]
+position = Vector2(775, 403)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24_2ltu8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="B0tParlante"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="B0tParlante/StaticBody2D"]
+z_index = 4
+polygon = PackedVector2Array(-112.5, -89.9999, -49.9999, -105, 87.5, -99.9999, 97.5, -94.9999, 65, -67.4999, 87.5, -32.5, 87.5, 7.5, 72.5, 55, 35, 70, 30, 115, 5, 115, -54.9999, 95, -72.4999, 80, -140, 55, -165, 10, -160, -47.5)
+
+[node name="B0tParlante2" type="Sprite2D" parent="."]
+position = Vector2(1985, 464)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24_2ltu8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="B0tParlante2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="B0tParlante2/StaticBody2D"]
+z_index = 2
+polygon = PackedVector2Array(-112.5, -89.9999, -49.9999, -105, 87.5, -99.9999, 97.5, -94.9999, 65, -67.4999, 87.5, -32.5, 87.5, 7.5, 72.5, 55, 35, 70, 30, 115, 5, 115, -54.9999, 95, -72.4999, 80, -140, 55, -165, 10, -160, -47.5)
+
+[node name="B0tParlante3" type="Sprite2D" parent="."]
+position = Vector2(3411, 381)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24_2ltu8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="B0tParlante3"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="B0tParlante3/StaticBody2D"]
+z_index = 2
+polygon = PackedVector2Array(-112.5, -89.9999, -49.9999, -105, 87.5, -99.9999, 97.5, -94.9999, 65, -67.4999, 87.5, -32.5, 87.5, 7.5, 72.5, 55, 35, 70, 30, 115, 5, 115, -54.9999, 95, -72.4999, 80, -140, 55, -165, 10, -160, -47.5)
+
+[node name="B0tParlante4" type="Sprite2D" parent="."]
+position = Vector2(4755, 476)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24_2ltu8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="B0tParlante4"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="B0tParlante4/StaticBody2D"]
+z_index = 2
+polygon = PackedVector2Array(-112.5, -89.9999, -49.9999, -105, 87.5, -99.9999, 97.5, -94.9999, 65, -67.4999, 87.5, -32.5, 87.5, 7.5, 72.5, 55, 35, 70, 30, 115, 5, 115, -54.9999, 95, -72.4999, 80, -140, 55, -165, 10, -160, -47.5)
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]

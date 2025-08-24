@@ -52,6 +52,7 @@ height = 48.0
 radius = 29.0689
 
 [node name="enemie_4" type="CharacterBody2D" groups=["enemy_4"]]
+z_index = 3
 script = ExtResource("1_qes82")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
