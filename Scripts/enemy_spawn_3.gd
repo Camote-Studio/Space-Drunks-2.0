@@ -4,7 +4,7 @@ const ENEMY = preload("res://Scenes/Enemies/enemie_3.tscn")
 @export var cam_path: NodePath
 @export var x_min: float = 73.0
 @export var x_max: float = 2590.0
-@export var y_min: float = 204.0
+@export var y_min: float = 366.0
 @export var y_max: float = 482.0
 @export var batch_size: int = 3
 @export var wave_spread: float = 0.5

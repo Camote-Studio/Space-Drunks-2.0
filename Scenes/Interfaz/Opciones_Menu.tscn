@@ -122,7 +122,6 @@ text = "Quit"
 
 [node name="test_effect_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_ca0yn")
-bus = &"SoundEffect"
 
 [connection signal="timeout" from="Sombras_transición/sombra_time" to="." method="_on_sombra_time_timeout"]
 [connection signal="drag_started" from="sound_effect_scroller" to="." method="_on_sound_effect_scroller_drag_started"]
