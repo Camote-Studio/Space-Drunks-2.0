@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://t8t1xbgjp2hy"]
+[gd_scene load_steps=43 format=3 uid="uid://t8t1xbgjp2hy"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c5udsfo1kf8ja" path="res://Assets/art/sprites/complements_sprites/coin_3.png" id="25_3ssdm"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="25_cfgxb"]
 [ext_resource type="Texture2D" uid="uid://bd3b6n6yc4blk" path="res://Assets/art/sprites/complements_sprites/coin_4.png" id="26_ufeic"]
+[ext_resource type="PackedScene" uid="uid://brv58c33gpqv3" path="res://Scenes/box.tscn" id="27_pe6h5"]
 [ext_resource type="Texture2D" uid="uid://cyuhv8fianx7e" path="res://Assets/art/sprites/complements_sprites/coin_5.png" id="27_q00ib"]
 [ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/enemy_spawn.tscn" id="28_0ic24"]
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="28_jy7da"]
@@ -542,12 +543,7 @@ volume_db = 10.0
 pitch_scale = 1.1
 attenuation = 0.15932
 
-[node name="Box" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Box"]
-position = Vector2(1174, 364)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("31_jqqi2")
+[node name="Box" parent="." instance=ExtResource("27_pe6h5")]
 
 [node name="Box2" type="Node2D" parent="."]
 
