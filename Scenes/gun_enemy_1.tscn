@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b040jrwoqx1yo"]
 
 [ext_resource type="Script" uid="uid://dn3tgpp6qko0h" path="res://Scripts/Enemies/gun_enemy_1.gd" id="1_68hwi"]
-[ext_resource type="Texture2D" uid="uid://cruufcspx1yey" path="res://Assets/art/sprites/Armas/Proyectiles/bullet.png" id="1_ivctt"]
+[ext_resource type="Texture2D" uid="uid://cvgvd26qrxocj" path="res://Assets/art/sprites/Armas/Proyectiles/BALIT2.png" id="2_68hwi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0xf5e"]
 radius = 11.0454
@@ -10,9 +10,8 @@ radius = 11.0454
 script = ExtResource("1_68hwi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.792169, 0.124575, 0, 1)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_ivctt")
+texture = ExtResource("2_68hwi")
 
 [node name="Area2D" type="Area2D" parent="."]
 

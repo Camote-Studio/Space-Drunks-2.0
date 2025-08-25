@@ -1,44 +1,49 @@
 extends Node2D
 
 const BULLET = preload("res://Scenes/bullet.tscn")
+
 var can_fire := true
 @export var cooldown: float = 0.2
 @onready var timer: Timer = $Timer
 var pitch_variations_gun = [0.8, 1.0, 1.5]
 
+# Offset para cuando apunta a la derecha e izquierda
+@export var offset_right := Vector2(20, 20)
+@export var offset_left := Vector2(-20, 20)
+
 func _ready() -> void:
-	$Timer.one_shot = true
-	$Timer.wait_time = cooldown
+	timer.one_shot = true
+	timer.wait_time = cooldown
 
 func random_pitch_variations_gun():
-	var random_pitch = pitch_variations_gun[randi()%pitch_variations_gun.size()]
+	var random_pitch = pitch_variations_gun[randi() % pitch_variations_gun.size()]
 	$lasergun.pitch_scale = random_pitch
 	$lasergun.play()
 
 func _process(delta: float) -> void:
-	# Ahora volteamos el sprite del arma en base a si el sprite del jugador está volteado.
-	# get_parent().get_node("Sprite2D") accede al nodo del sprite del jugador.
 	var player_sprite_is_flipped = get_parent().get_node("AnimatedSprite2D").flip_h
 	
-	# Simplemente asigna el valor de flip_h del jugador al sprite del arma.
-	$"../AnimatedSprite2D".flip_h = player_sprite_is_flipped
+	# **Cambiar posición y rotación en base al flip**
+	$Sprite2D.flip_h = player_sprite_is_flipped
+	position = Vector2(-20, 20) if player_sprite_is_flipped else Vector2(20, 20)
+
 
 	if Input.is_action_just_pressed("fired") and can_fire:
-		random_pitch_variations_gun()
-		var bullet_instance = BULLET.instantiate()
-		get_tree().root.add_child(bullet_instance)
+		_fire(player_sprite_is_flipped)
 
-		bullet_instance.global_position = global_position
-		
-		# La rotación de la bala debe coincidir con la dirección de la escala del jugador.
-		if player_sprite_is_flipped:
-			bullet_instance.rotation_degrees = 180
-		else:
-			bullet_instance.rotation_degrees = 0
-			
-		can_fire = false
-		$Timer.start()
+func _fire(is_flipped: bool) -> void:
+	random_pitch_variations_gun()
+	var bullet_instance = BULLET.instantiate()
 
+	# Añadir la bala al mismo nivel que el jugador
+	get_parent().get_parent().add_child(bullet_instance)
+	bullet_instance.global_position = global_position
+	
+	# Ajustar rotación de la bala
+	bullet_instance.rotation_degrees = 180 if is_flipped else 0
+
+	can_fire = false
+	timer.start()
 
 func _on_timer_timeout() -> void:
 	can_fire = true

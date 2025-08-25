@@ -52,6 +52,7 @@ height = 48.0
 radius = 29.0689
 
 [node name="enemie_4" type="CharacterBody2D" groups=["enemy_4"]]
+z_index = 4
 script = ExtResource("1_qes82")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
@@ -60,6 +61,7 @@ scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_8q5kh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 4
 position = Vector2(0, 14)
 shape = SubResource("CapsuleShape2D_a1fw3")
 

@@ -1,7 +1,6 @@
-[gd_scene load_steps=127 format=3 uid="uid://c2uks060bx75"]
+[gd_scene load_steps=137 format=3 uid="uid://c2uks060bx75"]
 
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_p0e4v"]
-[ext_resource type="Texture2D" uid="uid://cjvvb4lk2yv8t" path="res://Assets/art/sprites/Personajes/SmolT.png" id="2_c4k0l"]
 [ext_resource type="PackedScene" uid="uid://tytkyjl3qajp" path="res://Scenes/gun.tscn" id="3_aatkl"]
 [ext_resource type="Texture2D" uid="uid://co3h3qdsffnum" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_00_delay-0.03s.png" id="3_gcs77"]
 [ext_resource type="Texture2D" uid="uid://ccf3e70xy10d2" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_01_delay-0.03s.png" id="4_6i1ax"]
@@ -60,6 +59,7 @@
 [ext_resource type="Texture2D" uid="uid://d07h7cwbw61qu" path="res://Assets/art/sprites/Personajes/WALK DIRK/frame_26_delay-0.03s.png" id="30_512bc"]
 [ext_resource type="Texture2D" uid="uid://cy13nefvkt2ys" path="res://Assets/art/sprites/Personajes/WALK DIRK/frame_27_delay-0.03s.png" id="31_2d7o3"]
 [ext_resource type="Texture2D" uid="uid://cfa15wx4hhh4d" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_28_delay-0.03s.png" id="31_fqe1y"]
+[ext_resource type="Texture2D" uid="uid://dn1ls6r6x3rqd" path="res://Assets/art/sprites/complements_sprites/YAMCHA.png" id="32_esulk"]
 [ext_resource type="Texture2D" uid="uid://dv4bfttms73cm" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_29_delay-0.03s.png" id="32_fnqhg"]
 [ext_resource type="Texture2D" uid="uid://dxyw52hri1je5" path="res://Assets/art/sprites/Personajes/WALK DIRK/frame_28_delay-0.03s.png" id="32_x8ega"]
 [ext_resource type="Texture2D" uid="uid://cgigd0kdja40w" path="res://Assets/art/sprites/Personajes/WALK DIRK/frame_29_delay-0.03s.png" id="33_7hw46"]
@@ -124,10 +124,12 @@
 [ext_resource type="Texture2D" uid="uid://2ddjoxyinhx5" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_88_delay-0.03s.png" id="91_p4vhd"]
 [ext_resource type="Texture2D" uid="uid://ugcdoxkyf2aw" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_89_delay-0.03s.png" id="92_rrb1e"]
 [ext_resource type="Texture2D" uid="uid://bp6wleysoign0" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_90_delay-0.03s.png" id="93_r4lpj"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
-radius = 11.0
-height = 38.0
+[ext_resource type="Texture2D" uid="uid://f6h17j78fk7n" path="res://Assets/art/sprites/Particulas/EXPLO_1.png" id="125_jr8eq"]
+[ext_resource type="Texture2D" uid="uid://jwwhfgs4q7a8" path="res://Assets/art/sprites/Particulas/EXPLO_2.png" id="126_vc3l7"]
+[ext_resource type="Texture2D" uid="uid://b3djxqrgdb402" path="res://Assets/art/sprites/Particulas/EXPLO_3.png" id="127_dsmtk"]
+[ext_resource type="Texture2D" uid="uid://b8hwhwq3kb6bc" path="res://Assets/art/sprites/Particulas/EXPLO_4.png" id="128_g8517"]
+[ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="129_1vwi1"]
+[ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="130_8lj6k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k774p"]
 animations = [{
@@ -225,6 +227,14 @@ animations = [{
 "loop": true,
 "name": &"caminar",
 "speed": 50.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_esulk")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -505,13 +515,81 @@ animations = [{
 "speed": 40.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
+radius = 11.0
+height = 38.0
+
+[sub_resource type="Animation" id="Animation_tb6cx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_v6jke"]
+resource_name = "explosion_death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.433333, 0.966667, 1.16667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true, false, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wxyas"]
+_data = {
+&"RESET": SubResource("Animation_tb6cx"),
+&"explosion_death": SubResource("Animation_v6jke")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_01h24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("125_jr8eq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_vc3l7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_dsmtk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_g8517")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_1vwi1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_8lj6k")
+}],
+"loop": true,
+"name": &"explosion_death",
+"speed": 8.0
+}]
+
 [node name="Player_1" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_p0e4v")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_c4k0l")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 5.96046e-08)
+scale = Vector2(0.3, 0.307)
+sprite_frames = SubResource("SpriteFrames_k774p")
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 21)
@@ -520,9 +598,19 @@ shape = SubResource("CapsuleShape2D_yqug6")
 [node name="Gun" parent="." instance=ExtResource("3_aatkl")]
 position = Vector2(-2, 18)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -0.999999)
-scale = Vector2(0.3, 0.307)
-sprite_frames = SubResource("SpriteFrames_k774p")
-animation = &"caminar"
-frame_progress = 0.402809
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wxyas")
+}
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(11, 28)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_01h24")
+animation = &"explosion_death"
+autoplay = "explosion_death"
+frame = 4
+frame_progress = 0.188546
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -5,17 +5,17 @@
 [ext_resource type="AudioStream" uid="uid://hs5wadwnl64m" path="res://Assets/sfx/lasergun-35817_[cut_1sec].mp3" id="3_t6ynv"]
 
 [node name="Gun" type="Node2D"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.15, 0.15)
 script = ExtResource("1_pey2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pey2u")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.0
 
 [node name="lasergun" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_t6ynv")
-volume_db = 20.0
+volume_db = 10.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

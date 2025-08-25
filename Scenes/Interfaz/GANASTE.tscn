@@ -1,0 +1,171 @@
+[gd_scene load_steps=23 format=3 uid="uid://d7nmo4v4sth3"]
+
+[ext_resource type="Script" uid="uid://dihdgbx0r4kg6" path="res://Scripts/Intefaz/ganaste.gd" id="1_05nj0"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="2_hbenx"]
+[ext_resource type="Texture2D" uid="uid://brgr140eg45id" path="res://Assets/art/background/WIN/ezgif-frame-001.png" id="3_vrmvo"]
+[ext_resource type="Texture2D" uid="uid://bvx2ld0qfjjde" path="res://Assets/art/background/WIN/ezgif-frame-002.png" id="4_kybl0"]
+[ext_resource type="Texture2D" uid="uid://c3qdffavn5mdc" path="res://Assets/art/background/WIN/ezgif-frame-003.png" id="5_sy7nv"]
+[ext_resource type="Texture2D" uid="uid://c3vgld6nh57fy" path="res://Assets/art/background/WIN/ezgif-frame-004.png" id="6_v1bvn"]
+[ext_resource type="Texture2D" uid="uid://bkkri624dy3ok" path="res://Assets/art/background/WIN/ezgif-frame-005.png" id="7_72hu8"]
+[ext_resource type="Texture2D" uid="uid://ct2t2ybmnggf7" path="res://Assets/art/background/WIN/ezgif-frame-006.png" id="8_4ahjb"]
+[ext_resource type="Texture2D" uid="uid://bhvjygvruietr" path="res://Assets/art/background/WIN/ezgif-frame-007.png" id="9_h4akn"]
+[ext_resource type="Texture2D" uid="uid://dmlyjy1pw5wo" path="res://Assets/art/background/WIN/ezgif-frame-008.png" id="10_50aui"]
+[ext_resource type="Texture2D" uid="uid://oybu1rclr47o" path="res://Assets/art/background/WIN/ezgif-frame-009.png" id="11_mw5gl"]
+[ext_resource type="Texture2D" uid="uid://kyugdntolduo" path="res://Assets/art/background/WIN/ezgif-frame-010.png" id="12_ismqo"]
+[ext_resource type="Texture2D" uid="uid://c5rwq04tmws55" path="res://Assets/art/background/WIN/ezgif-frame-011.png" id="13_o8k2a"]
+[ext_resource type="Texture2D" uid="uid://dvwxdixpb32ml" path="res://Assets/art/background/WIN/ezgif-frame-012.png" id="14_1cbmh"]
+[ext_resource type="Texture2D" uid="uid://jmrp2bx82wyf" path="res://Assets/art/background/WIN/ezgif-frame-013.png" id="15_cfdir"]
+[ext_resource type="Texture2D" uid="uid://wikkbrcci25s" path="res://Assets/art/background/WIN/ezgif-frame-014.png" id="16_h23g8"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="17_owkye"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oy1ph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vrmvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kybl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sy7nv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_v1bvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_72hu8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4ahjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_h4akn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_50aui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mw5gl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ismqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_o8k2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1cbmh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_cfdir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_h23g8")
+}],
+"loop": true,
+"name": &"gg",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_f635k"]
+resource_name = "Continuar"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["", "Play Again? Press start"]
+}
+
+[sub_resource type="Animation" id="Animation_ax7pe"]
+resource_name = "GANASTE"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["", "YOU WIN !!"]
+}
+
+[sub_resource type="Animation" id="Animation_xlxge"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d234u"]
+_data = {
+&"Continuar": SubResource("Animation_f635k"),
+&"GANASTE": SubResource("Animation_ax7pe"),
+&"RESET": SubResource("Animation_xlxge")
+}
+
+[node name="Ganaste" type="Node2D"]
+script = ExtResource("1_05nj0")
+
+[node name="Sombras_transición" parent="." instance=ExtResource("2_hbenx")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, 2)
+scale = Vector2(0.581818, 0.635294)
+sprite_frames = SubResource("SpriteFrames_oy1ph")
+animation = &"gg"
+autoplay = "gg"
+frame_progress = 0.893912
+centered = false
+
+[node name="Label" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 15.0
+offset_right = 605.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.698039, 0, 1)
+theme_override_colors/font_outline_color = Color(0.501961, 0.537255, 0, 1)
+theme_override_fonts/font = ExtResource("17_owkye")
+theme_override_font_sizes/font_size = 100
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+libraries = {
+&"": SubResource("AnimationLibrary_d234u")
+}
+autoplay = "GANASTE"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 586.0
+offset_right = 715.0
+offset_bottom = 727.0
+theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.698039, 0, 1)
+theme_override_colors/font_outline_color = Color(0.501961, 0.537255, 0, 1)
+theme_override_fonts/font = ExtResource("17_owkye")
+theme_override_font_sizes/font_size = 30
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label2"]
+libraries = {
+&"": SubResource("AnimationLibrary_d234u")
+}
+autoplay = "Continuar"
