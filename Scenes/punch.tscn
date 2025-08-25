@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqkuka33kxcqu"]
 
 [ext_resource type="Texture2D" uid="uid://blex0n2rdxghj" path="res://Assets/art/sprites/Armas/Punch1.png" id="1_71g2a"]
-[ext_resource type="Script" uid="uid://d070ppq8fg2le" path="res://Scripts/punch.gd" id="1_gaxiv"]
+[ext_resource type="Script" path="res://Scripts/punch.gd" id="1_gaxiv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8w4d"]
 radius = 32.0156
