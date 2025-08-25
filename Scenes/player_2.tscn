@@ -859,7 +859,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Player_2" type="CharacterBody2D" groups=["player_2", "players"]]
+[node name="Player_2" type="CharacterBody2D" groups=["player_2"]]
 script = ExtResource("1_a3adp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
