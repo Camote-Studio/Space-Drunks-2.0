@@ -1,9 +1,8 @@
 extends Node2D
 
 func _ready():
-	$Label/AnimationPlayer.play("Retry")
 	$Label/AnimationPlayer.play("Continuar")
-	
+	$Label/AnimationPlayer.play("GANASTE")
 	
 	
 func _process(delta):
