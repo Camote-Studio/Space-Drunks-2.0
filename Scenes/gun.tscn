@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://hs5wadwnl64m" path="res://Assets/sfx/lasergun-35817_[cut_1sec].mp3" id="3_t6ynv"]
 
 [node name="Gun" type="Node2D"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.15, 0.15)
 script = ExtResource("1_pey2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
