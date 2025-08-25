@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0jbneopgj5as"]
+[gd_scene load_steps=11 format=3 uid="uid://b0jbneopgj5as"]
 
 [ext_resource type="PackedScene" uid="uid://sd77axdv10ou" path="res://Scenes/Backgrounds/menu_opciones_background.tscn" id="1_eqj40"]
 [ext_resource type="Script" uid="uid://donbm0ly7e86o" path="res://Scripts/Intefaz/opciones_menu.gd" id="1_pnniq"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="2_pnniq"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="4_wsc1c"]
+[ext_resource type="Script" uid="uid://ddql72uga8uo4" path="res://Scripts/Intefaz/music_scroller.gd" id="5_8jn6b"]
+[ext_resource type="Script" uid="uid://b5dguji3i4iko" path="res://Scripts/Intefaz/sound_effect_scroller.gd" id="6_ca0yn"]
+[ext_resource type="Texture2D" uid="uid://dq21b1oy4geks" path="res://Assets/art/sprites/Interfaz/botella_1.png" id="6_esbkl"]
+[ext_resource type="Texture2D" uid="uid://c4tjccgcl8xd" path="res://Assets/art/sprites/Interfaz/botella_2.png" id="7_ca0yn"]
+[ext_resource type="Texture2D" uid="uid://dkd2a5xr6b4qh" path="res://Assets/art/sprites/Interfaz/botella_3.png" id="8_on7rc"]
+[ext_resource type="AudioStream" uid="uid://dtiacpyj0ui1e" path="res://Assets/sfx/495541__lilmati__retro-death.wav" id="10_ca0yn"]
 
 [node name="OpcionesMenu" type="Control"]
 layout_mode = 3
@@ -30,10 +36,93 @@ theme_override_fonts/font = ExtResource("2_pnniq")
 theme_override_font_sizes/font_size = 56
 text = "OPTIONS"
 
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -402.0
+offset_top = 168.0
+offset_right = -241.0
+offset_bottom = 247.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_pnniq")
+theme_override_font_sizes/font_size = 46
+text = "Music"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -401.0
+offset_top = 278.0
+offset_right = -240.0
+offset_bottom = 357.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_pnniq")
+theme_override_font_sizes/font_size = 46
+text = "Effects"
+
 [node name="Sombras_transición" parent="." instance=ExtResource("4_wsc1c")]
 visible = false
 layout_mode = 0
 
 [node name="sombra_time" type="Timer" parent="Sombras_transición"]
 
+[node name="music_scroller" type="HSlider" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 356.0
+offset_top = 176.0
+offset_right = 551.0
+offset_bottom = 192.0
+scale = Vector2(3, 3)
+max_value = 2.5
+value = 2.5
+script = ExtResource("5_8jn6b")
+
+[node name="sound_effect_scroller" type="HSlider" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 359.0
+offset_top = 287.0
+offset_right = 554.0
+offset_bottom = 303.0
+scale = Vector2(3, 3)
+max_value = 4.0
+value = 4.0
+script = ExtResource("6_ca0yn")
+
+[node name="Quit_menu" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 494.0
+offset_right = 1294.0
+offset_bottom = 2629.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_esbkl")
+texture_pressed = ExtResource("7_ca0yn")
+texture_hover = ExtResource("8_on7rc")
+
+[node name="Label" type="Label" parent="Quit_menu"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 140.0
+offset_right = 998.0
+offset_bottom = 319.0
+rotation = -0.235619
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_pnniq")
+theme_override_font_sizes/font_size = 128
+text = "Quit"
+
+[node name="test_effect_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_ca0yn")
+
 [connection signal="timeout" from="Sombras_transición/sombra_time" to="." method="_on_sombra_time_timeout"]
+[connection signal="drag_started" from="sound_effect_scroller" to="." method="_on_sound_effect_scroller_drag_started"]
+[connection signal="pressed" from="Quit_menu" to="." method="_on_quit_menu_pressed"]
