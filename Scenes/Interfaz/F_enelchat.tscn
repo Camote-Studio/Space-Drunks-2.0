@@ -84,6 +84,21 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="Animation" id="Animation_7qtlc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
 [sub_resource type="Animation" id="Animation_shfoc"]
 resource_name = "Retry"
 loop_mode = 1
@@ -99,21 +114,6 @@ tracks/0/keys = {
 "update": 1,
 "values": ["", "GAME
 OVER"]
-}
-
-[sub_resource type="Animation" id="Animation_7qtlc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [""]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y1bxd"]
