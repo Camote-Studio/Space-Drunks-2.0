@@ -24,4 +24,4 @@ func _game_over():
 	await timer.timeout
 	
 	# Cambiar de escena después del delay
-	get_tree().change_scene_to_file("res://Scenes/Interfaz/Menu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Interfaz/F_enelchat.tscn")

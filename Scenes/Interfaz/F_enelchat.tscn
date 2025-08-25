@@ -1,0 +1,210 @@
+[gd_scene load_steps=29 format=3 uid="uid://c35wg10ubluin"]
+
+[ext_resource type="Script" uid="uid://e8e61gkc0b5f" path="res://Scripts/Intefaz/f_enelchat.gd" id="1_47cka"]
+[ext_resource type="Texture2D" uid="uid://dmyjmuiqagt7p" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-001.png" id="2_ru5b7"]
+[ext_resource type="Texture2D" uid="uid://bk7d11pfmju1d" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-002.png" id="3_edpnn"]
+[ext_resource type="Texture2D" uid="uid://sdwhowjybyqi" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-003.png" id="4_mdhxt"]
+[ext_resource type="Texture2D" uid="uid://c4icmfpllmfmx" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-004.png" id="5_yfjfn"]
+[ext_resource type="Texture2D" uid="uid://bk5wx4hs6iebr" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-005.png" id="6_yd3m5"]
+[ext_resource type="Texture2D" uid="uid://wx0mem74t5cc" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-006.png" id="7_f4cpw"]
+[ext_resource type="Texture2D" uid="uid://iawrdykihkec" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-007.png" id="8_p656c"]
+[ext_resource type="Texture2D" uid="uid://ln7kpr1tnmor" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-008.png" id="9_483he"]
+[ext_resource type="Texture2D" uid="uid://qucolhrejyoh" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-009.png" id="10_j2ork"]
+[ext_resource type="Texture2D" uid="uid://bh6a6a2agpcqh" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-010.png" id="11_dbq1n"]
+[ext_resource type="Texture2D" uid="uid://docsacdx3v3k7" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-011.png" id="12_e3dly"]
+[ext_resource type="Texture2D" uid="uid://btmoc1cr44fo5" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-012.png" id="13_6bxcc"]
+[ext_resource type="Texture2D" uid="uid://cjtv81m824cpw" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-013.png" id="14_aatmp"]
+[ext_resource type="Texture2D" uid="uid://cytmk8kaewwce" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-014.png" id="15_1chxe"]
+[ext_resource type="Texture2D" uid="uid://dr3uctslrana0" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-015.png" id="16_1y1cd"]
+[ext_resource type="Texture2D" uid="uid://bsye8rxrm00vs" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-016.png" id="17_7fgra"]
+[ext_resource type="Texture2D" uid="uid://dwrdid5q864tn" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-017.png" id="18_epw84"]
+[ext_resource type="Texture2D" uid="uid://ddvryb4swfbrw" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-018.png" id="19_pve41"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="20_p3ag8"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="21_02rku"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjaag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ru5b7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_edpnn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mdhxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yfjfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yd3m5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f4cpw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_p656c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_483he")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_j2ork")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dbq1n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_e3dly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6bxcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_aatmp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1chxe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_1y1cd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_7fgra")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_epw84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_pve41")
+}],
+"loop": true,
+"name": &"gg",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_shfoc"]
+resource_name = "Retry"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["", "GAME
+OVER"]
+}
+
+[sub_resource type="Animation" id="Animation_7qtlc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y1bxd"]
+_data = {
+&"RESET": SubResource("Animation_7qtlc"),
+&"Retry": SubResource("Animation_shfoc")
+}
+
+[sub_resource type="Animation" id="Animation_47cka"]
+resource_name = "Continuar"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["", "press start to continue..."]
+}
+
+[sub_resource type="Animation" id="Animation_ru5b7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_edpnn"]
+_data = {
+&"Continuar": SubResource("Animation_47cka"),
+&"RESET": SubResource("Animation_ru5b7")
+}
+
+[node name="FEnelchat" type="Node2D"]
+script = ExtResource("1_47cka")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.581818, 0.635294)
+sprite_frames = SubResource("SpriteFrames_cjaag")
+animation = &"gg"
+autoplay = "gg"
+frame_progress = 0.435054
+centered = false
+
+[node name="Sombras_transición" parent="." instance=ExtResource("20_p3ag8")]
+offset_top = 3.0
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 17.0
+offset_top = -1.0
+offset_right = 812.0
+offset_bottom = 284.0
+theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.698039, 0, 1)
+theme_override_colors/font_outline_color = Color(0.5036, 0.539205, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("21_02rku")
+theme_override_font_sizes/font_size = 100
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+libraries = {
+&"": SubResource("AnimationLibrary_y1bxd")
+}
+autoplay = "Retry"
+
+[node name="continue" type="Label" parent="."]
+texture_filter = 1
+offset_left = 616.0
+offset_top = 593.0
+offset_right = 1358.0
+offset_bottom = 664.0
+theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.698039, 0, 1)
+theme_override_colors/font_outline_color = Color(0.5036, 0.539205, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("21_02rku")
+theme_override_font_sizes/font_size = 35
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="continue"]
+libraries = {
+&"": SubResource("AnimationLibrary_edpnn")
+}
+autoplay = "Continuar"
