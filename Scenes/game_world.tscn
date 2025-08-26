@@ -249,6 +249,7 @@ texture = ExtResource("3_jqqi2")
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(414, 139)
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D2"]
 texture_filter = 1
@@ -279,6 +280,7 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2(1006, 203)
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D5"]
 texture_filter = 1
@@ -294,6 +296,7 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D8" type="StaticBody2D" parent="."]
 position = Vector2(3107, 144)
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D8"]
 texture_filter = 1
@@ -309,6 +312,7 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D9" type="StaticBody2D" parent="."]
 position = Vector2(3798, 209)
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D9"]
 texture_filter = 1
@@ -324,6 +328,7 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D10" type="StaticBody2D" parent="."]
 position = Vector2(4622, 115)
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D10"]
 texture_filter = 1
@@ -339,6 +344,7 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
 position = Vector2(1694, 140)
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D6"]
 texture_filter = 1
@@ -366,12 +372,14 @@ position = Vector2(2741.5, 124)
 shape = SubResource("RectangleShape2D_1m887")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(-2.5, 84.5)
 shape = SubResource("RectangleShape2D_nmac2")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(5507.51, 146.503)
