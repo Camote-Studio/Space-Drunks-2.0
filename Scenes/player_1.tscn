@@ -1,5 +1,4 @@
-[gd_scene load_steps=181 format=3 uid="uid://c2uks060bx75"]
-
+[gd_scene load_steps=181 format=3 uid="uid://c3egt0yjxsvrn"]
 
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_p0e4v"]
 [ext_resource type="Texture2D" uid="uid://t1sr0p1gcjrw" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 001.png" id="2_qo81y"]
@@ -78,13 +77,11 @@
 [ext_resource type="Texture2D" uid="uid://cy13nefvkt2ys" path="res://Assets/art/sprites/Personajes/WALK DIRK/frame_27_delay-0.03s.png" id="31_2d7o3"]
 [ext_resource type="Texture2D" uid="uid://cfa15wx4hhh4d" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_28_delay-0.03s.png" id="31_fqe1y"]
 [ext_resource type="Texture2D" uid="uid://b0naf7veiepit" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_00_delay-0.1s.png" id="32_77chy"]
-
 [ext_resource type="Texture2D" uid="uid://dn1ls6r6x3rqd" path="res://Assets/art/sprites/complements_sprites/YAMCHA.png" id="32_esulk"]
 [ext_resource type="Texture2D" uid="uid://dv4bfttms73cm" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_29_delay-0.03s.png" id="32_fnqhg"]
 [ext_resource type="Texture2D" uid="uid://dxyw52hri1je5" path="res://Assets/art/sprites/Personajes/WALK DIRK/frame_28_delay-0.03s.png" id="32_x8ega"]
 [ext_resource type="Texture2D" uid="uid://cgigd0kdja40w" path="res://Assets/art/sprites/Personajes/WALK DIRK/frame_29_delay-0.03s.png" id="33_7hw46"]
 [ext_resource type="Texture2D" uid="uid://cwodpoo7cxcbj" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_01_delay-0.03s.png" id="33_u13eq"]
-
 [ext_resource type="Texture2D" uid="uid://bwu64l5lcsevm" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_30_delay-0.03s.png" id="33_ud8yo"]
 [ext_resource type="Texture2D" uid="uid://cdmddygqfmdq5" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_31_delay-0.03s.png" id="34_esulk"]
 [ext_resource type="Texture2D" uid="uid://bteydlududo17" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_02_delay-0.03s.png" id="34_krvq8"]
@@ -114,7 +111,6 @@
 [ext_resource type="Texture2D" uid="uid://dmyj4takirj3r" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_43_delay-0.03s.png" id="46_v6jke"]
 [ext_resource type="Texture2D" uid="uid://ws6y0fefsq3e" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_44_delay-0.03s.png" id="47_tb6cx"]
 [ext_resource type="Texture2D" uid="uid://gey6mxmwc07i" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_15_delay-0.03s.png" id="47_wd7t2"]
-
 [ext_resource type="Texture2D" uid="uid://nj4g5j357lqe" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_45_delay-0.03s.png" id="48_wxyas"]
 [ext_resource type="Texture2D" uid="uid://rlo14kutnfvp" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_16_delay-0.03s.png" id="48_y30uo"]
 [ext_resource type="Texture2D" uid="uid://bcytxfijwa5wb" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_46_delay-0.03s.png" id="49_01h24"]
@@ -122,7 +118,6 @@
 [ext_resource type="Texture2D" uid="uid://yuh8xfvcityy" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_18_delay-0.03s.png" id="50_35b2c"]
 [ext_resource type="Texture2D" uid="uid://cxpjow3ruja0h" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_47_delay-0.03s.png" id="50_rh1ry"]
 [ext_resource type="Texture2D" uid="uid://bs1i44f6v5v3c" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_19_delay-0.03s.png" id="51_2aarq"]
-
 [ext_resource type="Texture2D" uid="uid://f7yydhwak85x" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_48_delay-0.03s.png" id="51_eoncb"]
 [ext_resource type="Texture2D" uid="uid://doluljlkqkeya" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_49_delay-0.03s.png" id="52_gx4qq"]
 [ext_resource type="Texture2D" uid="uid://ciqsms6bdpqag" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_20_delay-0.03s.png" id="52_hh556"]
@@ -138,7 +133,6 @@
 [ext_resource type="Texture2D" uid="uid://ct4wypn2e23cd" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_25_delay-0.03s.png" id="57_rrb1e"]
 [ext_resource type="Texture2D" uid="uid://scc34ashg0cb" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_55_delay-0.03s.png" id="58_16yfp"]
 [ext_resource type="Texture2D" uid="uid://qsbxu78gf2dq" path="res://Assets/art/sprites/Personajes/walk back dirk/frame_26_delay-0.03s.png" id="58_r4lpj"]
-
 [ext_resource type="Texture2D" uid="uid://c1cbbpmm1icg2" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_56_delay-0.03s.png" id="59_anab5"]
 [ext_resource type="Texture2D" uid="uid://d0j0jpt5m8e28" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_57_delay-0.03s.png" id="60_512bc"]
 [ext_resource type="Texture2D" uid="uid://cl2ubba73wn3q" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_58_delay-0.03s.png" id="61_2d7o3"]
@@ -455,7 +449,6 @@ animations = [{
 "texture": ExtResource("32_esulk")
 }],
 "loop": true,
-
 "name": &"death",
 "speed": 5.0
 }, {
@@ -815,7 +808,6 @@ sprite_frames = SubResource("SpriteFrames_k774p")
 animation = &"aturdio"
 frame_progress = 0.322638
 
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 21)
 shape = SubResource("CapsuleShape2D_yqug6")
@@ -842,4 +834,3 @@ frame_progress = 0.188546
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
-

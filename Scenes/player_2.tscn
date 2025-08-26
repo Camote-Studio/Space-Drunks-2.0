@@ -1,21 +1,31 @@
-[gd_scene load_steps=182 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=192 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
+[ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
 [ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://Scenes/sword.tscn" id="3_eus2p"]
 [ext_resource type="Texture2D" uid="uid://cqxklgykn6by8" path="res://Assets/art/sprites/Personajes/BIGB/frame_00_delay-0.03s.png" id="3_sj0qb"]
 [ext_resource type="Texture2D" uid="uid://u73h8cvpbapi" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_00_delay-0.03s.png" id="3_uqjhf"]
+[ext_resource type="Texture2D" uid="uid://dr3las3svr06d" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 002.png" id="3_ygfiw"]
+[ext_resource type="Texture2D" uid="uid://c1brhnb6aumja" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 003.png" id="4_b3dpy"]
 [ext_resource type="Texture2D" uid="uid://cve5t1xbqv8u" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_01_delay-0.03s.png" id="4_esjcq"]
 [ext_resource type="Texture2D" uid="uid://c37xghewhca1o" path="res://Assets/art/sprites/Personajes/BIGB/frame_01_delay-0.03s.png" id="4_g6uhq"]
 [ext_resource type="Texture2D" uid="uid://dtledry37ucwq" path="res://Assets/art/sprites/Personajes/BIGB/frame_02_delay-0.03s.png" id="5_f1g1f"]
 [ext_resource type="Texture2D" uid="uid://cja2uuvbuxmp0" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_02_delay-0.03s.png" id="5_moq04"]
+[ext_resource type="Texture2D" uid="uid://bl2ex62r03ytj" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 004.png" id="5_wjkv8"]
 [ext_resource type="Texture2D" uid="uid://coacxyxuph77i" path="res://Assets/art/sprites/Personajes/BIGB/frame_03_delay-0.03s.png" id="6_occrk"]
+[ext_resource type="Texture2D" uid="uid://dwg6wppwkx4jg" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 007.png" id="6_wjkv8"]
 [ext_resource type="Texture2D" uid="uid://dptx6iddjwxx3" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_03_delay-0.03s.png" id="6_xvps5"]
 [ext_resource type="Texture2D" uid="uid://c73lbdpt4x66g" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_04_delay-0.03s.png" id="7_6dh2a"]
+[ext_resource type="Texture2D" uid="uid://coouk7v55eqiu" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 006.png" id="7_b5o0t"]
+[ext_resource type="Texture2D" uid="uid://m1bkhyiafqpk" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 008.png" id="7_bdlbh"]
 [ext_resource type="Texture2D" uid="uid://pitwg7gec8me" path="res://Assets/art/sprites/Personajes/BIGB/frame_04_delay-0.03s.png" id="7_f1oep"]
 [ext_resource type="Texture2D" uid="uid://6ithjj605vbf" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_05_delay-0.03s.png" id="8_0a744"]
+[ext_resource type="Texture2D" uid="uid://bmpmugjvpx2bt" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 009.png" id="8_b5o0t"]
 [ext_resource type="Texture2D" uid="uid://c44l5r2o37ude" path="res://Assets/art/sprites/Personajes/BIGB/frame_05_delay-0.03s.png" id="8_thmj0"]
+[ext_resource type="Texture2D" uid="uid://cb4h4wf1ekkcy" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 010.png" id="9_0jo8c"]
 [ext_resource type="Texture2D" uid="uid://b22bnvoenbpoo" path="res://Assets/art/sprites/Personajes/BIGB/frame_06_delay-0.03s.png" id="9_ctkhr"]
 [ext_resource type="Texture2D" uid="uid://2r3q374b04bs" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_06_delay-0.03s.png" id="9_qwboe"]
+[ext_resource type="Texture2D" uid="uid://b1krbj1mav4os" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 011.png" id="10_36xct"]
 [ext_resource type="Texture2D" uid="uid://1cttk55hijep" path="res://Assets/art/sprites/Personajes/BIGB/frame_07_delay-0.03s.png" id="10_pfkrk"]
 [ext_resource type="Texture2D" uid="uid://b5te1ydnpu58u" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_07_delay-0.03s.png" id="10_xw0hg"]
 [ext_resource type="Texture2D" uid="uid://buejwcxrdpmky" path="res://Assets/art/sprites/Personajes/BIGB/frame_08_delay-0.03s.png" id="11_71vir"]
@@ -178,6 +188,41 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rn5h7"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5yg3c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ygfiw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_b3dpy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wjkv8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_b5o0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wjkv8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bdlbh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b5o0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0jo8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_36xct")
+}],
+"loop": true,
+"name": &"aturdido",
+"speed": 7.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_uqjhf")
@@ -769,7 +814,8 @@ script = ExtResource("1_a3adp")
 position = Vector2(1, -11)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_rn5h7")
-animation = &"death"
+animation = &"aturdido"
+frame_progress = 0.090859
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -2)
@@ -791,3 +837,7 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_5yg3c")
 animation = &"explosion_death"
 autoplay = "explosion_death"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
