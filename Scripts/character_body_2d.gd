@@ -70,7 +70,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		_handle_floating(delta)
 
-func _on_damage(amount: float, source: String) -> void:
+func _on_damage(amount: float, source: String = "desconocido") -> void:
+	print("🔥 Jugador recibió", amount, "de daño. Fuente:", source)
 	if dead:
 		return
 
