@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal damage(value: float)
+signal damage(value: float, source: String)
 signal died
 
 var speed := 150.0
@@ -111,10 +111,10 @@ func _physics_process(delta: float) -> void:
 		_do_punch(dir)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") or body.is_in_group("player_2"):
 		target_in_range = body as CharacterBody2D
 	if body.is_in_group("player_1_bullet"):
-		emit_signal("damage", 10.0)
+		emit_signal("damage", 10.0,"golpe")
 		if body.has_method("queue_free"):
 			body.queue_free()
 
@@ -130,6 +130,7 @@ func _on_area_2d_area_entered(a: Area2D) -> void:
 
 func _do_punch(dir: Vector2) -> void:
 	if target_in_range:
+		print("💥 Enemigo golpea al jugador con daño:", punch_damage)
 		target_in_range.emit_signal("damage", punch_damage)
 		if sfx_hit:
 			sfx_hit.pitch_scale = pitch_variations[rng.randi_range(0, pitch_variations.size() - 1)]
@@ -147,7 +148,7 @@ func _do_punch(dir: Vector2) -> void:
 func _on_punch_timer_timeout() -> void:
 	_attack_lock = false
 
-func _on_damage(amount: float) -> void:
+func _on_damage(amount: float, source: String) -> void:
 	if bar_4:
 		bar_4.value = clamp(bar_4.value - amount, bar_4.min_value, bar_4.max_value)
 	_stack_value += amount

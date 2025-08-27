@@ -1,4 +1,4 @@
-[gd_scene load_steps=181 format=3 uid="uid://c3egt0yjxsvrn"]
+[gd_scene load_steps=190 format=3 uid="uid://c3egt0yjxsvrn"]
 
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_p0e4v"]
 [ext_resource type="Texture2D" uid="uid://t1sr0p1gcjrw" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 001.png" id="2_qo81y"]
@@ -151,15 +151,24 @@
 [ext_resource type="Texture2D" uid="uid://den6h8ysfnxv" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_71_delay-0.03s.png" id="74_tw51m"]
 [ext_resource type="Texture2D" uid="uid://n7mgq07v6idm" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_72_delay-0.03s.png" id="75_6vfcg"]
 [ext_resource type="Texture2D" uid="uid://xrj2qrjns663" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_73_delay-0.03s.png" id="76_nebvn"]
+[ext_resource type="Texture2D" uid="uid://dsb3220yfdhkb" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 000.png" id="77_r4lpj"]
 [ext_resource type="Texture2D" uid="uid://bhd0tjvyvjcko" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_74_delay-0.03s.png" id="77_w8iev"]
+[ext_resource type="Texture2D" uid="uid://bobrxo57vrwd6" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 001.png" id="78_k774p"]
 [ext_resource type="Texture2D" uid="uid://c8y6glshht830" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_75_delay-0.03s.png" id="78_tpega"]
 [ext_resource type="Texture2D" uid="uid://cl0yyb560ksex" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_76_delay-0.03s.png" id="79_4fs5g"]
+[ext_resource type="Texture2D" uid="uid://cdcaro8aplgpt" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 002.png" id="79_e0wwm"]
 [ext_resource type="Texture2D" uid="uid://0gu5fqxy40ev" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_77_delay-0.03s.png" id="80_k22l2"]
+[ext_resource type="Texture2D" uid="uid://clwfy58hvs6fw" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 003.png" id="80_tqa8w"]
+[ext_resource type="Texture2D" uid="uid://c3a3bcghb0i6p" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 004.png" id="81_1arlc"]
 [ext_resource type="Texture2D" uid="uid://ximl3lbegwyl" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_78_delay-0.03s.png" id="81_jmaqv"]
+[ext_resource type="Texture2D" uid="uid://7eoguue3eqnj" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 005.png" id="82_unmkb"]
 [ext_resource type="Texture2D" uid="uid://f6jba3ncsvjh" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_79_delay-0.03s.png" id="82_wd7t2"]
+[ext_resource type="Texture2D" uid="uid://t3n80u2temcy" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 006.png" id="83_8hk8e"]
 [ext_resource type="Texture2D" uid="uid://cvtrkambovyio" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_80_delay-0.03s.png" id="83_y30uo"]
 [ext_resource type="Texture2D" uid="uid://v02sryg75bjc" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_81_delay-0.03s.png" id="84_qo81y"]
+[ext_resource type="Texture2D" uid="uid://cqtgir7n1w83a" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 007.png" id="84_uq7cj"]
 [ext_resource type="Texture2D" uid="uid://cxb553uwhp66x" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_82_delay-0.03s.png" id="85_35b2c"]
+[ext_resource type="Texture2D" uid="uid://fcnr12k3ggci" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 008.png" id="85_b26ls"]
 [ext_resource type="Texture2D" uid="uid://c16rxha1su4my" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_83_delay-0.03s.png" id="86_2aarq"]
 [ext_resource type="Texture2D" uid="uid://cv258o8ddmu6k" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_84_delay-0.03s.png" id="87_hh556"]
 [ext_resource type="Texture2D" uid="uid://cv22mu278lbdi" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_85_delay-0.03s.png" id="88_qnjfm"]
@@ -452,10 +461,37 @@ animations = [{
 "name": &"death",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("77_r4lpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_k774p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_e0wwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_tqa8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_1arlc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_unmkb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_8hk8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_uq7cj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_b26ls")
+}],
 "loop": true,
 "name": &"envenenado",
-"speed": 5.0
+"speed": 17.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -811,7 +847,8 @@ script = ExtResource("1_p0e4v")
 position = Vector2(-1, 5.96046e-08)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
-animation = &"aturdio"
+animation = &"envenenado"
+frame_progress = 0.494211
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 21)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=37 format=3 uid="uid://82ef3cmon8x5"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
 [ext_resource type="Texture2D" uid="uid://cogb4fvu0xhth" path="res://Assets/art/background/BACKGROUND_2.png" id="2_2ltu8"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="21_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://d0vmf7ddix762" path="res://Scenes/enemy_spawn_4.tscn" id="22_gdlfp"]
 [ext_resource type="Texture2D" uid="uid://5ky34t7mdciu" path="res://Assets/art/sprites/complements_sprites/B0t_Parlante.png" id="24_2ltu8"]
+[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="25_dfrea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq78c"]
 size = Vector2(5503, 20)
@@ -459,5 +460,8 @@ texture = ExtResource("24_2ltu8")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D4/StaticBody2D2"]
 polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 32.5, 97.5, 32.5, 115, 5, 115, -42.5, 105, -65, 85, -127.5, 65, -150, 42.5, -162.5, 10)
+
+[node name="enemie_2" parent="." instance=ExtResource("25_dfrea")]
+position = Vector2(587, 357)
 
 [connection signal="body_entered" from="Portal_2/Area2D" to="Portal_2" method="_on_area_2d_body_entered"]
