@@ -19,6 +19,7 @@ flip_h = true
 [node name="laser" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_v57tp")
 volume_db = 10.0
+bus = &"SoundEffect"
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(-26, 23)
