@@ -48,6 +48,8 @@ func _physics_process(delta: float) -> void:
 		direction = -direction
 		if animated_sprite.animation != "aturdio":
 			animated_sprite.play("aturdio")
+		if abs(direction.x) > abs(direction.y):
+			animated_sprite.flip_h = direction.x < 0
 	else:
 		# Animaciones normales
 		if direction == Vector2.ZERO:
