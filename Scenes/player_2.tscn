@@ -1,4 +1,4 @@
-[gd_scene load_steps=192 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=226 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
@@ -177,8 +177,42 @@
 [ext_resource type="Texture2D" uid="uid://bim8yy2yhc1om" path="res://Assets/art/sprites/Personajes/BIGB/frame_74_delay-0.03s.png" id="87_xw0hg"]
 [ext_resource type="Texture2D" uid="uid://crti6byvewsl1" path="res://Assets/art/sprites/Personajes/BIGB/frame_75_delay-0.03s.png" id="88_se0d0"]
 [ext_resource type="Texture2D" uid="uid://dybglnopsmibt" path="res://Assets/art/sprites/Personajes/BIGB/frame_76_delay-0.03s.png" id="89_1a6of"]
+[ext_resource type="Texture2D" uid="uid://boqedpo2gf4ia" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_00_delay-0.03s.png" id="89_xb4tb"]
 [ext_resource type="Texture2D" uid="uid://c2m65rncesrwd" path="res://Assets/art/sprites/Personajes/BIGB/frame_77_delay-0.03s.png" id="90_fcbx1"]
+[ext_resource type="Texture2D" uid="uid://b2oipyj7d3lfr" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_01_delay-0.03s.png" id="90_mlrfv"]
+[ext_resource type="Texture2D" uid="uid://cv8djd65rc7ch" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_02_delay-0.03s.png" id="91_otioi"]
 [ext_resource type="Texture2D" uid="uid://df3ttwj07e2uy" path="res://Assets/art/sprites/Personajes/BIGB/frame_78_delay-0.07s.png" id="91_qixq7"]
+[ext_resource type="Texture2D" uid="uid://clyvg37h1dx0j" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_03_delay-0.03s.png" id="92_6b0ul"]
+[ext_resource type="Texture2D" uid="uid://dghv1yau5r5jr" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_04_delay-0.03s.png" id="93_dm71r"]
+[ext_resource type="Texture2D" uid="uid://ykkdx53ewlt0" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_05_delay-0.03s.png" id="94_sk8vn"]
+[ext_resource type="Texture2D" uid="uid://p7ptklrd4tco" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_06_delay-0.03s.png" id="95_4ruve"]
+[ext_resource type="Texture2D" uid="uid://druw7wf00n7rq" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_07_delay-0.03s.png" id="96_i0oww"]
+[ext_resource type="Texture2D" uid="uid://c4oytydfwdyjf" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_08_delay-0.03s.png" id="97_5s451"]
+[ext_resource type="Texture2D" uid="uid://dpyr8ig6on2cn" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_09_delay-0.03s.png" id="98_74qmu"]
+[ext_resource type="Texture2D" uid="uid://m8yek0hqfue" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_10_delay-0.03s.png" id="99_2eahy"]
+[ext_resource type="Texture2D" uid="uid://f6g2h8he0bwk" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_11_delay-0.03s.png" id="100_prblm"]
+[ext_resource type="Texture2D" uid="uid://cdx7rquevu5on" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_12_delay-0.03s.png" id="101_58h14"]
+[ext_resource type="Texture2D" uid="uid://b7ji4qj5mir4n" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_13_delay-0.03s.png" id="102_dfurs"]
+[ext_resource type="Texture2D" uid="uid://vw5c3opxrfwb" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_14_delay-0.03s.png" id="103_2y41i"]
+[ext_resource type="Texture2D" uid="uid://cfnxgdqrh0hat" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_15_delay-0.03s.png" id="104_4x7fj"]
+[ext_resource type="Texture2D" uid="uid://b463gb2dt46na" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_16_delay-0.03s.png" id="105_wrxan"]
+[ext_resource type="Texture2D" uid="uid://bbhqjadql7n53" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_17_delay-0.03s.png" id="106_87ajp"]
+[ext_resource type="Texture2D" uid="uid://bko7afqhodgeh" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_18_delay-0.03s.png" id="107_h0onn"]
+[ext_resource type="Texture2D" uid="uid://jt6f26w051cc" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_19_delay-0.03s.png" id="108_mcjc0"]
+[ext_resource type="Texture2D" uid="uid://lffbwndi7ilw" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_20_delay-0.03s.png" id="109_p5u73"]
+[ext_resource type="Texture2D" uid="uid://dx3jiblil32yx" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_21_delay-0.03s.png" id="110_m7vy7"]
+[ext_resource type="Texture2D" uid="uid://c0lqkbl5gpvnw" path="res://Assets/art/sprites/Personajes/WALK BACK BIGB/frame_22_delay-0.03s.png" id="111_70dce"]
+[ext_resource type="Texture2D" uid="uid://bievc6iqgqcnv" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 001.png" id="113_prblm"]
+[ext_resource type="Texture2D" uid="uid://p0ysi2ms2f0y" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 002.png" id="114_58h14"]
+[ext_resource type="Texture2D" uid="uid://bl40u77xbytnl" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 003.png" id="115_dfurs"]
+[ext_resource type="Texture2D" uid="uid://dr52pjqe7glwl" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 004.png" id="116_2y41i"]
+[ext_resource type="Texture2D" uid="uid://pnjymisrhck4" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 005.png" id="117_4x7fj"]
+[ext_resource type="Texture2D" uid="uid://bffpjsjclpaki" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 006.png" id="118_wrxan"]
+[ext_resource type="Texture2D" uid="uid://dljx6qfldb8hq" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 007.png" id="119_87ajp"]
+[ext_resource type="Texture2D" uid="uid://cd4c3k7rid46v" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 008.png" id="120_h0onn"]
+[ext_resource type="Texture2D" uid="uid://wbqmb1heom0v" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 009.png" id="121_mcjc0"]
+[ext_resource type="Texture2D" uid="uid://c0vqfohodb8vi" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 010.png" id="122_p5u73"]
+[ext_resource type="Texture2D" uid="uid://cv2e4wap0ot84" path="res://Assets/art/sprites/Personajes/big enfermo/big enfermo 011.png" id="123_m7vy7"]
 [ext_resource type="Texture2D" uid="uid://f6h17j78fk7n" path="res://Assets/art/sprites/Particulas/EXPLO_1.png" id="170_xw0hg"]
 [ext_resource type="Texture2D" uid="uid://jwwhfgs4q7a8" path="res://Assets/art/sprites/Particulas/EXPLO_2.png" id="171_se0d0"]
 [ext_resource type="Texture2D" uid="uid://b3djxqrgdb402" path="res://Assets/art/sprites/Particulas/EXPLO_3.png" id="172_1a6of"]
@@ -461,11 +495,123 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("89_xb4tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_mlrfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_otioi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_6b0ul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_dm71r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_sk8vn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_4ruve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_i0oww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_5s451")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_74qmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_2eahy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_prblm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_58h14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_dfurs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_2y41i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_4x7fj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_wrxan")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_87ajp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_h0onn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_mcjc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_p5u73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_m7vy7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_70dce")
+}],
+"loop": true,
+"name": &"caminar_subir",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("79_esjcq")
 }],
 "loop": true,
 "name": &"death",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("113_prblm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_58h14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_dfurs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_2y41i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_4x7fj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_wrxan")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_87ajp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_h0onn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("121_mcjc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_p5u73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_m7vy7")
+}],
+"loop": true,
+"name": &"envenenado",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -815,8 +961,8 @@ script = ExtResource("1_a3adp")
 position = Vector2(1, -11)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_rn5h7")
-animation = &"aturdido"
-frame_progress = 0.090859
+animation = &"envenenado"
+frame_progress = 0.353447
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -2)
@@ -841,4 +987,7 @@ autoplay = "explosion_death"
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="venenoTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]

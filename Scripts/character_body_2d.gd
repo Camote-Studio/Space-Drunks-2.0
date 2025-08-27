@@ -1,30 +1,28 @@
 extends CharacterBody2D
 
-# --- Señales ---
 signal damage(amount: float, source: String)
-signal muerte  # Para notificar al GameManager
+signal muerte  
 
-# --- Nodos ---
 @onready var bar: ProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-# --- Movimiento ---
 var speed := 200
-var controls_inverted := false
-var invert_duration := 2.0 
-var invert_timer := 0.0
-
+enum Estado {
+	NORMAL,
+	VENENO,
+	ATURDIDO
+}
+var estado_actual : Estado = Estado.NORMAL
 var floating := false
 var invulnerable := false
-var invul_duration := 4.0
+var invul_duration := 4.3
 var invul_timer := 0.0
 var float_start_y := 420.0
 var float_target_y := 130.0
 var rotation_speed := 3.0
-var float_lerp_speed := 2.0
+var float_lerp_speed := 2.5
 var return_lerp_speed := 3.0
 
-# --- Estado ---
 var dead := false
 var allow_input := true
 
@@ -44,24 +42,31 @@ func _physics_process(delta: float) -> void:
 	if allow_input:
 		direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
 
-	if controls_inverted:
-		direction = -direction
-		if animated_sprite.animation != "aturdio":
-			animated_sprite.play("aturdio")
-		if abs(direction.x) > abs(direction.y):
-			animated_sprite.flip_h = direction.x < 0
-	else:
-		# Animaciones normales
-		if direction == Vector2.ZERO:
-			animated_sprite.play("idle")
-		else:
-			if abs(direction.x) > abs(direction.y):
-				animated_sprite.play("caminar")
+	match estado_actual:
+		Estado.VENENO:
+			if animated_sprite.animation != "envenenado":
+				animated_sprite.play("envenenado")
+			if abs(direction.x) > 0:
 				animated_sprite.flip_h = direction.x < 0
-			elif direction.y < 0:
-				animated_sprite.play("caminar_subir")
+
+		Estado.ATURDIDO:
+			direction = -direction
+			if animated_sprite.animation != "aturdio":
+				animated_sprite.play("aturdio")
+			if abs(direction.x) > abs(direction.y):
+				animated_sprite.flip_h = direction.x < 0
+
+		Estado.NORMAL:
+			if direction == Vector2.ZERO:
+				animated_sprite.play("idle")
 			else:
-				animated_sprite.play("caminar_bajar")
+				if abs(direction.x) > abs(direction.y):
+					animated_sprite.play("caminar")
+					animated_sprite.flip_h = direction.x < 0
+				elif direction.y < 0:
+					animated_sprite.play("caminar_subir")
+				else:
+					animated_sprite.play("caminar_bajar")
 
 	velocity = direction * speed
 
@@ -71,7 +76,6 @@ func _physics_process(delta: float) -> void:
 		_handle_floating(delta)
 
 func _on_damage(amount: float, source: String = "desconocido") -> void:
-	print("🔥 Jugador recibió", amount, "de daño. Fuente:", source)
 	if dead:
 		return
 
@@ -81,15 +85,26 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 			_die()
 			return
 
-	if source == "bala":
-		controls_inverted = true
-		invert_timer = invert_duration
-		animated_sprite.play("aturdio")
-		$AturdidoTimer.start(invert_duration)
-	elif source == "bala_gravedad":
-		floating = true
-		invulnerable = true
-		invul_timer = invul_duration
+	match source:
+		"veneno":
+			if estado_actual == Estado.NORMAL:   
+				print("🔥 Jugador envenenado")
+				estado_actual = Estado.VENENO
+				$venenoTimer.start(0.5)
+				animated_sprite.play("envenenado")
+
+		"bala":
+			if estado_actual == Estado.NORMAL:   
+				print("💥 Jugador aturdido")
+				estado_actual = Estado.ATURDIDO
+				$AturdidoTimer.start(2)
+				animated_sprite.play("aturdio")
+
+		"bala_gravedad":
+			print("🌪 Jugador flotando")
+			floating = true
+			invulnerable = true
+			invul_timer = invul_duration
 
 func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
@@ -116,7 +131,6 @@ func _handle_floating(delta: float) -> void:
 	global_position.y = lerp(global_position.y, target_y, current_lerp_speed * delta)
 	rotation += current_rotation_speed * delta
 
-	# Desactivar colisiones mientras flota
 	set_collision_layer(0)
 	set_collision_mask(0)
 
@@ -138,7 +152,6 @@ func _die() -> void:
 	allow_input = false
 	floating = false
 	invulnerable = false
-	controls_inverted = false
 
 	velocity = Vector2.ZERO
 	rotation = 0.0
@@ -168,4 +181,9 @@ func _on_death_finished() -> void:
 
 
 func _on_aturdido_timer_timeout() -> void:
-	controls_inverted = false
+	if estado_actual == Estado.ATURDIDO:
+		estado_actual = Estado.NORMAL
+
+func _on_veneno_timer_timeout() -> void:
+	if estado_actual == Estado.VENENO:
+		estado_actual = Estado.NORMAL
