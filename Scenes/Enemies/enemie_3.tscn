@@ -91,6 +91,7 @@ show_percentage = false
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_tdua5")
 volume_db = 10.0
+bus = &"SoundEffect"
 
 [node name="Punch_timer" type="Timer" parent="."]
 
