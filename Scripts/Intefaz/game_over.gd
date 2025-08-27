@@ -22,6 +22,6 @@ func _game_over():
 	
 	# Esperar a que termine
 	await timer.timeout
-	
+	$"Sombras_transición/AnimationPlayer".play("Sombra_off")
 	# Cambiar de escena después del delay
 	get_tree().change_scene_to_file("res://Scenes/Interfaz/F_enelchat.tscn")

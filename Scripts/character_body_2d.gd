@@ -46,22 +46,23 @@ func _physics_process(delta: float) -> void:
 
 	if controls_inverted:
 		direction = -direction
-		if animated_sprite.animation != "aturdio":
-			animated_sprite.play("aturdio")
-	else:
-		# Animaciones normales
-		if direction == Vector2.ZERO:
-			animated_sprite.play("idle")
-		else:
-			if abs(direction.x) > abs(direction.y):
-				animated_sprite.play("caminar")
-				animated_sprite.flip_h = direction.x < 0
-			elif direction.y < 0:
-				animated_sprite.play("caminar_subir")
-			else:
-				animated_sprite.play("caminar_bajar")
+		invert_timer -= delta
+		if invert_timer <= 0.0:
+			controls_inverted = false
 
 	velocity = direction * speed
+
+	# Animaciones
+	if direction == Vector2.ZERO:
+		animated_sprite.play("idle")
+	else:
+		if abs(direction.x) > abs(direction.y):
+			animated_sprite.play("caminar")
+			animated_sprite.flip_h = direction.x < 0
+		elif direction.y < 0:
+			animated_sprite.play("caminar_subir")
+		elif direction.y > 0:
+			animated_sprite.play("caminar_bajar")
 
 	if not floating:
 		move_and_slide()
@@ -81,8 +82,7 @@ func _on_damage(amount: float, source: String) -> void:
 	if source == "bala":
 		controls_inverted = true
 		invert_timer = invert_duration
-		animated_sprite.play("aturdio")
-		$AturdidoTimer.start(invert_duration)
+		print("Jugador invertido por impacto de bala")
 	elif source == "bala_gravedad":
 		floating = true
 		invulnerable = true
@@ -162,7 +162,3 @@ func _die() -> void:
 func _on_death_finished() -> void:
 	if animated_sprite.animation == "death":
 		animated_sprite.playing = false
-
-
-func _on_aturdido_timer_timeout() -> void:
-	controls_inverted = false
