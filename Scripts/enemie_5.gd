@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal damage(value: float)
+signal damage(value: float, source: String)
 signal died
 
 # ===== Movimiento directo =====
@@ -10,7 +10,7 @@ var accel := 1800.0
 # ===== Agarre =====
 enum State { CHASE, GRAB }
 var state := State.CHASE
-var grab_range := 120.0          # distancia a la que inicia el agarre
+var grab_range := 100.0          # distancia a la que inicia el agarre
 var grab_duration := 3.0         # tiempo pegado
 var grab_dps := 8.0              # daño por segundo durante el agarre
 var grab_tick := 0.25            # cada cuánto aplica daño
@@ -124,7 +124,7 @@ func _start_grab() -> void:
 func _on_dot_tick() -> void:
 	if state == State.GRAB and player:
 		# Daño periódico al jugador
-		player.emit_signal("damage", grab_dps * grab_tick)
+		player.emit_signal("damage", grab_dps * grab_tick,"veneno")
 	else:
 		_dot_timer.stop()
 
@@ -140,7 +140,7 @@ func _on_grab_cd_timeout() -> void:
 
 # ===== Colisiones de área =====
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") or body.is_in_group("player_2"):
 		# no guardamos ref aquí; usamos 'player' ya encontrado
 		pass
 	if body.is_in_group("player_1_bullet"):
@@ -161,7 +161,6 @@ func _on_area_2d_area_entered(a: Area2D) -> void:
 func _on_damage(amount: float) -> void:
 	if bar_7:
 		bar_7.value = clamp(bar_7.value - amount, bar_7.min_value, bar_7.max_value)
-
 	_stack_value += amount
 	label.text = str(int(_stack_value))
 	label.visible = true
