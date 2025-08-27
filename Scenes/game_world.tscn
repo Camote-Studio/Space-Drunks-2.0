@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bp6lif50yrxnn" path="res://Assets/art/background/BACKGROUND_1.png" id="3_f8pys"]
 [ext_resource type="Texture2D" uid="uid://b56ujtckpkkl5" path="res://Assets/art/background/background_floor.png" id="3_jqqi2"]
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="4_8yf3i"]
-[ext_resource type="PackedScene" uid="uid://c2uks060bx75" path="res://Scenes/player_1.tscn" id="5_ygye0"]
+[ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="5_ygye0"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="6_f8pys"]
 [ext_resource type="Texture2D" uid="uid://djxemuoar68fd" path="res://Assets/art/sprites/complements_sprites/bg_MESAS.png" id="7_f8pys"]
 [ext_resource type="Script" uid="uid://cpufpisex7oqp" path="res://Scripts/Level1/portal.gd" id="10_nmac2"]
