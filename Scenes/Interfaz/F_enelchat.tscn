@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://c35wg10ubluin"]
 
-[ext_resource type="Script" path="res://Scripts/Intefaz/f_enelchat.gd" id="1_47cka"]
+[ext_resource type="Script" uid="uid://e8e61gkc0b5f" path="res://Scripts/Intefaz/f_enelchat.gd" id="1_47cka"]
 [ext_resource type="Texture2D" uid="uid://dmyjmuiqagt7p" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-001.png" id="2_ru5b7"]
 [ext_resource type="Texture2D" uid="uid://bk7d11pfmju1d" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-002.png" id="3_edpnn"]
 [ext_resource type="Texture2D" uid="uid://sdwhowjybyqi" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-003.png" id="4_mdhxt"]

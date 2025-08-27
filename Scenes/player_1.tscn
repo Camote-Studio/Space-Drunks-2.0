@@ -452,6 +452,11 @@ animations = [{
 "name": &"death",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"envenenado",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_gcs77")
@@ -807,7 +812,6 @@ position = Vector2(-1, 5.96046e-08)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
 animation = &"aturdio"
-frame_progress = 0.322638
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 21)
