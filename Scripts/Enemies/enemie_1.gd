@@ -11,8 +11,8 @@ const BULLET_ENEMY_1 = preload("res://Scenes/gun_enemy_1.tscn")
 @onready var anim: AnimatedSprite2D = $Sprite2D
 
 var min_range := 250.0
-var max_range := 280.0
-var attack_range := 400.0
+var max_range := 350.0
+var attack_range := 500.0
 var bullet_speed := 700.0
 
 var _stack_value := 0.0

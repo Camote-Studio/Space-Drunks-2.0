@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bp6lif50yrxnn" path="res://Assets/art/background/BACKGROUND_1.png" id="3_f8pys"]
 [ext_resource type="Texture2D" uid="uid://b56ujtckpkkl5" path="res://Assets/art/background/background_floor.png" id="3_jqqi2"]
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="4_8yf3i"]
-[ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="5_ygye0"]
+[ext_resource type="PackedScene" uid="uid://c2uks060bx75" path="res://Scenes/player_1.tscn" id="5_ygye0"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="6_f8pys"]
 [ext_resource type="Texture2D" uid="uid://djxemuoar68fd" path="res://Assets/art/sprites/complements_sprites/bg_MESAS.png" id="7_f8pys"]
 [ext_resource type="Script" uid="uid://cpufpisex7oqp" path="res://Scripts/Level1/portal.gd" id="10_nmac2"]
@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://c5udsfo1kf8ja" path="res://Assets/art/sprites/complements_sprites/coin_3.png" id="25_3ssdm"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="25_cfgxb"]
 [ext_resource type="Texture2D" uid="uid://bd3b6n6yc4blk" path="res://Assets/art/sprites/complements_sprites/coin_4.png" id="26_ufeic"]
-[ext_resource type="PackedScene" uid="uid://brv58c33gpqv3" path="res://Scenes/box.tscn" id="27_pe6h5"]
 [ext_resource type="Texture2D" uid="uid://cyuhv8fianx7e" path="res://Assets/art/sprites/complements_sprites/coin_5.png" id="27_q00ib"]
 [ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/enemy_spawn.tscn" id="28_0ic24"]
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="28_jy7da"]
@@ -28,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="30_8yf3i"]
 [ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/enemy_spawn_2.tscn" id="30_nswfa"]
 [ext_resource type="Texture2D" uid="uid://rq0mwrl4053j" path="res://Assets/art/sprites/complements_sprites/box_1.png" id="31_jqqi2"]
+[ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="31_pe6h5"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_gf2tg"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="32_thxnh"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="33_8d0et"]
@@ -240,7 +240,6 @@ script = ExtResource("4_8yf3i")
 polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
-visible = false
 texture_filter = 1
 position = Vector2(2751.6, 391.5)
 scale = Vector2(6.82831, 1.0035)
@@ -249,7 +248,6 @@ texture = ExtResource("3_jqqi2")
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(414, 139)
 scale = Vector2(0.5, 0.5)
-collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D2"]
 texture_filter = 1
@@ -280,7 +278,6 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2(1006, 203)
 scale = Vector2(0.5, 0.5)
-collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D5"]
 texture_filter = 1
@@ -296,7 +293,6 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D8" type="StaticBody2D" parent="."]
 position = Vector2(3107, 144)
 scale = Vector2(0.5, 0.5)
-collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D8"]
 texture_filter = 1
@@ -312,7 +308,6 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D9" type="StaticBody2D" parent="."]
 position = Vector2(3798, 209)
 scale = Vector2(0.5, 0.5)
-collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D9"]
 texture_filter = 1
@@ -328,7 +323,6 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D10" type="StaticBody2D" parent="."]
 position = Vector2(4622, 115)
 scale = Vector2(0.5, 0.5)
-collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D10"]
 texture_filter = 1
@@ -344,7 +338,6 @@ polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.6
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
 position = Vector2(1694, 140)
 scale = Vector2(0.5, 0.5)
-collision_layer = 2
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D6"]
 texture_filter = 1
@@ -372,14 +365,12 @@ position = Vector2(2741.5, 124)
 shape = SubResource("RectangleShape2D_1m887")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(-2.5, 84.5)
 shape = SubResource("RectangleShape2D_nmac2")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(5507.51, 146.503)
@@ -547,11 +538,16 @@ texture = ExtResource("25_cfgxb")
 
 [node name="starts_audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_o87y8")
-volume_db = 1.0
+volume_db = 10.0
 pitch_scale = 1.1
 attenuation = 0.15932
 
-[node name="Box" parent="." instance=ExtResource("27_pe6h5")]
+[node name="Box" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Box"]
+position = Vector2(1174, 364)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("31_jqqi2")
 
 [node name="Box2" type="Node2D" parent="."]
 
@@ -573,5 +569,7 @@ texture = ExtResource("31_jqqi2")
 
 [node name="enemy_spawn_2" parent="." instance=ExtResource("30_nswfa")]
 y_max = 460.0
+
+[node name="GameOver" parent="." groups=["players"] instance=ExtResource("31_pe6h5")]
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ded5rvlm7p5bl"]
+[gd_scene load_steps=3 format=3 uid="uid://ded5rvlm7p5bl"]
 
 [ext_resource type="Script" uid="uid://47ow54spcf4x" path="res://Scripts/Intefaz/game_over.gd" id="1_m5628"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="2_m7d3u"]
 
 [node name="GameOver" type="Node"]
 script = ExtResource("1_m5628")
+
+[node name="Sombras_transición" parent="." instance=ExtResource("2_m7d3u")]
