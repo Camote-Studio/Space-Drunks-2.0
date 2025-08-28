@@ -2,7 +2,7 @@ extends Camera2D
 
 signal reached_target(x: float)
 
-@export var speed: float = 60.0
+@export var speed: float = 30.0
 var target_x: float = 0.0
 var moving: bool = false
 

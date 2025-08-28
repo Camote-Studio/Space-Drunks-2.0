@@ -280,6 +280,7 @@ offset_bottom = 347.0
 transparent_bg = true
 
 [node name="PeekCamera" type="Camera2D" parent="OffscreenPeekHUD/SVP"]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -372,14 +373,13 @@ position = Vector2(1073, 140)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("19_fnwrx")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
 position = Vector2(576, 303)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
 
 [node name="enemie_spawn_6" parent="." instance=ExtResource("22_tii1t")]
-cam_path = NodePath("../Camera2D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
