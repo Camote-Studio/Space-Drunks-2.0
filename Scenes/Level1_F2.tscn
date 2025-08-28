@@ -233,7 +233,7 @@ script = ExtResource("3_dfrea")
 polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
 [node name="Player_1" parent="." instance=ExtResource("3_vti5k")]
-position = Vector2(348, 475)
+position = Vector2(263, 468)
 
 [node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
 position = Vector2(244, 304)
