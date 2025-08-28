@@ -132,13 +132,25 @@ func _spawn_random_move_enemy() -> void:
 	var scene: PackedScene = MOVE_ENEMY_POOL[rng.randi() % MOVE_ENEMY_POOL.size()]
 	var e = scene.instantiate()
 
-	var px := cam.global_position.x + move_spawn_x_offset_from_cam
-	var py := rng.randf_range(move_spawn_y_min, move_spawn_y_max)
+	# Decidir lado: 0 = izquierda, 1 = derecha
+	var side = rng.randi() % 2
+	var half_width = 1152 / 2  # tamaño del viewport / 2
+	var spawn_offset = 100.0    # qué tan fuera del viewport aparecerá
+
+	var px: float
+	if side == 0:
+		px = cam.global_position.x - half_width - spawn_offset  # fuera a la izquierda
+	else:
+		px = cam.global_position.x + half_width + spawn_offset  # fuera a la derecha
+
+	# Altura dentro de los límites
+	var py = rng.randf_range(move_spawn_y_min, move_spawn_y_max)
+
 	e.global_position = Vector2(px, py)
 	get_parent().add_child(e)
 
 	if debug_logs:
-		print("[Spawner] Spawned random enemy (1–4) at ", px, ",", py)
+		print("[Spawner] Spawned enemy outside viewport at ", px, ",", py)
 
 func _cancel_move_spawns() -> void:
 	for t in _active_move_timers:
