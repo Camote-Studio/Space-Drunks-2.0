@@ -254,7 +254,7 @@ shape = SubResource("RectangleShape2D_f4neb")
 position = Vector2(0, 112)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4/StaticBody2D2"]
-position = Vector2(2744.5, 474)
+position = Vector2(2747, 428)
 shape = SubResource("RectangleShape2D_15ly5")
 
 [node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
