@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bdki3q5u31n1m"]
+[gd_scene load_steps=29 format=3 uid="uid://c35wg10ubluin"]
 
 [ext_resource type="Script" path="res://Scripts/Intefaz/f_enelchat.gd" id="1_47cka"]
 [ext_resource type="Texture2D" uid="uid://dmyjmuiqagt7p" path="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-001.png" id="2_ru5b7"]
