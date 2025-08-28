@@ -87,6 +87,7 @@ _data = {
 }
 
 [node name="Enemie_1" type="CharacterBody2D" groups=["enemy_1"]]
+z_index = 2
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_k5ikt")
@@ -98,6 +99,7 @@ scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_hrlvl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 4
 shape = SubResource("CircleShape2D_08ug1")
 
 [node name="Area2D" type="Area2D" parent="."]

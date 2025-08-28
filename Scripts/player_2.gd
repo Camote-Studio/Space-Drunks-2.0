@@ -58,8 +58,8 @@ func _physics_process(delta: float) -> void:
 
 		Estado.ATURDIDO:
 			direction = -direction
-			if animated_sprite.animation != "aturdio":
-				animated_sprite.play("aturdio")
+			if animated_sprite.animation != "aturdido":
+				animated_sprite.play("aturdido")
 			if abs(direction.x) > abs(direction.y):
 				animated_sprite.flip_h = direction.x < 0
 
@@ -105,7 +105,7 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 			if estado_actual == Estado.NORMAL:   # ✅ solo si no está envenenado
 				print("💥 Jugador aturdido")
 				estado_actual = Estado.ATURDIDO
-				$aturdidoTimer.start(2)
+				$Timer.start(2)
 				animated_sprite.play("aturdio")
 
 		"bala_gravedad":
