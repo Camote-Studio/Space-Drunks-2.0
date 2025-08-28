@@ -18,12 +18,8 @@ func _ready() -> void:
 		
 func _process(delta: float) -> void:
 	position += transform.x * SPEED * delta
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print("Recibiste un impacto alien flaco! Has perdido vida.")
-		print("recibiste una bala.")
 		body.emit_signal("damage", 20.0,'bala')
 	if body.is_in_group("player_2"):
-		print("Recibiste un impacto alien gordo! Has perdido vida.")
 		body.emit_signal("damage", 20.0,'bala')
