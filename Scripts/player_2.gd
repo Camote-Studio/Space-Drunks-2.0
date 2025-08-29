@@ -5,7 +5,7 @@ signal damage(amount: float, source: String)
 signal muerte  # Para notificar al GameManager
 
 # --- Nodos ---
-@onready var bar: ProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
+@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # --- Movimiento ---
