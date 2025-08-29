@@ -374,11 +374,36 @@ position = Vector2(1073, 140)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("19_fnwrx")
 
+[node name="cont monedas" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.109
+anchor_top = 0.179
+anchor_right = 0.109
+anchor_bottom = 0.179
+offset_left = -13.568
+offset_top = -10.992
+offset_right = 9.43199
+offset_bottom = 12.008
+text = "0"
+
+[node name="cont monedas2" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.263
+anchor_top = 0.18
+anchor_right = 0.263
+anchor_bottom = 0.18
+offset_left = -9.97601
+offset_top = -9.64001
+offset_right = 13.024
+offset_bottom = 13.36
+text = "0"
+
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
 position = Vector2(576, 303)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
+speed = 15.0
 
 [node name="enemie_spawn_6" parent="." instance=ExtResource("22_tii1t")]
 

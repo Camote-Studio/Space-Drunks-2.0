@@ -9,7 +9,7 @@ const BULLET_ENEMY_1 = preload("res://Scenes/gun_enemy_1.tscn")
 @onready var label: Label = $Label
 @onready var bar_3: ProgressBar = $ProgressBar_enemy
 @onready var anim: AnimatedSprite2D = $Sprite2D
-
+const MONEDA = preload("res://Scenes/moneda.tscn")
 var min_range := 250.0
 var max_range := 280.0
 var attack_range := 400.0
@@ -152,11 +152,14 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 func _report_dead() -> void:
 	if reported_dead: return
 	reported_dead = true
+	_drop_coin()
 	emit_signal("died")
-	queue_free()
+	call_deferred("queue_free") 
 
 func _on_AnimatedSprite2D_animation_finished() -> void:
+	
 	if anim.animation == "explosion":
+		
 		_report_dead()
 
 func _on_explosion_timer_timeout() -> void:
@@ -177,3 +180,11 @@ func _update_target() -> void:
 				nearest_dist = dist
 				nearest = p
 	player = nearest
+func _drop_coin():
+	print("crear moneda")
+	var coin_instance = MONEDA.instantiate()
+	get_parent().add_child(coin_instance)
+	coin_instance.global_position = global_position
+	var sprite = coin_instance.get_node("AnimatedSprite2D")
+	if sprite:
+		sprite.play("idle")

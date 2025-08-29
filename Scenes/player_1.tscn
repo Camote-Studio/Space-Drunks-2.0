@@ -847,8 +847,7 @@ script = ExtResource("1_p0e4v")
 position = Vector2(-1, 5.96046e-08)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
-animation = &"envenenado"
-frame_progress = 0.494211
+animation = &"caminar_subir"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 21)
