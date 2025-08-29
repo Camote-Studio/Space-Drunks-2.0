@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://t8t1xbgjp2hy"]
+[gd_scene load_steps=46 format=3 uid="uid://t8t1xbgjp2hy"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://bg7a0x7n1spia" path="res://Assets/art/sprites/Portales/portal.png" id="11_4asma"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="13_n6wrj"]
 [ext_resource type="AudioStream" uid="uid://7t50crxvlos8" path="res://Assets/sfx/ready-set-go-sound-268353.mp3" id="14_o87y8"]
+[ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="15_dcn6k"]
+[ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="16_8sajs"]
 [ext_resource type="Texture2D" uid="uid://ch6hbtjs06x3l" path="res://Assets/art/sprites/complements_sprites/shape_character.png" id="20_jqqi2"]
 [ext_resource type="Texture2D" uid="uid://wgdd4pjcahpm" path="res://Assets/art/sprites/complements_sprites/characater_1_profile.png" id="21_krfk8"]
 [ext_resource type="Texture2D" uid="uid://3i466vl6hlny" path="res://Assets/art/sprites/complements_sprites/character_2_profile.png" id="22_thxnh"]
@@ -453,14 +455,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ProgressBar_alien_1" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0, 1, 0, 1)
+[node name="ProgressBar_alien_1" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.76378
+anchor_bottom = 0.0555556
 offset_left = 98.0
-offset_top = 29.0
-offset_right = 191.0
-offset_bottom = 62.0
+offset_top = 24.0
+offset_right = 190.125
+offset_bottom = 57.0
+scale = Vector2(0.12157, 0.612286)
 value = 100.0
-show_percentage = false
+texture_under = ExtResource("15_dcn6k")
+texture_progress = ExtResource("16_8sajs")
 metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
@@ -481,15 +487,16 @@ offset_bottom = 85.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
-[node name="ProgressBar_alien_2" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0, 1, 0, 1)
+[node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
 offset_left = 273.0
-offset_top = 30.0
-offset_right = 366.0
-offset_bottom = 62.0
+offset_top = 24.0
+offset_right = 1245.0
+offset_bottom = 93.0
 rotation = -0.00284467
+scale = Vector2(0.122, 0.612)
 value = 100.0
-show_percentage = false
+texture_under = ExtResource("15_dcn6k")
+texture_progress = ExtResource("16_8sajs")
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]

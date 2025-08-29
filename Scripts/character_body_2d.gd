@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal damage(amount: float, source: String)
 signal muerte  
 
-@onready var bar: ProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
+@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_1: ProgressBar = $"../CanvasLayer/ProgressBar_ability_1"
 
