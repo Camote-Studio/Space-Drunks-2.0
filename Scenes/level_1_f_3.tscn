@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=34 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="Texture2D" uid="uid://dt4w2krqhrqhn" path="res://Scripts/BG_ESTACIONAMIENTO.png" id="2_gupyi"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="21_c5os2"]
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
+[ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/enemie_1.tscn" id="23_d1i85"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
 size = Vector2(5503, 20)
@@ -373,11 +374,36 @@ position = Vector2(1073, 140)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("19_fnwrx")
 
+[node name="cont monedas" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.109
+anchor_top = 0.179
+anchor_right = 0.109
+anchor_bottom = 0.179
+offset_left = -13.568
+offset_top = -10.992
+offset_right = 9.43199
+offset_bottom = 12.008
+text = "0"
+
+[node name="cont monedas2" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.263
+anchor_top = 0.18
+anchor_right = 0.263
+anchor_bottom = 0.18
+offset_left = -9.97601
+offset_top = -9.64001
+offset_right = 13.024
+offset_bottom = 13.36
+text = "0"
+
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
 position = Vector2(576, 303)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
+speed = 15.0
 
 [node name="enemie_spawn_6" parent="." instance=ExtResource("22_tii1t")]
 
@@ -390,3 +416,6 @@ libraries = {
 
 [node name="Final_Boss" parent="." instance=ExtResource("22_gupyi")]
 position = Vector2(2739, 382)
+
+[node name="Enemie_1" parent="." instance=ExtResource("23_d1i85")]
+position = Vector2(693, 377)

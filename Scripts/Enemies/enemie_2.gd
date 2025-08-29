@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal damage(value: float, source: String)
+signal damage(value: float)
 signal died
 
 var speed := 150.0
@@ -30,7 +30,7 @@ var walk_phase := 0.0
 var walk_seed := 0.0
 var calm_start := 120.0
 var calm_end := 80.0
-
+const MONEDA = preload("res://Scenes/moneda.tscn")
 var _stack_value := 0.0
 var _label_base_pos := Vector2.ZERO
 var _tween: Tween
@@ -109,6 +109,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead:
 		_do_punch(dir)
+func _drop_coin():
+	var coin_instance = MONEDA.instantiate()
+	get_parent().add_child(coin_instance)
+	coin_instance.global_position = global_position
+	var sprite = coin_instance.get_node("AnimatedSprite2D")
+	if sprite:
+		sprite.play("idle")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.is_in_group("player_2"):
@@ -148,7 +155,8 @@ func _do_punch(dir: Vector2) -> void:
 func _on_punch_timer_timeout() -> void:
 	_attack_lock = false
 
-func _on_damage(amount: float, source: String) -> void:
+func _on_damage(amount: float) -> void:
+
 	if bar_4:
 		bar_4.value = clamp(bar_4.value - amount, bar_4.min_value, bar_4.max_value)
 	_stack_value += amount
@@ -182,6 +190,7 @@ func _on_stack_timeout() -> void:
 
 func _die() -> void:
 	dead = true
+	
 	label.visible = false
 	velocity = Vector2.ZERO
 	area.monitoring = false
@@ -205,12 +214,14 @@ func _on_sprite_2d_animation_finished() -> void:
 			explosion_timer.stop()
 		if not reported_dead:
 			reported_dead = true
+			_drop_coin()
 			emit_signal("died")
 		queue_free()
 
 func _on_explosion_timer_timeout() -> void:
 	if not reported_dead:
 		reported_dead = true
+		
 		emit_signal("died")
 	queue_free()
 func _update_target() -> void:
