@@ -6,6 +6,7 @@ signal died
 # ===== Movimiento directo =====
 var speed := 200.0
 var accel := 1800.0
+const MONEDA = preload("res://Scenes/moneda.tscn")
 
 # ===== Agarre =====
 enum State { CHASE, GRAB }
@@ -214,6 +215,7 @@ func _on_sprite_2d_animation_finished() -> void:
 		if explosion_timer and explosion_timer.time_left > 0.0:
 			explosion_timer.stop()
 		if not reported_dead:
+			_drop_coin()
 			reported_dead = true
 			emit_signal("died")
 		queue_free()
@@ -239,3 +241,10 @@ func _update_target() -> void:
 				nearest = p
 
 	player = nearest
+func _drop_coin():
+	var coin_instance = MONEDA.instantiate()
+	get_parent().add_child(coin_instance)
+	coin_instance.global_position = global_position
+	var sprite = coin_instance.get_node("AnimatedSprite2D")
+	if sprite:
+		sprite.play("idle")

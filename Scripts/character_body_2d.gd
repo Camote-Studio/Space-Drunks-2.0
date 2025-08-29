@@ -1,7 +1,8 @@
 extends CharacterBody2D
-
+# player 1
 signal damage(amount: float, source: String)
 signal muerte  
+var coins: int = 0
 
 @onready var bar: ProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -69,10 +70,7 @@ func _physics_process(delta: float) -> void:
 				if abs(direction.x) > abs(direction.y):
 					animated_sprite.play("caminar")
 					animated_sprite.flip_h = direction.x < 0
-				elif direction.y < 0:
-					animated_sprite.play("caminar_subir")
-				else:
-					animated_sprite.play("caminar_bajar")
+
 
 	velocity = direction * speed
 
@@ -237,3 +235,6 @@ func _on_aturdido_timer_timeout() -> void:
 func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
 		estado_actual = Estado.NORMAL
+func collect_coin():
+	coins += 1
+	$"../CanvasLayer/cont monedas".text=str(coins)
