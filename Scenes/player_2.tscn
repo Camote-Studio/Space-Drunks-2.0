@@ -1,8 +1,7 @@
-[gd_scene load_steps=226 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=228 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
-[ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://Scenes/sword.tscn" id="3_eus2p"]
 [ext_resource type="Texture2D" uid="uid://cqxklgykn6by8" path="res://Assets/art/sprites/Personajes/BIGB/frame_00_delay-0.03s.png" id="3_sj0qb"]
 [ext_resource type="Texture2D" uid="uid://u73h8cvpbapi" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_00_delay-0.03s.png" id="3_uqjhf"]
 [ext_resource type="Texture2D" uid="uid://dr3las3svr06d" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 002.png" id="3_ygfiw"]
@@ -219,6 +218,7 @@
 [ext_resource type="Texture2D" uid="uid://b8hwhwq3kb6bc" path="res://Assets/art/sprites/Particulas/EXPLO_4.png" id="173_fcbx1"]
 [ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="174_qixq7"]
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="175_rn5h7"]
+[ext_resource type="Texture2D" uid="uid://blex0n2rdxghj" path="res://Assets/art/sprites/Armas/Punch1.png" id="220_58h14"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rn5h7"]
 animations = [{
@@ -953,6 +953,12 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_prblm"]
+radius = 90.0617
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
+radius = 80.0694
+
 [node name="Player_2" type="CharacterBody2D" groups=["player_2"]]
 collision_mask = 3
 script = ExtResource("1_a3adp")
@@ -966,10 +972,6 @@ animation = &"aturdido"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -2)
 shape = SubResource("CapsuleShape2D_1m887")
-
-[node name="sword" parent="." instance=ExtResource("3_eus2p")]
-z_index = 1
-position = Vector2(16, -4)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -988,5 +990,26 @@ autoplay = "explosion_death"
 
 [node name="venenoTimer" type="Timer" parent="."]
 
+[node name="Punch_left" type="Sprite2D" parent="." groups=["puño_player2"]]
+position = Vector2(-15, -10)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("220_58h14")
+
+[node name="Area2D" type="Area2D" parent="Punch_left"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_left/Area2D"]
+shape = SubResource("CircleShape2D_prblm")
+
+[node name="Punch_right" type="Sprite2D" parent="." groups=["puño_player2"]]
+position = Vector2(45, -20)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("220_58h14")
+
+[node name="Area2D" type="Area2D" parent="Punch_right"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_right/Area2D"]
+shape = SubResource("CircleShape2D_58h14")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
+[connection signal="body_entered" from="Punch_left/Area2D" to="." method="_on_area_2d_body_entered"]
