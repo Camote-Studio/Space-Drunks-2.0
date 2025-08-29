@@ -1,8 +1,9 @@
 extends CharacterBody2D
-
+# player 2
 # --- Señales ---
 signal damage(amount: float, source: String)
 signal muerte  # Para notificar al GameManager
+var coins: int = 0
 
 # --- Nodos ---
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
@@ -252,7 +253,9 @@ func _on_death_finished() -> void:
 func _on_timer_timeout() -> void:
 	if estado_actual == Estado.ATURDIDO:
 		estado_actual = Estado.NORMAL
-
+func collect_coin():
+	coins += 1
+	$"../CanvasLayer/cont monedas2".text=str(coins)
 
 
 func _on_veneno_timer_timeout() -> void:

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal damage(value: float)
+
 signal died
 
 var speed := 150.0
@@ -12,6 +13,7 @@ var player: CharacterBody2D = null
 @onready var explosion_timer: Timer = $explosion_timer
 @onready var punch_timer: Timer = $Punch_timer
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
+const MONEDA = preload("res://Scenes/moneda.tscn")
 
 var min_range := 70.0
 var max_range := 140.0
@@ -203,6 +205,7 @@ func _on_sprite_2d_animation_finished() -> void:
 			explosion_timer.stop()
 		if not reported_dead:
 			reported_dead = true
+			_drop_coin()
 			emit_signal("died")
 		queue_free()
 
@@ -227,3 +230,10 @@ func _update_target() -> void:
 				nearest = p
 
 	player = nearest
+func _drop_coin():
+	var coin_instance = MONEDA.instantiate()
+	get_parent().add_child(coin_instance)
+	coin_instance.global_position = global_position
+	var sprite = coin_instance.get_node("AnimatedSprite2D")
+	if sprite:
+		sprite.play("idle")
