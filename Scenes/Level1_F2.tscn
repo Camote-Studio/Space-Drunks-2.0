@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=38 format=3 uid="uid://82ef3cmon8x5"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
 [ext_resource type="Texture2D" uid="uid://cogb4fvu0xhth" path="res://Assets/art/background/BACKGROUND_2.png" id="2_2ltu8"]
@@ -24,7 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="21_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://d0vmf7ddix762" path="res://Scenes/enemy_spawn_4.tscn" id="22_gdlfp"]
 [ext_resource type="Texture2D" uid="uid://5ky34t7mdciu" path="res://Assets/art/sprites/complements_sprites/B0t_Parlante.png" id="24_2ltu8"]
-[ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/enemie_1.tscn" id="25_dfrea"]
+[ext_resource type="PackedScene" uid="uid://c76e4r2yxqn47" path="res://Scenes/enemie_5.tscn" id="25_dfrea"]
+[ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="26_lsce1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq78c"]
 size = Vector2(5503, 20)
@@ -489,5 +490,7 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Enemie_1" parent="." instance=ExtResource("25_dfrea")]
 position = Vector2(545, 460)
+
+[node name="GameOver" parent="." instance=ExtResource("26_lsce1")]
 
 [connection signal="body_entered" from="Portal_2/Area2D" to="Portal_2" method="_on_area_2d_body_entered"]

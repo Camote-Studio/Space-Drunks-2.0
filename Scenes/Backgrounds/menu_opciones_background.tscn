@@ -1,12 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://sd77axdv10ou"]
 
-[ext_resource type="Texture2D" uid="uid://br1rl1ga5wfq1" path="res://Assets/art/background/Option_menu.jpg" id="1_q4rga"]
+[ext_resource type="Texture2D" uid="uid://cpha7lwf4t8n8" path="res://Assets/art/background/Options/BACKGROUND_OPTIONS.png" id="1_q4rga"]
 
 [node name="MenuOpcionesBackground" type="Node2D"]
 
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-position = Vector2(578, 325.75)
-scale = Vector2(1.87908, 1.44432)
+position = Vector2(2, -3)
+scale = Vector2(0.580808, 0.638235)
 texture = ExtResource("1_q4rga")
+centered = false
