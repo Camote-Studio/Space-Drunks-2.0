@@ -127,7 +127,11 @@ func _on_area_2d_area_entered(a: Area2D) -> void:
 		emit_signal("damage", 10.0)
 		if a.has_method("queue_free"):
 			a.queue_free()
-
+	elif a.is_in_group("puño_player_2"):
+		emit_signal("damage", 20.0)
+		if a.has_method("queue_free"):
+			a.queue_free()
+			
 func _do_punch(dir: Vector2) -> void:
 	if target_in_range:
 		print("💥 Enemigo golpea al jugador con daño:", punch_damage)
