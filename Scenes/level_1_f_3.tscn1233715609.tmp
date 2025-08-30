@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=34 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="Texture2D" uid="uid://dt4w2krqhrqhn" path="res://Scripts/BG_ESTACIONAMIENTO.png" id="2_gupyi"]
@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="17_eeksg"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="18_m74wh"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="19_fnwrx"]
-[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="19_tii1t"]
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="21_c5os2"]
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
@@ -356,15 +355,15 @@ texture = ExtResource("11_v4p21")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(89, 121)
-scale = Vector2(0.197642, 0.187)
+position = Vector2(77, 118)
+scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_3k20b")
 autoplay = "default"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(264, 120)
-scale = Vector2(0.197642, 0.187)
+position = Vector2(267, 121)
+scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_3k20b")
 autoplay = "default"
 
@@ -381,12 +380,10 @@ anchor_left = 0.109
 anchor_top = 0.179
 anchor_right = 0.109
 anchor_bottom = 0.179
-offset_left = -15.568
-offset_top = -17.992
-offset_right = 36.432
-offset_bottom = 27.008
-theme_override_fonts/font = ExtResource("19_tii1t")
-theme_override_font_sizes/font_size = 33
+offset_left = -13.568
+offset_top = -10.992
+offset_right = 9.43199
+offset_bottom = 12.008
 text = "0"
 
 [node name="cont monedas2" type="Label" parent="CanvasLayer"]
@@ -395,12 +392,10 @@ anchor_left = 0.263
 anchor_top = 0.18
 anchor_right = 0.263
 anchor_bottom = 0.18
-offset_left = -7.97601
-offset_top = -21.64
-offset_right = 15.024
-offset_bottom = 21.36
-theme_override_fonts/font = ExtResource("19_tii1t")
-theme_override_font_sizes/font_size = 33
+offset_left = -9.97601
+offset_top = -9.64001
+offset_right = 13.024
+offset_bottom = 13.36
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
@@ -408,6 +403,7 @@ position = Vector2(576, 303)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
+speed = 15.0
 
 [node name="enemie_spawn_6" parent="." instance=ExtResource("22_tii1t")]
 

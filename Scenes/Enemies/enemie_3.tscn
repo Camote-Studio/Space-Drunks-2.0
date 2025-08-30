@@ -46,10 +46,10 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o5ftm"]
 radius = 33.0
-height = 112.0
+height = 146.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4qff"]
-radius = 60.6383
+radius = 65.0308
 
 [node name="enemie_3" type="CharacterBody2D" groups=["enemy_3"]]
 script = ExtResource("1_jssh4")
