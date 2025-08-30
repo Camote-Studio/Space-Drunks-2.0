@@ -888,7 +888,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
 radius = 27.0
-height = 90.0
+height = 86.0
 
 [sub_resource type="Animation" id="Animation_tb6cx"]
 length = 0.001
@@ -970,7 +970,7 @@ sprite_frames = SubResource("SpriteFrames_rn5h7")
 animation = &"aturdido"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -2)
+position = Vector2(-1, 5)
 shape = SubResource("CapsuleShape2D_1m887")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
