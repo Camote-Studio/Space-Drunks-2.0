@@ -1,15 +1,19 @@
-[gd_scene load_steps=34 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=38 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
-[ext_resource type="Texture2D" uid="uid://dt4w2krqhrqhn" path="res://Scripts/BG_ESTACIONAMIENTO.png" id="2_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
+[ext_resource type="Texture2D" uid="uid://cipii8vtjfb0k" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tii1t"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="3_c5os2"]
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_d1i85"]
+[ext_resource type="Texture2D" uid="uid://geshj00w23bu" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-1.png" id="3_sij3j"]
+[ext_resource type="Texture2D" uid="uid://df48eticct6nt" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-2.png" id="4_efrga"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="6_tii1t"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="7_efrga"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="8_6nii4"]
+[ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="9_6nii4"]
 [ext_resource type="Texture2D" uid="uid://ch6hbtjs06x3l" path="res://Assets/art/sprites/complements_sprites/shape_character.png" id="9_sij3j"]
 [ext_resource type="Texture2D" uid="uid://wgdd4pjcahpm" path="res://Assets/art/sprites/complements_sprites/characater_1_profile.png" id="10_r84mv"]
+[ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="10_sij3j"]
 [ext_resource type="Texture2D" uid="uid://3i466vl6hlny" path="res://Assets/art/sprites/complements_sprites/character_2_profile.png" id="11_v4p21"]
 [ext_resource type="Texture2D" uid="uid://78uicu7sheov" path="res://Assets/art/sprites/complements_sprites/coin_1.png" id="12_s0j4o"]
 [ext_resource type="Texture2D" uid="uid://dn3imkkyfogyt" path="res://Assets/art/sprites/complements_sprites/coin_2.png" id="13_a7g42"]
@@ -214,9 +218,14 @@ script = ExtResource("1_gupyi")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(817, 301.25)
+position = Vector2(807, 209)
 scale = Vector2(0.4085, 0.448529)
-texture = ExtResource("2_gupyi")
+texture = ExtResource("2_tii1t")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(0.41625, 0.627451)
+texture = ExtResource("3_sij3j")
+centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
 visible = false
@@ -225,6 +234,12 @@ script = ExtResource("3_d1i85")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ParallaxBackground/StaticBody2D"]
 polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
+[node name="Piso" type="Sprite2D" parent="."]
+position = Vector2(-8, -62)
+scale = Vector2(1.37575, 0.7)
+texture = ExtResource("4_efrga")
+centered = false
+
 [node name="Player_1" parent="." instance=ExtResource("2_sv6kg")]
 position = Vector2(278, 340)
 
@@ -232,7 +247,7 @@ position = Vector2(278, 340)
 position = Vector2(266, 481)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 152)
+position = Vector2(0, 138)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2742, 85)
@@ -245,6 +260,7 @@ position = Vector2(-2.5, 84.5)
 shape = SubResource("RectangleShape2D_u0fq8")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(5, 96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(5507.51, 146.503)
@@ -296,14 +312,19 @@ text = "Ready?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar_alien_1" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0.145098, 1, 0, 1)
+[node name="ProgressBar_alien_1" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.76378
+anchor_bottom = 0.0555556
 offset_left = 98.0
-offset_top = 29.0
-offset_right = 191.0
-offset_bottom = 62.0
+offset_top = 24.0
+offset_right = 190.125
+offset_bottom = 57.0
+scale = Vector2(0.12157, 0.612286)
 value = 100.0
-show_percentage = false
+texture_under = ExtResource("9_6nii4")
+texture_progress = ExtResource("10_sij3j")
+metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
@@ -321,15 +342,17 @@ offset_right = 367.0
 offset_bottom = 85.0
 show_percentage = false
 
-[node name="ProgressBar_alien_2" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0, 1, 0, 1)
+[node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
 offset_left = 273.0
-offset_top = 30.0
-offset_right = 366.0
-offset_bottom = 62.0
+offset_top = 24.0
+offset_right = 1245.0
+offset_bottom = 93.0
 rotation = -0.00284467
+scale = Vector2(0.122, 0.612)
 value = 100.0
-show_percentage = false
+texture_under = ExtResource("9_6nii4")
+texture_progress = ExtResource("10_sij3j")
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(77, 51)
@@ -400,7 +423,6 @@ text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
 position = Vector2(576, 303)
-zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
 speed = 15.0
