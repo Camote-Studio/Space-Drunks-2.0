@@ -15,8 +15,8 @@ const MOVE_ENEMY_POOL := [ENEMY1, ENEMY2, ENEMY3, ENEMY4]
 
 # --- Configuración de spawns aleatorios durante los trayectos ---
 @export var move_spawn_count_per_travel: int = 6     # cuántos enemigos por trayecto
-@export var move_spawn_y_min: float = 204.0
-@export var move_spawn_y_max: float = 482.0
+@export var move_spawn_y_min: float = 292.0
+@export var move_spawn_y_max: float = 481.0
 @export var move_spawn_x_offset_from_cam: float = 0
 @export var move_spawn_spread_jitter: float = 0.15
 

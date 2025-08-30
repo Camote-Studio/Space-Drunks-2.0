@@ -8,8 +8,8 @@ const ENEMY4 = preload("res://Scenes/enemie_4.tscn")
 # --------- FASE 1 ---------
 @export var phase1_max_spawns: int = 3
 @export var phase1_x_spawn: float = 1734.0
-@export var phase1_y_min: float = 204.0
-@export var phase1_y_max: float = 482.0
+@export var phase1_y_min: float = 330.0   # antes 204.0
+@export var phase1_y_max: float = 480.0
 @export var x_after_phase1: float = 2999.0
 
 # --------- FASE 2 ---------
@@ -21,7 +21,7 @@ const ENEMY4 = preload("res://Scenes/enemie_4.tscn")
 
 # Intervalo entre spawns dentro de cada fase
 @export var interval_min: float = 0.6
-@export var interval_max: float = 1.4
+@export var interval_max: float = 1
 
 # Estados
 enum { S_PHASE1, S_WAIT_CLEAR1, S_WAIT_CAM1, S_PHASE2, S_WAIT_CLEAR2, S_DONE }
