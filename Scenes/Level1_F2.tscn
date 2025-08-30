@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=45 format=3 uid="uid://82ef3cmon8x5"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
 [ext_resource type="Texture2D" uid="uid://c4w2sgl0n7du1" path="res://Assets/art/background/BACKGROUND_2-1.png" id="2_aupn4"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://d0vmf7ddix762" path="res://Scenes/enemy_spawn_4.tscn" id="22_gdlfp"]
 [ext_resource type="PackedScene" uid="uid://c76e4r2yxqn47" path="res://Scenes/enemie_5.tscn" id="25_dfrea"]
 [ext_resource type="Texture2D" uid="uid://yyky48pqoy0o" path="res://Assets/art/background/B0t_Parlante.png" id="25_gnd3l"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="26_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="26_lsce1"]
 [ext_resource type="Texture2D" uid="uid://cmg5786amr7vb" path="res://Assets/art/background/mesa_2.png" id="28_6ftvt"]
 [ext_resource type="Texture2D" uid="uid://c2wggx3w4wwt" path="res://Assets/art/background/BG2_TUBO.png" id="29_8fs40"]
@@ -446,6 +447,8 @@ offset_left = -13.568
 offset_top = -10.992
 offset_right = 9.43199
 offset_bottom = 12.008
+theme_override_fonts/font = ExtResource("26_6ftvt")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="cont monedas2" type="Label" parent="CanvasLayer"]
@@ -458,6 +461,8 @@ offset_left = -5.58401
 offset_top = -4.64001
 offset_right = 17.416
 offset_bottom = 18.36
+theme_override_fonts/font = ExtResource("26_6ftvt")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="enemy_spawn_4" parent="." instance=ExtResource("22_gdlfp")]

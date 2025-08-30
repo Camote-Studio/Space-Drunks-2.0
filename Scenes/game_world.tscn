@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://t8t1xbgjp2hy"]
+[gd_scene load_steps=47 format=3 uid="uid://t8t1xbgjp2hy"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://bd3b6n6yc4blk" path="res://Assets/art/sprites/complements_sprites/coin_4.png" id="26_ufeic"]
 [ext_resource type="Texture2D" uid="uid://cyuhv8fianx7e" path="res://Assets/art/sprites/complements_sprites/coin_5.png" id="27_q00ib"]
 [ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/enemy_spawn.tscn" id="28_0ic24"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="28_8sajs"]
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="28_jy7da"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="29_408q8"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="30_8yf3i"]
@@ -449,6 +450,7 @@ offset_left = 337.0
 offset_top = 186.0
 offset_right = 718.0
 offset_bottom = 315.0
+theme_override_fonts/font = ExtResource("28_8sajs")
 theme_override_font_sizes/font_size = 60
 text = "Ready?"
 horizontal_alignment = 1
@@ -554,6 +556,8 @@ offset_left = -13.568
 offset_top = -10.992
 offset_right = 9.43199
 offset_bottom = 12.008
+theme_override_fonts/font = ExtResource("28_8sajs")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="cont monedas2" type="Label" parent="CanvasLayer"]
@@ -566,6 +570,8 @@ offset_left = -11.952
 offset_top = -11.64
 offset_right = 15.048
 offset_bottom = 11.36
+theme_override_fonts/font = ExtResource("28_8sajs")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="Pausa" parent="." instance=ExtResource("30_8yf3i")]

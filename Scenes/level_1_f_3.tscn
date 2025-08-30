@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=39 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="23_r84mv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
 size = Vector2(5503, 20)
@@ -407,6 +408,8 @@ offset_left = -13.568
 offset_top = -10.992
 offset_right = 9.43199
 offset_bottom = 12.008
+theme_override_fonts/font = ExtResource("23_r84mv")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="cont monedas2" type="Label" parent="CanvasLayer"]
