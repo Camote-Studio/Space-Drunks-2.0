@@ -224,7 +224,7 @@ scale = Vector2(0.4085, 0.448529)
 texture = ExtResource("2_tii1t")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-scale = Vector2(0.41625, 0.627451)
+scale = Vector2(0.416, 0.637255)
 texture = ExtResource("3_sij3j")
 centered = false
 
@@ -422,6 +422,8 @@ offset_left = -9.97601
 offset_top = -9.64001
 offset_right = 13.024
 offset_bottom = 13.36
+theme_override_fonts/font = ExtResource("23_r84mv")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
