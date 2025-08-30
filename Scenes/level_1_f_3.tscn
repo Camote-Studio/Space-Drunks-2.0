@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=37 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="Texture2D" uid="uid://dt4w2krqhrqhn" path="res://Scripts/BG_ESTACIONAMIENTO.png" id="2_gupyi"]
@@ -20,7 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="18_m74wh"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="19_fnwrx"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="19_tii1t"]
+[ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="20_6nii4"]
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="21_c5os2"]
+[ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="21_sij3j"]
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
@@ -297,15 +299,6 @@ text = "Ready?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar_alien_1" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0.145098, 1, 0, 1)
-offset_left = 98.0
-offset_top = 29.0
-offset_right = 191.0
-offset_bottom = 62.0
-value = 100.0
-show_percentage = false
-
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
 offset_left = 98.0
@@ -320,16 +313,6 @@ offset_left = 289.0
 offset_top = 69.0
 offset_right = 367.0
 offset_bottom = 85.0
-show_percentage = false
-
-[node name="ProgressBar_alien_2" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0, 1, 0, 1)
-offset_left = 273.0
-offset_top = 30.0
-offset_right = 366.0
-offset_bottom = 62.0
-rotation = -0.00284467
-value = 100.0
 show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
@@ -402,6 +385,34 @@ offset_bottom = 21.36
 theme_override_fonts/font = ExtResource("19_tii1t")
 theme_override_font_sizes/font_size = 33
 text = "0"
+
+[node name="ProgressBar_alien_1" type="TextureProgressBar" parent="CanvasLayer"]
+z_index = -1
+anchors_preset = -1
+anchor_right = 0.76378
+anchor_bottom = 0.0555556
+offset_left = 116.0
+offset_top = 22.0
+offset_right = 208.125
+offset_bottom = 55.0
+scale = Vector2(0.12157, 0.612286)
+value = 100.0
+texture_under = ExtResource("20_6nii4")
+texture_progress = ExtResource("21_sij3j")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
+z_index = -1
+offset_left = 299.0
+offset_top = 28.0
+offset_right = 1271.0
+offset_bottom = 97.0
+rotation = -0.00284467
+scale = Vector2(0.122, 0.612)
+value = 100.0
+texture_under = ExtResource("20_6nii4")
+texture_progress = ExtResource("21_sij3j")
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
 position = Vector2(576, 303)
