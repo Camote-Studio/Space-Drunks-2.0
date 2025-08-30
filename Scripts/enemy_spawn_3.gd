@@ -40,7 +40,6 @@ func _start_wave() -> void:
 	current_batch_id = 0
 	batch_alive = 0
 	inflight_scheduled = 0
-	_try_spawn_next_batch()  
 
 func _stop_wave() -> void:
 	wave_active = false
