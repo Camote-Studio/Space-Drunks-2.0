@@ -41,9 +41,6 @@ size = Vector2(1232.99, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15ly5"]
 size = Vector2(5497, 20)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bdxm"]
-shader = ExtResource("8_6nii4")
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_3k20b"]
 animations = [{
 "frames": [{
@@ -210,6 +207,9 @@ _data = {
 &"start_animation": SubResource("Animation_n6wrj")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r84mv"]
+shader = ExtResource("8_6nii4")
+
 [node name="Level1_F3" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -274,31 +274,6 @@ position = Vector2(0, 112)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4/StaticBody2D2"]
 position = Vector2(2747, 428)
 shape = SubResource("RectangleShape2D_15ly5")
-
-[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("7_efrga")
-player = NodePath("../Player_1")
-
-[node name="Peek" type="Control" parent="OffscreenPeekHUD"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek"]
-material = SubResource("ShaderMaterial_1bdxm")
-layout_mode = 0
-offset_left = 30.0
-offset_top = 233.0
-offset_right = 140.0
-offset_bottom = 347.0
-
-[node name="SVP" type="SubViewport" parent="OffscreenPeekHUD"]
-transparent_bg = true
-
-[node name="PeekCamera" type="Camera2D" parent="OffscreenPeekHUD/SVP"]
-visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -444,3 +419,51 @@ libraries = {
 position = Vector2(2739, 382)
 
 [node name="GameOver" parent="." instance=ExtResource("23_d1i85")]
+
+[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player1", "player2", "main_cam")]
+script = ExtResource("7_efrga")
+player1 = NodePath("../Player_1")
+player2 = NodePath("../Player_2")
+main_cam = NodePath("../Camera2D")
+
+[node name="Peek1" type="Control" parent="OffscreenPeekHUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek1"]
+material = SubResource("ShaderMaterial_r84mv")
+layout_mode = 0
+offset_left = 30.0
+offset_top = 233.0
+offset_right = 140.0
+offset_bottom = 347.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SVP1" type="SubViewport" parent="OffscreenPeekHUD"]
+transparent_bg = true
+
+[node name="PeekCamera1" type="Camera2D" parent="OffscreenPeekHUD/SVP1"]
+
+[node name="SVP2" type="SubViewport" parent="OffscreenPeekHUD"]
+transparent_bg = true
+
+[node name="PeekCamera2" type="Camera2D" parent="OffscreenPeekHUD/SVP2"]
+
+[node name="Peek2" type="Control" parent="OffscreenPeekHUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek2"]
+material = SubResource("ShaderMaterial_r84mv")
+layout_mode = 0
+offset_left = 30.025
+offset_top = 450.0
+offset_right = 140.025
+offset_bottom = 564.0
+metadata/_edit_use_anchors_ = true
