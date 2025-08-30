@@ -7,14 +7,15 @@ const ENEMY = preload("res://Scenes/enemie_5.tscn")
 
 @export var phase1_max_spawns: int = 3
 @export var phase1_x_spawn: float = 1734.0
-@export var phase1_y_min: float = 204.0
-@export var phase1_y_max: float = 482.0
+@export var phase1_y_min: float = 292.0
+@export var phase1_y_max: float = 481.0
+@export var phase2_y_min: float = 292.0
+@export var phase2_y_max: float = 481.0
 @export var x_after_phase1: float = 2999.0
 
 @export var phase2_max_spawns: int = 3
 @export var phase2_x_spawn: float = 2999.0
-@export var phase2_y_min: float = 204.0
-@export var phase2_y_max: float = 482.0
+
 @export var x_after_phase2: float = 5132.0
 
 @export var interval_min: float = 0.6
