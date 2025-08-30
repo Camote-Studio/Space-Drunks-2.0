@@ -6,7 +6,7 @@ signal muerte  # Para notificar al GameManager
 var coins: int = 0
 
 # --- Nodos ---
-@onready var bar: ProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
+@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # --- Movimiento ---
