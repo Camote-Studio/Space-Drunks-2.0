@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=45 format=3 uid="uid://82ef3cmon8x5"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
 [ext_resource type="Texture2D" uid="uid://c4w2sgl0n7du1" path="res://Assets/art/background/BACKGROUND_2-1.png" id="2_aupn4"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="20_jrhcu"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="21_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://d0vmf7ddix762" path="res://Scenes/enemy_spawn_4.tscn" id="22_gdlfp"]
+[ext_resource type="PackedScene" uid="uid://c76e4r2yxqn47" path="res://Scenes/enemie_5.tscn" id="25_dfrea"]
 [ext_resource type="Texture2D" uid="uid://yyky48pqoy0o" path="res://Assets/art/background/B0t_Parlante.png" id="25_gnd3l"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="26_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="26_lsce1"]
@@ -275,7 +276,7 @@ position = Vector2(2736, 447)
 shape = SubResource("RectangleShape2D_e2b77")
 
 [node name="Player_1" parent="." instance=ExtResource("3_vti5k")]
-position = Vector2(186, 408)
+position = Vector2(257, 403)
 
 [node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
 position = Vector2(362, 384)
@@ -332,8 +333,6 @@ metadata/_edit_use_anchors_ = true
 transparent_bg = true
 
 [node name="PeekCamera" type="Camera2D" parent="OffscreenPeekHUD/SVP"]
-
-[node name="PeekCamera2" type="Camera2D" parent="OffscreenPeekHUD/SVP"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -884,6 +883,9 @@ texture = ExtResource("25_gnd3l")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bocinas13/StaticBody2D2"]
 polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 32.5, 97.5, 32.5, 115, 5, 115, -42.5, 105, -65, 85, -127.5, 65, -150, 42.5, -162.5, 10)
+
+[node name="Enemie_1" parent="." instance=ExtResource("25_dfrea")]
+position = Vector2(914, 391)
 
 [node name="Pausa" parent="." instance=ExtResource("31_jrhcu")]
 
