@@ -1,14 +1,31 @@
 extends CanvasLayer
 
-@export var player: CharacterBody2D
+@export var player1: CharacterBody2D
+@export var player2: CharacterBody2D
 @export var main_cam: Camera2D
 
-@onready var peek: Control = $Peek
-@onready var circle: TextureRect = $Peek/Circle
-@onready var svp: SubViewport = $SVP
-@onready var peek_cam: Camera2D = $SVP/PeekCamera
+# UI y cámaras del peek 1
+@onready var peek1: Control = $Peek1
+@onready var circle1: TextureRect = $Peek1/Circle
+@onready var svp1: SubViewport = $SVP1
+@onready var peek_cam1: Camera2D = $SVP1/PeekCamera1
+
+# UI y cámaras del peek 2
+@onready var peek2: Control = $Peek2
+@onready var circle2: TextureRect = $Peek2/Circle
+@onready var svp2: SubViewport = $SVP2
+@onready var peek_cam2: Camera2D = $SVP2/PeekCamera2
+
 
 func _ready() -> void:
+	# Configuración jugador 1
+	_setup_peek(svp1, circle1, peek1, peek_cam1)
+
+	# Configuración jugador 2
+	_setup_peek(svp2, circle2, peek2, peek_cam2)
+
+
+func _setup_peek(svp: SubViewport, circle: TextureRect, peek: Control, cam: Camera2D) -> void:
 	svp.size = Vector2i(128, 128)
 	svp.world_2d = get_viewport().world_2d
 	svp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -17,19 +34,26 @@ func _ready() -> void:
 	circle.size = Vector2(128, 128)
 	peek.size = Vector2(128, 128)
 	peek.visible = false
-	peek_cam.enabled = true
-	peek_cam.make_current()
+	cam.enabled = true
+	cam.make_current()
+
 
 func _process(delta: float) -> void:
-	if player == null:
-		return
+	if player1:
+		_update_peek(player1, peek1, peek_cam1)
+	if player2:
+		_update_peek(player2, peek2, peek_cam2)
+
+
+func _update_peek(player: CharacterBody2D, peek: Control, cam: Camera2D) -> void:
 	var off := _is_offscreen(player)
 	peek.visible = off
 	if off:
-		peek_cam.global_position = player.global_position
+		cam.global_position = player.global_position
 		if main_cam:
-			peek_cam.zoom = main_cam.zoom
-			peek_cam.rotation = main_cam.rotation
+			cam.zoom = main_cam.zoom
+			cam.rotation = main_cam.rotation
+
 
 func _is_offscreen(n: Node2D) -> bool:
 	var cam := main_cam

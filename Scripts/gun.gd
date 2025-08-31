@@ -3,7 +3,7 @@ extends Node2D
 @export var bullet_scene: PackedScene = preload("res://Scenes/bullet.tscn")
 
 var can_fire := true
-@export var cooldown: float = 0.2
+@export var cooldown: float = 0.5
 @onready var timer: Timer = $Timer
 var pitch_variations_gun = [0.8, 1.0, 1.5]
 
@@ -21,12 +21,16 @@ func random_pitch_variations_gun():
 	$lasergun.play()
 
 func _process(delta: float) -> void:
+	var player = get_parent()  # referencia al Player
 	var player_sprite_is_flipped = get_parent().get_node("AnimatedSprite2D").flip_h
 	
 	# **Cambiar posición y rotación en base al flip**
 	$Sprite2D.flip_h = player_sprite_is_flipped
 	position = Vector2(-20, 20) if player_sprite_is_flipped else Vector2(20, 20)
 
+	# --- Bloqueo de disparo si el jugador está muerto o sin input ---
+	if player.dead or not player.allow_input:
+		return
 
 	if Input.is_action_just_pressed("fired") and can_fire:
 		_fire(player_sprite_is_flipped)

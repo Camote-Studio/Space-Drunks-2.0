@@ -2,20 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<< HEAD
-uid="uid://1oudbt72tvyb"
-=======
-uid="uid://cipii8vtjfb0k"
->>>>>>> ZtanQX
-path="res://.godot/imported/BACKGROUND_ART_SKETCH_2.png-80a5f2ac6a049d46dddacfe362af8cb2.ctex"
+uid="uid://dstwxpamwhtcv"
+path="res://.godot/imported/BACKGROUND_ART_SKETCH_33.png-8ba790bad0c9a04817d76d7f345efa79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png"
-dest_files=["res://.godot/imported/BACKGROUND_ART_SKETCH_2.png-80a5f2ac6a049d46dddacfe362af8cb2.ctex"]
+source_file="res://Assets/art/background/BACKGROUND_ART_SKETCH_33.png"
+dest_files=["res://.godot/imported/BACKGROUND_ART_SKETCH_33.png-8ba790bad0c9a04817d76d7f345efa79.ctex"]
 
 [params]
 
