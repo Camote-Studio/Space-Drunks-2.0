@@ -444,7 +444,6 @@ shape = SubResource("CapsuleShape2D_o87y8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 303)
-zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("13_n6wrj")
 
@@ -454,9 +453,10 @@ libraries = {
 }
 autoplay = "start_animation"
 
-[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player", "main_cam")]
+[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player1", "player2", "main_cam")]
 script = ExtResource("32_thxnh")
-player = NodePath("../Player_1")
+player1 = NodePath("../Player_1")
+player2 = NodePath("../Player_2")
 main_cam = NodePath("../Camera2D")
 
 [node name="Peek" type="Control" parent="OffscreenPeekHUD"]
@@ -488,6 +488,13 @@ offset_left = 337.0
 offset_top = 186.0
 offset_right = 718.0
 offset_bottom = 315.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("29_q27iu")
 theme_override_font_sizes/font_size = 60
 text = "Ready?"
 horizontal_alignment = 1
@@ -593,6 +600,8 @@ offset_left = -13.568
 offset_top = -10.992
 offset_right = 9.43199
 offset_bottom = 12.008
+theme_override_fonts/font = ExtResource("29_q27iu")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="cont monedas2" type="Label" parent="CanvasLayer"]
@@ -605,6 +614,8 @@ offset_left = -11.952
 offset_top = -11.64
 offset_right = 15.048
 offset_bottom = 11.36
+theme_override_fonts/font = ExtResource("29_q27iu")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="Label2" type="Label" parent="CanvasLayer"]
