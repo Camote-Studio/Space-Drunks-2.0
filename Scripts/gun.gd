@@ -3,7 +3,7 @@ extends Node2D
 const BULLET = preload("res://Scenes/bullet.tscn")
 
 var can_fire := true
-@export var cooldown: float = 0.2
+@export var cooldown: float = 0.5
 @onready var timer: Timer = $Timer
 var pitch_variations_gun = [0.8, 1.0, 1.5]
 
