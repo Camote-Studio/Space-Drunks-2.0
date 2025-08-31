@@ -3,7 +3,7 @@ extends Node2D
 @export var bullet_scene: PackedScene = preload("res://Scenes/bullet.tscn")
 
 var can_fire := true
-@export var cooldown: float = 0.2
+@export var cooldown: float = 0.5
 @onready var timer: Timer = $Timer
 var pitch_variations_gun = [0.8, 1.0, 1.5]
 
@@ -17,8 +17,8 @@ func _ready() -> void:
 
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi() % pitch_variations_gun.size()]
-	$lasergun.pitch_scale = random_pitch
-	$lasergun.play()
+	$electrogun.pitch_scale = random_pitch
+	$electrogun.play()
 
 func _process(delta: float) -> void: 
 	look_at(get_global_mouse_position())

@@ -16,9 +16,9 @@ texture = ExtResource("2_is41n")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
 
-[node name="lasergun" type="AudioStreamPlayer2D" parent="."]
+[node name="electrogun" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_wv8vk")
-volume_db = 18.0
+pitch_scale = 1.5
 bus = &"Sound Effect"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

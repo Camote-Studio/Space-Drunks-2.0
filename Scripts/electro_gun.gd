@@ -46,6 +46,7 @@ func _process(_dt: float) -> void:
 	position = offset_left if flip else offset_right
 
 	if Input.is_action_just_pressed("fired") and can_fire:
+		$electrogun.play()
 		_fire(flip)
 
 func _fire(is_flipped: bool) -> void:
