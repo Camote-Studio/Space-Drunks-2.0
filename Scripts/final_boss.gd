@@ -61,6 +61,13 @@ var _dash_dir := Vector2.ZERO
 var _dash_timer: Timer
 var _dash_cd_timer: Timer
 var _poison_timer: Timer
+
+@export var shock_duration: float = 1.5   # segundos de lentitud
+@export var shock_factor: float   = 0.35  # 35% de la velocidad original
+
+var _shock_timer: Timer
+var _base_speed: float
+var _is_shocked := false
 # ===================================
 
 func random_pitch_variations_gun():
@@ -104,13 +111,26 @@ func _ready() -> void:
 	_poison_timer = Timer.new(); _poison_timer.one_shot = false; add_child(_poison_timer)
 	_poison_timer.wait_time = poison_spawn_interval
 	_poison_timer.connect("timeout", Callable(self, "_spawn_poison_here"))
+	#---ELECTROSHOCK
+	_base_speed = speed
 
+	_shock_timer = Timer.new()
+	_shock_timer.one_shot = true
+	add_child(_shock_timer)
+	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
+		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
 func _physics_process(delta: float) -> void:
 	if dead or player == null:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
-
+	# --- limpiar electroshock antes de liberar ---
+	if _shock_timer:
+		_shock_timer.stop()
+	_is_shocked = false
+	speed = _base_speed
+	# (opcional) revertir feedback visual:
+	# if sprite_2d: sprite_2d.modulate = Color(1,1,1)
 	var to_player := player.global_position - global_position
 	var dist := to_player.length()
 	var dir := to_player.normalized()

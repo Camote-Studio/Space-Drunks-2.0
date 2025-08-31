@@ -256,7 +256,7 @@ func _on_timer_timeout() -> void:
 func collect_coin():
 	coins += 1
 	$"../CanvasLayer/cont monedas2".text=str(coins)
-
+	
 
 func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:

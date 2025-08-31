@@ -1,0 +1,203 @@
+[gd_scene load_steps=14 format=3 uid="uid://c274vlvelf5gf"]
+
+[ext_resource type="Script" uid="uid://bfginuq8ldw2" path="res://Scripts/ui_abilities.gd" id="1_0ep42"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="2_f83e2"]
+[ext_resource type="Texture2D" uid="uid://24y4xmkmajay" path="res://Assets/art/sprites/abilities/chicken_space.png" id="3_0ep42"]
+[ext_resource type="Texture2D" uid="uid://78uicu7sheov" path="res://Assets/art/sprites/complements_sprites/coin_1.png" id="4_7uouw"]
+[ext_resource type="Texture2D" uid="uid://dn3imkkyfogyt" path="res://Assets/art/sprites/complements_sprites/coin_2.png" id="5_ikdbi"]
+[ext_resource type="Texture2D" uid="uid://c5udsfo1kf8ja" path="res://Assets/art/sprites/complements_sprites/coin_3.png" id="6_2odyj"]
+[ext_resource type="Texture2D" uid="uid://bd3b6n6yc4blk" path="res://Assets/art/sprites/complements_sprites/coin_4.png" id="7_yup56"]
+[ext_resource type="Texture2D" uid="uid://cyuhv8fianx7e" path="res://Assets/art/sprites/complements_sprites/coin_5.png" id="8_1b1mo"]
+[ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="9_yyxlh"]
+[ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="10_macka"]
+[ext_resource type="Texture2D" uid="uid://dhqi54jg8qvgb" path="res://Assets/art/sprites/Armas/gUN1.png" id="11_0ep42"]
+[ext_resource type="Texture2D" uid="uid://cwkjwsuumx1xw" path="res://Assets/art/sprites/Armas/gun.png" id="12_7uouw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6htma"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7uouw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ikdbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2odyj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yup56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1b1mo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yyxlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_macka")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="UI_abilities" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ep42")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1148.0
+offset_bottom = 653.0
+color = Color(1, 1, 1, 0.0980392)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 301.0
+offset_top = 237.0
+offset_right = 436.0
+offset_bottom = 260.0
+theme_override_fonts/font = ExtResource("2_f83e2")
+text = "Chicken party"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(372, 344)
+scale = Vector2(0.251121, 0.209542)
+texture = ExtResource("3_0ep42")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(392, 272)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_6htma")
+autoplay = "default"
+frame_progress = 0.690623
+
+[node name="coin_label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 301.0
+offset_top = 261.0
+offset_right = 381.0
+offset_bottom = 284.0
+theme_override_fonts/font = ExtResource("2_f83e2")
+text = "20"
+horizontal_alignment = 1
+
+[node name="chicken" type="Button" parent="."]
+layout_mode = 2
+offset_left = 301.0
+offset_top = 400.0
+offset_right = 436.0
+offset_bottom = 431.0
+action_mode = 0
+text = "Select Item"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+offset_left = 525.0
+offset_top = 237.0
+offset_right = 630.0
+offset_bottom = 260.0
+theme_override_fonts/font = ExtResource("2_f83e2")
+text = "Gun 360"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 2
+offset_left = 575.0
+offset_top = 361.0
+offset_right = 680.0
+offset_bottom = 384.0
+theme_override_fonts/font = ExtResource("2_f83e2")
+text = "360"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(596, 344)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("11_0ep42")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(616, 272)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_6htma")
+autoplay = "default"
+frame_progress = 0.690623
+
+[node name="coin_label2" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 525.0
+offset_top = 261.0
+offset_right = 602.0
+offset_bottom = 284.0
+theme_override_fonts/font = ExtResource("2_f83e2")
+text = "20"
+horizontal_alignment = 1
+
+[node name="gun_360" type="Button" parent="."]
+layout_mode = 2
+offset_left = 541.0
+offset_top = 401.0
+offset_right = 646.0
+offset_bottom = 432.0
+text = "Select Item"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 2
+offset_left = 728.0
+offset_top = 237.0
+offset_right = 839.0
+offset_bottom = 260.0
+theme_override_fonts/font = ExtResource("2_f83e2")
+text = "Electro Gun"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(799, 344)
+scale = Vector2(0.3, 0.251)
+texture = ExtResource("12_7uouw")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(819, 272)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_6htma")
+autoplay = "default"
+frame_progress = 0.690623
+
+[node name="coin_label3" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 728.0
+offset_top = 261.0
+offset_right = 805.0
+offset_bottom = 284.0
+theme_override_fonts/font = ExtResource("2_f83e2")
+text = "20"
+horizontal_alignment = 1
+
+[node name="gun" type="Button" parent="."]
+layout_mode = 2
+offset_left = 736.0
+offset_top = 403.0
+offset_right = 847.0
+offset_bottom = 434.0
+text = "Select Item"
+
+[connection signal="pressed" from="chicken" to="." method="_on_chicken_pressed"]
+[connection signal="pressed" from="gun_360" to="." method="_on_jet_pressed"]
+[connection signal="pressed" from="gun_360" to="." method="_on_gun_360_pressed"]
+[connection signal="pressed" from="gun" to="." method="_on_gun_pressed"]

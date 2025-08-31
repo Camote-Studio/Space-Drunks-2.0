@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfc7gwinjocqd"]
+
+[ext_resource type="Script" uid="uid://dtcugo0nr0j7p" path="res://Scripts/electro_gun.gd" id="1_yaydr"]
+[ext_resource type="Texture2D" uid="uid://cwkjwsuumx1xw" path="res://Assets/art/sprites/Armas/gun.png" id="2_is41n"]
+[ext_resource type="PackedScene" uid="uid://b03y7nj5n2fk4" path="res://Scenes/electric_bullet.tscn" id="2_wv8vk"]
+[ext_resource type="AudioStream" uid="uid://dfrqm1dlw73h8" path="res://Assets/sfx/electric-155027.mp3" id="3_wv8vk"]
+
+[node name="Electro_gun" type="Node2D"]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_yaydr")
+bullet_scene = ExtResource("2_wv8vk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_is41n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="lasergun" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wv8vk")
+volume_db = 18.0
+bus = &"Sound Effect"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
