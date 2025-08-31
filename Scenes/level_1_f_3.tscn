@@ -1,6 +1,7 @@
-[gd_scene load_steps=39 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=41 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
+[ext_resource type="Script" uid="uid://dp63iu2t3yb7i" path="res://Scripts/Level3/level_1_f_3.gd" id="1_v4p21"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
 [ext_resource type="Texture2D" uid="uid://cipii8vtjfb0k" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tii1t"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="3_c5os2"]
@@ -28,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="30_s0j4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
 size = Vector2(5503, 20)
@@ -211,6 +213,7 @@ _data = {
 shader = ExtResource("8_6nii4")
 
 [node name="Level1_F3" type="Node2D"]
+script = ExtResource("1_v4p21")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource("1_gupyi")
@@ -467,3 +470,5 @@ offset_top = 450.0
 offset_right = 140.025
 offset_bottom = 564.0
 metadata/_edit_use_anchors_ = true
+
+[node name="Sombras_transición" parent="." instance=ExtResource("30_s0j4o")]
