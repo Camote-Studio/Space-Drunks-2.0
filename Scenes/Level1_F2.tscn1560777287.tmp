@@ -1,6 +1,5 @@
-[gd_scene load_steps=46 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=45 format=3 uid="uid://82ef3cmon8x5"]
 
-[ext_resource type="Script" uid="uid://dtj8n72t1er10" path="res://Scripts/Level2/Level1F2.gd" id="1_8fs40"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
 [ext_resource type="Texture2D" uid="uid://c4w2sgl0n7du1" path="res://Assets/art/background/BACKGROUND_2-1.png" id="2_aupn4"]
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_dfrea"]
@@ -27,13 +26,13 @@
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="20_jrhcu"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="21_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://d0vmf7ddix762" path="res://Scenes/enemy_spawn_4.tscn" id="22_gdlfp"]
+[ext_resource type="PackedScene" uid="uid://c76e4r2yxqn47" path="res://Scenes/enemie_5.tscn" id="25_dfrea"]
 [ext_resource type="Texture2D" uid="uid://yyky48pqoy0o" path="res://Assets/art/background/B0t_Parlante.png" id="25_gnd3l"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="26_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="26_lsce1"]
 [ext_resource type="Texture2D" uid="uid://cmg5786amr7vb" path="res://Assets/art/background/mesa_2.png" id="28_6ftvt"]
 [ext_resource type="Texture2D" uid="uid://c2wggx3w4wwt" path="res://Assets/art/background/BG2_TUBO.png" id="29_8fs40"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="31_jrhcu"]
-[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="34_d5vqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq78c"]
 size = Vector2(5503, 20)
@@ -221,7 +220,6 @@ animations = [{
 }]
 
 [node name="Level1F2" type="Node2D"]
-script = ExtResource("1_8fs40")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource("1_i54yl")
@@ -278,10 +276,10 @@ position = Vector2(2736, 447)
 shape = SubResource("RectangleShape2D_e2b77")
 
 [node name="Player_1" parent="." instance=ExtResource("3_vti5k")]
-position = Vector2(907, 544)
+position = Vector2(257, 403)
 
 [node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
-position = Vector2(883, 421)
+position = Vector2(362, 384)
 
 [node name="Portal_2" type="Node2D" parent="." groups=["portal"]]
 position = Vector2(-3, 143)
@@ -310,20 +308,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_5ckil")
 }
 
-[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player1", "player2", "main_cam")]
+[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player", "main_cam")]
 script = ExtResource("9_xbg64")
-player1 = NodePath("../Player_1")
-player2 = NodePath("../Player_2")
+player = NodePath("../Player_1")
 main_cam = NodePath("../Camera2D")
 
-[node name="Peek1" type="Control" parent="OffscreenPeekHUD"]
+[node name="Peek" type="Control" parent="OffscreenPeekHUD"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek1"]
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek"]
 material = SubResource("ShaderMaterial_8fs40")
 layout_mode = 0
 offset_left = 30.0
@@ -332,31 +329,10 @@ offset_right = 140.0
 offset_bottom = 347.0
 metadata/_edit_use_anchors_ = true
 
-[node name="SVP1" type="SubViewport" parent="OffscreenPeekHUD"]
+[node name="SVP" type="SubViewport" parent="OffscreenPeekHUD"]
 transparent_bg = true
 
-[node name="PeekCamera1" type="Camera2D" parent="OffscreenPeekHUD/SVP1"]
-
-[node name="SVP2" type="SubViewport" parent="OffscreenPeekHUD"]
-transparent_bg = true
-
-[node name="PeekCamera2" type="Camera2D" parent="OffscreenPeekHUD/SVP2"]
-
-[node name="Peek2" type="Control" parent="OffscreenPeekHUD"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek2"]
-material = SubResource("ShaderMaterial_8fs40")
-layout_mode = 0
-offset_left = 30.025
-offset_top = 450.0
-offset_right = 140.025
-offset_bottom = 564.0
-metadata/_edit_use_anchors_ = true
+[node name="PeekCamera" type="Camera2D" parent="OffscreenPeekHUD/SVP"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -908,10 +884,11 @@ texture = ExtResource("25_gnd3l")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bocinas13/StaticBody2D2"]
 polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 32.5, 97.5, 32.5, 115, 5, 115, -42.5, 105, -65, 85, -127.5, 65, -150, 42.5, -162.5, 10)
 
+[node name="Enemie_1" parent="." instance=ExtResource("25_dfrea")]
+position = Vector2(914, 391)
+
 [node name="Pausa" parent="." instance=ExtResource("31_jrhcu")]
 
 [node name="GameOver" parent="." instance=ExtResource("26_lsce1")]
-
-[node name="Sombras_transición" parent="." instance=ExtResource("34_d5vqw")]
 
 [connection signal="body_entered" from="Portal_2/Area2D" to="Portal_2" method="_on_area_2d_body_entered"]

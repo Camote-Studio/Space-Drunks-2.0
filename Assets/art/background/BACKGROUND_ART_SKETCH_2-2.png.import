@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://bowbbaila6ttx"
+=======
+uid="uid://df48eticct6nt"
+>>>>>>> ZtanQX
 path="res://.godot/imported/BACKGROUND_ART_SKETCH_2-2.png-d23eb15219b22734fa025663b4552bfb.ctex"
 metadata={
 "vram_texture": false
