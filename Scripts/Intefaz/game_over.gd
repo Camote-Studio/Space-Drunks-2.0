@@ -12,7 +12,6 @@ func _on_player_died():
 		_game_over()
 
 func _game_over():
-	print("GAME OVER")
 	# Crear un Timer temporal
 	var timer = Timer.new()
 	timer.wait_time = 2.0

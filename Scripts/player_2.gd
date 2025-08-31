@@ -318,7 +318,6 @@ func activate_sword_for(seconds: float = -1.0) -> void:
 	# Si ya está activa, sólo renueva tiempo
 	if _sword_active and is_instance_valid(_sword_instance):
 		_sword_timer.start(seconds)
-		print("[P2] ⏱ Espada extendida a ", seconds, " s")
 		return
 
 	# Instanciar y anclar
@@ -332,7 +331,6 @@ func activate_sword_for(seconds: float = -1.0) -> void:
 
 	_sword_active = true
 	_sword_timer.start(seconds)
-	print("[P2] ✅ Espada ACTIVADA por ", seconds, " s")
 
 func _revert_sword() -> void:
 	if is_instance_valid(_sword_instance):
@@ -343,7 +341,6 @@ func _revert_sword() -> void:
 	# Rehabilita puños
 	punch_left.visible  = true
 	punch_right.visible = true
-	print("[P2] 🔁 Espada DESACTIVADA — vuelven los puños")
 
 func _update_sword_transform() -> void:
 	if not _sword_active or not is_instance_valid(_sword_instance):
@@ -373,4 +370,3 @@ func _power_sword() -> void:
 	if bar_ability_2 and bar_ability_2.value >= bar_ability_2.max_value:
 		bar_ability_2.value = bar_ability_2.min_value
 		activate_sword_for(espada_duracion)   
-		print("[P2] ⚡ Espada activada por carga de habilidad")
