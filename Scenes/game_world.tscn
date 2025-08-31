@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dkt37yghdsm2q"]
+[gd_scene load_steps=53 format=3 uid="uid://dkt37yghdsm2q"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -30,6 +30,7 @@
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="29_q27iu"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="30_8yf3i"]
 [ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/enemy_spawn_2.tscn" id="30_nswfa"]
+[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="30_qejn6"]
 [ext_resource type="Texture2D" uid="uid://rq0mwrl4053j" path="res://Assets/art/sprites/complements_sprites/box_1.png" id="31_jqqi2"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="31_pe6h5"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_gf2tg"]
@@ -663,6 +664,15 @@ text = "SPACE CHICKEN'S TIME"
 
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("35_8sajs")]
 spawn_seconds = 20.0
+
+[node name="enemie_2" parent="CanvasLayer" instance=ExtResource("30_qejn6")]
+position = Vector2(781, 490)
+
+[node name="enemie_3" parent="CanvasLayer" instance=ExtResource("30_qejn6")]
+position = Vector2(698, 370)
+
+[node name="enemie_4" parent="CanvasLayer" instance=ExtResource("30_qejn6")]
+position = Vector2(588, 512)
 
 [node name="Pausa" parent="." instance=ExtResource("30_8yf3i")]
 
