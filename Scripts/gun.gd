@@ -1,6 +1,6 @@
 extends Node2D
 
-const BULLET = preload("res://Scenes/bullet.tscn")
+@export var bullet_scene: PackedScene = preload("res://Scenes/bullet.tscn")
 
 var can_fire := true
 @export var cooldown: float = 0.2
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 
 func _fire(is_flipped: bool) -> void:
 	random_pitch_variations_gun()
-	var bullet_instance = BULLET.instantiate()
+	var bullet_instance = bullet_scene.instantiate()
 
 	# Añadir la bala al mismo nivel que el jugador
 	get_parent().get_parent().add_child(bullet_instance)

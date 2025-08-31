@@ -4,9 +4,28 @@ signal damage(amount: float, source: String)
 signal muerte  
 var coins: int = 0
 
+@onready var gun_node: Node = $Gun
+
+@export var gun_360_scene: PackedScene = preload("res://Scenes/gun_360.tscn")
+
+@export var electro_gun_scene: PackedScene = preload("res://Scenes/electro_gun.tscn")
+@export var electro_duration_min: float = 15.0
+@export var electro_duration_max: float = 20.0
+
+var _electro_instance: Node2D = null
+var _revert_timer: Timer
+var _electro_active := false
+
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_1: ProgressBar = $"../CanvasLayer/ProgressBar_ability_1"
+
+@onready var shop: Control = $"../CanvasLayer/UI_abilities"
+
+var has_chicken_pony := false
+var has_jet_punches := false
+var has_sleepy_gun := false
 
 var speed := 200
 enum Estado {
@@ -39,7 +58,14 @@ func _ready() -> void:
 	animated_sprite.play("idle")
 	if not is_in_group("players"):
 		add_to_group("players")
+	_revert_timer = Timer.new()
+	_revert_timer.one_shot = true
+	add_child(_revert_timer)
+	
+	if not _revert_timer.is_connected("timeout", Callable(self, "_revert_gun_instance")):
+		_revert_timer.connect("timeout", Callable(self, "_revert_gun_instance"))
 
+	_set_gun_active(gun_node, true)
 func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
@@ -197,6 +223,8 @@ func apply_power_to_bullet(bullet: Node) -> void:
 #        MUERTE
 # ======================
 func _die() -> void:
+	if _electro_active:
+		_revert_gun_instance()
 	dead = true
 	allow_input = false
 	floating = false
@@ -235,6 +263,54 @@ func _on_aturdido_timer_timeout() -> void:
 func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
 		estado_actual = Estado.NORMAL
-func collect_coin():
+		
+func collect_coin() -> void:
 	coins += 1
-	$"../CanvasLayer/cont monedas".text=str(coins)
+	$"../CanvasLayer/cont monedas2".text=str(coins)
+	# Cuando llega a 1 moneda, muestra el panel
+	if coins == 1 and is_instance_valid(shop):
+		shop.visible = true
+func activate_electro_for(seconds: float = -1.0) -> void:
+	if seconds <= 0.0:
+		seconds = randf_range(electro_duration_min, electro_duration_max)
+	if electro_gun_scene == null:
+		push_warning("[P1] electro_gun_scene no asignada.")
+		return
+	# Si ya está activa, solo extiende el tiempo
+	if _electro_active and is_instance_valid(_electro_instance):
+		_revert_timer.start(seconds)
+		print("[P1] ⏱ ElectroGun extendida a ", seconds, "s")
+		return
+
+	# Instanciar ElectroGun como hija del player
+	_electro_instance = electro_gun_scene.instantiate() as Node2D
+	add_child(_electro_instance)
+	_electro_instance.name = "ElectroGun"
+	# opcional: copia posición para que “aparezca” en el mismo sitio que la normal
+	_electro_instance.position = gun_node.position
+
+	# Activa electro, desactiva normal
+	_set_gun_active(gun_node, false)
+	_set_gun_active(_electro_instance, true)
+	_electro_active = true
+	_revert_timer.start(seconds)
+	print("[P1] ✅ ElectroGun ACTIVADA por ", seconds, "s")
+func _revert_gun_instance() -> void:
+	# Apaga y borra ElectroGun
+	if is_instance_valid(_electro_instance):
+		_set_gun_active(_electro_instance, false)
+		_electro_instance.queue_free()
+		_electro_instance = null
+		_electro_active = false
+
+	# Reactiva la normal
+	_set_gun_active(gun_node, true)
+	print("[P1] 🔁 Vuelve la Gun normal")
+
+func _set_gun_active(g: Node, active: bool) -> void:
+	if not is_instance_valid(g):
+		return
+	# que solo procese el arma activa
+	g.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
+	if "visible" in g:
+		g.visible = active

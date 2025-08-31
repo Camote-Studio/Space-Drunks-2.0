@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://t8t1xbgjp2hy"]
+[gd_scene load_steps=52 format=3 uid="uid://t8t1xbgjp2hy"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/enemy_spawn.tscn" id="28_0ic24"]
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="28_jy7da"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="29_408q8"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="29_q27iu"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="30_8yf3i"]
 [ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/enemy_spawn_2.tscn" id="30_nswfa"]
 [ext_resource type="Texture2D" uid="uid://rq0mwrl4053j" path="res://Assets/art/sprites/complements_sprites/box_1.png" id="31_jqqi2"]
@@ -34,6 +35,8 @@
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_gf2tg"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="32_thxnh"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="33_8d0et"]
+[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="35_8sajs"]
+[ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5503, 20)
@@ -219,6 +222,42 @@ animations = [{
 "name": &"default",
 "speed": 10.0
 }]
+
+[sub_resource type="Animation" id="Animation_q27iu"]
+resource_name = "chicken"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lmfx7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qejn6"]
+_data = {
+&"RESET": SubResource("Animation_lmfx7"),
+&"chicken": SubResource("Animation_q27iu")
+}
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("1_8d0et")
@@ -568,6 +607,19 @@ offset_right = 15.048
 offset_bottom = 11.36
 text = "0"
 
+[node name="Label2" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 340.0
+offset_top = 271.0
+offset_right = 670.0
+offset_bottom = 313.0
+theme_override_fonts/font = ExtResource("29_q27iu")
+theme_override_font_sizes/font_size = 30
+text = "SPACE CHICKEN'S TIME"
+
+[node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("35_8sajs")]
+spawn_seconds = 20.0
+
 [node name="Pausa" parent="." instance=ExtResource("30_8yf3i")]
 
 [node name="starts_audio" type="AudioStreamPlayer2D" parent="."]
@@ -599,9 +651,10 @@ texture = ExtResource("31_jqqi2")
 
 [node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
 offset_left = 2.0
-offset_top = 3.0
+offset_top = -13.0
 offset_right = 1155.0
-offset_bottom = 649.0
+offset_bottom = 633.0
+mouse_filter = 2
 
 [node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
 
@@ -609,5 +662,12 @@ offset_bottom = 649.0
 y_max = 460.0
 
 [node name="GameOver" parent="." groups=["players"] instance=ExtResource("31_pe6h5")]
+
+[node name="text_animation_abilities" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qejn6")
+}
+
+[node name="spawn_chicken" parent="." instance=ExtResource("37_lmfx7")]
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]
