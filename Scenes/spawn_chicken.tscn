@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://jej05omgom5m"]
+
+[ext_resource type="Script" uid="uid://ckir2a2fl8xkm" path="res://Scripts/spawn_chicken.gd" id="1_0gbs6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8ugh"]
+
+[node name="spawn_chicken" type="Area2D"]
+script = ExtResource("1_0gbs6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m8ugh")
+
+[node name="chicken_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="chicken_timer" to="." method="_on_chicken_timer_timeout"]

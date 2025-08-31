@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xenlds0o8ci6"
-path="res://.godot/imported/BACKGROUND_ART_SKETCH_2.png-80a5f2ac6a049d46dddacfe362af8cb2.ctex"
+uid="uid://24y4xmkmajay"
+path="res://.godot/imported/chicken_space.png-146a0e8460386599b905ab6e96ddc92b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png"
-dest_files=["res://.godot/imported/BACKGROUND_ART_SKETCH_2.png-80a5f2ac6a049d46dddacfe362af8cb2.ctex"]
+source_file="res://Assets/art/sprites/abilities/chicken_space.png"
+dest_files=["res://.godot/imported/chicken_space.png-146a0e8460386599b905ab6e96ddc92b.ctex"]
 
 [params]
 

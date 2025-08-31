@@ -1,17 +1,19 @@
-[gd_scene load_steps=39 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=38 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
-[ext_resource type="Texture2D" uid="uid://cipii8vtjfb0k" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tii1t"]
+[ext_resource type="Texture2D" uid="uid://xenlds0o8ci6" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tii1t"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="3_c5os2"]
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_d1i85"]
-[ext_resource type="Texture2D" uid="uid://geshj00w23bu" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-1.png" id="3_sij3j"]
-[ext_resource type="Texture2D" uid="uid://df48eticct6nt" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-2.png" id="4_efrga"]
+[ext_resource type="Texture2D" uid="uid://dwy5qcmvangbi" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-1.png" id="3_sij3j"]
+[ext_resource type="Texture2D" uid="uid://c8ctvirugussx" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-2.png" id="4_efrga"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="6_tii1t"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="7_efrga"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="8_6nii4"]
+[ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="9_6nii4"]
 [ext_resource type="Texture2D" uid="uid://ch6hbtjs06x3l" path="res://Assets/art/sprites/complements_sprites/shape_character.png" id="9_sij3j"]
 [ext_resource type="Texture2D" uid="uid://wgdd4pjcahpm" path="res://Assets/art/sprites/complements_sprites/characater_1_profile.png" id="10_r84mv"]
+[ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="10_sij3j"]
 [ext_resource type="Texture2D" uid="uid://3i466vl6hlny" path="res://Assets/art/sprites/complements_sprites/character_2_profile.png" id="11_v4p21"]
 [ext_resource type="Texture2D" uid="uid://78uicu7sheov" path="res://Assets/art/sprites/complements_sprites/coin_1.png" id="12_s0j4o"]
 [ext_resource type="Texture2D" uid="uid://dn3imkkyfogyt" path="res://Assets/art/sprites/complements_sprites/coin_2.png" id="13_a7g42"]
@@ -21,10 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="17_eeksg"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="18_m74wh"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="19_fnwrx"]
-[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="19_tii1t"]
-[ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="20_6nii4"]
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="21_c5os2"]
-[ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="21_sij3j"]
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
@@ -40,6 +39,9 @@ size = Vector2(1232.99, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15ly5"]
 size = Vector2(5497, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bdxm"]
+shader = ExtResource("8_6nii4")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3k20b"]
 animations = [{
@@ -207,9 +209,6 @@ _data = {
 &"start_animation": SubResource("Animation_n6wrj")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r84mv"]
-shader = ExtResource("8_6nii4")
-
 [node name="Level1_F3" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -219,14 +218,14 @@ script = ExtResource("1_gupyi")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(807, 209)
-scale = Vector2(0.4085, 0.448529)
+position = Vector2(817, 171)
+scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("2_tii1t")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-scale = Vector2(0.416, 0.637255)
+position = Vector2(717, 201.5)
+scale = Vector2(0.3115, 0.39902)
 texture = ExtResource("3_sij3j")
-centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
 visible = false
@@ -235,20 +234,21 @@ script = ExtResource("3_d1i85")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ParallaxBackground/StaticBody2D"]
 polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
-[node name="Piso" type="Sprite2D" parent="."]
-position = Vector2(-8, -62)
-scale = Vector2(1.37575, 0.7)
+[node name="PISO" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-345, 67)
+scale = Vector2(1.08375, 0.566667)
 texture = ExtResource("4_efrga")
 centered = false
 
 [node name="Player_1" parent="." instance=ExtResource("2_sv6kg")]
-position = Vector2(372, 284)
+position = Vector2(278, 340)
 
 [node name="Player_2" parent="." instance=ExtResource("3_c5os2")]
-position = Vector2(245, 292)
+position = Vector2(266, 481)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 138)
+position = Vector2(17, 178)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2742, 85)
@@ -261,7 +261,7 @@ position = Vector2(-2.5, 84.5)
 shape = SubResource("RectangleShape2D_u0fq8")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(5, 96)
+position = Vector2(0, 94)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(5507.51, 146.503)
@@ -274,6 +274,30 @@ position = Vector2(0, 112)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4/StaticBody2D2"]
 position = Vector2(2747, 428)
 shape = SubResource("RectangleShape2D_15ly5")
+
+[node name="OffscreenPeekHUD" type="CanvasLayer" parent="."]
+script = ExtResource("7_efrga")
+
+[node name="Peek" type="Control" parent="OffscreenPeekHUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek"]
+material = SubResource("ShaderMaterial_1bdxm")
+layout_mode = 0
+offset_left = 30.0
+offset_top = 233.0
+offset_right = 140.0
+offset_bottom = 347.0
+
+[node name="SVP" type="SubViewport" parent="OffscreenPeekHUD"]
+transparent_bg = true
+
+[node name="PeekCamera" type="Camera2D" parent="OffscreenPeekHUD/SVP"]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -298,8 +322,20 @@ offset_right = 190.125
 offset_bottom = 57.0
 scale = Vector2(0.12157, 0.612286)
 value = 100.0
-texture_under = ExtResource("20_6nii4")
-texture_progress = ExtResource("21_sij3j")
+texture_under = ExtResource("9_6nii4")
+texture_progress = ExtResource("10_sij3j")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 273.0
+offset_top = 24.0
+offset_right = 1245.0
+offset_bottom = 93.0
+rotation = -0.00284467
+scale = Vector2(0.122, 0.612)
+value = 100.0
+texture_under = ExtResource("9_6nii4")
+texture_progress = ExtResource("10_sij3j")
 metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
@@ -317,18 +353,6 @@ offset_top = 69.0
 offset_right = 367.0
 offset_bottom = 85.0
 show_percentage = false
-
-[node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 273.0
-offset_top = 24.0
-offset_right = 1245.0
-offset_bottom = 93.0
-rotation = -0.00284467
-scale = Vector2(0.122, 0.612)
-value = 100.0
-texture_under = ExtResource("20_6nii4")
-texture_progress = ExtResource("21_sij3j")
-metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(77, 51)
@@ -354,15 +378,15 @@ texture = ExtResource("11_v4p21")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(89, 121)
-scale = Vector2(0.197642, 0.187)
+position = Vector2(77, 118)
+scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_3k20b")
 autoplay = "default"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(264, 120)
-scale = Vector2(0.197642, 0.187)
+position = Vector2(267, 121)
+scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_3k20b")
 autoplay = "default"
 
@@ -383,8 +407,6 @@ offset_left = -13.568
 offset_top = -10.992
 offset_right = 9.43199
 offset_bottom = 12.008
-theme_override_fonts/font = ExtResource("19_tii1t")
-theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="cont monedas2" type="Label" parent="CanvasLayer"]
@@ -397,14 +419,15 @@ offset_left = -9.97601
 offset_top = -9.64001
 offset_right = 13.024
 offset_bottom = 13.36
-theme_override_fonts/font = ExtResource("19_tii1t")
-theme_override_font_sizes/font_size = 33
+
+
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
 position = Vector2(576, 303)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
+speed = 15.0
 
 [node name="enemie_spawn_6" parent="." instance=ExtResource("22_tii1t")]
 
@@ -419,51 +442,3 @@ libraries = {
 position = Vector2(2739, 382)
 
 [node name="GameOver" parent="." instance=ExtResource("23_d1i85")]
-
-[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player1", "player2", "main_cam")]
-script = ExtResource("7_efrga")
-player1 = NodePath("../Player_1")
-player2 = NodePath("../Player_2")
-main_cam = NodePath("../Camera2D")
-
-[node name="Peek1" type="Control" parent="OffscreenPeekHUD"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek1"]
-material = SubResource("ShaderMaterial_r84mv")
-layout_mode = 0
-offset_left = 30.0
-offset_top = 233.0
-offset_right = 140.0
-offset_bottom = 347.0
-metadata/_edit_use_anchors_ = true
-
-[node name="SVP1" type="SubViewport" parent="OffscreenPeekHUD"]
-transparent_bg = true
-
-[node name="PeekCamera1" type="Camera2D" parent="OffscreenPeekHUD/SVP1"]
-
-[node name="SVP2" type="SubViewport" parent="OffscreenPeekHUD"]
-transparent_bg = true
-
-[node name="PeekCamera2" type="Camera2D" parent="OffscreenPeekHUD/SVP2"]
-
-[node name="Peek2" type="Control" parent="OffscreenPeekHUD"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek2"]
-material = SubResource("ShaderMaterial_r84mv")
-layout_mode = 0
-offset_left = 30.025
-offset_top = 450.0
-offset_right = 140.025
-offset_bottom = 564.0
-metadata/_edit_use_anchors_ = true

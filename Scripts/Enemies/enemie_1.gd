@@ -34,6 +34,13 @@ var wiggle_amp := 40.0
 var wiggle_freq := 1.6
 var pitch_variations_gun = [0.8, 1.5, 2.5]
 
+@export var shock_duration: float = 1.5   # segundos de lentitud
+@export var shock_factor: float   = 0.35  # 35% de la velocidad original
+
+var _shock_timer: Timer
+var _base_speed: float
+var _is_shocked := false
+
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi()%pitch_variations_gun.size()]
 	$hit.pitch_scale = random_pitch
@@ -65,6 +72,15 @@ func _ready() -> void:
 	add_child(strafe_timer)
 	strafe_timer.connect("timeout", Callable(self, "_on_strafe_swap"))
 	strafe_timer.start()
+	
+	#---ELECTROSHOCK
+	_base_speed = speed
+
+	_shock_timer = Timer.new()
+	_shock_timer.one_shot = true
+	add_child(_shock_timer)
+	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
+		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
 
 func _physics_process(delta: float) -> void:
 	_update_target()
@@ -150,11 +166,22 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 		emit_signal("damage", 10.0)
 
 func _report_dead() -> void:
-	if reported_dead: return
+	if reported_dead:
+		return
 	reported_dead = true
+
+	# --- limpiar electroshock antes de liberar ---
+	if _shock_timer:
+		_shock_timer.stop()
+	_is_shocked = false
+	speed = _base_speed
+	# (opcional) revertir feedback visual:
+	# if sprite_2d: sprite_2d.modulate = Color(1,1,1)
+
+	# --- tu lógica de muerte ---
 	_drop_coin()
 	emit_signal("died")
-	call_deferred("queue_free") 
+	call_deferred("queue_free")
 
 func _on_AnimatedSprite2D_animation_finished() -> void:
 	
@@ -188,3 +215,25 @@ func _drop_coin():
 	var sprite = coin_instance.get_node("AnimatedSprite2D")
 	if sprite:
 		sprite.play("idle")
+		
+func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
+	if dead:
+		return
+
+	if duration <= 0.0:
+		duration = shock_duration
+	if factor <= 0.0:
+		factor = shock_factor
+
+	# Si no estaba en shock, guarda la base y aplica el slow.
+	if not _is_shocked:
+		_base_speed = speed
+		_is_shocked = true
+	# Si ya estaba en shock y llega otro, asegura el mínimo (no sube).
+	speed = min(speed, _base_speed * factor)
+	
+	_shock_timer.start(duration)
+	
+func _end_electroshock() -> void:
+	_is_shocked = false
+	speed = _base_speed

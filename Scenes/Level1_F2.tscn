@@ -1,5 +1,6 @@
-[gd_scene load_steps=44 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=46 format=3 uid="uid://82ef3cmon8x5"]
 
+[ext_resource type="Script" uid="uid://dtj8n72t1er10" path="res://Scripts/Level2/Level1F2.gd" id="1_8fs40"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
 [ext_resource type="Texture2D" uid="uid://c4w2sgl0n7du1" path="res://Assets/art/background/BACKGROUND_2-1.png" id="2_aupn4"]
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_dfrea"]
@@ -32,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cmg5786amr7vb" path="res://Assets/art/background/mesa_2.png" id="28_6ftvt"]
 [ext_resource type="Texture2D" uid="uid://c2wggx3w4wwt" path="res://Assets/art/background/BG2_TUBO.png" id="29_8fs40"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="31_jrhcu"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="34_d5vqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq78c"]
 size = Vector2(5503, 20)
@@ -219,6 +221,7 @@ animations = [{
 }]
 
 [node name="Level1F2" type="Node2D"]
+script = ExtResource("1_8fs40")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource("1_i54yl")
@@ -241,8 +244,8 @@ script = ExtResource("3_dfrea")
 polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
 [node name="PISO" type="Sprite2D" parent="."]
-position = Vector2(-10, 85)
-scale = Vector2(1.382, 0.552941)
+position = Vector2(-279, 85)
+scale = Vector2(1.44925, 0.552941)
 texture = ExtResource("4_3dh15")
 centered = false
 
@@ -908,5 +911,7 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 [node name="Pausa" parent="." instance=ExtResource("31_jrhcu")]
 
 [node name="GameOver" parent="." instance=ExtResource("26_lsce1")]
+
+[node name="Sombras_transición" parent="." instance=ExtResource("34_d5vqw")]
 
 [connection signal="body_entered" from="Portal_2/Area2D" to="Portal_2" method="_on_area_2d_body_entered"]
