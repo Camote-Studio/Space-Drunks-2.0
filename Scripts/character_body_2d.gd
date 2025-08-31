@@ -7,6 +7,9 @@ var coins: int = 0
 @onready var gun_node: Node = $Gun
 
 @export var gun_360_scene: PackedScene = preload("res://Scenes/gun_360.tscn")
+var _360_instance: Node2D = null
+var _360_timer: Timer
+var _360_active := false
 
 @export var electro_gun_scene: PackedScene = preload("res://Scenes/electro_gun.tscn")
 @export var electro_duration_min: float = 15.0
@@ -65,6 +68,14 @@ func _ready() -> void:
 	if not _revert_timer.is_connected("timeout", Callable(self, "_revert_gun_instance")):
 		_revert_timer.connect("timeout", Callable(self, "_revert_gun_instance"))
 
+	_360_timer = Timer.new()
+	_360_timer.one_shot = true
+	add_child(_360_timer)
+	
+	if not _360_timer.is_connected("timeout", Callable(self, "_360_gun_instance")):
+		_360_timer.connect("timeout", Callable(self, "_360_gun_instance"))
+
+	
 	_set_gun_active(gun_node, true)
 func _physics_process(delta: float) -> void:
 	if dead:
@@ -225,6 +236,8 @@ func apply_power_to_bullet(bullet: Node) -> void:
 func _die() -> void:
 	if _electro_active:
 		_revert_gun_instance()
+	elif _360_active:
+		_360_gun_instance()
 	dead = true
 	allow_input = false
 	floating = false
@@ -302,6 +315,45 @@ func _revert_gun_instance() -> void:
 		_electro_instance.queue_free()
 		_electro_instance = null
 		_electro_active = false
+
+	# Reactiva la normal
+	_set_gun_active(gun_node, true)
+	print("[P1] 🔁 Vuelve la Gun normal")
+
+
+func activate_360_for(seconds: float = -1.0) -> void:
+	if seconds <= 0.0:
+		seconds = randf_range(electro_duration_min, electro_duration_max)
+	if gun_360_scene == null:
+		push_warning("[P1] 360_gun_scene no asignada.")
+		return
+	# Si ya está activa, solo extiende el tiempo
+	if _360_active and is_instance_valid(_360_instance):
+		_360_timer.start(seconds)
+		print("[P1] ⏱ 360Gun extendida a ", seconds, "s")
+		return
+
+	# Instanciar ElectroGun como hija del player
+	_360_instance = gun_360_scene.instantiate() as Node2D
+	add_child(_360_instance)
+	_360_instance.name = "360Gun"
+	# opcional: copia posición para que “aparezca” en el mismo sitio que la normal
+	_360_instance.position = gun_node.position
+
+	# Activa electro, desactiva normal
+	_set_gun_active(gun_node, false)
+	_set_gun_active(_360_instance, true)
+	_360_active = true
+	_360_timer.start(seconds)
+	print("[P1] ✅ 360Gun ACTIVADA por ", seconds, "s")
+	
+func _360_gun_instance() -> void:
+		# Apaga y borra ElectroGun
+	if is_instance_valid(_360_instance):
+		_set_gun_active(_360_instance, false)
+		_360_instance.queue_free()
+		_360_instance = null
+		_360_active = false
 
 	# Reactiva la normal
 	_set_gun_active(gun_node, true)
