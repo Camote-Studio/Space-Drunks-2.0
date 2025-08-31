@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
-[ext_resource type="Texture2D" uid="uid://1oudbt72tvyb" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tii1t"]
+[ext_resource type="Texture2D" uid="uid://xenlds0o8ci6" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tii1t"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="3_c5os2"]
 [ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="3_d1i85"]
-[ext_resource type="Texture2D" uid="uid://bbkp2w3fe1vq0" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-1.png" id="3_sij3j"]
-[ext_resource type="Texture2D" uid="uid://bowbbaila6ttx" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-2.png" id="4_efrga"]
+[ext_resource type="Texture2D" uid="uid://dwy5qcmvangbi" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-1.png" id="3_sij3j"]
+[ext_resource type="Texture2D" uid="uid://c8ctvirugussx" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-2.png" id="4_efrga"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="6_tii1t"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="7_efrga"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="8_6nii4"]
@@ -218,13 +218,13 @@ script = ExtResource("1_gupyi")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(817, 217.25)
-scale = Vector2(0.4085, 0.283823)
+position = Vector2(817, 171)
+scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("2_tii1t")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(701, 210)
-scale = Vector2(0.3, 0.3)
+position = Vector2(717, 201.5)
+scale = Vector2(0.3115, 0.39902)
 texture = ExtResource("3_sij3j")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
@@ -236,8 +236,8 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 
 [node name="PISO" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-10, 67)
-scale = Vector2(1, 0.566667)
+position = Vector2(-345, 67)
+scale = Vector2(1.08375, 0.566667)
 texture = ExtResource("4_efrga")
 centered = false
 
@@ -248,7 +248,7 @@ position = Vector2(278, 340)
 position = Vector2(266, 481)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 152)
+position = Vector2(17, 178)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2742, 85)
@@ -261,6 +261,7 @@ position = Vector2(-2.5, 84.5)
 shape = SubResource("RectangleShape2D_u0fq8")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(0, 94)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(5507.51, 146.503)
@@ -274,9 +275,8 @@ position = Vector2(0, 112)
 position = Vector2(2747, 428)
 shape = SubResource("RectangleShape2D_15ly5")
 
-[node name="OffscreenPeekHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
+[node name="OffscreenPeekHUD" type="CanvasLayer" parent="."]
 script = ExtResource("7_efrga")
-player = NodePath("../Player_1")
 
 [node name="Peek" type="Control" parent="OffscreenPeekHUD"]
 layout_mode = 3
@@ -423,7 +423,6 @@ text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
 position = Vector2(576, 303)
-zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
 speed = 15.0

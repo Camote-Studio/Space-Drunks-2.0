@@ -244,8 +244,8 @@ script = ExtResource("3_dfrea")
 polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
 [node name="PISO" type="Sprite2D" parent="."]
-position = Vector2(-10, 85)
-scale = Vector2(1.382, 0.552941)
+position = Vector2(-279, 85)
+scale = Vector2(1.44925, 0.552941)
 texture = ExtResource("4_3dh15")
 centered = false
 
