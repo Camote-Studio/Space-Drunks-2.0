@@ -1,7 +1,8 @@
-[gd_scene load_steps=228 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=229 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
+[ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://Scenes/sword.tscn" id="2_58h14"]
 [ext_resource type="Texture2D" uid="uid://cqxklgykn6by8" path="res://Assets/art/sprites/Personajes/BIGB/frame_00_delay-0.03s.png" id="3_sj0qb"]
 [ext_resource type="Texture2D" uid="uid://u73h8cvpbapi" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_00_delay-0.03s.png" id="3_uqjhf"]
 [ext_resource type="Texture2D" uid="uid://dr3las3svr06d" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 002.png" id="3_ygfiw"]
@@ -888,7 +889,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
 radius = 27.0
-height = 90.0
+height = 86.0
 
 [sub_resource type="Animation" id="Animation_tb6cx"]
 length = 0.001
@@ -962,6 +963,7 @@ radius = 80.0694
 [node name="Player_2" type="CharacterBody2D" groups=["player_2"]]
 collision_mask = 3
 script = ExtResource("1_a3adp")
+espada_scene = ExtResource("2_58h14")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -11)
@@ -970,7 +972,7 @@ sprite_frames = SubResource("SpriteFrames_rn5h7")
 animation = &"aturdido"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -2)
+position = Vector2(-1, 5)
 shape = SubResource("CapsuleShape2D_1m887")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -44,6 +44,13 @@ var _attack_lock := false
 var pitch_variations_gun = [0.8, 1.5, 2.5]
 var face_sign := 1.0
 
+@export var shock_duration: float = 1.5   # segundos de lentitud
+@export var shock_factor: float   = 0.35  # 35% de la velocidad original
+
+var _shock_timer: Timer
+var _base_speed: float
+var _is_shocked := false
+
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi()%pitch_variations_gun.size()]
 	$hit.pitch_scale = random_pitch
@@ -76,7 +83,14 @@ func _ready() -> void:
 		sprite_2d.connect("animation_finished", Callable(self, "_on_sprite_2d_animation_finished"))
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
+	#---ELECTROSHOCK
+	_base_speed = speed
 
+	_shock_timer = Timer.new()
+	_shock_timer.one_shot = true
+	add_child(_shock_timer)
+	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
+		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
 func _physics_process(delta: float) -> void:
 	_update_target()
 	if dead or player == null:
@@ -183,6 +197,8 @@ func _on_stack_timeout() -> void:
 
 func _die() -> void:
 	dead = true
+	if _is_shocked:
+		_end_electroshock()
 	label.visible = false
 	velocity = Vector2.ZERO
 	area.set_deferred("monitoring", false)
@@ -203,6 +219,8 @@ func _on_sprite_2d_animation_finished() -> void:
 	if sprite_2d.animation == "explosion":
 		if explosion_timer and explosion_timer.time_left > 0.0:
 			explosion_timer.stop()
+		if _is_shocked:
+			_end_electroshock() 
 		if not reported_dead:
 			reported_dead = true
 			_drop_coin()
@@ -237,3 +255,24 @@ func _drop_coin():
 	var sprite = coin_instance.get_node("AnimatedSprite2D")
 	if sprite:
 		sprite.play("idle")
+func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
+	if dead:
+		return
+
+	if duration <= 0.0:
+		duration = shock_duration
+	if factor <= 0.0:
+		factor = shock_factor
+
+	# Si no estaba en shock, guarda la base y aplica el slow.
+	if not _is_shocked:
+		_base_speed = speed
+		_is_shocked = true
+	# Si ya estaba en shock y llega otro, asegura el mínimo (no sube).
+	speed = min(speed, _base_speed * factor)
+	
+	_shock_timer.start(duration)
+	
+func _end_electroshock() -> void:
+	_is_shocked = false
+	speed = _base_speed
