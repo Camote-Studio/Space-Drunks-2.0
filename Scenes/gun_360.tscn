@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cndlmb7t1kdda"]
+
+[ext_resource type="Script" uid="uid://0ygvdndonyoc" path="res://Scripts/gun_360.gd" id="1_nj0ri"]
+[ext_resource type="Texture2D" uid="uid://dhqi54jg8qvgb" path="res://Assets/art/sprites/Armas/gUN1.png" id="2_yuom3"]
+[ext_resource type="AudioStream" uid="uid://hs5wadwnl64m" path="res://Assets/sfx/lasergun-35817_[cut_1sec].mp3" id="3_05b7b"]
+
+[node name="Gun_360" type="Node2D"]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_nj0ri")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yuom3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="lasergun" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_05b7b")
+volume_db = 10.0
+bus = &"Sound Effect"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
