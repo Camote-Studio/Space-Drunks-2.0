@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=39 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
@@ -24,12 +24,13 @@
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="18_m74wh"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="19_fnwrx"]
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="21_c5os2"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="21_r84mv"]
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
-size = Vector2(5503, 20)
+size = Vector2(5588.5, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0fq8"]
 size = Vector2(15, 1115)
@@ -38,10 +39,7 @@ size = Vector2(15, 1115)
 size = Vector2(1232.99, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15ly5"]
-size = Vector2(5497, 20)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bdxm"]
-shader = ExtResource("8_6nii4")
+size = Vector2(5563.5, 3)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3k20b"]
 animations = [{
@@ -209,6 +207,9 @@ _data = {
 &"start_animation": SubResource("Animation_n6wrj")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r84mv"]
+shader = ExtResource("8_6nii4")
+
 [node name="Level1_F3" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -251,13 +252,13 @@ position = Vector2(266, 481)
 position = Vector2(17, 178)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2742, 85)
+position = Vector2(2699.25, 80)
 shape = SubResource("RectangleShape2D_b0kl2")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(-2.5, 84.5)
+position = Vector2(-78, 88)
 shape = SubResource("RectangleShape2D_u0fq8")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
@@ -272,32 +273,8 @@ shape = SubResource("RectangleShape2D_f4neb")
 position = Vector2(0, 112)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4/StaticBody2D2"]
-position = Vector2(2747, 428)
+position = Vector2(2713.75, 419.5)
 shape = SubResource("RectangleShape2D_15ly5")
-
-[node name="OffscreenPeekHUD" type="CanvasLayer" parent="."]
-script = ExtResource("7_efrga")
-
-[node name="Peek" type="Control" parent="OffscreenPeekHUD"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD/Peek"]
-material = SubResource("ShaderMaterial_1bdxm")
-layout_mode = 0
-offset_left = 30.0
-offset_top = 233.0
-offset_right = 140.0
-offset_bottom = 347.0
-
-[node name="SVP" type="SubViewport" parent="OffscreenPeekHUD"]
-transparent_bg = true
-
-[node name="PeekCamera" type="Camera2D" parent="OffscreenPeekHUD/SVP"]
-visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -405,23 +382,27 @@ anchor_right = 0.109
 anchor_bottom = 0.179
 offset_left = -13.568
 offset_top = -10.992
-offset_right = 9.43199
-offset_bottom = 12.008
+offset_right = 10.432
+offset_bottom = 36.008
+theme_override_fonts/font = ExtResource("21_r84mv")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="cont monedas2" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.263
-anchor_top = 0.18
-anchor_right = 0.263
-anchor_bottom = 0.18
-offset_left = -9.97601
-offset_top = -9.64001
-offset_right = 13.024
-offset_bottom = 13.36
+anchor_left = 0.155
+anchor_top = 0.198
+anchor_right = 0.155
+anchor_bottom = 0.198
+offset_left = 121.44
+offset_top = -23.304
+offset_right = 148.44
+offset_bottom = 23.696
+theme_override_fonts/font = ExtResource("21_r84mv")
+theme_override_font_sizes/font_size = 33
 text = "0"
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["camara"]]
+[node name="Camera2D" type="Camera2D" parent="." groups=["camara", "main_camera"]]
 position = Vector2(576, 303)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
@@ -440,3 +421,63 @@ libraries = {
 position = Vector2(2739, 382)
 
 [node name="GameOver" parent="." instance=ExtResource("23_d1i85")]
+
+[node name="OffscreenPeekHUD2" type="CanvasLayer" parent="." node_paths=PackedStringArray("player1", "player2", "main_cam")]
+layer = 3
+script = ExtResource("7_efrga")
+player1 = NodePath("../Player_1")
+player2 = NodePath("../Player_2")
+main_cam = NodePath("../Camera2D")
+
+[node name="Peek1" type="Control" parent="OffscreenPeekHUD2"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD2/Peek1"]
+material = SubResource("ShaderMaterial_r84mv")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.275
+anchor_right = 0.25
+anchor_bottom = 0.275
+offset_top = 233.0
+offset_right = 110.0
+offset_bottom = 347.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SVP1" type="SubViewport" parent="OffscreenPeekHUD2"]
+process_priority = 3
+transparent_bg = true
+
+[node name="PeekCamera1" type="Camera2D" parent="OffscreenPeekHUD2/SVP1"]
+
+[node name="SVP2" type="SubViewport" parent="OffscreenPeekHUD2"]
+transparent_bg = true
+
+[node name="PeekCamera2" type="Camera2D" parent="OffscreenPeekHUD2/SVP2"]
+
+[node name="Peek2" type="Control" parent="OffscreenPeekHUD2"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD2/Peek2"]
+material = SubResource("ShaderMaterial_r84mv")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.399375
+anchor_top = 0.525
+anchor_right = 0.399375
+anchor_bottom = 0.525
+offset_left = -5.975
+offset_top = 450.0
+offset_right = 104.025
+offset_bottom = 564.0
