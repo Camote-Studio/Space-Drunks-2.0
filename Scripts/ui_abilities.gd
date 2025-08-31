@@ -95,7 +95,10 @@ func _on_gun_pressed() -> void:
 
 
 func _on_gun_360_pressed() -> void:
-	print("[UI] Jet PRESSED → request_spawn(", spawn_seconds, ")")
-	emit_signal("request_spawn", spawn_seconds)
-	_play_anim("jet")
+	var p1 := get_tree().get_first_node_in_group("player") as Node
+	if p1 and p1.has_method("activate_360_for"):
+		p1.activate_360_for() # 15–20 s aleatorio
+		print("[UI] 360Gun solicitada")
+	visible = false
+	_play_anim("360")
 	_close_ui()
