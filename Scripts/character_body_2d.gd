@@ -262,6 +262,8 @@ func _die() -> void:
 			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
 
 	# Emitir señal para GameManager
+	$"../CanvasLayer/Sprite2D".self_modulate = Color(1, 0, 0, 1) 
+	$"../CanvasLayer/Characater1Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_kirk.png")
 	emit_signal("muerte")
 
 func _on_death_finished() -> void:

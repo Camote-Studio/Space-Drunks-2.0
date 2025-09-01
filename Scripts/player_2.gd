@@ -269,7 +269,8 @@ func _die() -> void:
 		animated_sprite.play("death")
 		if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
 			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
-
+	$"../CanvasLayer/Sprite2D2".self_modulate = Color(1, 0, 0, 1) 
+	$"../CanvasLayer/Character2Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_big.png")
 	emit_signal("muerte")
 
 func _on_death_finished() -> void:
