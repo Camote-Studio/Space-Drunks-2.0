@@ -998,11 +998,12 @@ autoplay = "explosion_death"
 [node name="venenoTimer" type="Timer" parent="."]
 
 [node name="Punch_left" type="Sprite2D" parent="." groups=["puño_player2"]]
-position = Vector2(-15, -10)
+position = Vector2(-38, -21)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("220_58h14")
 
 [node name="Area2D" type="Area2D" parent="Punch_left"]
+position = Vector2(6.66667, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_left/Area2D"]
 shape = SubResource("CircleShape2D_prblm")

@@ -27,11 +27,13 @@ func _process(delta: float) -> void:
 		scale.x = -0.2 
 	else: 
 		scale.x = 0.2 
-	if Input.is_action_just_pressed("fired"):
+	if Input.is_action_just_pressed("fired") and can_fire:
 		var bullet_instance = bullet_scene.instantiate()
 		get_tree().root.add_child(bullet_instance) 
 		bullet_instance.global_position = global_position 
 		bullet_instance.rotation = rotation
+		can_fire = false
+		timer.start()
 
 func _on_timer_timeout() -> void:
 	can_fire = true
