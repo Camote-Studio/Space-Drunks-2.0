@@ -137,20 +137,17 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 	match source:
 		"veneno":
 			if estado_actual == Estado.NORMAL:   
-				print("🔥 Jugador envenenado")
 				estado_actual = Estado.VENENO
 				$venenoTimer.start(0.5)
 				animated_sprite.play("envenenado")
 
 		"bala":
 			if estado_actual == Estado.NORMAL:   
-				print("💥 Jugador aturdido")
 				estado_actual = Estado.ATURDIDO
 				$AturdidoTimer.start(2)
 				animated_sprite.play("aturdio")
 
 		"bala_gravedad":
-			print("🌪 Jugador flotando")
 			floating = true
 			invulnerable = true
 			invul_timer = invul_duration
@@ -216,7 +213,6 @@ func _power() -> void:
 	if bar_ability_1 and bar_ability_1.value >= bar_ability_1.max_value:
 		next_shot_powered = true
 		bar_ability_1.value = bar_ability_1.min_value
-		print("⚡ ¡Poder activado! El próximo disparo será potenciado")
 
 # Aplica el poder a la bala recién creada (llámalo al instanciar la bala del jugador).
 func apply_power_to_bullet(bullet: Node) -> void:
@@ -232,7 +228,6 @@ func apply_power_to_bullet(bullet: Node) -> void:
 		bullet.call("set_damage", power_bullet_extra_damage)
 	# Consumir el poder (solo este disparo)
 	next_shot_powered = false
-	print("💥 Disparo potenciado lanzado")
 
 # ======================
 #        MUERTE
@@ -267,6 +262,8 @@ func _die() -> void:
 			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
 
 	# Emitir señal para GameManager
+	$"../CanvasLayer/Sprite2D".self_modulate = Color(1, 0, 0, 1) 
+	$"../CanvasLayer/Characater1Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_kirk.png")
 	emit_signal("muerte")
 
 func _on_death_finished() -> void:
@@ -283,7 +280,7 @@ func _on_veneno_timer_timeout() -> void:
 		
 func collect_coin() -> void:
 	coins += 1
-	$"../CanvasLayer/cont monedas2".text=str(coins)
+	$"../CanvasLayer/cont monedas".text=str(coins)
 	# Cuando llega a 1 moneda, muestra el panel
 	if coins == 1 and is_instance_valid(shop):
 		shop.visible = true
@@ -296,7 +293,6 @@ func activate_electro_for(seconds: float = -1.0) -> void:
 	# Si ya está activa, solo extiende el tiempo
 	if _electro_active and is_instance_valid(_electro_instance):
 		_revert_timer.start(seconds)
-		print("[P1] ⏱ ElectroGun extendida a ", seconds, "s")
 		return
 
 	# Instanciar ElectroGun como hija del player
@@ -311,7 +307,6 @@ func activate_electro_for(seconds: float = -1.0) -> void:
 	_set_gun_active(_electro_instance, true)
 	_electro_active = true
 	_revert_timer.start(seconds)
-	print("[P1] ✅ ElectroGun ACTIVADA por ", seconds, "s")
 func _revert_gun_instance() -> void:
 	# Apaga y borra ElectroGun
 	if is_instance_valid(_electro_instance):
@@ -322,7 +317,6 @@ func _revert_gun_instance() -> void:
 
 	# Reactiva la normal
 	_set_gun_active(gun_node, true)
-	print("[P1] 🔁 Vuelve la Gun normal")
 
 
 func activate_360_for(seconds: float = -1.0) -> void:
@@ -334,7 +328,6 @@ func activate_360_for(seconds: float = -1.0) -> void:
 	# Si ya está activa, solo extiende el tiempo
 	if _360_active and is_instance_valid(_360_instance):
 		_360_timer.start(seconds)
-		print("[P1] ⏱ 360Gun extendida a ", seconds, "s")
 		return
 
 	# Instanciar ElectroGun como hija del player
@@ -349,7 +342,6 @@ func activate_360_for(seconds: float = -1.0) -> void:
 	_set_gun_active(_360_instance, true)
 	_360_active = true
 	_360_timer.start(seconds)
-	print("[P1] ✅ 360Gun ACTIVADA por ", seconds, "s")
 	
 func _360_gun_instance() -> void:
 		# Apaga y borra ElectroGun
@@ -361,7 +353,6 @@ func _360_gun_instance() -> void:
 
 	# Reactiva la normal
 	_set_gun_active(gun_node, true)
-	print("[P1] 🔁 Vuelve la Gun normal")
 
 func _set_gun_active(g: Node, active: bool) -> void:
 	if not is_instance_valid(g):

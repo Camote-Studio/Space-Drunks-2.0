@@ -186,14 +186,14 @@ func _punch_alternate()-> void:
 		var base_l = punch_left.position
 		var dir_l = -1.0 if $Punch_left.flip_h else 1.0
 		var t = create_tween()
-		t.tween_property(punch_left, "position", base_l + Vector2(32.0 * dir_l, 0.0), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		t.tween_property(punch_left, "position", base_l + Vector2(45.0 * dir_l, 0.0), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		t.tween_property(punch_left, "position", base_l, 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		t.tween_callback(Callable(self, "_on_punch_done"))
 	else:
 		var base_r = punch_right.position
 		var dir_r = -1.0 if $Punch_right.flip_h else 1.0
 		var t_r = create_tween()
-		t_r.tween_property(punch_right, "position", base_r + Vector2(32.0 * dir_r, 0.0), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		t_r.tween_property(punch_right, "position", base_r + Vector2(45.0 * dir_r, 0.0), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		t_r.tween_property(punch_right, "position", base_r, 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		t_r.tween_callback(Callable(self, "_on_punch_done"))
 	_use_left = not _use_left
@@ -269,7 +269,8 @@ func _die() -> void:
 		animated_sprite.play("death")
 		if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
 			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
-
+	$"../CanvasLayer/Sprite2D2".self_modulate = Color(1, 0, 0, 1) 
+	$"../CanvasLayer/Character2Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_big.png")
 	emit_signal("muerte")
 
 func _on_death_finished() -> void:
@@ -298,14 +299,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		dmg = 20.0
 	elif body.is_in_group("boss"):
 		dmg = 10.0
-
 	if dmg > 0.0 and body.has_signal("damage"):
 		body.emit_signal("damage", dmg)
+
+		gain_ability_from_attack_2(dmg)
 
 # ----------------------
 #   PODER: ESPADA
 # ----------------------
-# Llama a esto para activar la espada (desde UI/moneda/etc.)
 func activate_sword_for(seconds: float = -1.0) -> void:
 	if dead:
 		return
@@ -318,7 +319,6 @@ func activate_sword_for(seconds: float = -1.0) -> void:
 	# Si ya está activa, sólo renueva tiempo
 	if _sword_active and is_instance_valid(_sword_instance):
 		_sword_timer.start(seconds)
-		print("[P2] ⏱ Espada extendida a ", seconds, " s")
 		return
 
 	# Instanciar y anclar
@@ -332,7 +332,6 @@ func activate_sword_for(seconds: float = -1.0) -> void:
 
 	_sword_active = true
 	_sword_timer.start(seconds)
-	print("[P2] ✅ Espada ACTIVADA por ", seconds, " s")
 
 func _revert_sword() -> void:
 	if is_instance_valid(_sword_instance):
@@ -343,34 +342,64 @@ func _revert_sword() -> void:
 	# Rehabilita puños
 	punch_left.visible  = true
 	punch_right.visible = true
-	print("[P2] 🔁 Espada DESACTIVADA — vuelven los puños")
 
 func _update_sword_transform() -> void:
 	if not _sword_active or not is_instance_valid(_sword_instance):
 		return
-	# Ancla cerca del puño derecho “base”, respetando el facing
 	var anchor := Vector2(abs(_base_right.x) * _facing, _base_right.y)
 	_sword_instance.position = anchor
-	# Flip simple por escala X
 	_sword_instance.scale.x = abs(_sword_instance.scale.x) * float(_facing)
 
 # ======================
 #  CARGA DE HABILIDAD 2
 # ======================
-# Llama esto cuando P2 HACE daño (golpe/espada/bala)
 func gain_ability_from_attack_2(damage_dealt: float) -> void:
 	if dead or bar_ability_2 == null:
 		return
 	var gain = max(0.0, damage_dealt)
 	bar_ability_2.value = clamp(bar_ability_2.value + gain, bar_ability_2.min_value, bar_ability_2.max_value)
 	if bar_ability_2.value >= bar_ability_2.max_value:
-		_power_sword()
+		_power()
 
-# Activa la espada cuando la barra está llena y resetea la barra
-func _power_sword() -> void:
+func _power() -> void:
 	if dead:
 		return
 	if bar_ability_2 and bar_ability_2.value >= bar_ability_2.max_value:
 		bar_ability_2.value = bar_ability_2.min_value
-		activate_sword_for(espada_duracion)   
-		print("[P2] ⚡ Espada activada por carga de habilidad")
+
+		var alabarda = $alabarda
+		var hitbox = alabarda.get_node("Hitbox")
+		alabarda.visible = true
+		alabarda.rotation_degrees = 0
+		hitbox.monitoring = true  # activar hitbox
+
+		var t = create_tween()
+
+		# 1. Carga del golpe (wind-up) → 0.3s hacia atrás
+		t.tween_property(alabarda, "rotation_degrees", -45.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+		# 2. Swing fuerte (ataque principal) → 0.4s hacia adelante
+		t.tween_property(alabarda, "rotation_degrees", 120.0, 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+
+		# 3. Vuelve lentamente a la posición inicial → 0.3s
+		t.tween_property(alabarda, "rotation_degrees", 0.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+		# 4. Termina: desactiva hitbox y oculta arma
+		t.tween_callback(Callable(self, "_end_power"))
+
+func _end_power() -> void:
+	var alabarda = $alabarda
+	var hitbox = alabarda.get_node("Hitbox")
+	alabarda.rotation_degrees = 0
+	alabarda.hide()
+	hitbox.monitoring = false
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	var enemy = area.get_parent()
+	if (enemy.is_in_group("enemy_1") 
+		or enemy.is_in_group("enemy_2") 
+		or enemy.is_in_group("enemy_3") 
+		or enemy.is_in_group("enemy_4") 
+		or enemy.is_in_group("enemy_5") 
+		or enemy.is_in_group("boss")) and enemy.has_signal("damage"):
+		enemy.emit_signal("damage", 50.0)  # daño fijo de la alabarda
