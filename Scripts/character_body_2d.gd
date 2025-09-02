@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal damage(amount: float, source: String)
 signal muerte  
 var coins: int = 0
-
+@export var player_id: String = "player1"  # Identificador único
 @onready var gun_node: Node = $Gun
 
 @export var gun_360_scene: PackedScene = preload("res://Scenes/gun_360.tscn")
@@ -54,8 +54,15 @@ var allow_input := true
 var next_shot_powered := false         # se activa cuando la barra se llena
 var power_bullet_scale := 1.8          # escala visual del próximo disparo
 var power_bullet_extra_damage := 20.0  # daño extra del próximo disparo
+@onready var coin_label: Label = $"../CanvasLayer/cont monedas"
 
 func _ready() -> void:
+	coins = GameState.get_coins(player_id)
+	GameState.set_coins(player_id, coins)
+	if coin_label: # solo si existe el nodo
+		coin_label.text = str(coins)
+	else:
+		push_error("⚠️ No se encontró el nodo Label de monedas en el árbol de nodos.")
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 	animated_sprite.play("idle")
@@ -109,8 +116,7 @@ func _physics_process(delta: float) -> void:
 					animated_sprite.flip_h = direction.x < 0
 				elif direction.y < 0:
 					animated_sprite.play("caminar_subir")
-				else:
-					animated_sprite.play("caminar_bajar")
+
 
 
 	velocity = direction * speed
@@ -278,12 +284,14 @@ func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
 		estado_actual = Estado.NORMAL
 		
-func collect_coin() -> void:
-	coins += 1
-	$"../CanvasLayer/cont monedas".text=str(coins)
-	# Cuando llega a 1 moneda, muestra el panel
-	if coins == 1 and is_instance_valid(shop):
-		shop.visible = true
+func collect_coin(amount: int = 1) -> void:
+	coins += amount
+	
+	if coin_label:
+		coin_label.text = str(coins)
+
+	GameState.set_coins(player_id, coins)
+
 func activate_electro_for(seconds: float = -1.0) -> void:
 	if seconds <= 0.0:
 		seconds = randf_range(electro_duration_min, electro_duration_max)

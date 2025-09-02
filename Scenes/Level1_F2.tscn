@@ -281,10 +281,10 @@ position = Vector2(2736, 447)
 shape = SubResource("RectangleShape2D_e2b77")
 
 [node name="Player_1" parent="." instance=ExtResource("3_vti5k")]
-position = Vector2(907, 544)
+position = Vector2(50, 500)
 
 [node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
-position = Vector2(883, 421)
+position = Vector2(50, 400)
 
 [node name="Portal_2" type="Node2D" parent="." groups=["portal"]]
 position = Vector2(-3, 143)
@@ -366,7 +366,8 @@ offset_right = 1245.0
 offset_bottom = 93.0
 rotation = -0.00284467
 scale = Vector2(0.122, 0.612)
-value = 100.0
+max_value = 300.0
+value = 300.0
 texture_under = ExtResource("13_wcv5e")
 texture_progress = ExtResource("14_jrhcu")
 metadata/_edit_use_anchors_ = true
