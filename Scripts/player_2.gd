@@ -4,11 +4,13 @@ extends CharacterBody2D
 signal damage(amount: float, source: String)
 signal muerte  # Para notificar al GameManager
 var coins: int = 0
+@export var player_id: String = "player2"  # Identificador único
 
 # --- Nodos ---
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_2: ProgressBar = $"../CanvasLayer/ProgressBar_ability_2"
+@onready var coin_label: Label = $"../CanvasLayer/cont monedas2"
 
 # --- Movimiento ---
 var speed := 220
@@ -53,6 +55,16 @@ var _sword_active := false
 var _sword_timer: Timer
 
 func _ready() -> void:
+	coins = GameState.get_coins(player_id)
+	GameState.set_coins(player_id, coins)
+	if coin_label: # solo si existe el nodo
+		coin_label.text = str(coins)
+	else:
+		push_error("⚠️ No se encontró el nodo Label de monedas en el árbol de nodos.")
+	if bar_ability_2:
+		bar_ability_2.min_value = 0
+		bar_ability_2.max_value = 100
+		bar_ability_2.value = bar_ability_2.min_value
 	_base_left  = punch_left.position
 	_base_right = punch_right.position
 	_use_left = (randi() & 1) == 0
@@ -87,7 +99,7 @@ func _physics_process(delta: float) -> void:
 		_set_facing(sign(direction.x))
 
 	# Si hay espada activa, bloquea el golpe de puños con fired_2
-	if Input.is_action_just_pressed("fired_2") and not _sword_active:
+	if Input.is_action_just_pressed("fired_2"):
 		_punch_alternate()
 
 	match estado_actual:
@@ -281,9 +293,11 @@ func _on_timer_timeout() -> void:
 	if estado_actual == Estado.ATURDIDO:
 		estado_actual = Estado.NORMAL
 
-func collect_coin():
-	coins += 1
-	$"../CanvasLayer/cont monedas2".text = str(coins)
+func collect_coin(amount: int = 1) -> void:
+	coins += amount
+	if coin_label:
+		coin_label.text = str(coins)
+	GameState.set_coins(player_id, coins)
 
 func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
@@ -301,6 +315,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		dmg = 10.0
 	if dmg > 0.0 and body.has_signal("damage"):
 		body.emit_signal("damage", dmg)
+		gain_ability_from_attack_2(dmg)
 
 		gain_ability_from_attack_2(dmg)
 
@@ -326,9 +341,16 @@ func activate_sword_for(seconds: float = -1.0) -> void:
 	add_child(_sword_instance)
 	_update_sword_transform()
 
-	# Opcional: ocultar puños mientras está la espada
-	punch_left.visible  = false
-	punch_right.visible = false
+# (Opcional) ocultar puños mientras está la espada
+	if has_node("Punch_left"):
+		$Punch_left.visible = false
+	if has_node("Punch_right"):
+		$Punch_right.visible = false
+
+	# Escuchar el daño de la espada para cargar la barra
+	if _sword_instance.has_signal("dealt_damage"):
+		if not _sword_instance.is_connected("dealt_damage", Callable(self, "_on_sword_dealt_damage")):
+			_sword_instance.connect("dealt_damage", Callable(self, "_on_sword_dealt_damage"))
 
 	_sword_active = true
 	_sword_timer.start(seconds)
@@ -355,6 +377,7 @@ func _update_sword_transform() -> void:
 # ======================
 func gain_ability_from_attack_2(damage_dealt: float) -> void:
 	if dead or bar_ability_2 == null:
+		
 		return
 	var gain = max(0.0, damage_dealt)
 	bar_ability_2.value = clamp(bar_ability_2.value + gain, bar_ability_2.min_value, bar_ability_2.max_value)
@@ -366,7 +389,6 @@ func _power() -> void:
 		return
 	if bar_ability_2 and bar_ability_2.value >= bar_ability_2.max_value:
 		bar_ability_2.value = bar_ability_2.min_value
-
 		var alabarda = $alabarda
 		var hitbox = alabarda.get_node("Hitbox")
 		alabarda.visible = true
@@ -402,4 +424,4 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		or enemy.is_in_group("enemy_4") 
 		or enemy.is_in_group("enemy_5") 
 		or enemy.is_in_group("boss")) and enemy.has_signal("damage"):
-		enemy.emit_signal("damage", 50.0)  # daño fijo de la alabarda
+		enemy.emit_signal("damage", 20.0)  # daño fijo de la alabarda
