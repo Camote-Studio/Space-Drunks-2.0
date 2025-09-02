@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2j72b88sic6x"]
+[gd_scene load_steps=12 format=3 uid="uid://delxv37bmv7mf"]
 
 [ext_resource type="Script" uid="uid://b2sky472x1re1" path="res://Scripts/loading_screen.gd" id="1_m2hk5"]
 [ext_resource type="Script" uid="uid://plq5eboaorat" path="res://Scripts/loading_interface.gd" id="2_1opfs"]
@@ -75,7 +75,7 @@ script = ExtResource("1_m2hk5")
 
 [node name="Loading_interface" type="CanvasLayer" parent="."]
 script = ExtResource("2_1opfs")
-next_scene_path = "uid://t8t1xbgjp2hy"
+next_scene_path = "uid://dkt37yghdsm2q"
 
 [node name="Control" type="Control" parent="Loading_interface"]
 layout_mode = 3

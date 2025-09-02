@@ -161,14 +161,24 @@ func _do_punch(dir: Vector2) -> void:
 		if sfx_hit:
 			sfx_hit.pitch_scale = pitch_variations[rng.randi_range(0, pitch_variations.size() - 1)]
 			sfx_hit.play()
+			
+#Bloquear movimiento durante golpe
 	_attack_lock = true
 	if _tween and _tween.is_running():
 		_tween.kill()
+		
+# Lanzar animación de golpe
+	if sprite_2d and sprite_2d.sprite_frames.has_animation("golpe"):
+		sprite_2d.play("golpe")
+		
+#Movimiento de embestida
 	var start := global_position
 	var end := start + dir * lunge_dist
 	_tween = create_tween()
 	_tween.tween_property(self, "global_position", end, lunge_time)
 	_tween.tween_property(self, "global_position", start, lunge_time)
+
+#Cooldown del ataque
 	punch_timer.start(punch_cooldown)
 
 func _on_punch_timer_timeout() -> void:
@@ -229,6 +239,12 @@ func _die() -> void:
 
 
 func _on_sprite_2d_animation_finished() -> void:
+	
+	# Si terminó el golpe, desbloquea ataque
+	if sprite_2d.animation == "golpe":
+		_attack_lock = false
+		return
+		
 	if sprite_2d.animation == "explosion":
 		if explosion_timer and explosion_timer.time_left > 0.0:
 			explosion_timer.stop()
