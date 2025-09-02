@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://doypp8bxp7xwd"]
+[gd_scene load_steps=7 format=3 uid="uid://doypp8bxp7xwd"]
 
 [ext_resource type="Script" uid="uid://dsnkh1ca8yhpt" path="res://Scripts/Intefaz/pausa.gd" id="1_hcvwa"]
 [ext_resource type="Texture2D" uid="uid://do1elbfuu5pbn" path="res://Assets/art/background/PAUSA.png" id="2_podca"]
+[ext_resource type="Texture2D" uid="uid://dq21b1oy4geks" path="res://Assets/art/sprites/Interfaz/botella_1.png" id="3_l3m5h"]
+[ext_resource type="Texture2D" uid="uid://c4tjccgcl8xd" path="res://Assets/art/sprites/Interfaz/botella_2.png" id="4_6cqya"]
+[ext_resource type="Texture2D" uid="uid://dkd2a5xr6b4qh" path="res://Assets/art/sprites/Interfaz/botella_3.png" id="5_di1sh"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="6_2nsgn"]
 
 [node name="Pausa" type="CanvasLayer"]
 process_mode = 3
@@ -13,3 +17,38 @@ offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("2_podca")
 expand_mode = 1
+
+[node name="Volver" type="TextureButton" parent="."]
+visible = false
+offset_left = 42.0
+offset_top = 466.0
+offset_right = 573.0
+offset_bottom = 763.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_l3m5h")
+texture_pressed = ExtResource("4_6cqya")
+texture_hover = ExtResource("5_di1sh")
+texture_focused = ExtResource("5_di1sh")
+
+[node name="Label" type="Label" parent="Volver"]
+visible = false
+layout_mode = 0
+offset_left = 72.0
+offset_top = 148.0
+offset_right = 559.0
+offset_bottom = 327.0
+rotation = -0.235619
+scale = Vector2(0.4, 0.4)
+focus_mode = 2
+theme_override_colors/font_color = Color(1, 0.858824, 0, 0.854902)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("6_2nsgn")
+theme_override_font_sizes/font_size = 128
+text = "Volver"
+
+[connection signal="pressed" from="Volver" to="." method="_on_volver_pressed"]
