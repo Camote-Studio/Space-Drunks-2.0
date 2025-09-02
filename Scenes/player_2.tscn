@@ -1,4 +1,4 @@
-[gd_scene load_steps=229 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=231 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
@@ -220,6 +220,7 @@
 [ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="174_qixq7"]
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="175_rn5h7"]
 [ext_resource type="Texture2D" uid="uid://blex0n2rdxghj" path="res://Assets/art/sprites/Armas/Punch1.png" id="220_58h14"]
+[ext_resource type="Texture2D" uid="uid://bgjxtcher56h1" path="res://Assets/art/sprites/Armas/ALABARDA.png" id="221_dfurs"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rn5h7"]
 animations = [{
@@ -960,6 +961,10 @@ radius = 90.0617
 [sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
 radius = 80.0694
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dfurs"]
+a = Vector2(-6.08382, 0.201834)
+b = Vector2(4.81887, 8.14064)
+
 [node name="Player_2" type="CharacterBody2D" groups=["player_2"]]
 collision_mask = 3
 script = ExtResource("1_a3adp")
@@ -1010,8 +1015,24 @@ texture = ExtResource("220_58h14")
 [node name="Area2D" type="Area2D" parent="Punch_right"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_right/Area2D"]
+position = Vector2(-3.33333, -6.66667)
 shape = SubResource("CircleShape2D_58h14")
+
+[node name="alabarda" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(40, -20)
+scale = Vector2(0.297274, 0.332028)
+texture = ExtResource("221_dfurs")
+
+[node name="Hitbox" type="Area2D" parent="alabarda"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alabarda/Hitbox"]
+position = Vector2(205.198, 36.1415)
+rotation = 1.5708
+scale = Vector2(50, 50)
+shape = SubResource("SegmentShape2D_dfurs")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
 [connection signal="body_entered" from="Punch_left/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="alabarda/Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -2,17 +2,19 @@ extends Node2D
 
 var SPEED := 200
 
-# Referencia rápida al jugador (usa el grupo "players" de tu script del player)
 @onready var player := get_tree().get_first_node_in_group("players")
+@onready var cam := get_tree().get_first_node_in_group("main_camera") as Camera2D
 
 func _ready() -> void:
-	# Si el próximo disparo estaba potenciado, aplícalo a ESTA bala
-	# (no pasa nada si el player no tiene ese método)
 	if player and player.has_method("apply_power_to_bullet"):
 		player.apply_power_to_bullet(self)
 
 func _process(delta: float) -> void:
 	position += transform.x * SPEED * delta
+
+	# Revisar si la bala salió de la cámara
+	if cam and not _is_on_screen():
+		queue_free() # destruye la bala si ya no se ve
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var did_hit := false
@@ -39,8 +41,18 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.emit_signal("damage", dmg)
 		did_hit = true
 
-	# Si hicimos daño, carga la barra de habilidad del player con ese daño
 	if did_hit:
 		if player and player.has_method("gain_ability_from_attack"):
 			player.gain_ability_from_attack(dmg)
 		queue_free()
+
+
+# Función para revisar si la bala está dentro del viewport de la cámara
+func _is_on_screen() -> bool:
+	if cam == null:
+		return true # si no hay cámara, no destruyas la bala
+	var screen_rect := Rect2(
+		cam.global_position - cam.zoom * cam.get_viewport_rect().size * 0.5,
+		cam.zoom * cam.get_viewport_rect().size
+	)
+	return screen_rect.has_point(global_position)
