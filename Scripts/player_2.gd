@@ -1,12 +1,18 @@
 extends CharacterBody2D
 # player 2
+
 # --- Señales ---
 signal damage(amount: float, source: String)
 signal muerte  # Para notificar al GameManager
+
+# --- Variables ---
 var coins: int = 0
 @export var player_id: String = "player2"  # Identificador único
 
 # --- Nodos ---
+@onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
+@onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
+
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_2: ProgressBar = $"../CanvasLayer/ProgressBar_ability_2"
@@ -54,17 +60,26 @@ var _sword_instance: Node2D = null
 var _sword_active := false
 var _sword_timer: Timer
 
+# ======================
+#   FUNCIONES BÁSICAS
+# ======================
 func _ready() -> void:
+	var alabarda = $alabarda
+	var hitbox = alabarda.get_node("Hitbox")
+	hitbox.monitoring = false  # 🔹 aseguramos que arranque desactivado
+
 	coins = GameState.get_coins(player_id)
 	GameState.set_coins(player_id, coins)
-	if coin_label: # solo si existe el nodo
+	if coin_label:
 		coin_label.text = str(coins)
 	else:
 		push_error("⚠️ No se encontró el nodo Label de monedas en el árbol de nodos.")
+
 	if bar_ability_2:
 		bar_ability_2.min_value = 0
-		bar_ability_2.max_value = 100
+		bar_ability_2.max_value = 150
 		bar_ability_2.value = bar_ability_2.min_value
+
 	_base_left  = punch_left.position
 	_base_right = punch_right.position
 	_use_left = (randi() & 1) == 0
@@ -85,89 +100,8 @@ func _ready() -> void:
 
 	_set_facing(1)
 
-func _physics_process(delta: float) -> void:
-	if dead:
-		velocity = Vector2.ZERO
-		return
-
-	var direction = Vector2.ZERO
-	if allow_input:
-		direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
-
-	# Actualiza facing si hay input en X
-	if abs(direction.x) > 0.01:
-		_set_facing(sign(direction.x))
-
-	# Si hay espada activa, bloquea el golpe de puños con fired_2
-	if Input.is_action_just_pressed("fired_2"):
-		_punch_alternate()
-
-	match estado_actual:
-		Estado.VENENO:
-			if animated_sprite.animation != "envenenado":
-				animated_sprite.play("envenenado")
-			if abs(direction.x) > 0:
-				animated_sprite.flip_h = direction.x < 0
-
-		Estado.ATURDIDO:
-			direction = -direction
-			if animated_sprite.animation != "aturdido":
-				animated_sprite.play("aturdido")
-			if abs(direction.x) > abs(direction.y):
-				animated_sprite.flip_h = direction.x < 0
-
-		Estado.NORMAL:
-			if direction == Vector2.ZERO:
-				animated_sprite.play("idle")
-			else:
-				if abs(direction.x) > abs(direction.y):
-					animated_sprite.play("caminar")
-					animated_sprite.flip_h = direction.x < 0
-				elif direction.y < 0:
-					animated_sprite.play("caminar_subir")
-				else:
-					animated_sprite.play("caminar_bajar")
-
-	velocity = direction * speed
-
-	if not floating:
-		move_and_slide()
-	else:
-		_handle_floating(delta)
-
 # ----------------------
-#   DAÑO RECIBIDO
-# ----------------------
-func _on_damage(amount: float, source: String = "desconocido") -> void:
-	if dead:
-		return
-
-	if bar:
-		bar.value = clamp(bar.value - amount, bar.min_value, bar.max_value)
-		if bar.value <= bar.min_value:
-			_die()
-			return
-
-	match source:
-		"veneno":
-			if estado_actual == Estado.NORMAL:
-				estado_actual = Estado.VENENO
-				$venenoTimer.start(0.2)
-				animated_sprite.play("envenenado")
-
-		"bala":
-			if estado_actual == Estado.NORMAL:
-				estado_actual = Estado.ATURDIDO
-				$Timer.start(2)
-				animated_sprite.play("aturdio")
-
-		"bala_gravedad":
-			floating = true
-			invulnerable = true
-			invul_timer = invul_duration
-
-# ----------------------
-#   FACING / PUÑOS / ESPADA
+#   FACING / PUÑOS
 # ----------------------
 func _set_facing(sign_dir: int) -> void:
 	if sign_dir == 0:
@@ -182,7 +116,6 @@ func _set_facing(sign_dir: int) -> void:
 	punch_right.flip_h = animated_sprite.flip_h
 
 	# Reubica puños a su lado correcto (espejado respecto al origen del jugador)
-	# Sólo si no hay golpe en curso para no romper tweens
 	if not _punch_lock:
 		punch_left.position  = Vector2(_base_left.x  * _facing, _base_left.y)
 		punch_right.position = Vector2(_base_right.x * _facing, _base_right.y)
@@ -214,14 +147,7 @@ func _on_punch_done()-> void:
 	_punch_lock = false
 
 # ----------------------
-#   COLISIONES SALIENTES
-# ----------------------
-func _on_damage_enemy_body_entered(body: Node2D) -> void:
-	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
-		emit_signal("damage", 20.0, "bala")
-
-# ----------------------
-#   FLOTAR / MUERTE / TIMERS
+#   FLOTAR
 # ----------------------
 func _handle_floating(delta: float) -> void:
 	var target_y
@@ -257,6 +183,104 @@ func _handle_floating(delta: float) -> void:
 		set_collision_layer(1)
 		set_collision_mask(1)
 
+# =====================
+#   PROCESO PRINCIPAL
+# =====================
+func _physics_process(delta: float) -> void:
+	if dead:
+		velocity = Vector2.ZERO
+		return
+
+	var direction = Vector2.ZERO
+	if allow_input:
+		direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
+
+	# Actualiza facing si hay input en X
+	if abs(direction.x) > 0.01:
+		_set_facing(sign(direction.x))
+
+	# Si hay espada activa, bloquea el golpe de puños con fired_2
+	if Input.is_action_just_pressed("fired_2"):
+		_punch_alternate()
+
+	match estado_actual:
+		Estado.VENENO:
+			if animated_sprite.animation != "envenenado":
+				animated_sprite.play("envenenado")
+			if abs(direction.x) > 0:
+				animated_sprite.flip_h = direction.x < 0
+
+		Estado.ATURDIDO:
+			if not sonido_aturdido.playing:
+				sonido_aturdido.play()
+			direction = -direction
+			if animated_sprite.animation != "aturdido":
+				animated_sprite.play("aturdido")
+			if abs(direction.x) > abs(direction.y):
+				animated_sprite.flip_h = direction.x < 0
+
+		Estado.NORMAL:
+			if sonido_aturdido.playing:
+				sonido_aturdido.stop()
+			if direction == Vector2.ZERO:
+				animated_sprite.play("idle")
+			else:
+				if abs(direction.x) > abs(direction.y):
+					animated_sprite.play("caminar")
+					animated_sprite.flip_h = direction.x < 0
+				elif direction.y < 0:
+					animated_sprite.play("caminar_subir")
+				else:
+					animated_sprite.play("caminar_bajar")
+
+	velocity = direction * speed
+
+	if not floating:
+		move_and_slide()
+	else:
+		_handle_floating(delta)
+
+# =====================
+#   DAÑO RECIBIDO
+# =====================
+func _on_damage(amount: float, source: String = "desconocido") -> void:
+	if dead:
+		return
+
+	if bar:
+		bar.value = clamp(bar.value - amount, bar.min_value, bar.max_value)
+		if bar.value <= bar.min_value:
+			_die()
+			return
+
+	match source:
+		"veneno":
+			if estado_actual == Estado.NORMAL:
+				estado_actual = Estado.VENENO
+				$venenoTimer.start(0.2)
+				animated_sprite.play("envenenado")
+
+		"bala":
+			if estado_actual == Estado.NORMAL:
+				estado_actual = Estado.ATURDIDO
+				$Timer.start(2)
+				animated_sprite.play("aturdio")
+
+		"bala_gravedad":
+			floating = true
+			invulnerable = true
+			invul_timer = invul_duration
+
+# ----------------------
+#   COLISIONES SALIENTES
+# ----------------------
+func _on_damage_enemy_body_entered(body: Node2D) -> void:
+	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
+		emit_signal("damage", 20.0, "bala")
+
+# ----------------------
+#   MUERTE / TIMERS
+# ----------------------
 func _die() -> void:
 	dead = true
 	allow_input = false
@@ -281,6 +305,7 @@ func _die() -> void:
 		animated_sprite.play("death")
 		if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
 			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
+
 	$"../CanvasLayer/Sprite2D2".self_modulate = Color(1, 0, 0, 1) 
 	$"../CanvasLayer/Character2Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_big.png")
 	emit_signal("muerte")
@@ -317,8 +342,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.emit_signal("damage", dmg)
 		gain_ability_from_attack_2(dmg)
 
-		gain_ability_from_attack_2(dmg)
-
 # ----------------------
 #   PODER: ESPADA
 # ----------------------
@@ -341,7 +364,7 @@ func activate_sword_for(seconds: float = -1.0) -> void:
 	add_child(_sword_instance)
 	_update_sword_transform()
 
-# (Opcional) ocultar puños mientras está la espada
+	# (Opcional) ocultar puños mientras está la espada
 	if has_node("Punch_left"):
 		$Punch_left.visible = false
 	if has_node("Punch_right"):
@@ -377,7 +400,6 @@ func _update_sword_transform() -> void:
 # ======================
 func gain_ability_from_attack_2(damage_dealt: float) -> void:
 	if dead or bar_ability_2 == null:
-		
 		return
 	var gain = max(0.0, damage_dealt)
 	bar_ability_2.value = clamp(bar_ability_2.value + gain, bar_ability_2.min_value, bar_ability_2.max_value)
@@ -397,16 +419,16 @@ func _power() -> void:
 
 		var t = create_tween()
 
-		# 1. Carga del golpe (wind-up) → 0.3s hacia atrás
+		# 1. Carga del golpe (wind-up)
 		t.tween_property(alabarda, "rotation_degrees", -45.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-		# 2. Swing fuerte (ataque principal) → 0.4s hacia adelante
+		# 2. Swing fuerte
 		t.tween_property(alabarda, "rotation_degrees", 120.0, 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
-		# 3. Vuelve lentamente a la posición inicial → 0.3s
+		# 3. Regresa
 		t.tween_property(alabarda, "rotation_degrees", 0.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-		# 4. Termina: desactiva hitbox y oculta arma
+		# 4. Termina
 		t.tween_callback(Callable(self, "_end_power"))
 
 func _end_power() -> void:
