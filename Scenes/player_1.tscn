@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=3 uid="uid://c3egt0yjxsvrn"]
+[gd_scene load_steps=190 format=3 uid="uid://c3egt0yjxsvrn"]
 
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_p0e4v"]
 [ext_resource type="Texture2D" uid="uid://t1sr0p1gcjrw" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 001.png" id="2_qo81y"]
@@ -181,6 +181,8 @@
 [ext_resource type="Texture2D" uid="uid://b8hwhwq3kb6bc" path="res://Assets/art/sprites/Particulas/EXPLO_4.png" id="128_g8517"]
 [ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="129_1vwi1"]
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="130_8lj6k"]
+[ext_resource type="AudioStream" uid="uid://bns3qc8v3jfu4" path="res://Assets/sfx/Retro Birds 07.wav" id="182_r4lpj"]
+[ext_resource type="AudioStream" uid="uid://68jauvq2vtui" path="res://Assets/sfx/Retro Charge Off StereoUP 02.wav" id="183_k774p"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k774p"]
 animations = [{
@@ -867,6 +869,14 @@ frame_progress = 0.188546
 [node name="AturdidoTimer" type="Timer" parent="."]
 
 [node name="venenoTimer" type="Timer" parent="."]
+
+[node name="sonido_aturdido" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("182_r4lpj")
+volume_db = 10.0
+
+[node name="sonido_flotando" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("183_k774p")
+volume_db = 20.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]

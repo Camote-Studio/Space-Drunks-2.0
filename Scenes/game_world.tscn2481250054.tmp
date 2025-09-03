@@ -716,5 +716,10 @@ position = Vector2(649, 290)
 
 [node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
 position = Vector2(182, 282)
+player_id = null
+gun_360_scene = null
+electro_gun_scene = null
+electro_duration_min = null
+electro_duration_max = null
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]
