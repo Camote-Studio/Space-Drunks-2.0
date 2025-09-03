@@ -263,10 +263,9 @@ _data = {
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("1_8d0et")
 
-[node name="OffscreenPeekHUD2" type="CanvasLayer" parent="." node_paths=PackedStringArray("player1", "player2", "main_cam")]
+[node name="OffscreenPeekHUD2" type="CanvasLayer" parent="." node_paths=PackedStringArray("player2", "main_cam")]
 layer = 3
 script = ExtResource("32_thxnh")
-player1 = NodePath("../Player_1")
 player2 = NodePath("../Player_2")
 main_cam = NodePath("../Camera2D")
 
@@ -344,7 +343,7 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-87, 4)
-scale = Vector2(1.436, 0.636275)
+scale = Vector2(1.457, 0.636275)
 texture = ExtResource("5_gf2tg")
 centered = false
 
@@ -453,9 +452,6 @@ texture = ExtResource("6_gf2tg")
 position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
-
-[node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
-position = Vector2(328, 277)
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
 position = Vector2(305, 417)
@@ -574,7 +570,8 @@ offset_right = 1245.0
 offset_bottom = 93.0
 rotation = -0.00284467
 scale = Vector2(0.122, 0.612)
-value = 100.0
+max_value = 200.0
+value = 200.0
 texture_under = ExtResource("15_dcn6k")
 texture_progress = ExtResource("16_8sajs")
 metadata/_edit_use_anchors_ = true
@@ -665,15 +662,6 @@ text = "SPACE CHICKEN'S TIME"
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("35_8sajs")]
 spawn_seconds = 20.0
 
-[node name="enemie_2" parent="CanvasLayer" instance=ExtResource("30_qejn6")]
-position = Vector2(781, 490)
-
-[node name="enemie_3" parent="CanvasLayer" instance=ExtResource("30_qejn6")]
-position = Vector2(698, 370)
-
-[node name="enemie_4" parent="CanvasLayer" instance=ExtResource("30_qejn6")]
-position = Vector2(588, 512)
-
 [node name="Pausa" parent="." instance=ExtResource("30_8yf3i")]
 
 [node name="starts_audio" type="AudioStreamPlayer2D" parent="."]
@@ -704,10 +692,10 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("31_jqqi2")
 
 [node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
-offset_left = -12.0
-offset_top = -2.0
-offset_right = 1141.0
-offset_bottom = 644.0
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 1151.0
+offset_bottom = 639.0
 mouse_filter = 2
 
 [node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
@@ -723,5 +711,11 @@ libraries = {
 }
 
 [node name="spawn_chicken" parent="." instance=ExtResource("37_lmfx7")]
+
+[node name="enemie_2" parent="." instance=ExtResource("30_qejn6")]
+position = Vector2(649, 290)
+
+[node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
+position = Vector2(182, 282)
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]
