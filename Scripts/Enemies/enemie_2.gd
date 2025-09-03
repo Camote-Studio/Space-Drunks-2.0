@@ -1,8 +1,6 @@
 extends CharacterBody2D
-
 signal damage(value: float)
 signal died
-
 var speed := 150.0
 var player: CharacterBody2D = null
 @onready var label: Label = $Label
@@ -11,7 +9,7 @@ var player: CharacterBody2D = null
 @onready var sfx_hit: AudioStreamPlayer2D = $hit
 @onready var explosion_timer: Timer = $explosion_timer
 @onready var punch_timer: Timer = $Punch_timer
-@onready var sprite_2d: AnimatedSprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D  # AnimatedSprite2D
 
 var min_range := 70.0
 var max_range := 140.0
@@ -92,20 +90,29 @@ func _ready() -> void:
 	add_child(_shock_timer)
 	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
 		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
+
+	# Iniciar con Idle
+	if sprite_2d and sprite_2d.sprite_frames.has_animation("Idle"):
+		sprite_2d.play("Idle")
+
 func _physics_process(delta: float) -> void:
 	_update_target()
 	if dead or player == null:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
+
 	var to_player := player.global_position - global_position
 	var dist := to_player.length()
 	var dir := to_player.normalized()
 	var tangent := Vector2(-dir.y, dir.x)
+
 	walk_phase += delta
 	var calm = clamp((dist - calm_end) / max(1.0, calm_start - calm_end), 0.12, 1.0)
+
 	var offset = tangent * (sin(walk_phase * TAU * walk_freq + walk_seed) * side_amp * calm)
 	offset += Vector2(0, 1) * (sin(walk_phase * TAU * up_freq + walk_seed * 0.73) * up_amp * calm)
+
 	var target_vel := Vector2.ZERO
 	if _attack_lock:
 		target_vel = Vector2.ZERO
@@ -118,12 +125,19 @@ func _physics_process(delta: float) -> void:
 			target_vel = dir * (speed * 0.35) + offset * 0.6
 		if target_vel.length() > speed:
 			target_vel = target_vel.normalized() * speed
+
 	velocity = velocity.move_toward(target_vel, accel * delta)
 	rotation = 0.0
-	sprite_2d.flip_h = dir.x < 0.0
+	
+	# 👀 Corrección aquí:
+	sprite_2d.flip_h = dir.x > 0.0
+
 	move_and_slide()
+
 	if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead:
 		_do_punch(dir)
+
+
 func _drop_coin():
 	var coin_instance = MONEDA.instantiate()
 	get_parent().add_child(coin_instance)
@@ -162,30 +176,31 @@ func _do_punch(dir: Vector2) -> void:
 			sfx_hit.pitch_scale = pitch_variations[rng.randi_range(0, pitch_variations.size() - 1)]
 			sfx_hit.play()
 			
-#Bloquear movimiento durante golpe
 	_attack_lock = true
 	if _tween and _tween.is_running():
 		_tween.kill()
 		
-# Lanzar animación de golpe
+	# Animación de golpe
 	if sprite_2d and sprite_2d.sprite_frames.has_animation("golpe"):
 		sprite_2d.play("golpe")
 		
-#Movimiento de embestida
+	# Movimiento de embestida
 	var start := global_position
 	var end := start + dir * lunge_dist
 	_tween = create_tween()
 	_tween.tween_property(self, "global_position", end, lunge_time)
 	_tween.tween_property(self, "global_position", start, lunge_time)
 
-#Cooldown del ataque
+	# Cooldown del ataque
 	punch_timer.start(punch_cooldown)
 
 func _on_punch_timer_timeout() -> void:
 	_attack_lock = false
+	# volver a Idle si no está muerto
+	if not dead and sprite_2d and sprite_2d.sprite_frames.has_animation("Idle"):
+		sprite_2d.play("Idle")
 
 func _on_damage(amount: float) -> void:
-
 	if bar_4:
 		bar_4.value = clamp(bar_4.value - amount, bar_4.min_value, bar_4.max_value)
 	_stack_value += amount
@@ -237,12 +252,12 @@ func _die() -> void:
 	else:
 		explosion_timer.start(0.3)
 
-
 func _on_sprite_2d_animation_finished() -> void:
-	
-	# Si terminó el golpe, desbloquea ataque
 	if sprite_2d.animation == "golpe":
 		_attack_lock = false
+		# regresar a Idle
+		if not dead and sprite_2d.sprite_frames.has_animation("Idle"):
+			sprite_2d.play("Idle")
 		return
 		
 	if sprite_2d.animation == "explosion":
@@ -259,16 +274,15 @@ func _on_sprite_2d_animation_finished() -> void:
 func _on_explosion_timer_timeout() -> void:
 	if not reported_dead:
 		reported_dead = true
-		
 		emit_signal("died")
 	queue_free()
+
 func _update_target() -> void:
 	var players := []
 	players += get_tree().get_nodes_in_group("player")
 	players += get_tree().get_nodes_in_group("player_2")
 	var nearest: CharacterBody2D = null
 	var nearest_dist := INF
-
 	for p in players:
 		if p and p is Node2D:
 			var dist = global_position.distance_to(p.global_position)
@@ -280,19 +294,14 @@ func _update_target() -> void:
 func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 	if dead:
 		return
-
 	if duration <= 0.0:
 		duration = shock_duration
 	if factor <= 0.0:
 		factor = shock_factor
-
-	# Si no estaba en shock, guarda la base y aplica el slow.
 	if not _is_shocked:
 		_base_speed = speed
 		_is_shocked = true
-	# Si ya estaba en shock y llega otro, asegura el mínimo (no sube).
 	speed = min(speed, _base_speed * factor)
-	
 	_shock_timer.start(duration)
 	
 func _end_electroshock() -> void:
