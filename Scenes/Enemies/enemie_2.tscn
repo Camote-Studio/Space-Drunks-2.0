@@ -1,61 +1,22 @@
-[gd_scene load_steps=16 format=3 uid="uid://ct0hclkx0o8kc"]
+[gd_scene load_steps=21 format=3 uid="uid://ct0hclkx0o8kc"]
 
 [ext_resource type="Script" uid="uid://mekrbrac0ty5" path="res://Scripts/Enemies/enemie_2.gd" id="1_1vcbv"]
-[ext_resource type="Texture2D" uid="uid://c4pmu8cmx5lvb" path="res://Assets/art/sprites/Enemigos/DukaLIEN_1.png" id="1_4gxqd"]
-[ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Assets/art/sprites/Particulas/explosion_1.png" id="3_tv63o"]
-[ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Assets/art/sprites/Particulas/explosion_2.png" id="4_17ykr"]
-[ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Assets/art/sprites/Particulas/explosion_3.png" id="5_8tilq"]
-[ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Assets/art/sprites/Particulas/explosion_4.png" id="6_sps58"]
-[ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="7_feexy"]
-[ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="8_1j27o"]
 [ext_resource type="AudioStream" uid="uid://cmp0uxkr0orbl" path="res://Assets/sfx/506326__thevoicesgames__retro-explosion-1.wav" id="9_17ykr"]
-[ext_resource type="Texture2D" uid="uid://cxcsmygakiexq" path="res://Assets/art/sprites/Enemigos/g00.png" id="10_1x811"]
-[ext_resource type="Texture2D" uid="uid://cesmi8kjtj4c5" path="res://Assets/art/sprites/Enemigos/g01.png" id="11_vd1nh"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ajxft"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_4gxqd")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_tv63o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_17ykr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_8tilq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_sps58")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_feexy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_1j27o")
-}],
-"loop": true,
-"name": &"explosion",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_1x811")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_vd1nh")
-}],
-"loop": true,
-"name": &"golpe",
-"speed": 5.0
-}]
+[ext_resource type="Texture2D" uid="uid://xy07fhawgyea" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 00.png" id="12_ydtb8"]
+[ext_resource type="Texture2D" uid="uid://bcq5fjlrfqens" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 01.png" id="13_dslmc"]
+[ext_resource type="Texture2D" uid="uid://dlcgljy53wdfi" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 02.png" id="14_t6px6"]
+[ext_resource type="Texture2D" uid="uid://cdvivhlspbic0" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 03.png" id="15_k1txo"]
+[ext_resource type="Texture2D" uid="uid://cfri5nehve6yh" path="res://Assets/art/sprites/Enemigos/DukaLIEN_1_g0.png" id="16_tdqnl"]
+[ext_resource type="Texture2D" uid="uid://dneuh2s2n4hub" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 04.png" id="16_xfg08"]
+[ext_resource type="Texture2D" uid="uid://3mcvlhfsf62k" path="res://Assets/art/sprites/Enemigos/DukaLIEN_1_g1.png" id="17_78rhx"]
+[ext_resource type="Texture2D" uid="uid://brwap34ykjkew" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 05.png" id="17_aqajp"]
+[ext_resource type="Texture2D" uid="uid://dlvccr2mixsh6" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 06.png" id="18_isfjh"]
+[ext_resource type="Texture2D" uid="uid://cv2v3jx68l15e" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 07.png" id="19_wy3h6"]
+[ext_resource type="Texture2D" uid="uid://d0xog5e56vxis" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 08.png" id="20_atpl1"]
+[ext_resource type="Texture2D" uid="uid://c0aktrmmjqckh" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 09.png" id="21_ecxbv"]
+[ext_resource type="Texture2D" uid="uid://tek7ixsrqn7j" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 10.png" id="22_xybmp"]
+[ext_resource type="Texture2D" uid="uid://lt6gdh5cb1a3" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 11.png" id="23_dv5c7"]
+[ext_resource type="Texture2D" uid="uid://bwaduncm7wrsp" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 12.png" id="24_l3co5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vcbv"]
 radius = 15.0
@@ -68,18 +29,54 @@ radius = 25.02
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4gxqd")
+"texture": ExtResource("12_ydtb8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_dslmc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_t6px6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_k1txo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xfg08")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_aqajp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_isfjh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_wy3h6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_atpl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ecxbv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_xybmp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_dv5c7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_l3co5")
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_1x811")
+"texture": ExtResource("16_tdqnl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_vd1nh")
+"texture": ExtResource("17_78rhx")
 }],
 "loop": true,
 "name": &"golpe",
@@ -88,11 +85,6 @@ animations = [{
 
 [node name="enemie_2" type="CharacterBody2D" groups=["enemy_2"]]
 script = ExtResource("1_1vcbv")
-
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_ajxft")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
@@ -132,15 +124,16 @@ volume_db = 10.0
 [node name="Punch_timer" type="Timer" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(-7, 1)
-scale = Vector2(0.413564, 0.394495)
+position = Vector2(2, 4)
+scale = Vector2(0.319703, 0.288991)
 sprite_frames = SubResource("SpriteFrames_ul8mi")
-animation = &"Idle"
+animation = &"golpe"
+frame_progress = 0.671955
+flip_h = true
 
-[connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="explosion_timer" to="." method="_on_explosion_timer_timeout"]
 [connection signal="timeout" from="Punch_timer" to="." method="_on_punch_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

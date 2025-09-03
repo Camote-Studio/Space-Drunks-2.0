@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxcsmygakiexq"
-path="res://.godot/imported/g00.png-ee848a6fa0f231f69e18b57e82c7dc26.ctex"
+uid="uid://xy07fhawgyea"
+path="res://.godot/imported/DukaLIEN_1 00.png-986e31d6aec7f68b051a4562817731de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/sprites/Enemigos/g00.png"
-dest_files=["res://.godot/imported/g00.png-ee848a6fa0f231f69e18b57e82c7dc26.ctex"]
+source_file="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 00.png"
+dest_files=["res://.godot/imported/DukaLIEN_1 00.png-986e31d6aec7f68b051a4562817731de.ctex"]
 
 [params]
 
