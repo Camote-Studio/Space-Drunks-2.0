@@ -23,7 +23,7 @@ radius = 15.0
 height = 44.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_htokm"]
-radius = 25.02
+radius = 28.0179
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ul8mi"]
 animations = [{
@@ -124,8 +124,8 @@ volume_db = 10.0
 [node name="Punch_timer" type="Timer" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, 4)
-scale = Vector2(0.319703, 0.288991)
+position = Vector2(-2, 3)
+scale = Vector2(0.45663, 0.461583)
 sprite_frames = SubResource("SpriteFrames_ul8mi")
 animation = &"golpe"
 frame_progress = 0.671955

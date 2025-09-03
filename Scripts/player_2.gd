@@ -55,6 +55,10 @@ var _sword_active := false
 var _sword_timer: Timer
 
 func _ready() -> void:
+	var alabarda = $alabarda
+	var hitbox = alabarda.get_node("Hitbox")
+	hitbox.monitoring = false  # 🔹 aseguramos que arranque desactivado
+
 	coins = GameState.get_coins(player_id)
 	GameState.set_coins(player_id, coins)
 	if coin_label: # solo si existe el nodo
@@ -63,7 +67,7 @@ func _ready() -> void:
 		push_error("⚠️ No se encontró el nodo Label de monedas en el árbol de nodos.")
 	if bar_ability_2:
 		bar_ability_2.min_value = 0
-		bar_ability_2.max_value = 100
+		bar_ability_2.max_value = 150
 		bar_ability_2.value = bar_ability_2.min_value
 	_base_left  = punch_left.position
 	_base_right = punch_right.position
