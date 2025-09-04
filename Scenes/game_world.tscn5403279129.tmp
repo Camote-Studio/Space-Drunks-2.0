@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dkt37yghdsm2q"]
+[gd_scene load_steps=55 format=3 uid="uid://dkt37yghdsm2q"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -38,6 +38,8 @@
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="33_8d0et"]
 [ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="35_8sajs"]
 [ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
+[ext_resource type="PackedScene" uid="uid://cndlmb7t1kdda" path="res://Scenes/gun_360.tscn" id="39_5eo7h"]
+[ext_resource type="PackedScene" uid="uid://dfc7gwinjocqd" path="res://Scenes/electro_gun.tscn" id="40_6kdy0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lmfx7"]
 shader = ExtResource("33_8d0et")
@@ -716,5 +718,10 @@ position = Vector2(649, 290)
 
 [node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
 position = Vector2(182, 282)
+player_id = "player1"
+gun_360_scene = ExtResource("39_5eo7h")
+electro_gun_scene = ExtResource("40_6kdy0")
+electro_duration_min = 15.0
+electro_duration_max = 20.0
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]

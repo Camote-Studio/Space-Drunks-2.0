@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=48 format=3 uid="uid://82ef3cmon8x5"]
 
 [ext_resource type="Script" uid="uid://dtj8n72t1er10" path="res://Scripts/Level2/Level1F2.gd" id="1_8fs40"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
@@ -31,6 +31,7 @@
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="26_6ftvt"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="26_lsce1"]
 [ext_resource type="Texture2D" uid="uid://cmg5786amr7vb" path="res://Assets/art/background/mesa_2.png" id="28_6ftvt"]
+[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="28_d5vqw"]
 [ext_resource type="Texture2D" uid="uid://c2wggx3w4wwt" path="res://Assets/art/background/BG2_TUBO.png" id="29_8fs40"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="31_jrhcu"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="34_d5vqw"]
@@ -501,6 +502,9 @@ offset_top = 450.0
 offset_right = 140.025
 offset_bottom = 564.0
 metadata/_edit_use_anchors_ = true
+
+[node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("28_d5vqw")]
+spawn_seconds = 20.0
 
 [node name="enemy_spawn_4" parent="." instance=ExtResource("22_gdlfp")]
 
