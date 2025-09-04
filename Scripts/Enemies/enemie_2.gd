@@ -266,13 +266,15 @@ func _on_sprite_2d_animation_finished() -> void:
 		if _is_shocked:
 			_end_electroshock() 
 		if not reported_dead:
-			reported_dead = true
-			_drop_coin()
+			_drop_coin()              # 💰 primero soltar moneda
+			reported_dead = true      # luego marcar muerte reportada
 			emit_signal("died")
 		queue_free()
 
+
 func _on_explosion_timer_timeout() -> void:
 	if not reported_dead:
+		_drop_coin()                 # 💰 soltar moneda también aquí
 		reported_dead = true
 		emit_signal("died")
 	queue_free()
