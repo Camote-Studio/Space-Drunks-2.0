@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=40 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
@@ -27,6 +27,7 @@
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="21_r84mv"]
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
+[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="22_v4p21"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
@@ -401,6 +402,9 @@ offset_bottom = 23.696
 theme_override_fonts/font = ExtResource("21_r84mv")
 theme_override_font_sizes/font_size = 33
 text = "0"
+
+[node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("22_v4p21")]
+spawn_seconds = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara", "main_camera"]]
 position = Vector2(576, 303)
