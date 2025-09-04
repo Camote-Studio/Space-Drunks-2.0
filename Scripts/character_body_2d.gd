@@ -2,6 +2,7 @@ extends CharacterBody2D # player 1
 
 signal damage(amount: float, source: String)
 signal muerte
+@onready var shop: Control = $"../CanvasLayer/UI_abilities"
 
 var coins: int = 0
 @export var player_id: String = "player1" # Identificador único
@@ -25,7 +26,6 @@ var _electro_active := false
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_1: ProgressBar = $"../CanvasLayer/ProgressBar_ability_1"
-@onready var shop: Control = $"../CanvasLayer/UI_abilities"
 @onready var coin_label: Label = $"../CanvasLayer/cont monedas"
 
 var has_chicken_pony := false
@@ -108,7 +108,6 @@ func _physics_process(delta: float) -> void:
 			if abs(direction.x) > abs(direction.y):
 				animated_sprite.flip_h = direction.x < 0
 
-			# 🔊 sonido aturdido mientras dure
 			if not sonido_aturdido.playing:
 				sonido_aturdido.play()
 
@@ -122,19 +121,16 @@ func _physics_process(delta: float) -> void:
 				elif direction.y < 0:
 					animated_sprite.play("caminar_subir")
 
-			# 🔇 detener sonido aturdido
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()
 
 	velocity = direction * speed
 
 	if not floating:
-		# 🔇 detener sonido flotando
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
 		move_and_slide()
 	else:
-		# 🔊 activar sonido flotando
 		if not sonido_flotando.playing:
 			sonido_flotando.play()
 		_handle_floating(delta)
@@ -204,7 +200,7 @@ func _handle_floating(delta: float) -> void:
 		set_collision_mask(1)
 
 # ======================
-# CARGA DE HABILIDAD (por atacar)
+# CARGA DE HABILIDAD
 # ======================
 func gain_ability_from_attack(damage_dealt: float) -> void:
 	if dead or bar_ability_1 == null: return
@@ -213,24 +209,42 @@ func gain_ability_from_attack(damage_dealt: float) -> void:
 	if bar_ability_1.value >= bar_ability_1.max_value:
 		_power()
 
+func gain_ability_from_shot() -> void:
+	if dead or bar_ability_1 == null: return
+	var shots_required := 10.0
+	var gain := (bar_ability_1.max_value - bar_ability_1.min_value) / shots_required
+	bar_ability_1.value = clamp(bar_ability_1.value + gain, bar_ability_1.min_value, bar_ability_1.max_value)
+	if bar_ability_1.value >= bar_ability_1.max_value:
+		_power()
+
 # ======================
 # PODER
 # ======================
 func _power() -> void:
-	if dead or next_shot_powered: return
+	if dead or next_shot_powered: 
+		return
 	if bar_ability_1 and bar_ability_1.value >= bar_ability_1.max_value:
 		next_shot_powered = true
-		bar_ability_1.value = bar_ability_1.min_value
+		bar_ability_1.value = bar_ability_1.min_value  # reinicia barra aquí
+
+
 
 func apply_power_to_bullet(bullet: Node) -> void:
-	if not next_shot_powered: return
+	if not next_shot_powered: 
+		return
+
+	# Escala y daño extra
 	if bullet is Node2D:
 		bullet.scale *= power_bullet_scale
 	if "damage" in bullet:
 		bullet.damage += power_bullet_extra_damage
 	elif bullet.has_method("set_damage"):
 		bullet.call("set_damage", power_bullet_extra_damage)
+
+	# ✅ Consumimos el poder
 	next_shot_powered = false
+
+
 
 # ======================
 # MUERTE
@@ -284,6 +298,12 @@ func collect_coin(amount: int = 1) -> void:
 	if coin_label:
 		coin_label.text = str(coins)
 	GameState.set_coins(player_id, coins)
+	if coins >= 20:
+		_show_shop()
+		coins = 0
+		if coin_label:
+			coin_label.text = str(coins)
+			GameState.set_coins(player_id, coins)
 
 # ======================
 # ARMAS ESPECIALES
@@ -349,3 +369,8 @@ func _set_gun_active(g: Node, active: bool) -> void:
 	g.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
 	if "visible" in g:
 		g.visible = active
+func _show_shop() -> void:
+	if shop:
+		shop.open_for(self)  # llama a la función del UI_abilities
+	else:
+		push_warning("[P1] No encontré la tienda (UI_abilities)")

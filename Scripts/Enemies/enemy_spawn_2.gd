@@ -12,9 +12,9 @@ const ENEMY2 = preload("res://Scenes/enemie_4.tscn")   # enemigo alternativo
 @export var y_max: float = 482.0
 
 # Configuración de oleadas
-@export var wave_spread: float = 0.2     # retraso aleatorio entre spawns
-@export var concurrent_cap: int = 13     # antes 8 → aumentamos cantidad máxima viva
-@export var spawn_margin: float = 40.0   # píxeles fuera del viewport
+@export var wave_spread: float = 0.3     # retraso aleatorio entre spawns
+@export var concurrent_cap: int = 10    # antes 8 → aumentamos cantidad máxima viva
+@export var spawn_margin: float = 30.0   # píxeles fuera del viewport
 
 # Posiciones de fases
 @export var phase_positions: Array = [1300.0, 2999.0, 5132.0]

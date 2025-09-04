@@ -22,11 +22,11 @@ func random_pitch_variations_gun():
 
 func _process(delta: float) -> void:
 	var player = get_parent()  # referencia al Player
-	var player_sprite_is_flipped = get_parent().get_node("AnimatedSprite2D").flip_h
+	var player_sprite_is_flipped = player.get_node("AnimatedSprite2D").flip_h
 	
 	# **Cambiar posición y rotación en base al flip**
 	$Sprite2D.flip_h = player_sprite_is_flipped
-	position = Vector2(-20, 20) if player_sprite_is_flipped else Vector2(20, 20)
+	position = offset_left if player_sprite_is_flipped else offset_right
 
 	# --- Bloqueo de disparo si el jugador está muerto o sin input ---
 	if player.dead or not player.allow_input:
@@ -46,8 +46,18 @@ func _fire(is_flipped: bool) -> void:
 	# Ajustar rotación de la bala
 	bullet_instance.rotation_degrees = 180 if is_flipped else 0
 
+	# 🚀 APLICAR EL PODER (muy importante)
+	var player = get_parent()
+	if player and player.has_method("apply_power_to_bullet"):
+		player.apply_power_to_bullet(bullet_instance)
+
+	# 🚀 Cargar la barra por disparo
+	if player and player.has_method("gain_ability_from_shot"):
+		player.gain_ability_from_shot()
+
 	can_fire = false
 	timer.start()
+
 
 func _on_timer_timeout() -> void:
 	can_fire = true
