@@ -12,8 +12,7 @@ process_mode = 3
 script = ExtResource("1_hcvwa")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-offset_right = 1152.0
+offset_right = 1232.0
 offset_bottom = 648.0
 texture = ExtResource("2_podca")
 expand_mode = 1

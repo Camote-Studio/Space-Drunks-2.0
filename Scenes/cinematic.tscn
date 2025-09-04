@@ -591,10 +591,10 @@ tracks/43/path = NodePath("DukaLien1:position")
 tracks/43/interp = 1
 tracks/43/loop_wrap = true
 tracks/43/keys = {
-"times": PackedFloat32Array(-0.866665, 41.8448, 44.3224, 47.5624, 50),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(-0.866665, 0, 41.8448, 44.3224, 47.5624, 50),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1201, 502), Vector2(1201, 502), Vector2(1119, 571), Vector2(958, 600), Vector2(819, 584)]
+"values": [Vector2(1201, 502), Vector2(1323, 502), Vector2(1201, 502), Vector2(1119, 571), Vector2(958, 600), Vector2(819, 584)]
 }
 tracks/44/type = "value"
 tracks/44/imported = false
@@ -603,10 +603,10 @@ tracks/44/path = NodePath("DukaLien2:position")
 tracks/44/interp = 1
 tracks/44/loop_wrap = true
 tracks/44/keys = {
-"times": PackedFloat32Array(-0.400002, 41.8448, 44.3224, 47.6259, 50),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(-0.400002, 0, 41.8448, 44.3224, 47.6259, 50),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1224, 191), Vector2(1224, 191), Vector2(1164, 228), Vector2(1051, 266), Vector2(861, 323)]
+"values": [Vector2(1224, 191), Vector2(1351, 191), Vector2(1224, 191), Vector2(1164, 228), Vector2(1051, 266), Vector2(861, 323)]
 }
 
 [sub_resource type="Animation" id="Animation_6hyfp"]
