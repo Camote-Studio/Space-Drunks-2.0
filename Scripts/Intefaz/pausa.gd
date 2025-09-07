@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func _ready() -> void:
-	$Volver.grab_focus()
+	#$Volver.grab_focus()
 	
 	# Conectar señales del botón
 	$Volver.connect("focus_entered", Callable(self, "_on_volver_focus_entered"))
