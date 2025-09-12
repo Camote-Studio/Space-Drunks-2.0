@@ -1,9 +1,7 @@
 extends CanvasLayer
-
 @export var player1: CharacterBody2D
 @export var player2: CharacterBody2D
 @export var main_cam: Camera2D
-
 # UI y cámaras del peek 1
 @onready var peek1: Control = $Peek1
 @onready var circle1: TextureRect = $Peek1/Circle

@@ -4,6 +4,18 @@ signal damage(amount: float, source: String)
 signal muerte
 @onready var shop: Control = $"../CanvasLayer/UI_abilities"
 
+
+# --- SALTO / GRAVEDAD (pseudo-3D) ---
+var z := 0.0                  # altura actual sobre el piso
+var z_velocity := 0.0         # velocidad vertical
+@export var gravity_z := 2000.0
+@export var jump_power := 600.0
+@export var max_fall_speed := 2000.0
+var on_floor := true           # si estamos en el suelo (z = 0)
+
+
+
+
 var coins: int = 0
 @export var player_id: String = "player1" # Identificador único
 
@@ -93,6 +105,25 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector2.ZERO
 	if allow_input:
 		direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
+	if allow_input and Input.is_action_just_pressed("jump") and on_floor:
+		print("salto")
+		z_velocity = jump_power   # positivo hacia arriba
+		on_floor = false
+
+	if not on_floor:
+		z_velocity -= gravity_z * delta   # la gravedad lo va empujando hacia abajo
+		if z_velocity < -max_fall_speed:  # 👈 ojo, aquí debe ser "<"
+			z_velocity = -max_fall_speed
+
+	z += z_velocity * delta
+
+	if z < 0:   # toca el suelo
+		z = 0
+		z_velocity = 0
+		on_floor = true
+
+	animated_sprite.position.y = -z
+	gun_node.position.y = -z
 
 	match estado_actual:
 		Estado.VENENO:
