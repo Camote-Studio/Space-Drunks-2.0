@@ -24,7 +24,7 @@ var _revert_timer: Timer
 var _electro_active := false
 
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 @onready var bar_ability_1: ProgressBar = $"../CanvasLayer/ProgressBar_ability_1"
 @onready var coin_label: Label = $"../CanvasLayer/cont monedas"
 
@@ -50,9 +50,17 @@ var dead := false
 var allow_input := true
 
 # ====== Poder de disparo potenciado ======
-var next_shot_powered := false # se activa cuando la barra se llena
-var power_bullet_scale := 1.8 # escala visual del próximo disparo
-var power_bullet_extra_damage := 20.0 # daño extra del próximo disparo
+var next_shot_powered := false
+var power_bullet_scale := 1.8
+var power_bullet_extra_damage := 20.0
+@onready var visuals: Node2D = $Visuals
+
+# ====== Variables de salto ======
+@export var jump_force: float = 280.0
+@export var gravity: float = 600.0
+var z: float = 0.0
+var z_velocity: float = 0.0
+var is_jumping: bool = false
 
 func _ready() -> void:
 	coins = GameState.get_coins(player_id)
@@ -126,6 +134,12 @@ func _physics_process(delta: float) -> void:
 
 	velocity = direction * speed
 
+	# Input de salto
+	if allow_input and not is_jumping and Input.is_action_just_pressed("jump") and not floating:
+		z_velocity = jump_force
+		is_jumping = true
+
+	# Movimiento normal o flotante
 	if not floating:
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
@@ -135,6 +149,31 @@ func _physics_process(delta: float) -> void:
 			sonido_flotando.play()
 		_handle_floating(delta)
 
+	# ====== Física del salto ======
+# ====== Física del salto ======
+# ====== Física del salto ======
+# ====== Física del salto ======
+	if is_jumping:
+		z_velocity -= gravity * delta
+		z += z_velocity * delta
+
+		if z <= 0.0:
+			z = 0.0
+			z_velocity = 0.0
+			is_jumping = false
+
+		# Elevar todo lo visual (sprite + pistola)
+		visuals.position.y = -z
+	else:
+		# Reset al estar en el suelo
+		visuals.position.y = 0
+
+
+
+
+# ======================
+# DAÑO
+# ======================
 func _on_damage(amount: float, source: String = "desconocido") -> void:
 	if dead: return
 
@@ -166,6 +205,9 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
 		emit_signal("damage", 20.0, "bala")
 
+# ======================
+# FLOTAR
+# ======================
 func _handle_floating(delta: float) -> void:
 	var target_y
 	var current_lerp_speed
@@ -225,15 +267,12 @@ func _power() -> void:
 		return
 	if bar_ability_1 and bar_ability_1.value >= bar_ability_1.max_value:
 		next_shot_powered = true
-		bar_ability_1.value = bar_ability_1.min_value  # reinicia barra aquí
-
-
+		bar_ability_1.value = bar_ability_1.min_value
 
 func apply_power_to_bullet(bullet: Node) -> void:
 	if not next_shot_powered: 
 		return
 
-	# Escala y daño extra
 	if bullet is Node2D:
 		bullet.scale *= power_bullet_scale
 	if "damage" in bullet:
@@ -241,10 +280,7 @@ func apply_power_to_bullet(bullet: Node) -> void:
 	elif bullet.has_method("set_damage"):
 		bullet.call("set_damage", power_bullet_extra_damage)
 
-	# ✅ Consumimos el poder
 	next_shot_powered = false
-
-
 
 # ======================
 # MUERTE
@@ -293,6 +329,9 @@ func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
 		estado_actual = Estado.NORMAL
 
+# ======================
+# MONEDAS
+# ======================
 func collect_coin(amount: int = 1) -> void:
 	coins += amount
 	if coin_label:
@@ -369,8 +408,9 @@ func _set_gun_active(g: Node, active: bool) -> void:
 	g.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
 	if "visible" in g:
 		g.visible = active
+
 func _show_shop() -> void:
 	if shop:
-		shop.open_for(self)  # llama a la función del UI_abilities
+		shop.open_for(self)
 	else:
 		push_warning("[P1] No encontré la tienda (UI_abilities)")
