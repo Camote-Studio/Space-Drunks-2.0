@@ -1,63 +1,86 @@
 extends Node2D
 
 @export var bullet_scene: PackedScene = preload("res://Scenes/bullet.tscn")
-
-var can_fire := true
 @export var cooldown: float = 0.5
+var can_fire := true
+
 @onready var timer: Timer = $Timer
 var pitch_variations_gun = [0.8, 1.0, 1.5]
 
-# Offset para cuando apunta a la derecha e izquierda
-@export var offset_right := Vector2(20, 20)
-@export var offset_left := Vector2(-20, 20)
+# Offset del gun respecto al jugador
+@export var offset_right := Vector2(10, 15)
+@export var offset_left := Vector2(-10, 15)
+
+# Referencias
+var player: Node2D
+var player_sprite: AnimatedSprite2D
+var visuals_node: Node2D
+var base_position: Vector2
 
 func _ready() -> void:
 	timer.one_shot = true
 	timer.wait_time = cooldown
+	if not timer.is_connected("timeout", Callable(self, "_on_timer_timeout")):
+		timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 
-func random_pitch_variations_gun():
-	var random_pitch = pitch_variations_gun[randi() % pitch_variations_gun.size()]
-	$lasergun.pitch_scale = random_pitch
-	$lasergun.play()
+	player = get_parent()
+	if player:
+		if player.has_node("Visuals/AnimatedSprite2D"):
+			visuals_node = player.get_node("Visuals")
+			player_sprite = visuals_node.get_node("AnimatedSprite2D")
+		elif player.has_node("AnimatedSprite2D"):
+			player_sprite = player.get_node("AnimatedSprite2D")
+
+	base_position = position
 
 func _process(delta: float) -> void:
-	var player = get_parent()  # referencia al Player
-	var player_sprite_is_flipped = player.get_node("AnimatedSprite2D").flip_h
-	
-	# **Cambiar posición y rotación en base al flip**
-	$Sprite2D.flip_h = player_sprite_is_flipped
-	position = offset_left if player_sprite_is_flipped else offset_right
+	if not player:
+		return
 
-	# --- Bloqueo de disparo si el jugador está muerto o sin input ---
-	if player.dead or not player.allow_input:
+	var flipped := player_sprite and player_sprite.flip_h
+
+	# Actualizar sprite y posición del gun
+	$Sprite2D.flip_h = flipped
+	position.x = base_position.x + (offset_left.x if flipped else offset_right.x)
+	position.y = visuals_node.position.y + (offset_left.y if flipped else offset_right.y) if visuals_node else (offset_left.y if flipped else offset_right.y)
+
+	# Si el jugador no puede disparar
+	if "dead" in player and player.dead:
+		return
+	if "allow_input" in player and not player.allow_input:
 		return
 
 	if Input.is_action_just_pressed("fired") and can_fire:
-		_fire(player_sprite_is_flipped)
+		_fire(flipped)
 
 func _fire(is_flipped: bool) -> void:
-	random_pitch_variations_gun()
+	if has_node("lasergun"):
+		$lasergun.pitch_scale = pitch_variations_gun[randi() % pitch_variations_gun.size()]
+		$lasergun.play()
+
+	# Instanciar bala
 	var bullet_instance = bullet_scene.instantiate()
+	if bullet_instance == null:
+		push_error("❌ bullet_scene no está bien asignado. Revisa la ruta en preload.")
+		return
 
-	# Añadir la bala al mismo nivel que el jugador
-	get_parent().get_parent().add_child(bullet_instance)
+	# Agregarla al árbol ANTES de usar global_position
+	get_tree().current_scene.add_child(bullet_instance)
+
+	# Configurar posición y dirección
 	bullet_instance.global_position = global_position
-	
-	# Ajustar rotación de la bala
-	bullet_instance.rotation_degrees = 180 if is_flipped else 0
+	bullet_instance.direction = Vector2.LEFT if is_flipped else Vector2.RIGHT
+	bullet_instance.rotation = bullet_instance.direction.angle()
 
-	# 🚀 APLICAR EL PODER (muy importante)
-	var player = get_parent()
-	if player and player.has_method("apply_power_to_bullet"):
-		player.apply_power_to_bullet(bullet_instance)
-
-	# 🚀 Cargar la barra por disparo
-	if player and player.has_method("gain_ability_from_shot"):
-		player.gain_ability_from_shot()
+	# Pasar datos extra al player
+	if player:
+		if player.has_method("apply_power_to_bullet"):
+			player.apply_power_to_bullet(bullet_instance)
+		if player.has_method("gain_ability_from_shot"):
+			player.gain_ability_from_shot()
 
 	can_fire = false
 	timer.start()
-
 
 func _on_timer_timeout() -> void:
 	can_fire = true
