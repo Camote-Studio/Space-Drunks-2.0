@@ -1,22 +1,34 @@
 extends Node2D
 
-var SPEED := 200
+@export var SPEED: float = 400.0
+@export var lifetime: float = 5.0
+var direction: Vector2 = Vector2.RIGHT
 
 @onready var player := get_tree().get_first_node_in_group("players")
 @onready var cam := get_tree().get_first_node_in_group("main_camera") as Camera2D
 
+var time_alive := 0.0
+
 func _ready() -> void:
+	# Aplica posibles poderes del jugador a la bala
 	if player and player.has_method("apply_power_to_bullet"):
 		player.apply_power_to_bullet(self)
+	# Conectar la señal de colisión si no está conectada
+	if not is_connected("body_entered", Callable(self, "_on_area_2d_body_entered")):
+		connect("body_entered", Callable(self, "_on_area_2d_body_entered"))
 
 func _process(delta: float) -> void:
-	position += transform.x * SPEED * delta
+	# Mover bala usando global_position → independiente del jugador
+	global_position += direction * SPEED * delta
+	time_alive += delta
 
-	# Revisar si la bala salió de la cámara
+	# Destruir bala si sale de cámara o supera lifetime
 	if cam and not _is_on_screen():
-		queue_free() # destruye la bala si ya no se ve
+		queue_free()
+	elif time_alive >= lifetime:
+		queue_free()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(body: Node) -> void:
 	var did_hit := false
 	var dmg := 0.0
 
@@ -46,11 +58,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			player.gain_ability_from_attack(dmg)
 		queue_free()
 
-
 # Función para revisar si la bala está dentro del viewport de la cámara
 func _is_on_screen() -> bool:
 	if cam == null:
-		return true # si no hay cámara, no destruyas la bala
+		return true
 	var screen_rect := Rect2(
 		cam.global_position - cam.zoom * cam.get_viewport_rect().size * 0.5,
 		cam.zoom * cam.get_viewport_rect().size
