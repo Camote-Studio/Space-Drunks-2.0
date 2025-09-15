@@ -39,7 +39,7 @@ var return_lerp_speed := 3.0
 var dead := false
 var allow_input := true
 
-#--Mecánica de golpes
+# -- Mecánica de golpes
 var _use_left := true
 var _punch_lock := false
 @onready var punch_right: Sprite2D = $Punch_right
@@ -61,6 +61,15 @@ var _sword_active := false
 var _sword_timer: Timer
 
 # ======================
+#       SALTO (pseudo-3D)
+# ======================
+@export var jump_force: float = 220.0    # velocidad inicial (positivo)
+@export var gravity: float = 600.0       # gravedad aplicada (positivo)
+var z: float = 0.0                       # altura actual
+var z_velocity: float = 0.0              # velocidad vertical (positiva = sube)
+var is_jumping: bool = false
+
+# ======================
 #   FUNCIONES BÁSICAS
 # ======================
 func _ready() -> void:
@@ -80,6 +89,7 @@ func _ready() -> void:
 		bar_ability_2.max_value = 150
 		bar_ability_2.value = bar_ability_2.min_value
 
+	# Guardamos las posiciones base de los puños (para restaurar y calcular offsets)
 	_base_left  = punch_left.position
 	_base_right = punch_right.position
 	_use_left = (randi() & 1) == 0
@@ -111,16 +121,16 @@ func _set_facing(sign_dir: int) -> void:
 	# Flip visual del cuerpo
 	animated_sprite.flip_h = (_facing < 0)
 
-	# Flip visual de los puños
+	# Flip visual de los puños (solo flip, posición la actualizaremos cada frame)
 	punch_left.flip_h  = animated_sprite.flip_h
 	punch_right.flip_h = animated_sprite.flip_h
 
-	# Reubica puños a su lado correcto (espejado respecto al origen del jugador)
+	# Reubica puños a su lado correcto (usamos base X multiplicada por _facing; Y la dejamos para el salto)
 	if not _punch_lock:
 		punch_left.position  = Vector2(_base_left.x  * _facing, _base_left.y)
 		punch_right.position = Vector2(_base_right.x * _facing, _base_right.y)
 
-	# 🔹 Asegura que la espada se reancle/flippee con el facing
+	# Re-ancle arma / espada si está activa
 	_update_sword_transform()
 
 func _punch_alternate()-> void:
@@ -191,6 +201,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		return
 
+	# Input y movimiento
 	var direction = Vector2.ZERO
 	if allow_input:
 		direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
@@ -199,10 +210,11 @@ func _physics_process(delta: float) -> void:
 	if abs(direction.x) > 0.01:
 		_set_facing(sign(direction.x))
 
-	# Si hay espada activa, bloquea el golpe de puños con fired_2
+	# Si hay input de puño (fired_2)
 	if Input.is_action_just_pressed("fired_2"):
 		_punch_alternate()
 
+	# Animaciones / estados
 	match estado_actual:
 		Estado.VENENO:
 			if animated_sprite.animation != "envenenado":
@@ -222,23 +234,56 @@ func _physics_process(delta: float) -> void:
 		Estado.NORMAL:
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()
-			if direction == Vector2.ZERO:
+			if direction == Vector2.ZERO and not is_jumping:
 				animated_sprite.play("idle")
 			else:
-				if abs(direction.x) > abs(direction.y):
-					animated_sprite.play("caminar")
-					animated_sprite.flip_h = direction.x < 0
-				elif direction.y < 0:
-					animated_sprite.play("caminar_subir")
-				else:
-					animated_sprite.play("caminar_bajar")
+				if not is_jumping:
+					if abs(direction.x) > abs(direction.y):
+						animated_sprite.play("caminar")
+						animated_sprite.flip_h = direction.x < 0
+					elif direction.y < 0:
+						animated_sprite.play("caminar_subir")
+					else:
+						animated_sprite.play("caminar_bajar")
 
 	velocity = direction * speed
 
+	# ====== SALTO ======
+	# Solo permitir saltar si no estamos flotando y no ya saltando
+	if allow_input and Input.is_action_just_pressed("jump_2") and not is_jumping and not floating:
+		is_jumping = true
+		z_velocity = jump_force
+
+	# Física vertical del salto (pseudo-3D)
+	if is_jumping:
+		# gravity reduce z_velocity para que +vel -> sube, restamos gravity
+		z_velocity -= gravity * delta
+		z += z_velocity * delta
+
+		# Si llegamos o pasamos el suelo
+		if z <= 0.0:
+			z = 0.0
+			z_velocity = 0.0
+			is_jumping = false
+
+	# Movimiento (usa move_and_slide como antes)
 	if not floating:
 		move_and_slide()
 	else:
 		_handle_floating(delta)
+
+	# ====== Aplicar "altura" visual al sprite y a los puños ======
+	# AnimatedSprite se mueve visualmente hacia arriba cuando z > 0
+	animated_sprite.position.y = -z
+
+	# Reposicionamos puños cada frame para que sigan al jugador en X y suban/bajen con z
+	var left_x = _base_left.x * _facing
+	var right_x = _base_right.x * _facing
+	punch_left.position = Vector2(left_x, _base_left.y - z)
+	punch_right.position = Vector2(right_x, _base_right.y - z)
+
+	# Si la espada está activa, moverla también visualmente
+	_update_sword_transform()
 
 # =====================
 #   DAÑO RECIBIDO
@@ -391,7 +436,8 @@ func _revert_sword() -> void:
 func _update_sword_transform() -> void:
 	if not _sword_active or not is_instance_valid(_sword_instance):
 		return
-	var anchor := Vector2(abs(_base_right.x) * _facing, _base_right.y)
+	# Anchor basado en base_right (como tenías antes) y aplicamos offset vertical por salto (z)
+	var anchor := Vector2(abs(_base_right.x) * _facing, _base_right.y - z)
 	_sword_instance.position = anchor
 	_sword_instance.scale.x = abs(_sword_instance.scale.x) * float(_facing)
 
