@@ -871,14 +871,14 @@ volume_db = 20.0
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+texture_filter = 1
 position = Vector2(-1, 5.96046e-08)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
-animation = &"envenenado"
-frame_progress = 0.52476
+animation = &"caminar"
 
 [node name="Gun" parent="Visuals" instance=ExtResource("3_aatkl")]
-position = Vector2(22, 4)
+position = Vector2(-7, 21)
 
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
