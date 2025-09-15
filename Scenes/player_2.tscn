@@ -966,7 +966,7 @@ radius = 120.046
 a = Vector2(-6.08382, 0.201834)
 b = Vector2(4.81887, 8.14064)
 
-[node name="Player_2" type="CharacterBody2D" groups=["player_2"]]
+[node name="Player_2" type="CharacterBody2D" groups=["player_2", "puño_player2"]]
 collision_mask = 3
 script = ExtResource("1_a3adp")
 
