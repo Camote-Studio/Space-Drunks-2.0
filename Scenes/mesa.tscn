@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnkt7wssmcldm"]
+
+[ext_resource type="Script" uid="uid://da1iyj8j4f45r" path="res://Scenes/mesa.gd" id="1_o3usn"]
+[ext_resource type="Texture2D" uid="uid://capb2ldwe3yo7" path="res://Assets/art/background/MESAS1.png" id="2_hc3ql"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3usn"]
+radius = 46.0
+height = 182.0
+
+[node name="Mesa" type="Node2D" groups=["mesa"]]
+script = ExtResource("1_o3usn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.05176e-05, -3)
+scale = Vector2(0.489018, 0.369497)
+texture = ExtResource("2_hc3ql")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+scale = Vector2(1.1, 1.1)
+shape = SubResource("CapsuleShape2D_o3usn")
+debug_color = Color(0.937303, 1.50168e-05, 0.628544, 0.42)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_o3usn")
