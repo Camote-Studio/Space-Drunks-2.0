@@ -13,7 +13,7 @@ var player: CharacterBody2D = null
 
 var min_range := 70.0
 var max_range := 140.0
-var attack_range := 160.0
+var attack_range := 110.0
 var punch_damage := 10.0
 var punch_cooldown := 0.6
 var lunge_dist := 38.0
@@ -105,33 +105,32 @@ func _physics_process(delta: float) -> void:
 	var to_player := player.global_position - global_position
 	var dist := to_player.length()
 	var dir := to_player.normalized()
-	var tangent := Vector2(-dir.y, dir.x)
+	
+	var target_vel := dir *speed
+	#var tangent := Vector2(-dir.y, dir.x)
 
-	walk_phase += delta
-	var calm = clamp((dist - calm_end) / max(1.0, calm_start - calm_end), 0.12, 1.0)
+	#walk_phase += delta
+	#var calm = clamp((dist - calm_end) / max(1.0, calm_start - calm_end), 0.12, 1.0)
 
-	var offset = tangent * (sin(walk_phase * TAU * walk_freq + walk_seed) * side_amp * calm)
-	offset += Vector2(0, 1) * (sin(walk_phase * TAU * up_freq + walk_seed * 0.73) * up_amp * calm)
+	#var offset = tangent * (sin(walk_phase * TAU * walk_freq + walk_seed) * side_amp * calm)
+	#offset += Vector2(0, 1) * (sin(walk_phase * TAU * up_freq + walk_seed * 0.73) * up_amp * calm)
 
-	var target_vel := Vector2.ZERO
+	#var target_vel := Vector2.ZERO
 	if _attack_lock:
-		target_vel = Vector2.ZERO
-	else:
-		if dist > max_range:
-			target_vel = dir * speed + offset
-		elif dist < min_range:
-			target_vel = dir * (speed * 0.15) + offset * 0.25
-		else:
-			target_vel = dir * (speed * 0.35) + offset * 0.6
-		if target_vel.length() > speed:
-			target_vel = target_vel.normalized() * speed
+		target_vel *= 0.7
+	#else:
+		#if dist > max_range:
+			#target_vel = dir * speed + offset
+		#elif dist < min_range:
+			#target_vel = dir * speed * 0.15 + offset 
+		#else:
+			#target_vel = dir * (speed * 0.35) + offset * 0.6
+		#if target_vel.length() > speed:
+			#target_vel = target_vel.normalized() * speed
 
 	velocity = velocity.move_toward(target_vel, accel * delta)
 	rotation = 0.0
-	
-	# 👀 Corrección aquí:
 	sprite_2d.flip_h = dir.x > 0.0
-
 	move_and_slide()
 
 	if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead:

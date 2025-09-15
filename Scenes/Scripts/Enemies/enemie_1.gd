@@ -47,6 +47,10 @@ func random_pitch_variations_gun():
 	$hit.play()
 
 func _ready() -> void:
+	for m in get_tree().get_nodes_in_group("table"):
+		if m is StaticBody2D:
+			add_collision_exception_with(m)
+			m.add_collision_exception_with(self)
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		player = players[0]
@@ -91,21 +95,25 @@ func _physics_process(delta: float) -> void:
 		return
 	var to_player: Vector2 = player.global_position - global_position
 	var dist := to_player.length()
-	look_at(player.global_position)
-	rotation_degrees = wrap(rotation_degrees, 0, 360)
+	var dir := to_player.normalized()
+
+	var desired : = desired_dist
+	var deadzone := 18.0
+	var err := dist - desired
 	var target_vel := Vector2.ZERO
-	if dist > max_range:
-		target_vel = to_player.normalized() * speed
-	elif dist < min_range:
-		target_vel = -to_player.normalized() * speed
-	else:
+	
+	if abs(err) > deadzone:
+		var kp := 4.0
+		var radial_speed = clamp(err*kp, -speed, speed)
+		target_vel = dir * radial_speed
+	else:		
 		var tangent := Vector2(-to_player.y, to_player.x).normalized()
 		wiggle_t += delta
 		var osc := sin(wiggle_t * TAU * wiggle_freq) * wiggle_amp
 		var radial := to_player.normalized() * ((desired_dist - dist) * 4.0)
 		target_vel = tangent * (strafe_speed * orbit_dir + osc) + radial
-		if target_vel.length() > speed:
-			target_vel = target_vel.normalized() * speed
+	if target_vel.length() > speed:
+		target_vel = target_vel.normalized() * speed
 	velocity = velocity.move_toward(target_vel, accel * delta)
 	move_and_slide()
 
