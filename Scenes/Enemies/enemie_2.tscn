@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://ct0hclkx0o8kc"]
 
-[ext_resource type="Script" uid="uid://mekrbrac0ty5" path="res://Scripts/Enemies/enemie_2.gd" id="1_1vcbv"]
+[ext_resource type="Script" uid="uid://mekrbrac0ty5" path="res://Scenes/Scripts/Enemies/enemie_2.gd" id="1_1vcbv"]
 [ext_resource type="AudioStream" uid="uid://cmp0uxkr0orbl" path="res://Assets/sfx/506326__thevoicesgames__retro-explosion-1.wav" id="9_17ykr"]
 [ext_resource type="Texture2D" uid="uid://xy07fhawgyea" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 00.png" id="12_ydtb8"]
 [ext_resource type="Texture2D" uid="uid://bcq5fjlrfqens" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 01.png" id="13_dslmc"]
