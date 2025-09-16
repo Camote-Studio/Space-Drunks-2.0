@@ -88,6 +88,7 @@ _data = {
 
 [node name="Enemie_1" type="CharacterBody2D" groups=["enemy_1"]]
 z_index = 2
+rotation = 0.736588
 script = ExtResource("1_k5ikt")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
