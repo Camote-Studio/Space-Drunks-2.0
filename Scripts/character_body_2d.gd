@@ -122,12 +122,15 @@ func _physics_process(delta: float) -> void:
 		Estado.NORMAL:
 			if direction == Vector2.ZERO:
 				animated_sprite.play("idle")
+				$Visuals/Gun.visible = true
 			else:
 				if abs(direction.x) > abs(direction.y):
 					animated_sprite.play("caminar")
 					animated_sprite.flip_h = direction.x < 0
+					$Visuals/Gun.visible = true
 				elif direction.y < 0:
 					animated_sprite.play("caminar_subir")
+					$Visuals/Gun.visible = false
 
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()

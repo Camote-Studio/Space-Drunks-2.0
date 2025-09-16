@@ -1,0 +1,209 @@
+[gd_scene load_steps=19 format=3 uid="uid://dtmkqgu30b82b"]
+
+[ext_resource type="Texture2D" uid="uid://ccfvct5yvy3y4" path="res://Assets/art/sprites/Enemigos/1.png" id="1_nred1"]
+[ext_resource type="Script" uid="uid://tb0u813x1mym" path="res://Scripts/final_boss_fight.gd" id="1_t1478"]
+[ext_resource type="Texture2D" uid="uid://bma6w4p6xhc1v" path="res://Assets/art/sprites/Enemigos/2.png" id="2_dnds4"]
+[ext_resource type="Texture2D" uid="uid://c48q81hv7dorh" path="res://Assets/art/sprites/Enemigos/3.png" id="3_fa0xl"]
+[ext_resource type="Texture2D" uid="uid://br0a1f6kw8a7e" path="res://Assets/art/sprites/Enemigos/4.png" id="4_wmn2m"]
+[ext_resource type="Texture2D" uid="uid://cnoj1oo4xign5" path="res://Assets/art/sprites/Armas/Proyectiles/54fd5b0a088148e0a8e8ad499e23bcd54DnZJIUG727SY7NB-0-removebg-preview.png" id="5_t1478"]
+[ext_resource type="Script" uid="uid://b112x84qhk76y" path="res://Scripts/finite_state_machine.gd" id="6_fa0xl"]
+[ext_resource type="Script" uid="uid://con8mxbotqtw1" path="res://Scripts/state.gd" id="7_wmn2m"]
+[ext_resource type="Script" uid="uid://d161a6uytt08p" path="res://Scripts/idle.gd" id="8_56mf0"]
+[ext_resource type="Script" uid="uid://nxhaoogtbd4i" path="res://Scripts/follow.gd" id="9_56mf0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_56mf0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nred1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dnds4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fa0xl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wmn2m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nccab"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_t1478")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_t1478")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_t1478")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_kxd3t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5linm"]
+resource_name = "idle"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.466667, 1.06667, 1.66667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_iceyd"]
+resource_name = "laser"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.13333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.16),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cb1bk"]
+_data = {
+&"RESET": SubResource("Animation_kxd3t"),
+&"idle": SubResource("Animation_5linm"),
+&"laser": SubResource("Animation_iceyd")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dbaat"]
+radius = 97.0
+height = 326.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k180g"]
+radius = 617.984
+
+[node name="Final_BossFight" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_t1478")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_56mf0")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Pivot"]
+visible = false
+texture_filter = 1
+position = Vector2(-19, -54)
+scale = Vector2(1.503, 0.643)
+sprite_frames = SubResource("SpriteFrames_nccab")
+offset = Vector2(-118.34, -2)
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cb1bk")
+}
+autoplay = "idle"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+offset_left = 412.0
+offset_top = 556.0
+offset_right = 789.0
+offset_bottom = 609.0
+value = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11, -11)
+shape = SubResource("CapsuleShape2D_dbaat")
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+position = Vector2(19, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("CircleShape2D_k180g")
+
+[node name="FiniteStateMachine" type="Node2D" parent="."]
+script = ExtResource("6_fa0xl")
+
+[node name="Idle" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("8_56mf0")
+
+[node name="Follow" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("9_56mf0")
+
+[node name="Dash" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("7_wmn2m")
+
+[node name="LaserBeam" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("7_wmn2m")
+
+[node name="Death" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("7_wmn2m")
