@@ -1,7 +1,7 @@
 extends CharacterBody2D
 signal damage(value: float)
 signal died
-var speed := 150.0
+var speed := 80.0
 var player: CharacterBody2D = null
 @onready var label: Label = $Label
 @onready var bar_4: ProgressBar = $ProgressBar_enemy_2
@@ -19,7 +19,7 @@ var punch_cooldown := 0.6
 var lunge_dist := 38.0
 var lunge_time := 0.12
 
-var accel := 1200.0
+var accel := 800.0
 var side_amp := 90.0
 var up_amp := 60.0
 var walk_freq := 1.6
