@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dkt37yghdsm2q"]
+[gd_scene load_steps=53 format=3 uid="uid://dkt37yghdsm2q"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -37,6 +37,7 @@
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="33_8d0et"]
 [ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="35_8sajs"]
 [ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
+[ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/enemie_1.tscn" id="38_qejn6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5503, 20)
@@ -288,7 +289,7 @@ scale = Vector2(1.38475, 0.551961)
 texture = ExtResource("5_gf2tg")
 centered = false
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["table"]]
 position = Vector2(414, 139)
 scale = Vector2(0.5, 0.5)
 
@@ -304,7 +305,7 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+[node name="StaticBody2D7" type="StaticBody2D" parent="." groups=["table"]]
 position = Vector2(2382, 206)
 scale = Vector2(0.5, 0.5)
 
@@ -319,7 +320,7 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+[node name="StaticBody2D5" type="StaticBody2D" parent="." groups=["table"]]
 position = Vector2(1006, 203)
 scale = Vector2(0.5, 0.5)
 
@@ -334,7 +335,7 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="StaticBody2D8" type="StaticBody2D" parent="."]
+[node name="StaticBody2D8" type="StaticBody2D" parent="." groups=["table"]]
 position = Vector2(3107, 144)
 scale = Vector2(0.5, 0.5)
 
@@ -349,7 +350,7 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="StaticBody2D9" type="StaticBody2D" parent="."]
+[node name="StaticBody2D9" type="StaticBody2D" parent="." groups=["table"]]
 position = Vector2(3798, 209)
 scale = Vector2(0.5, 0.5)
 
@@ -364,7 +365,7 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="StaticBody2D10" type="StaticBody2D" parent="."]
+[node name="StaticBody2D10" type="StaticBody2D" parent="." groups=["table"]]
 position = Vector2(4622, 115)
 scale = Vector2(0.5, 0.5)
 
@@ -379,7 +380,7 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+[node name="StaticBody2D6" type="StaticBody2D" parent="." groups=["table"]]
 position = Vector2(1701, 165)
 scale = Vector2(0.5, 0.5)
 
@@ -402,7 +403,7 @@ position = Vector2(305, 417)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 3
-position = Vector2(0, 86)
+position = Vector2(0, 87)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2741.5, 124)
@@ -697,5 +698,8 @@ libraries = {
 position = Vector2(576, 303)
 position_smoothing_enabled = true
 script = ExtResource("13_n6wrj")
+
+[node name="Enemie_1" parent="." instance=ExtResource("38_qejn6")]
+position = Vector2(686, 328)
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]

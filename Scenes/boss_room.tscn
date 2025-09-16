@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dva108ycg7xae"]
+
+[ext_resource type="PackedScene" uid="uid://dtmkqgu30b82b" path="res://Scenes/final_boss_fight.tscn" id="1_4kqfc"]
+
+[node name="BossRoom" type="Node2D"]
+
+[node name="Final_BossFight" parent="." instance=ExtResource("1_4kqfc")]
+position = Vector2(562, 308)
