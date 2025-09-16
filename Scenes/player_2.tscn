@@ -1,4 +1,4 @@
-[gd_scene load_steps=232 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=233 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
@@ -218,6 +218,7 @@
 [ext_resource type="Texture2D" uid="uid://b8hwhwq3kb6bc" path="res://Assets/art/sprites/Particulas/EXPLO_4.png" id="173_fcbx1"]
 [ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="174_qixq7"]
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="175_rn5h7"]
+[ext_resource type="Texture2D" uid="uid://dxfomktac6dib" path="res://Assets/art/sprites/Armas/punch_1_flip.png" id="219_4x7fj"]
 [ext_resource type="Texture2D" uid="uid://blex0n2rdxghj" path="res://Assets/art/sprites/Armas/Punch1.png" id="220_58h14"]
 [ext_resource type="Texture2D" uid="uid://bgjxtcher56h1" path="res://Assets/art/sprites/Armas/ALABARDA.png" id="221_dfurs"]
 [ext_resource type="AudioStream" uid="uid://bns3qc8v3jfu4" path="res://Assets/sfx/Retro Birds 07.wav" id="222_4x7fj"]
@@ -1000,7 +1001,7 @@ autoplay = "explosion_death"
 [node name="Punch_left" type="Sprite2D" parent="." groups=["puño_player2"]]
 position = Vector2(-38, -21)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("220_58h14")
+texture = ExtResource("219_4x7fj")
 
 [node name="Area2D" type="Area2D" parent="Punch_left"]
 position = Vector2(6.66667, 0)
