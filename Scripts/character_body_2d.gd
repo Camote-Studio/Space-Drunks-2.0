@@ -4,17 +4,9 @@ signal damage(amount: float, source: String)
 signal muerte
 @onready var shop: Control = $"../CanvasLayer/UI_abilities"
 
-
-# --- SALTO / GRAVEDAD (pseudo-3D) ---
-var z := 0.0                  # altura actual sobre el piso
-var z_velocity := 0.0         # velocidad vertical
-@export var gravity_z := 2000.0
-@export var jump_power := 600.0
-@export var max_fall_speed := 2000.0
-var on_floor := true           # si estamos en el suelo (z = 0)
-
-
-
+# --- GUN / ULTI ---
+@onready var gun = $Gun
+@onready var ulti_timer: Timer = $UltiTimer
 
 var coins: int = 0
 @export var player_id: String = "player1" # Identificador único
@@ -60,6 +52,7 @@ var return_lerp_speed := 3.0
 
 var dead := false
 var allow_input := true
+var is_using_ulti := false
 
 # ====== Poder de disparo potenciado ======
 var next_shot_powered := false
@@ -67,25 +60,29 @@ var power_bullet_scale := 1.8
 var power_bullet_extra_damage := 20.0
 @onready var visuals: Node2D = $Visuals
 
-# ====== Variables de salto ======
-@export var jump_force: float = 280.0
-@export var gravity: float = 600.0
-
-var is_jumping: bool = false
-
 func _ready() -> void:
+	# Configuración de timers
+	if gun:
+		print("✅ Gun detectado:", gun)
+	else:
+		push_error("❌ Gun no está conectado en Player")
+		
+	if ulti_timer:
+		ulti_timer.one_shot = true
+		if not ulti_timer.is_connected("timeout", Callable(self, "_on_ulti_timer_timeout")):
+			ulti_timer.connect("timeout", Callable(self, "_on_ulti_timer_timeout"))
+
 	coins = GameState.get_coins(player_id)
 	GameState.set_coins(player_id, coins)
-
 	if coin_label:
 		coin_label.text = str(coins)
-	else:
-		push_error("⚠️ No se encontró el nodo Label de monedas en el árbol de nodos.")
 
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 
-	animated_sprite.play("idle")
+	# Animación por defecto
+	if animated_sprite:
+		animated_sprite.play("idle")
 
 	if not is_in_group("players"):
 		add_to_group("players")
@@ -110,28 +107,30 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var direction = Vector2.ZERO
+
 	if allow_input:
 		direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
-	if allow_input and Input.is_action_just_pressed("jump") and on_floor:
-		print("salto")
-		z_velocity = jump_power   # positivo hacia arriba
-		on_floor = false
 
-	if not on_floor:
-		z_velocity -= gravity_z * delta   # la gravedad lo va empujando hacia abajo
-		if z_velocity < -max_fall_speed:  # 👈 ojo, aquí debe ser "<"
-			z_velocity = -max_fall_speed
+	if Input.is_action_just_pressed("jump") and not is_using_ulti:
+		_activate_ulti()
 
-	z += z_velocity * delta
+	# --- Animaciones solo si NO estamos en ulti y no muertos ---
+	if not is_using_ulti and not dead:
+		_update_animation(direction)
 
-	if z < 0:   # toca el suelo
-		z = 0
-		z_velocity = 0
-		on_floor = true
+	velocity = direction.normalized() * speed
 
-	animated_sprite.position.y = -z
-	gun_node.position.y = -z
+	if not floating:
+		if sonido_flotando.playing:
+			sonido_flotando.stop()
+		move_and_slide()
+	else:
+		if not sonido_flotando.playing:
+			sonido_flotando.play()
+		_handle_floating(delta)
 
+# ====================== Animaciones
+func _update_animation(direction: Vector2) -> void:
 	match estado_actual:
 		Estado.VENENO:
 			if animated_sprite.animation != "envenenado":
@@ -140,12 +139,11 @@ func _physics_process(delta: float) -> void:
 				animated_sprite.flip_h = direction.x < 0
 
 		Estado.ATURDIDO:
-			direction = -direction
+			var dir = -direction
 			if animated_sprite.animation != "aturdio":
 				animated_sprite.play("aturdio")
-			if abs(direction.x) > abs(direction.y):
-				animated_sprite.flip_h = direction.x < 0
-
+			if abs(dir.x) > abs(dir.y):
+				animated_sprite.flip_h = dir.x < 0
 			if not sonido_aturdido.playing:
 				sonido_aturdido.play()
 
@@ -158,52 +156,10 @@ func _physics_process(delta: float) -> void:
 					animated_sprite.flip_h = direction.x < 0
 				elif direction.y < 0:
 					animated_sprite.play("caminar_subir")
-
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()
 
-	velocity = direction * speed
-
-	# Input de salto
-	if allow_input and not is_jumping and Input.is_action_just_pressed("jump") and not floating:
-		z_velocity = jump_force
-		is_jumping = true
-
-	# Movimiento normal o flotante
-	if not floating:
-		if sonido_flotando.playing:
-			sonido_flotando.stop()
-		move_and_slide()
-	else:
-		if not sonido_flotando.playing:
-			sonido_flotando.play()
-		_handle_floating(delta)
-
-	# ====== Física del salto ======
-# ====== Física del salto ======
-# ====== Física del salto ======
-# ====== Física del salto ======
-	if is_jumping:
-		z_velocity -= gravity * delta
-		z += z_velocity * delta
-
-		if z <= 0.0:
-			z = 0.0
-			z_velocity = 0.0
-			is_jumping = false
-
-		# Elevar todo lo visual (sprite + pistola)
-		visuals.position.y = -z
-	else:
-		# Reset al estar en el suelo
-		visuals.position.y = 0
-
-
-
-
-# ======================
-# DAÑO
-# ======================
+# ====================== Daño
 func _on_damage(amount: float, source: String = "desconocido") -> void:
 	if dead: return
 
@@ -217,15 +173,13 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 		"veneno":
 			if estado_actual == Estado.NORMAL:
 				estado_actual = Estado.VENENO
-				$venenoTimer.start(0.5)
-				animated_sprite.play("envenenado")
-
+				if has_node("venenoTimer"):
+					$venenoTimer.start(0.5)
 		"bala":
 			if estado_actual == Estado.NORMAL:
 				estado_actual = Estado.ATURDIDO
-				$AturdidoTimer.start(2)
-				animated_sprite.play("aturdio")
-
+				if has_node("AturdidoTimer"):
+					$AturdidoTimer.start(2)
 		"bala_gravedad":
 			floating = true
 			invulnerable = true
@@ -235,9 +189,7 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
 		emit_signal("damage", 20.0, "bala")
 
-# ======================
-# FLOTAR
-# ======================
+# ====================== Flotar
 func _handle_floating(delta: float) -> void:
 	var target_y
 	var current_lerp_speed
@@ -271,13 +223,10 @@ func _handle_floating(delta: float) -> void:
 		set_collision_layer(1)
 		set_collision_mask(1)
 
-# ======================
-# CARGA DE HABILIDAD
-# ======================
+# ====================== Poder
 func gain_ability_from_attack(damage_dealt: float) -> void:
 	if dead or bar_ability_1 == null: return
-	var gain = max(0.0, damage_dealt)
-	bar_ability_1.value = clamp(bar_ability_1.value + gain, bar_ability_1.min_value, bar_ability_1.max_value)
+	bar_ability_1.value = clamp(bar_ability_1.value + max(0.0, damage_dealt), bar_ability_1.min_value, bar_ability_1.max_value)
 	if bar_ability_1.value >= bar_ability_1.max_value:
 		_power()
 
@@ -289,9 +238,6 @@ func gain_ability_from_shot() -> void:
 	if bar_ability_1.value >= bar_ability_1.max_value:
 		_power()
 
-# ======================
-# PODER
-# ======================
 func _power() -> void:
 	if dead or next_shot_powered: 
 		return
@@ -312,9 +258,7 @@ func apply_power_to_bullet(bullet: Node) -> void:
 
 	next_shot_powered = false
 
-# ======================
-# MUERTE
-# ======================
+# ====================== Muerte
 func _die() -> void:
 	if _electro_active:
 		_revert_gun_instance()
@@ -338,16 +282,11 @@ func _die() -> void:
 
 	if animated_sprite:
 		animated_sprite.play("death")
-		if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
-			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
+		# NO detener la animación para que quede permanente
 
 	$"../CanvasLayer/Sprite2D".self_modulate = Color(1, 0, 0, 1)
 	$"../CanvasLayer/Characater1Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_kirk.png")
 	emit_signal("muerte")
-
-func _on_death_finished() -> void:
-	if animated_sprite.animation == "death":
-		animated_sprite.playing = false
 
 func _on_aturdido_timer_timeout() -> void:
 	if estado_actual == Estado.ATURDIDO:
@@ -359,9 +298,7 @@ func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
 		estado_actual = Estado.NORMAL
 
-# ======================
-# MONEDAS
-# ======================
+# ====================== Monedas
 func collect_coin(amount: int = 1) -> void:
 	coins += amount
 	if coin_label:
@@ -374,9 +311,7 @@ func collect_coin(amount: int = 1) -> void:
 			coin_label.text = str(coins)
 			GameState.set_coins(player_id, coins)
 
-# ======================
-# ARMAS ESPECIALES
-# ======================
+# ====================== Armas especiales
 func activate_electro_for(seconds: float = -1.0) -> void:
 	if seconds <= 0.0:
 		seconds = randf_range(electro_duration_min, electro_duration_max)
@@ -444,3 +379,36 @@ func _show_shop() -> void:
 		shop.open_for(self)
 	else:
 		push_warning("[P1] No encontré la tienda (UI_abilities)")
+
+# ====================== Ulti
+func _activate_ulti() -> void:
+	print("🔥 Ulti ACTIVADA")
+	is_using_ulti = true
+	allow_input = false
+
+	if gun:
+		gun.set_mode(gun.GunMode.TURRET)
+
+	if has_node("Visuals/AnimatedSprite2D"):
+		var anim_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
+		if anim_sprite.sprite_frames.has_animation("ulti_pose"):
+			anim_sprite.stop()
+			anim_sprite.play("ulti_pose")
+		else:
+			push_warning("Animación 'ulti_pose' no existe en AnimatedSprite2D")
+	if ulti_timer:
+		ulti_timer.start(5.0)
+
+func _on_ulti_timer_timeout() -> void:
+	print("⏱️ Ulti terminó → regresando a normal")
+	is_using_ulti = false
+	allow_input = true
+
+	if gun and gun.has_method("set_mode"):
+		gun.set_mode(gun.GunMode.PISTOL)
+
+	# Regresar a idle solo si no estamos muertos
+	if not dead and has_node("Visuals/AnimatedSprite2D"):
+		var anim_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
+		if anim_sprite.sprite_frames and anim_sprite.sprite_frames.has_animation("idle"):
+			anim_sprite.play("idle")

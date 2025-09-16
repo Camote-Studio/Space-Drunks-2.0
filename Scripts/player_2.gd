@@ -243,8 +243,6 @@ func _physics_process(delta: float) -> void:
 						animated_sprite.flip_h = direction.x < 0
 					elif direction.y < 0:
 						animated_sprite.play("caminar_subir")
-					else:
-						animated_sprite.play("caminar_bajar")
 
 	velocity = direction * speed
 

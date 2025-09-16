@@ -1,4 +1,4 @@
-[gd_scene load_steps=190 format=3 uid="uid://c3egt0yjxsvrn"]
+[gd_scene load_steps=191 format=3 uid="uid://c3egt0yjxsvrn"]
 
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_p0e4v"]
 [ext_resource type="Texture2D" uid="uid://t1sr0p1gcjrw" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 001.png" id="2_qo81y"]
@@ -182,6 +182,7 @@
 [ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="129_1vwi1"]
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="130_8lj6k"]
 [ext_resource type="AudioStream" uid="uid://bns3qc8v3jfu4" path="res://Assets/sfx/Retro Birds 07.wav" id="182_r4lpj"]
+[ext_resource type="Texture2D" uid="uid://d4edlffnyj7py" path="res://Assets/art/sprites/Personajes/militar kirk.png" id="183_e0wwm"]
 [ext_resource type="AudioStream" uid="uid://68jauvq2vtui" path="res://Assets/sfx/Retro Charge Off StereoUP 02.wav" id="183_k774p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
@@ -831,6 +832,14 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("183_e0wwm")
+}],
+"loop": true,
+"name": &"ulti_pose",
+"speed": 5.0
 }]
 
 [node name="Player_1" type="CharacterBody2D" groups=["player"]]
@@ -874,12 +883,14 @@ volume_db = 20.0
 position = Vector2(-1, 5.96046e-08)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
-animation = &"envenenado"
-frame_progress = 0.52476
+animation = &"ulti_pose"
 
-[node name="Gun" parent="Visuals" instance=ExtResource("3_aatkl")]
-position = Vector2(22, 4)
+[node name="UltiTimer" type="Timer" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_aatkl")]
+position = Vector2(17, 0)
 
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
 [connection signal="animation_finished" from="Visuals/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="UltiTimer" to="." method="_on_ulti_timer_timeout"]
