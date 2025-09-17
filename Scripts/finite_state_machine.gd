@@ -7,28 +7,49 @@ var previous_state: State
 @export var initial_state_name := ""   # opcional: setéalo en el inspector
 
 func _ready() -> void:
-	# Indexar únicamente hijos que sean State
+	set_process(true)
+	set_physics_process(true)
+
+	# Resolver el CharacterBody2D ancestro (el boss)
+	var boss_body: CharacterBody2D = null
+	var n: Node = self
+	while n:
+		if n is CharacterBody2D:
+			boss_body = n as CharacterBody2D
+			break
+		n = n.get_parent()
+
+	if boss_body == null:
+		push_error("FSM: no se encontró un CharacterBody2D ancestro. Verifica la jerarquía.")
+		return
+
+	# Indexar estados y configurar referencias
 	for child in get_children():
 		if child is State:
 			var s := child as State
 			states[s.name] = s
 			s.fsm = self
-			s.actor = get_parent() as Node2D  # el boss (nodo padre del FSM)
+			s.actor = get_parent() as Node2D   # normalmente el boss o su contenedor directo
+			s.body = boss_body                 # <- aquí inyectamos el CharacterBody2D
+			# los estados no procesan por sí solos; el FSM los llama
 			s.set_physics_process(false)
+			s.set_process(false)
 
-	# Elegir estado inicial
+	# Elegir estado inicial seguro
 	if initial_state_name == "" and states.size() > 0:
-		initial_state_name = get_child(0).name
+		initial_state_name = states.keys()[0]
+
 	current_state = states.get(initial_state_name, null)
 	previous_state = current_state
 	if current_state:
 		current_state.enter()
+	else:
+		push_warning("FSM: estado inicial inválido (revisa 'initial_state_name' o hijos State)")
 
 func transition_to(target_name: String, msg := {}) -> void:
 	var next := states.get(target_name, null) as State
 	if next == null or next == current_state:
 		return
-	# salir del actual ANTES de cambiar
 	if current_state:
 		current_state.exit()
 	previous_state = current_state

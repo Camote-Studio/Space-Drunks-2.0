@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=38 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
@@ -23,13 +23,10 @@
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="17_eeksg"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="18_m74wh"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="19_fnwrx"]
-[ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="21_c5os2"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="21_r84mv"]
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
-[ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="22_tii1t"]
 [ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="22_v4p21"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
-[ext_resource type="PackedScene" uid="uid://dtmkqgu30b82b" path="res://Scenes/final_boss_fight.tscn" id="30_s0j4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
 size = Vector2(5588.5, 10)
@@ -406,7 +403,6 @@ theme_override_font_sizes/font_size = 33
 text = "0"
 
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("22_v4p21")]
-spawn_seconds = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara", "main_camera"]]
 position = Vector2(576, 303)
@@ -414,17 +410,13 @@ position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
 speed = 15.0
 
-[node name="enemie_spawn_6" parent="." instance=ExtResource("22_tii1t")]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_5ckil")
 }
 
-[node name="Enemies_final" parent="." instance=ExtResource("21_c5os2")]
-
 [node name="Final_Boss" parent="." instance=ExtResource("22_gupyi")]
-position = Vector2(2739, 382)
+position = Vector2(998, 397)
 
 [node name="GameOver" parent="." instance=ExtResource("23_d1i85")]
 
@@ -487,6 +479,3 @@ offset_left = -5.975
 offset_top = 450.0
 offset_right = 104.025
 offset_bottom = 564.0
-
-[node name="Final_BossFight" parent="." instance=ExtResource("30_s0j4o")]
-position = Vector2(689, 388)

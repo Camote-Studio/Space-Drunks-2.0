@@ -9,8 +9,8 @@ var _t := 0.0
 var _wait := 0.5
 var _anim: AnimatedSprite2D
 
-func enter(msg := {}) -> void:
-	super.enter(msg)
+func enter() -> void:
+	super.enter()
 	_t = 0.0
 	_wait = randf_range(wait_time_min, wait_time_max)
 	if _anim == null:
