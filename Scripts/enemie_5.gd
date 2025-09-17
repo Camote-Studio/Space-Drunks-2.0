@@ -11,12 +11,12 @@ const MONEDA = preload("res://Scenes/moneda.tscn")
 # ===== Agarre =====
 enum State { CHASE, GRAB }
 var state := State.CHASE
-var grab_range := 100.0          # distancia a la que inicia el agarre
-var grab_duration := 3.0         # tiempo pegado
-var grab_dps := 8.0              # daño por segundo durante el agarre
-var grab_tick := 0.25            # cada cuánto aplica daño
-var grab_cooldown := 1.2         # enfriamiento antes de volver a agarrar
-var attach_offset := 8.0         # qué tan “encimado” se pega al jugador
+var grab_range := 100.0
+var grab_duration := 3.0
+var grab_dps := 8.0
+var grab_tick := 0.25
+var grab_cooldown := 1.2
+var attach_offset := 8.0
 
 # ===== Refs =====
 var player: CharacterBody2D = null
@@ -42,8 +42,8 @@ var reported_dead := false
 var rng := RandomNumberGenerator.new()
 var face_sign := 1.0
 
-@export var shock_duration: float = 1.5   # segundos de lentitud
-@export var shock_factor: float   = 0.35  # 35% de la velocidad original
+@export var shock_duration: float = 1.5
+@export var shock_factor: float = 0.35
 
 var _shock_timer: Timer
 var _base_speed: float
@@ -55,7 +55,6 @@ func _ready() -> void:
 		player = players[0]
 	add_to_group("enemy_5")
 
-	# Vida llena al iniciar
 	if bar_7:
 		bar_7.value = bar_7.max_value
 
@@ -71,7 +70,6 @@ func _ready() -> void:
 	if not area.is_connected("area_entered", Callable(self, "_on_area_2d_area_entered")):
 		area.connect("area_entered", Callable(self, "_on_area_2d_area_entered"))
 
-	# Timers
 	_stack_timer = Timer.new(); _stack_timer.one_shot = true; add_child(_stack_timer)
 	_stack_timer.connect("timeout", Callable(self, "_on_stack_timeout"))
 
@@ -88,7 +86,7 @@ func _ready() -> void:
 		sprite_2d.connect("animation_finished", Callable(self, "_on_sprite_2d_animation_finished"))
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
-	#---ELECTROSHOCK
+	
 	_base_speed = speed
 
 	_shock_timer = Timer.new()
@@ -96,6 +94,7 @@ func _ready() -> void:
 	add_child(_shock_timer)
 	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
 		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
+
 func _physics_process(delta: float) -> void:
 	_update_target()
 	if dead or player == null:
@@ -109,19 +108,15 @@ func _physics_process(delta: float) -> void:
 
 	match state:
 		State.CHASE:
-			# SIEMPRE avanzar hacia el jugador (sin “bailes” ni alejarse)
 			var target_vel := dir * speed
 			velocity = velocity.move_toward(target_vel, accel * delta)
-			# Iniciar agarre cuando esté cerca y sin cooldown
 			if dist <= grab_range and _grab_cd_timer.time_left <= 0.0:
 				_start_grab()
 		State.GRAB:
-			# Mantenerse pegado al jugador (reposicionar constantemente)
 			var anchor := player.global_position - dir * attach_offset
 			global_position = global_position.move_toward(anchor, accel * delta * 0.02)
 			velocity = Vector2.ZERO
 
-	# Cara (flip)
 	if abs(dir.x) > 0.1:
 		face_sign = sign(dir.x)
 	sprite_2d.flip_h = face_sign < 0.0
@@ -138,31 +133,27 @@ func _start_grab() -> void:
 
 func _on_dot_tick() -> void:
 	if state == State.GRAB and player:
-		# Daño periódico al jugador
 		player.emit_signal("damage", grab_dps * grab_tick,"veneno")
 	else:
 		_dot_timer.stop()
 
 func _on_grab_timer_timeout() -> void:
-	# Termina agarre -> vuelve a perseguir (sin retroceder)
 	_dot_timer.stop()
 	state = State.CHASE
 	_grab_cd_timer.start(grab_cooldown)
 
 func _on_grab_cd_timeout() -> void:
-	# cooldown terminado; sin acción extra
 	pass
 
 # ===== Colisiones de área =====
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.is_in_group("player_2"):
-		# no guardamos ref aquí; usamos 'player' ya encontrado
 		pass
 	if body.is_in_group("player_1_bullet"):
 		emit_signal("damage", 30.0)
 		if body.has_method("queue_free"):
 			body.queue_free()
-
+	
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	pass
 
@@ -171,6 +162,11 @@ func _on_area_2d_area_entered(a: Area2D) -> void:
 		emit_signal("damage", 10.0)
 		if a.has_method("queue_free"):
 			a.queue_free()
+	# ¡Aquí está la corrección! Ahora el enemigo detectará la ulti del jugador 2
+	if a.is_in_group("alabarda_player_2"):
+		var parent = a.get_parent()
+		if parent and parent.is_in_group("players"):
+			emit_signal("damage", parent.ULTI_DAMAGE)
 
 # ===== Daño/vida UI =====
 func _on_damage(amount: float) -> void:
@@ -231,7 +227,7 @@ func _on_sprite_2d_animation_finished() -> void:
 		if explosion_timer and explosion_timer.time_left > 0.0:
 			explosion_timer.stop()
 		if _is_shocked:
-			_end_electroshock() 
+			_end_electroshock()
 		if not reported_dead:
 			_drop_coin()
 			reported_dead = true
@@ -243,6 +239,7 @@ func _on_explosion_timer_timeout() -> void:
 		reported_dead = true
 		emit_signal("died")
 	queue_free()
+
 func _update_target() -> void:
 	var players := []
 	players += get_tree().get_nodes_in_group("player")
@@ -275,15 +272,13 @@ func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 	if factor <= 0.0:
 		factor = shock_factor
 
-	# Si no estaba en shock, guarda la base y aplica el slow.
 	if not _is_shocked:
 		_base_speed = speed
 		_is_shocked = true
-	# Si ya estaba en shock y llega otro, asegura el mínimo (no sube).
 	speed = min(speed, _base_speed * factor)
-	
+
 	_shock_timer.start(duration)
-	
+
 func _end_electroshock() -> void:
 	_is_shocked = false
 	speed = _base_speed

@@ -36,7 +36,7 @@ motion_mirroring = Vector2(1149, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxBackground/Espacio"]
 texture_filter = 1
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.672396, 0.6)
 texture = ExtResource("2_1xh45")
 centered = false
 
@@ -102,7 +102,7 @@ text = "
 DRUNKS"
 
 [node name="Start" type="TextureButton" parent="."]
-layout_mode = 2
+layout_mode = 0
 offset_left = 40.0
 offset_top = 260.0
 offset_right = 880.0

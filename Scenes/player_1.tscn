@@ -880,7 +880,6 @@ volume_db = 20.0
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
-texture_filter = 1
 position = Vector2(-1, 5.96046e-08)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")

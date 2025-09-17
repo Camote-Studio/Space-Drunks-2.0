@@ -41,6 +41,19 @@ var _shock_timer: Timer
 var _base_speed: float
 var _is_shocked := false
 
+# === SISTEMA DE HITSTUN ===
+@export var hitstun_duration: float = 0.8        # Duración del hitstun por golpe
+@export var hitstun_threshold: float = 15.0      # Daño mínimo para activar hitstun
+@export var combo_window: float = 1.2            # Tiempo para extender combo
+@export var hitstun_color: Color = Color(1.0, 0.3, 0.3, 1.0)  # Rojo para hitstun
+
+var _in_hitstun := false
+var _hitstun_timer: Timer
+var _combo_timer: Timer
+var _combo_count := 0
+var _original_color: Color
+var _hitstun_tween: Tween
+
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi()%pitch_variations_gun.size()]
 	$hit.pitch_scale = random_pitch
@@ -81,6 +94,8 @@ func _ready() -> void:
 	add_child(_shock_timer)
 	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
 		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
+		
+	_ready_hitstun_system()
 
 func _physics_process(delta: float) -> void:
 	_update_target()
@@ -89,10 +104,17 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 			move_and_slide()
 		return
+		
+	# === MODIFICACIÓN: Movimiento reducido durante hitstun ===
+	var movement_multiplier = 1.0
+	if _in_hitstun:
+		movement_multiplier = 0.4  # 40% velocidad durante hitstun
+		
 	var to_player: Vector2 = player.global_position - global_position
 	var dist := to_player.length()
 	look_at(player.global_position)
 	rotation_degrees = wrap(rotation_degrees, 0, 360)
+	
 	var target_vel := Vector2.ZERO
 	if dist > max_range:
 		target_vel = to_player.normalized() * speed
@@ -130,26 +152,34 @@ func _on_gun_timer_timeout() -> void:
 func _on_damage(amount: float) -> void:
 	if bar_3:
 		bar_3.value = clamp(bar_3.value - amount, bar_3.min_value, bar_3.max_value)
+		
 	_stack_value += amount
 	label.text = str(int(_stack_value))
 	label.visible = true
 	label.position = _label_base_pos
 	label.scale = Vector2.ONE
+	
 	var sum := int(_stack_value)
 	var col := Color(1, 1, 1, 1)
 	if sum <= 20: col = Color(1, 1, 1, 1)
 	elif sum <= 40: col = Color(1, 1, 0, 1)
 	else: col = Color(1, 0, 0, 1)
 	label.modulate = col
+	
 	if _tween and _tween.is_running(): _tween.kill()
 	_tween = create_tween()
 	_tween.tween_property(label, "position:y", _label_base_pos.y - 18.0, 0.25)
 	_tween.parallel().tween_property(label, "scale", Vector2(1.25, 1.25), 0.18)
 	_tween.parallel().tween_property(label, "modulate:a", 0.0, 0.35).set_delay(0.05)
 	_stack_timer.start(0.4)
+	
 	random_pitch_variations_gun()
+	
+	#Sistema de Hitstun
+	_process_hitstun(amount)
 	if not dead and bar_3 and bar_3.value <= bar_3.min_value:
 		dead = true
+		_end_hitstun () #Limpia hitstun al morir
 		label.visible = false
 		if has_node("gun_timer"): $gun_timer.stop()
 		velocity = Vector2.ZERO
@@ -169,6 +199,13 @@ func _report_dead() -> void:
 	if reported_dead:
 		return
 	reported_dead = true
+	
+	#Limpiar hitstun antes de morir
+	if _hitstun_timer:
+		_hitstun_timer.stop()
+	if _combo_timer:
+		_combo_timer.stop()
+	_end_hitstun()
 
 	# --- limpiar electroshock antes de liberar ---
 	if _shock_timer:
@@ -231,9 +268,115 @@ func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 		_is_shocked = true
 	# Si ya estaba en shock y llega otro, asegura el mínimo (no sube).
 	speed = min(speed, _base_speed * factor)
-	
 	_shock_timer.start(duration)
 	
 func _end_electroshock() -> void:
 	_is_shocked = false
 	speed = _base_speed
+
+func _ready_hitstun_system() -> void:
+	# Llamar esto dentro de tu _ready() existente
+	
+	# Timer para duración del hitstun
+	_hitstun_timer = Timer.new()
+	_hitstun_timer.one_shot = true
+	add_child(_hitstun_timer)
+	_hitstun_timer.connect("timeout", Callable(self, "_end_hitstun"))
+	
+	# Timer para ventana de combo
+	_combo_timer = Timer.new()
+	_combo_timer.one_shot = true
+	add_child(_combo_timer)
+	_combo_timer.connect("timeout", Callable(self, "_reset_combo"))
+	
+	# Guardar color original del sprite
+	if anim:
+			_original_color = anim.modulate
+
+func _process_hitstun(damage_amount: float) -> void:
+# Solo activa hitstun si el daño es suficiente
+	if damage_amount < hitstun_threshold:
+		return
+	
+	# Incrementa combo si estamos en ventana de combo
+	if _combo_timer.time_left > 0.0:
+		_combo_count += 1
+	else:
+		_combo_count = 1
+	
+	# Reinicia timer de combo
+	_combo_timer.start(combo_window)
+	
+	# Activa/extiende hitstun
+	_enter_hitstun()
+	
+	# Duración del hitstun se extiende con combos
+	var extended_duration = hitstun_duration + (_combo_count * 0.2)
+	_hitstun_timer.start(extended_duration)
+	
+	print("🥊 Combo x", _combo_count, " - Hitstun: ", extended_duration, "s")
+
+func _enter_hitstun() -> void:
+	if dead:
+		return
+		
+	_in_hitstun = true
+	
+	# Para el timer de disparo
+	if has_node("gun_timer") and $gun_timer:
+		$gun_timer.paused = true
+	
+	# Cambia color a rojo con animación suave
+	if _hitstun_tween:
+		_hitstun_tween.kill()
+	
+	_hitstun_tween = create_tween()
+	_hitstun_tween.tween_property(anim, "modulate", hitstun_color, 0.1)
+	
+	# Opcional: Reduce velocidad durante hitstun
+	var original_speed = speed
+	speed *= 0.6  # 60% de velocidad
+	
+	# Efecto visual adicional: sacudida
+	_screen_shake_effect()
+
+func _end_hitstun() -> void:
+	if not _in_hitstun:
+		return
+		
+	_in_hitstun = false
+	
+	# Reactiva disparo
+	if has_node("gun_timer") and $gun_timer and not dead:
+		$gun_timer.paused = false
+	
+	# Restaura color original
+	if _hitstun_tween:
+		_hitstun_tween.kill()
+	
+	_hitstun_tween = create_tween()
+	_hitstun_tween.tween_property(anim, "modulate", _original_color, 0.2)
+	
+	# Restaura velocidad (si no está en electroshock)
+	if not _is_shocked:
+		speed = _base_speed
+	
+	print("🛡️ Hitstun terminado")
+
+func _reset_combo() -> void:
+	if _combo_count > 1:
+		print("💥 Combo terminado: ", _combo_count, " golpes!")
+	_combo_count = 0
+
+func _screen_shake_effect() -> void:
+	# Efecto de sacudida sutil del sprite
+	var shake_tween = create_tween()
+	var original_pos = anim.position
+	
+	# Sacudida rápida
+	for i in range(3):
+		var offset = Vector2(randf_range(-3, 3), randf_range(-3, 3))
+		shake_tween.tween_property(anim, "position", original_pos + offset, 0.05)
+		shake_tween.tween_property(anim, "position", original_pos, 0.05)
+
+	
