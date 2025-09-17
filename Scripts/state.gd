@@ -1,25 +1,16 @@
 extends Node
 class_name State
 
-var fsm: Node
-var actor: Node2D
+var fsm: Node                # lo setea el FSM
+var actor: Node2D            # normalmente el mismo boss
+var body: CharacterBody2D    # CharacterBody2D del boss (lo setea el FSM)
 
-func enter(msg := {}) -> void:
-	set_physics_process(true)
+func enter() -> void: pass
+func exit() -> void: pass
+func physics_update(delta: float) -> void: pass
+func update(delta: float) -> void: pass
+func handle_input(event: InputEvent) -> void: pass
 
-func exit() -> void:
-	set_physics_process(false)
-
-func handle_input(_event: InputEvent) -> void: pass
-func physics_update(delta: float) -> void: transition(delta)
-func update(_delta: float) -> void: pass
-func transition(_delta: float) -> void: pass
-
-# Helpers
-func _get_player() -> Node2D:
-	return actor.get_tree().get_first_node_in_group("player") as Node2D
-
-func _dir_to_player() -> Vector2:
-	var p := _get_player()
-	if p == null: return Vector2.RIGHT
-	return (p.global_position - actor.global_position).normalized()
+func _get_player() -> CharacterBody2D:
+	# Asegúrate de que tu Player esté en el grupo "player"
+	return get_tree().get_first_node_in_group("player") as CharacterBody2D
