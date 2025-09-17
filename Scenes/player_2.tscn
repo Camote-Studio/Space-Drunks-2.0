@@ -1015,10 +1015,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_prblm"]
-radius = 123.738
+radius = 180.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
-radius = 120.046
+radius = 156.702
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dfurs"]
 a = Vector2(-6.08382, 0.201834)
@@ -1096,10 +1096,6 @@ shape = SubResource("SegmentShape2D_dfurs")
 stream = ExtResource("222_4x7fj")
 volume_db = 10.0
 
-[node name="sonido_flotando" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("223_wrxan")
-volume_db = 20.0
-
 [node name="TimerUlti" type="Timer" parent="."]
 
 [node name="TimerAutoPunch" type="Timer" parent="."]
@@ -1108,6 +1104,10 @@ volume_db = 20.0
 emitting = false
 texture = ExtResource("173_fcbx1")
 gravity = Vector2(0, 0)
+
+[node name="sonido_flotando" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("223_wrxan")
+volume_db = 20.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
