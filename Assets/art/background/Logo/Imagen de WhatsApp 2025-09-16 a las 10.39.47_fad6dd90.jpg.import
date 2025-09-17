@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b53b0g6a2qciq"
-path="res://.godot/imported/BULLET_BOSS.png-8531b9f8ebe9f30d47676f6b9074aee0.ctex"
+uid="uid://dncusxi4lmtn0"
+path="res://.godot/imported/Imagen de WhatsApp 2025-09-16 a las 10.39.47_fad6dd90.jpg-728f1b0fef3df5106c371f1b1285b748.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/sprites/Armas/Proyectiles/BULLET_BOSS.png"
-dest_files=["res://.godot/imported/BULLET_BOSS.png-8531b9f8ebe9f30d47676f6b9074aee0.ctex"]
+source_file="res://Assets/art/background/Logo/Imagen de WhatsApp 2025-09-16 a las 10.39.47_fad6dd90.jpg"
+dest_files=["res://.godot/imported/Imagen de WhatsApp 2025-09-16 a las 10.39.47_fad6dd90.jpg-728f1b0fef3df5106c371f1b1285b748.ctex"]
 
 [params]
 
