@@ -1,13 +1,8 @@
-[gd_scene load_steps=58 format=3 uid="uid://c4wyasp8w20no"]
+[gd_scene load_steps=53 format=3 uid="uid://c4wyasp8w20no"]
 
 [ext_resource type="Script" uid="uid://3leniu2qoiv1" path="res://Scripts/Intefaz/0_menu_0.gd" id="1_43v56"]
-[ext_resource type="Texture2D" uid="uid://bajct0mviccbd" path="res://Assets/art/background/Menu/Press start/ezgif-frame-001.jpg" id="2_admrm"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="3_jykc7"]
-[ext_resource type="Texture2D" uid="uid://tppuhr62g7vh" path="res://Assets/art/background/Menu/Press start/ezgif-frame-002.jpg" id="3_v3a1p"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="4_5i3i0"]
-[ext_resource type="Texture2D" uid="uid://dpsw0ovi6adcm" path="res://Assets/art/background/Menu/Press start/ezgif-frame-003.jpg" id="4_6c2wg"]
-[ext_resource type="Texture2D" uid="uid://7g2n3bihbn78" path="res://Assets/art/background/Menu/Press start/ezgif-frame-004.jpg" id="5_qmd73"]
-[ext_resource type="Texture2D" uid="uid://bjm4vue60unch" path="res://Assets/art/background/Menu/Press start/ezgif-frame-005.jpg" id="6_pbbll"]
 [ext_resource type="Texture2D" uid="uid://dvx50naqqsyge" path="res://Assets/art/background/Menu/Press start/ezgif-frame-006.jpg" id="7_epxwl"]
 [ext_resource type="Texture2D" uid="uid://dpy171eqaij0k" path="res://Assets/art/background/Menu/Press start/ezgif-frame-007.jpg" id="8_q16ej"]
 [ext_resource type="Texture2D" uid="uid://dfb0hrej16l7g" path="res://Assets/art/background/Menu/Press start/ezgif-frame-009.jpg" id="9_gxlnt"]
@@ -58,25 +53,13 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_admrm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_v3a1p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_6c2wg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_qmd73")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_pbbll")
-}, {
-"duration": 1.0,
 "texture": ExtResource("7_epxwl")
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_q16ej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_hrpob")
 }, {
 "duration": 1.0,
 "texture": ExtResource("9_gxlnt")
@@ -110,9 +93,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("19_s5aus")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_hrpob")
 }, {
 "duration": 1.0,
 "texture": ExtResource("21_qcr4s")
@@ -154,10 +134,10 @@ animations = [{
 "texture": ExtResource("33_70u0q")
 }, {
 "duration": 1.0,
-"texture": ExtResource("34_qjoya")
+"texture": ExtResource("35_vubm2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("35_vubm2")
+"texture": ExtResource("34_qjoya")
 }, {
 "duration": 1.0,
 "texture": ExtResource("36_suqyc")
@@ -209,7 +189,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 15.0
+"speed": 25.0
 }]
 
 [sub_resource type="Animation" id="Animation_admrm"]
@@ -253,11 +233,10 @@ _data = {
 script = ExtResource("1_43v56")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.622727, 0.635294)
+scale = Vector2(0.5838384, 0.635294)
 sprite_frames = SubResource("SpriteFrames_a6dcp")
 autoplay = "default"
-frame = 23
-frame_progress = 0.957309
+frame_progress = 0.06622942
 centered = false
 
 [node name="Sombras_transición" parent="." instance=ExtResource("3_jykc7")]
@@ -270,8 +249,12 @@ offset_top = 377.0
 offset_right = 1080.0
 offset_bottom = 448.0
 theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
-theme_override_colors/font_shadow_color = Color(1, 0.698039, 0, 1)
-theme_override_colors/font_outline_color = Color(0.5036, 0.539205, 1.92523e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = ExtResource("4_5i3i0")
 theme_override_font_sizes/font_size = 50
 

@@ -6,7 +6,11 @@ func _ready() -> void:
 	var music = preload("res://Assets/music/624874__sonically_sound__retro-funk-20032022-1714.wav")
 	SoundEffectManager.music_player.stream = music
 	SoundEffectManager.music_player.play()
-	#$Start.grab_focus()
+	for button in get_tree().get_nodes_in_group("ui_botones"):
+		if button is TextureButton:
+			button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			button.focus_mode = Control.FOCUS_ALL  # Sigue respondiendo a teclado/mando
+	$Start.grab_focus()
 
 func _on_start_pressed() -> void:
 	tipo_boton = "start"

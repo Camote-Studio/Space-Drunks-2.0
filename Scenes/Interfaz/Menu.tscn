@@ -101,7 +101,7 @@ theme_override_font_sizes/font_size = 90
 text = "
 DRUNKS"
 
-[node name="Start" type="TextureButton" parent="."]
+[node name="Start" type="TextureButton" parent="." groups=["ui_botones"]]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 260.0
@@ -110,6 +110,7 @@ offset_bottom = 2395.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Options")
+button_mask = 0
 texture_normal = ExtResource("9_mm3o3")
 texture_pressed = ExtResource("10_2qgrd")
 texture_hover = ExtResource("11_w4fob")
@@ -135,7 +136,7 @@ theme_override_font_sizes/font_size = 128
 text = "Start
  Game"
 
-[node name="Options" type="TextureButton" parent="."]
+[node name="Options" type="TextureButton" parent="." groups=["ui_botones"]]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 383.0
@@ -144,6 +145,7 @@ offset_bottom = 2518.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../Start")
 focus_neighbor_bottom = NodePath("../Quit")
+button_mask = 0
 texture_normal = ExtResource("9_mm3o3")
 texture_pressed = ExtResource("10_2qgrd")
 texture_hover = ExtResource("11_w4fob")
@@ -168,7 +170,7 @@ theme_override_fonts/font = ExtResource("5_erq20")
 theme_override_font_sizes/font_size = 128
 text = "Options"
 
-[node name="Quit" type="TextureButton" parent="."]
+[node name="Quit" type="TextureButton" parent="." groups=["ui_botones"]]
 layout_mode = 0
 offset_left = 221.0
 offset_top = 502.0
@@ -177,6 +179,7 @@ offset_bottom = 2637.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Start")
+button_mask = 0
 texture_normal = ExtResource("9_mm3o3")
 texture_pressed = ExtResource("10_2qgrd")
 texture_hover = ExtResource("11_w4fob")
