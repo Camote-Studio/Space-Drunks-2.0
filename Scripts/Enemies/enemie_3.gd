@@ -143,19 +143,17 @@ func _physics_process(delta: float) -> void:
 		_do_punch(dir)
 
 # ---------------------------
-
 func _do_punch(dir: Vector2) -> void:
 	if target_in_range:
 		var direction_to_player = (target_in_range.global_position - global_position).normalized()
 		if direction_to_player.x != 0:
 			face_sign = sign(direction_to_player.x)
-			sprite_2d.flip_h = face_sign > 0.0  # flip invertido
+			sprite_2d.flip_h = face_sign > 0.0
 		
-		target_in_range.emit_signal("damage", punch_damage)
-		
-		if sfx_hit:
-			sfx_hit.pitch_scale = pitch_variations[rng.randi_range(0, pitch_variations.size() - 1)]
-			sfx_hit.play()
+		# Solo aplicar daño y print, sin mover al jugador
+		print("El enemigo golpeó al jugador!")
+		if target_in_range.has_method("emit_signal"):
+			target_in_range.emit_signal("damage", punch_damage)
 		
 	if sprite_2d:
 		sprite_2d.play("ataque")
@@ -191,9 +189,16 @@ func _on_sprite_2d_animation_finished() -> void:
 			emit_signal("died")
 		queue_free()
 
+# ---------------------------
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	if dead:
+		return
 	if body.is_in_group("player") or body.is_in_group("player_2"):
 		target_in_range = body as CharacterBody2D
+		# Solo imprimir y aplicar daño, sin mover al jugador
+		print("El enemigo golpeó al jugador!")
+		if body.has_method("emit_signal"):
+			body.emit_signal("damage", punch_damage)
 	if body.is_in_group("player_1_bullet"):
 		emit_signal("damage", 30.0)
 		if body.has_method("queue_free"):
@@ -209,6 +214,7 @@ func _on_area_2d_area_entered(a: Area2D) -> void:
 		if a.has_method("queue_free"):
 			a.queue_free()
 
+# ---------------------------
 func _on_damage(amount: float) -> void:
 	if bar_5:
 		bar_5.value = clamp(bar_5.value - amount, bar_5.min_value, bar_5.max_value)
@@ -267,17 +273,14 @@ func _update_target() -> void:
 	var players := []
 	players += get_tree().get_nodes_in_group("player")
 	players += get_tree().get_nodes_in_group("player_2")
-
 	var nearest: Node2D = null
 	var nearest_dist := INF
-
 	for p in players:
 		if p and p is Node2D:
 			var dist = global_position.distance_to(p.global_position)
 			if dist < nearest_dist:
 				nearest_dist = dist
 				nearest = p
-
 	player = nearest
 
 func _drop_coin() -> void:
@@ -298,8 +301,8 @@ func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 	if not _is_shocked:
 		_base_speed = speed
 		_is_shocked = true
-	speed = min(speed, _base_speed * factor)
-	_shock_timer.start(duration)
+		speed = min(speed, _base_speed * factor)
+		_shock_timer.start(duration)
 
 func _end_electroshock() -> void:
 	_is_shocked = false

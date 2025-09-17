@@ -421,3 +421,6 @@ func _on_ulti_timer_timeout() -> void:
 		var anim_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 		if anim_sprite.sprite_frames and anim_sprite.sprite_frames.has_animation("idle"):
 			anim_sprite.play("idle")
+# Empuje temporal que no rompe la física
+func push_temp(offset: Vector2) -> void:
+	global_position += offset
