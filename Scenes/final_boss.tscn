@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cy7nosfcmj6l0"]
+[gd_scene load_steps=13 format=3 uid="uid://cy7nosfcmj6l0"]
 
 [ext_resource type="Script" uid="uid://dhr4nudsalkcc" path="res://Scripts/final_boss.gd" id="1_blxqn"]
 [ext_resource type="Texture2D" uid="uid://ckvb4w6t1iqik" path="res://Assets/art/sprites/Enemigos/FINALboz.png" id="1_xchk6"]
-[ext_resource type="PackedScene" uid="uid://cj0wechyf4nf1" path="res://Scenes/poison_cloud.tscn" id="2_6vmjv"]
 [ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Assets/art/sprites/Particulas/explosion_1.png" id="4_8i2ud"]
 [ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Assets/art/sprites/Particulas/explosion_2.png" id="5_5uamw"]
 [ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Assets/art/sprites/Particulas/explosion_3.png" id="6_mxp2g"]
@@ -54,13 +53,13 @@ radius = 142.618
 
 [node name="Final_Boss" type="CharacterBody2D" groups=["boss"]]
 scale = Vector2(0.9, 0.9)
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_blxqn")
-poison_scene = ExtResource("2_6vmjv")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_60rb2")
-flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(15, -20)
@@ -91,7 +90,6 @@ offset_right = 129.667
 offset_bottom = -196.333
 max_value = 700.0
 value = 700.0
-show_percentage = false
 
 [node name="explosion_timer" type="Timer" parent="."]
 

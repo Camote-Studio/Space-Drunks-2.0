@@ -286,7 +286,7 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-23, -132)
-scale = Vector2(1.38475, 0.78921574)
+scale = Vector2(1.38475, 0.789216)
 texture = ExtResource("5_gf2tg")
 centered = false
 
@@ -645,7 +645,6 @@ theme_override_font_sizes/font_size = 30
 text = "SPACE CHICKEN'S TIME"
 
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("35_8sajs")]
-spawn_seconds = 20.0
 
 [node name="Pausa" parent="." instance=ExtResource("30_8yf3i")]
 
