@@ -150,14 +150,23 @@ func _update_animation(direction: Vector2) -> void:
 		Estado.NORMAL:
 			if direction == Vector2.ZERO:
 				animated_sprite.play("idle")
+				$Gun.visible = true
 			else:
 				if abs(direction.x) > abs(direction.y):
 					animated_sprite.play("caminar")
 					animated_sprite.flip_h = direction.x < 0
+					$Gun.visible = true
 				elif direction.y < 0:
 					animated_sprite.play("caminar_subir")
+					$Gun.visible = false
+				else:
+					# si va hacia abajo, mostrar gun
+					animated_sprite.play("caminar")
+					$Gun.visible = true
+
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()
+
 
 # ====================== Daño
 func _on_damage(amount: float, source: String = "desconocido") -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=233 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=246 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
@@ -218,11 +218,24 @@
 [ext_resource type="Texture2D" uid="uid://b8hwhwq3kb6bc" path="res://Assets/art/sprites/Particulas/EXPLO_4.png" id="173_fcbx1"]
 [ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="174_qixq7"]
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="175_rn5h7"]
+[ext_resource type="Texture2D" uid="uid://dap7xhpcnmpjg" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s1.png" id="213_5xl0v"]
+[ext_resource type="Texture2D" uid="uid://dj3ptn1p22cgc" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s2.png" id="214_nxc58"]
+[ext_resource type="Texture2D" uid="uid://c04fo12rjsjmn" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s3.png" id="215_q8pxg"]
+[ext_resource type="Texture2D" uid="uid://c8b4eeehskqwc" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s4.png" id="216_qehk6"]
+[ext_resource type="Texture2D" uid="uid://ceny6wwplsblx" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s5.png" id="217_bmd6w"]
+[ext_resource type="Texture2D" uid="uid://dt0qet7gl176i" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s6.png" id="218_vdi1f"]
 [ext_resource type="Texture2D" uid="uid://dxfomktac6dib" path="res://Assets/art/sprites/Armas/punch_1_flip.png" id="219_4x7fj"]
+[ext_resource type="Texture2D" uid="uid://cwg6yj67ty3go" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s7.png" id="219_fe54o"]
 [ext_resource type="Texture2D" uid="uid://blex0n2rdxghj" path="res://Assets/art/sprites/Armas/Punch1.png" id="220_58h14"]
+[ext_resource type="Texture2D" uid="uid://cnqskcu1fgq5q" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s8.png" id="220_ak4gr"]
 [ext_resource type="Texture2D" uid="uid://bgjxtcher56h1" path="res://Assets/art/sprites/Armas/ALABARDA.png" id="221_dfurs"]
+[ext_resource type="Texture2D" uid="uid://c7tuk32cmqyfg" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s9.png" id="221_hl2cp"]
 [ext_resource type="AudioStream" uid="uid://bns3qc8v3jfu4" path="res://Assets/sfx/Retro Birds 07.wav" id="222_4x7fj"]
+[ext_resource type="Texture2D" uid="uid://gjrpl8afn683" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s10.png" id="222_ejkku"]
+[ext_resource type="Texture2D" uid="uid://c07xgr7hqadmj" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s11.png" id="223_keshl"]
 [ext_resource type="AudioStream" uid="uid://68jauvq2vtui" path="res://Assets/sfx/Retro Charge Off StereoUP 02.wav" id="223_wrxan"]
+[ext_resource type="Texture2D" uid="uid://b0fmkdyvev4rx" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s12.png" id="224_ylgmh"]
+[ext_resource type="Texture2D" uid="uid://bfibibol4kbks" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s13.png" id="225_32qke"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rn5h7"]
 animations = [{
@@ -888,6 +901,50 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("213_5xl0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("214_nxc58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("215_q8pxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("216_qehk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("217_bmd6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("218_vdi1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("219_fe54o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("220_ak4gr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("221_hl2cp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("222_ejkku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("223_keshl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("224_ylgmh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("225_32qke")
+}],
+"loop": true,
+"name": &"ulti_pose",
+"speed": 36.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
@@ -975,7 +1032,8 @@ script = ExtResource("1_a3adp")
 position = Vector2(1, -11)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_rn5h7")
-animation = &"aturdido"
+animation = &"ulti_pose"
+frame_progress = 0.296472
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 5)
@@ -1042,7 +1100,19 @@ volume_db = 10.0
 stream = ExtResource("223_wrxan")
 volume_db = 20.0
 
+[node name="TimerUlti" type="Timer" parent="."]
+
+[node name="TimerAutoPunch" type="Timer" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+texture = ExtResource("173_fcbx1")
+gravity = Vector2(0, 0)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
 [connection signal="body_entered" from="Punch_left/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Punch_right/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="area_entered" from="alabarda/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="TimerUlti" to="." method="_on_timer_ulti_timeout"]
+[connection signal="timeout" from="TimerAutoPunch" to="." method="_on_timer_auto_punch_timeout"]

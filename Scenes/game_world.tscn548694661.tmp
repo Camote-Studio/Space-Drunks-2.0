@@ -38,7 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="35_8sajs"]
 [ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
 [ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/enemie_1.tscn" id="38_qejn6"]
-[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="39_p5xse"]
+[ext_resource type="PackedScene" uid="uid://c76e4r2yxqn47" path="res://Scenes/enemie_5.tscn" id="39_p5xse"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5503, 20)
@@ -285,8 +285,8 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-23, -132)
-scale = Vector2(1.38475, 0.78921574)
+position = Vector2(-23, -14)
+scale = Vector2(1.38475, 0.551961)
 texture = ExtResource("5_gf2tg")
 centered = false
 
@@ -397,14 +397,14 @@ scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
 [node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
-position = Vector2(266, 273)
+position = Vector2(328, 277)
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
 position = Vector2(305, 417)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 3
-position = Vector2(5, 42)
+position = Vector2(0, 87)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2741.5, 124)
@@ -417,7 +417,6 @@ position = Vector2(-2.5, 84.5)
 shape = SubResource("RectangleShape2D_nmac2")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(0, 164)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(5507.51, 146.503)
@@ -559,8 +558,7 @@ offset_right = 1245.0
 offset_bottom = 93.0
 rotation = -0.00284467
 scale = Vector2(0.122, 0.612)
-max_value = 200.0
-value = 200.0
+value = 100.0
 texture_under = ExtResource("15_dcn6k")
 texture_progress = ExtResource("16_8sajs")
 metadata/_edit_use_anchors_ = true
@@ -677,8 +675,10 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("31_jqqi2")
 
 [node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
-offset_top = -12.0
-offset_bottom = 634.0
+offset_left = -6.0
+offset_top = -16.0
+offset_right = 1147.0
+offset_bottom = 630.0
 mouse_filter = 2
 
 [node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
@@ -703,10 +703,10 @@ script = ExtResource("13_n6wrj")
 [node name="Enemie_1" parent="." instance=ExtResource("38_qejn6")]
 position = Vector2(686, 328)
 
-[node name="enemie_2" parent="." instance=ExtResource("39_p5xse")]
-position = Vector2(594, 246)
+[node name="enemie_5" parent="." instance=ExtResource("39_p5xse")]
+position = Vector2(656, 380)
 
-[node name="enemie_3" parent="." instance=ExtResource("39_p5xse")]
-position = Vector2(592, 355)
+[node name="enemie_6" parent="." instance=ExtResource("39_p5xse")]
+position = Vector2(544, 276)
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 # player 2
+@onready var TimerGolpeUlti: Timer = Timer.new()
 
 # --- Señales ---
 signal damage(amount: float, source: String)
@@ -8,7 +9,17 @@ signal muerte  # Para notificar al GameManager
 # --- Variables ---
 var coins: int = 0
 @export var player_id: String = "player2"  # Identificador único
+var ulti_active: bool = false
+var punch_base_dmg := {
+	"enemy_1": 30.0,
+	"enemy_2": 30.0,
+	"enemy_3": 10.0,
+	"enemy_4": 10.0,
+	"enemy_5": 20.0,
+	"boss": 10.0
+}
 
+@onready var TimerUlti: Timer = $TimerUlti
 # --- Nodos ---
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
@@ -60,19 +71,20 @@ var _sword_instance: Node2D = null
 var _sword_active := false
 var _sword_timer: Timer
 
-# ======================
-#       SALTO (pseudo-3D)
-# ======================
-@export var jump_force: float = 220.0    # velocidad inicial (positivo)
-@export var gravity: float = 600.0       # gravedad aplicada (positivo)
-var z: float = 0.0                       # altura actual
-var z_velocity: float = 0.0              # velocidad vertical (positiva = sube)
-var is_jumping: bool = false
 
 # ======================
 #   FUNCIONES BÁSICAS
 # ======================
 func _ready() -> void:
+	# ... lo que ya tienes ...
+	
+	# Timer de golpes de ulti (constante, repetitivo)
+	TimerGolpeUlti.wait_time = 0.5   # intervalo entre golpes
+	TimerGolpeUlti.one_shot = false
+	add_child(TimerGolpeUlti)
+	if not TimerGolpeUlti.is_connected("timeout", Callable(self, "_ulti_punch")):
+		TimerGolpeUlti.connect("timeout", Callable(self, "_ulti_punch"))
+
 	var alabarda = $alabarda
 	var hitbox = alabarda.get_node("Hitbox")
 	hitbox.monitoring = false  # 🔹 aseguramos que arranque desactivado
@@ -199,7 +211,16 @@ func _handle_floating(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
-		return
+		return  # ¡ya no hacemos nada mientras esté muerto!
+
+	if Input.is_action_just_pressed("jump_2") and not ulti_active:
+		_start_ulti()
+
+
+
+	# 🔹 Si la ulti está activa, ignoramos efectos de veneno o aturdido
+	if ulti_active and estado_actual != Estado.NORMAL:
+		estado_actual = Estado.NORMAL
 
 	# Input y movimiento
 	var direction = Vector2.ZERO
@@ -234,54 +255,26 @@ func _physics_process(delta: float) -> void:
 		Estado.NORMAL:
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()
-			if direction == Vector2.ZERO and not is_jumping:
-				animated_sprite.play("idle")
+
+			if ulti_active:
+				# 🔹 si está en ulti, mantenemos ulti_pose
+				if animated_sprite.animation != "ulti_pose":
+					animated_sprite.play("ulti_pose")
 			else:
-				if not is_jumping:
+				if direction == Vector2.ZERO:
+					animated_sprite.play("idle")
+				else:
 					if abs(direction.x) > abs(direction.y):
 						animated_sprite.play("caminar")
 						animated_sprite.flip_h = direction.x < 0
 					elif direction.y < 0:
 						animated_sprite.play("caminar_subir")
 
+	# Movimiento real del personaje
 	velocity = direction * speed
+	move_and_slide()
 
-	# ====== SALTO ======
-	# Solo permitir saltar si no estamos flotando y no ya saltando
-	if allow_input and Input.is_action_just_pressed("jump_2") and not is_jumping and not floating:
-		is_jumping = true
-		z_velocity = jump_force
 
-	# Física vertical del salto (pseudo-3D)
-	if is_jumping:
-		# gravity reduce z_velocity para que +vel -> sube, restamos gravity
-		z_velocity -= gravity * delta
-		z += z_velocity * delta
-
-		# Si llegamos o pasamos el suelo
-		if z <= 0.0:
-			z = 0.0
-			z_velocity = 0.0
-			is_jumping = false
-
-	# Movimiento (usa move_and_slide como antes)
-	if not floating:
-		move_and_slide()
-	else:
-		_handle_floating(delta)
-
-	# ====== Aplicar "altura" visual al sprite y a los puños ======
-	# AnimatedSprite se mueve visualmente hacia arriba cuando z > 0
-	animated_sprite.position.y = -z
-
-	# Reposicionamos puños cada frame para que sigan al jugador en X y suban/bajen con z
-	var left_x = _base_left.x * _facing
-	var right_x = _base_right.x * _facing
-	punch_left.position = Vector2(left_x, _base_left.y - z)
-	punch_right.position = Vector2(right_x, _base_right.y - z)
-
-	# Si la espada está activa, moverla también visualmente
-	_update_sword_transform()
 
 # =====================
 #   DAÑO RECIBIDO
@@ -321,23 +314,21 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
 		emit_signal("damage", 20.0, "bala")
 
-# ----------------------
-#   MUERTE / TIMERS
-# ----------------------
 func _die() -> void:
 	dead = true
 	allow_input = false
 	floating = false
 	invulnerable = false
 	controls_inverted = false
-
-	# Si hay espada activa, quítala
-	_revert_sword()
-
 	velocity = Vector2.ZERO
 	rotation = 0.0
 	set_collision_layer(0)
 	set_collision_mask(0)
+	TimerUlti.stop()
+	TimerGolpeUlti.stop()
+	$Timer.stop()
+	$venenoTimer.stop()
+	_revert_sword()
 
 	if is_in_group("player_2"):
 		remove_from_group("player_2")
@@ -346,8 +337,9 @@ func _die() -> void:
 
 	if animated_sprite:
 		animated_sprite.play("death")
+		# La animación de muerte se queda hasta el final
 		if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
-			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"))
+			animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"), CONNECT_ONE_SHOT)
 
 	$"../CanvasLayer/Sprite2D2".self_modulate = Color(1, 0, 0, 1) 
 	$"../CanvasLayer/Character2Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_big.png")
@@ -373,23 +365,65 @@ func _on_veneno_timer_timeout() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var dmg := 0.0
-	if body.is_in_group("enemy_1") or body.is_in_group("enemy_2"):
-		dmg = 30.0
-	elif body.is_in_group("enemy_3") or body.is_in_group("enemy_4"):
-		dmg = 10.0
+
+	# ✅ Solo aplica daño si el jugador golpeó (fired_2) o si está en ulti
+	if not ulti_active and not Input.is_action_pressed("fired_2"):
+		return
+
+	if body.is_in_group("enemy_1"):
+		dmg = punch_base_dmg["enemy_1"]
+	elif body.is_in_group("enemy_2"):
+		dmg = punch_base_dmg["enemy_2"]
+	elif body.is_in_group("enemy_3"):
+		dmg = punch_base_dmg["enemy_3"]
+	elif body.is_in_group("enemy_4"):
+		dmg = punch_base_dmg["enemy_4"]
 	elif body.is_in_group("enemy_5"):
-		dmg = 20.0
+		dmg = punch_base_dmg["enemy_5"]
 	elif body.is_in_group("boss"):
-		dmg = 10.0
+		dmg = punch_base_dmg["boss"]
+
+	# 🔹 Duplica daño si ulti está activa
+	if ulti_active:
+		dmg *= 2.0
+
 	if dmg > 0.0 and body.has_signal("damage"):
+		var modo: String
+		if ulti_active:
+			modo = "ULTI"
+		else:
+			modo = "NORMAL"
+		print("[PUÑOS] Golpe a %s | Daño: %s | Modo: %s" % [body.name, dmg, modo])
 		body.emit_signal("damage", dmg)
 		gain_ability_from_attack_2(dmg)
+
+
+func _ulti_punch() -> void:
+	if not ulti_active:
+		return
+
+	# Simula un golpe alternado visual
+	_punch_alternate()
+
+	# Buscar enemigos en rango (Area2D de puños)
+	var area = $Area2D
+	if area:
+		for body in area.get_overlapping_bodies():
+			if body.is_in_group("enemy_1") or body.is_in_group("enemy_2") \
+			or body.is_in_group("enemy_3") or body.is_in_group("enemy_4") \
+			or body.is_in_group("enemy_5") or body.is_in_group("boss"):
+				if body.has_signal("damage"):
+					print("[ULTI] Golpe automático a %s | Daño: 50" % body.name)
+					body.emit_signal("damage", 50.0)
+
+
 
 # ----------------------
 #   PODER: ESPADA
 # ----------------------
 func activate_sword_for(seconds: float = -1.0) -> void:
 	if dead:
+		velocity = Vector2.ZERO
 		return
 	if espada_scene == null:
 		push_warning("[P2] No hay espada_scene asignada en el Inspector.")
@@ -434,10 +468,11 @@ func _revert_sword() -> void:
 func _update_sword_transform() -> void:
 	if not _sword_active or not is_instance_valid(_sword_instance):
 		return
-	# Anchor basado en base_right (como tenías antes) y aplicamos offset vertical por salto (z)
-	var anchor := Vector2(abs(_base_right.x) * _facing, _base_right.y - z)
+	# Anchor basado en base_right (sin eje z)
+	var anchor := Vector2(abs(_base_right.x) * _facing, _base_right.y)
 	_sword_instance.position = anchor
 	_sword_instance.scale.x = abs(_sword_instance.scale.x) * float(_facing)
+
 
 # ======================
 #  CARGA DE HABILIDAD 2
@@ -452,6 +487,7 @@ func gain_ability_from_attack_2(damage_dealt: float) -> void:
 
 func _power() -> void:
 	if dead:
+		velocity = Vector2.ZERO
 		return
 	if bar_ability_2 and bar_ability_2.value >= bar_ability_2.max_value:
 		bar_ability_2.value = bar_ability_2.min_value
@@ -475,6 +511,34 @@ func _power() -> void:
 		# 4. Termina
 		t.tween_callback(Callable(self, "_end_power"))
 
+func _start_ulti() -> void:
+	ulti_active = true
+	animated_sprite.play("ulti_pose")
+	punch_left.visible = false
+	punch_right.visible = false
+	TimerUlti.stop()
+	TimerUlti.start(5.0)
+	if not TimerUlti.is_connected("timeout", Callable(self, "_end_ulti")):
+		TimerUlti.connect("timeout", Callable(self, "_end_ulti"))
+		TimerGolpeUlti.start()
+
+
+
+func _end_ulti() -> void:
+	ulti_active = false
+	punch_left.visible = true
+	punch_right.visible = true
+	animated_sprite.play("idle")
+
+	# 🔹 Detiene los golpes automáticos
+	TimerGolpeUlti.stop()
+
+
+	# 🔹 Detiene los golpes automáticos
+	TimerGolpeUlti.stop()
+
+
+
 func _end_power() -> void:
 	var alabarda = $alabarda
 	var hitbox = alabarda.get_node("Hitbox")
@@ -491,3 +555,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		or enemy.is_in_group("enemy_5") 
 		or enemy.is_in_group("boss")) and enemy.has_signal("damage"):
 		enemy.emit_signal("damage", 20.0)  # daño fijo de la alabarda
+func _process(delta: float) -> void:
+	if ulti_active and bar:
+		var increment = 30 * delta  # delta asegura incremento por segundo
+		bar.value = min(bar.value + increment, bar.max_value)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c48q81hv7dorh"
-path="res://.godot/imported/3.png-d36b7c6fe808bda975a2e4fd7a478219.ctex"
+uid="uid://dj3ptn1p22cgc"
+path="res://.godot/imported/s2.png-afd62b8284c2a31f379041a8dbafa3a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/sprites/Enemigos/3.png"
-dest_files=["res://.godot/imported/3.png-d36b7c6fe808bda975a2e4fd7a478219.ctex"]
+source_file="res://Assets/art/sprites/Personajes/sayayin_ulti/s2.png"
+dest_files=["res://.godot/imported/s2.png-afd62b8284c2a31f379041a8dbafa3a9.ctex"]
 
 [params]
 

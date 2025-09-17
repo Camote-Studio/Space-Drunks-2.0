@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c48q81hv7dorh"
-path="res://.godot/imported/3.png-d36b7c6fe808bda975a2e4fd7a478219.ctex"
+uid="uid://cejvgf4718hib"
+path="res://.godot/imported/Punch3.png-11d0945fd4020af9496681abe93add2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/sprites/Enemigos/3.png"
-dest_files=["res://.godot/imported/3.png-d36b7c6fe808bda975a2e4fd7a478219.ctex"]
+source_file="res://Assets/art/sprites/Armas/Punch3.png"
+dest_files=["res://.godot/imported/Punch3.png-11d0945fd4020af9496681abe93add2c.ctex"]
 
 [params]
 
