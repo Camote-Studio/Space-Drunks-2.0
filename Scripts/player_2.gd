@@ -211,27 +211,20 @@ func _handle_floating(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
-		return  # ¡ya no hacemos nada mientras esté muerto!
+		return
 
-	if Input.is_action_just_pressed("jump_2") and not ulti_active:
-		_start_ulti()
-
-
-
-	# 🔹 Si la ulti está activa, ignoramos efectos de veneno o aturdido
-	if ulti_active and estado_actual != Estado.NORMAL:
-		estado_actual = Estado.NORMAL
-
-	# Input y movimiento
 	var direction = Vector2.ZERO
 	if allow_input:
 		direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
 
-	# Actualiza facing si hay input en X
+	if Input.is_action_just_pressed("jump_2") and not ulti_active:
+		_start_ulti()
+
+	# --- Actualizar facing si hay input
 	if abs(direction.x) > 0.01:
 		_set_facing(sign(direction.x))
 
-	# Si hay input de puño (fired_2)
+	# Input de puño
 	if Input.is_action_just_pressed("fired_2"):
 		_punch_alternate()
 
@@ -255,9 +248,7 @@ func _physics_process(delta: float) -> void:
 		Estado.NORMAL:
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()
-
 			if ulti_active:
-				# 🔹 si está en ulti, mantenemos ulti_pose
 				if animated_sprite.animation != "ulti_pose":
 					animated_sprite.play("ulti_pose")
 			else:
@@ -270,9 +261,19 @@ func _physics_process(delta: float) -> void:
 					elif direction.y < 0:
 						animated_sprite.play("caminar_subir")
 
-	# Movimiento real del personaje
-	velocity = direction * speed
-	move_and_slide()
+	# --- Movimiento
+	if not floating:
+		velocity = direction * speed
+		move_and_slide()
+		# detener sonido de flotación si estaba sonando
+		if sonido_flotando.playing:
+			sonido_flotando.stop()
+	else:
+		# reproducir sonido flotando
+		if not sonido_flotando.playing:
+			sonido_flotando.play()
+		_handle_floating(delta)
+
 
 
 

@@ -233,10 +233,10 @@ _data = {
 script = ExtResource("1_43v56")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5838384, 0.635294)
+scale = Vector2(0.583838, 0.635294)
 sprite_frames = SubResource("SpriteFrames_a6dcp")
 autoplay = "default"
-frame_progress = 0.06622942
+frame_progress = 0.0662294
 centered = false
 
 [node name="Sombras_transición" parent="." instance=ExtResource("3_jykc7")]

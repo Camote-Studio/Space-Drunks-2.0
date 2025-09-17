@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dkt37yghdsm2q"]
+[gd_scene load_steps=53 format=3 uid="uid://dkt37yghdsm2q"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -37,8 +37,7 @@
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="33_8d0et"]
 [ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="35_8sajs"]
 [ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
-[ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/enemie_1.tscn" id="38_qejn6"]
-[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="39_p5xse"]
+[ext_resource type="PackedScene" uid="uid://bb6kdi0va62sg" path="res://Scenes/Enemies/enemie_3.tscn" id="40_5eo7h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5503, 20)
@@ -699,13 +698,10 @@ position = Vector2(576, 303)
 position_smoothing_enabled = true
 script = ExtResource("13_n6wrj")
 
-[node name="Enemie_1" parent="." instance=ExtResource("38_qejn6")]
-position = Vector2(686, 328)
+[node name="enemie_4" parent="." instance=ExtResource("40_5eo7h")]
+position = Vector2(971, 423)
 
-[node name="enemie_2" parent="." instance=ExtResource("39_p5xse")]
-position = Vector2(594, 246)
-
-[node name="enemie_3" parent="." instance=ExtResource("39_p5xse")]
-position = Vector2(592, 355)
+[node name="enemie_5" parent="." instance=ExtResource("40_5eo7h")]
+position = Vector2(424, 253)
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]
