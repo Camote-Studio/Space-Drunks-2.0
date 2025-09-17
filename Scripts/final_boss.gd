@@ -3,7 +3,13 @@ extends CharacterBody2D
 signal damage(value: float)
 signal died
 
-var speed := 40.0
+# ----------------- FASES/ESTADOS -----------------
+enum State { NORMAL, PHASE_85 }
+var current_state: int = State.NORMAL
+var _did_dash85 := false              # para no repetir el dash de 85%
+# -------------------------------------------------
+
+var speed := 80.0
 var player: CharacterBody2D = null
 @onready var label: Label = $Label
 @onready var bar_boss: ProgressBar = $ProgressBar_boss
@@ -43,16 +49,16 @@ var pitch_variations_gun = [0.8, 1.5, 2.5]
 var face_sign := 1.0
 
 # ========== DASH + VENENO ==========
-@export var poison_scene: PackedScene        # Asignar en el editor: PoisonCloud.tscn
+@export var poison_scene: PackedScene
 @export var dash_speed := 520.0
 @export var dash_time := 0.35
 @export var dash_cooldown := 2.2
-@export var dash_min_range := 120.0          # no dashes si está demasiado cerca
-@export var dash_max_range := 520.0          # ni demasiado lejos
-@export var dash_chance := 0.35              # probabilidad de decidir dash cuando puede
+@export var dash_min_range := 120.0
+@export var dash_max_range := 520.0
+@export var dash_chance := 0.35
 
-@export var poison_spawn_interval := 0.08    # cada cuánto deja un charco durante el dash
-@export var poison_lifetime := 2.5           # se pasan a la escena veneno (si expuesto allí)
+@export var poison_spawn_interval := 0.08
+@export var poison_lifetime := 2.5
 @export var poison_dps := 12.0
 @export var poison_tick := 0.25
 
@@ -62,8 +68,8 @@ var _dash_timer: Timer
 var _dash_cd_timer: Timer
 var _poison_timer: Timer
 
-@export var shock_duration: float = 1.5   # segundos de lentitud
-@export var shock_factor: float   = 0.35  # 35% de la velocidad original
+@export var shock_duration: float = 1.5
+@export var shock_factor: float   = 0.35
 
 var _shock_timer: Timer
 var _base_speed: float
@@ -85,6 +91,7 @@ func _ready() -> void:
 	label.visible = false
 	rng.randomize()
 	walk_seed = rng.randf() * TAU
+
 	area.monitoring = true
 	if not area.is_connected("body_entered", Callable(self, "_on_area_2d_body_entered")):
 		area.connect("body_entered", Callable(self, "_on_area_2d_body_entered"))
@@ -92,15 +99,19 @@ func _ready() -> void:
 		area.connect("body_exited", Callable(self, "_on_area_2d_body_exited"))
 	if not area.is_connected("area_entered", Callable(self, "_on_area_2d_area_entered")):
 		area.connect("area_entered", Callable(self, "_on_area_2d_area_entered"))
+
 	punch_timer.one_shot = true
 	if not punch_timer.is_connected("timeout", Callable(self, "_on_punch_timer_timeout")):
 		punch_timer.connect("timeout", Callable(self, "_on_punch_timer_timeout"))
+
 	_stack_timer = Timer.new()
 	_stack_timer.one_shot = true
 	add_child(_stack_timer)
 	_stack_timer.connect("timeout", Callable(self, "_on_stack_timeout"))
+
 	if sprite_2d and not sprite_2d.is_connected("animation_finished", Callable(self, "_on_sprite_2d_animation_finished")):
 		sprite_2d.connect("animation_finished", Callable(self, "_on_sprite_2d_animation_finished"))
+
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 
@@ -111,35 +122,46 @@ func _ready() -> void:
 	_poison_timer = Timer.new(); _poison_timer.one_shot = false; add_child(_poison_timer)
 	_poison_timer.wait_time = poison_spawn_interval
 	_poison_timer.connect("timeout", Callable(self, "_spawn_poison_here"))
-	#---ELECTROSHOCK
-	_base_speed = speed
 
+	#--- Electroshock
+	_base_speed = speed
 	_shock_timer = Timer.new()
 	_shock_timer.one_shot = true
 	add_child(_shock_timer)
 	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
 		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
+
+	current_state = State.NORMAL
+	_did_dash85 = false
+
 func _physics_process(delta: float) -> void:
 	if dead or player == null:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
-	# --- limpiar electroshock antes de liberar ---
+
+	# reset visual shock por si lo estabas usando temporalmente
 	if _shock_timer:
 		_shock_timer.stop()
 	_is_shocked = false
 	speed = _base_speed
-	# (opcional) revertir feedback visual:
-	# if sprite_2d: sprite_2d.modulate = Color(1,1,1)
+
+	# --- vector al jugador ---
 	var to_player := player.global_position - global_position
 	var dist := to_player.length()
-	var dir := to_player.normalized()
+	var dir := Vector2.ZERO
+	if dist > 0.0:
+		dir = to_player / dist
+
+
+	# ---------- STATE MACHINE por vida ----------
+	_update_state(dist, dir)
+	# -------------------------------------------
 
 	walk_phase += delta
 	var target_vel := Vector2.ZERO
 
 	if _is_dashing:
-		# durante dash: ir recto y dejar veneno
 		target_vel = _dash_dir * dash_speed
 	else:
 		# movimiento normal con oscilación
@@ -154,18 +176,19 @@ func _physics_process(delta: float) -> void:
 			target_vel = Vector2.ZERO
 		else:
 			if dist > max_range:
-				target_vel = dir * speed + offset
+				target_vel = dir * speed 
 			elif dist < min_range:
 				target_vel = -dir * (speed * 0.8)
 			else:
-				target_vel = dir * (speed * 0.55) + offset * 0.4
+				target_vel = Vector2.ZERO
 
-		# intentar dash si se cumplen condiciones
+		# Dash “normal” por probabilidad y rango
 		_try_dash(dist, dir)
 
 	# clamp de velocidad
 	if target_vel.length() > dash_speed and _is_dashing == false:
 		target_vel = target_vel.normalized() * dash_speed
+
 	velocity = velocity.move_toward(target_vel, accel * delta)
 
 	rotation = 0.0
@@ -179,7 +202,34 @@ func _physics_process(delta: float) -> void:
 	if not _is_dashing and dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead:
 		_do_punch(dir)
 
+# ---------- Helpers de estado ----------
+func _hp_pct() -> float:
+	if bar_boss == null:
+		return 1.0
+	var minv := bar_boss.min_value
+	var maxv := bar_boss.max_value
+	if maxv <= minv:
+		return 1.0
+	return (bar_boss.value - minv) / (maxv - minv)
+
+func _update_state(dist: float, dir: Vector2) -> void:
+	match current_state:
+		State.NORMAL:
+			# Transición a PHASE_85 cuando la vida <= 85%
+			if _hp_pct() <= 0.85 and not _did_dash85:
+				current_state = State.PHASE_85
+				_did_dash85 = true
+		State.PHASE_85:
+			# Aquí puedes alterar parámetros para hacerlo más agresivo
+			# (solo una vez al entrar, pero es inofensivo si se repite)
+			dash_chance = 0.6
+			speed = max(speed, _base_speed * 1.15)
+			accel = max(accel, 1800.0)
+# --------------------------------------
+
 func _try_dash(dist: float, dir: Vector2) -> void:
+	if current_state == State.NORMAL:
+		return
 	if _is_dashing or _attack_lock:
 		return
 	if _dash_cd_timer.time_left > 0.0:
@@ -254,11 +304,13 @@ func _on_punch_timer_timeout() -> void:
 func _on_damage(amount: float) -> void:
 	if bar_boss:
 		bar_boss.value = clamp(bar_boss.value - amount, bar_boss.min_value, bar_boss.max_value)
+
 	_stack_value += amount
 	label.text = str(int(_stack_value))
 	label.visible = true
 	label.position = _label_base_pos
 	label.scale = Vector2.ONE
+
 	var sum := int(_stack_value)
 	var col := Color(1, 1, 1, 1)
 	if sum <= 20:
@@ -268,6 +320,7 @@ func _on_damage(amount: float) -> void:
 	else:
 		col = Color(1, 0, 0, 1)
 	label.modulate = col
+
 	if _tween and _tween.is_running() and _attack_lock == false:
 		_tween.kill()
 	var t := create_tween()
@@ -276,6 +329,8 @@ func _on_damage(amount: float) -> void:
 	t.parallel().tween_property(label, "modulate:a", 0.0, 0.32).set_delay(0.04)
 	_stack_timer.start(0.4)
 	random_pitch_variations_gun()
+
+	# Si llega a 0, muere
 	if not dead and bar_boss and bar_boss.value <= bar_boss.min_value:
 		_die()
 

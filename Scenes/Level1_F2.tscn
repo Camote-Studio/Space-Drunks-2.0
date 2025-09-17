@@ -504,7 +504,6 @@ offset_bottom = 564.0
 metadata/_edit_use_anchors_ = true
 
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("28_d5vqw")]
-spawn_seconds = 20.0
 
 [node name="enemy_spawn_4" parent="." instance=ExtResource("22_gdlfp")]
 
