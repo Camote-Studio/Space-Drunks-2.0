@@ -1,8 +1,10 @@
 extends CanvasLayer
 
 func _ready() -> void:
-	#$Volver.grab_focus()
-	
+	# Desactivar mouse para este botón
+	$Volver.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$Volver.focus_mode = Control.FOCUS_ALL  # sigue recibiendo foco desde teclado/mando
+
 	# Conectar señales del botón
 	$Volver.connect("focus_entered", Callable(self, "_on_volver_focus_entered"))
 	$Volver.connect("focus_exited", Callable(self, "_on_volver_focus_exited"))
@@ -13,6 +15,10 @@ func _physics_process(delta: float) -> void:
 		$TextureRect.visible = not $TextureRect.visible
 		$Volver.visible = not $Volver.visible
 		$Volver/Label.visible = not $Volver/Label.visible
+
+		# Darle foco automáticamente al botón cuando abres el menú
+		if $Volver.visible:
+			$Volver.grab_focus()
 
 func _on_volver_pressed() -> void:
 	get_tree().paused = not get_tree().paused
