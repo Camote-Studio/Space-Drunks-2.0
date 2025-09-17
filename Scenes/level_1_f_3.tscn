@@ -416,7 +416,7 @@ libraries = {
 }
 
 [node name="Final_Boss" parent="." instance=ExtResource("22_gupyi")]
-position = Vector2(998, 397)
+position = Vector2(1941, 380)
 
 [node name="GameOver" parent="." instance=ExtResource("23_d1i85")]
 

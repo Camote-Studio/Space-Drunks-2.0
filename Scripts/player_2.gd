@@ -273,8 +273,8 @@ func _physics_process(delta: float) -> void:
 		if not sonido_flotando.playing:
 			sonido_flotando.play()
 		_handle_floating(delta)
-
-
+func push_temp(offset: Vector2) -> void:
+	global_position += offset
 
 
 # =====================

@@ -1,4 +1,4 @@
-[gd_scene load_steps=246 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=257 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
@@ -236,6 +236,17 @@
 [ext_resource type="AudioStream" uid="uid://68jauvq2vtui" path="res://Assets/sfx/Retro Charge Off StereoUP 02.wav" id="223_wrxan"]
 [ext_resource type="Texture2D" uid="uid://b0fmkdyvev4rx" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s12.png" id="224_ylgmh"]
 [ext_resource type="Texture2D" uid="uid://bfibibol4kbks" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s13.png" id="225_32qke"]
+[ext_resource type="Texture2D" uid="uid://dtndackjcb7n7" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s14.png" id="226_ylgmh"]
+[ext_resource type="Texture2D" uid="uid://c0sdr1b6s1pf8" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s15.png" id="227_32qke"]
+[ext_resource type="Texture2D" uid="uid://8dc0qggghis0" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s16.png" id="228_ucjq2"]
+[ext_resource type="Texture2D" uid="uid://eqc4pu7s2uov" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s17.png" id="229_b1epr"]
+[ext_resource type="Texture2D" uid="uid://cue1f1hkrvxpj" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s18.png" id="230_xeei5"]
+[ext_resource type="Texture2D" uid="uid://bmri52i8vddlx" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s19.png" id="231_xkabn"]
+[ext_resource type="Texture2D" uid="uid://bf4pi57al4qqm" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s20.png" id="232_p1pvs"]
+[ext_resource type="Texture2D" uid="uid://dfn006os8c8to" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s21.png" id="233_eufwi"]
+[ext_resource type="Texture2D" uid="uid://3aoxntwf2sx1" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s22.png" id="234_klxos"]
+[ext_resource type="Texture2D" uid="uid://c30t4mmfxwawq" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s23.png" id="235_d83bn"]
+[ext_resource type="Texture2D" uid="uid://d3q2kswtw60v1" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s24.png" id="236_n0pwd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rn5h7"]
 animations = [{
@@ -941,10 +952,43 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("225_32qke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("226_ylgmh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("227_32qke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("228_ucjq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("229_b1epr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("230_xeei5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("231_xkabn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("232_p1pvs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("233_eufwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("234_klxos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("235_d83bn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("236_n0pwd")
 }],
 "loop": true,
 "name": &"ulti_pose",
-"speed": 36.0
+"speed": 40.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
@@ -1033,7 +1077,7 @@ position = Vector2(1, -11)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_rn5h7")
 animation = &"ulti_pose"
-frame_progress = 0.296472
+frame_progress = 0.0995656
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 5)
