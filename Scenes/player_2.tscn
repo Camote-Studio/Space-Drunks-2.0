@@ -1024,7 +1024,7 @@ radius = 120.046
 a = Vector2(-6.08382, 0.201834)
 b = Vector2(4.81887, 8.14064)
 
-[node name="Player_2" type="CharacterBody2D" groups=["player_2"]]
+[node name="Player_2" type="CharacterBody2D" groups=["player_2", "puño_player2"]]
 collision_mask = 3
 script = ExtResource("1_a3adp")
 
@@ -1057,7 +1057,6 @@ autoplay = "explosion_death"
 [node name="venenoTimer" type="Timer" parent="."]
 
 [node name="Punch_left" type="Sprite2D" parent="." groups=["puño_player2"]]
-visible = false
 position = Vector2(-38, -21)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("219_4x7fj")
@@ -1069,7 +1068,6 @@ position = Vector2(6.66667, 0)
 shape = SubResource("CircleShape2D_prblm")
 
 [node name="Punch_right" type="Sprite2D" parent="." groups=["puño_player2"]]
-visible = false
 position = Vector2(45, -20)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("220_58h14")
@@ -1102,7 +1100,19 @@ volume_db = 10.0
 stream = ExtResource("223_wrxan")
 volume_db = 20.0
 
+[node name="TimerUlti" type="Timer" parent="."]
+
+[node name="TimerAutoPunch" type="Timer" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+texture = ExtResource("173_fcbx1")
+gravity = Vector2(0, 0)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
 [connection signal="body_entered" from="Punch_left/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Punch_right/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="area_entered" from="alabarda/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="TimerUlti" to="." method="_on_timer_ulti_timeout"]
+[connection signal="timeout" from="TimerAutoPunch" to="." method="_on_timer_auto_punch_timeout"]

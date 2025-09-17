@@ -48,6 +48,20 @@ var _shock_timer: Timer
 var _base_speed: float
 var _is_shocked := false
 
+# === SISTEMA DE HITSTUN ===
+@export var hitstun_duration: float = 0.8        # Duración del hitstun por golpe
+@export var hitstun_threshold: float = 15.0      # Daño mínimo para activar hitstun
+@export var combo_window: float = 1.2            # Tiempo para extender combo
+@export var hitstun_color: Color = Color(1.0, 0.3, 0.3, 1.0)  # Rojo para hitstun
+
+var _in_hitstun := false
+var _hitstun_timer: Timer
+var _combo_timer: Timer
+var _combo_count := 0
+var _original_color: Color
+var _hitstun_tween: Tween
+
+
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi()%pitch_variations_gun.size()]
 	$hit.pitch_scale = random_pitch
@@ -94,6 +108,8 @@ func _ready() -> void:
 	# Iniciar con Idle
 	if sprite_2d and sprite_2d.sprite_frames.has_animation("Idle"):
 		sprite_2d.play("Idle")
+		
+	_ready_hitstun_system()
 
 func _physics_process(delta: float) -> void:
 	_update_target()
@@ -112,6 +128,14 @@ func _physics_process(delta: float) -> void:
 
 	var offset = tangent * (sin(walk_phase * TAU * walk_freq + walk_seed) * side_amp * calm)
 	offset += Vector2(0, 1) * (sin(walk_phase * TAU * up_freq + walk_seed * 0.73) * up_amp * calm)
+
+	# === MODIFICACIÓN: Movimiento reducido durante hitstun ===
+	var movement_multiplier = 1.0
+	if _in_hitstun:
+		movement_multiplier = 0.2  # 20% velocidad durante hitstun (muy lento)
+		# Durante hitstun, reducir también las oscilaciones
+		offset *= 0.3
+		calm *= 0.3
 
 	var target_vel := Vector2.ZERO
 	if _attack_lock:
@@ -134,7 +158,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead:
+	if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead and not _in_hitstun:
 		_do_punch(dir)
 
 
@@ -169,6 +193,11 @@ func _on_area_2d_area_entered(a: Area2D) -> void:
 			a.queue_free()
 			
 func _do_punch(dir: Vector2) -> void:
+	
+	# No atacar si está en hitstun
+	if _in_hitstun:
+		return
+		
 	if target_in_range:
 		print("💥 Enemigo golpea al jugador con daño:", punch_damage)
 		target_in_range.emit_signal("damage", punch_damage)
@@ -184,12 +213,13 @@ func _do_punch(dir: Vector2) -> void:
 	if sprite_2d and sprite_2d.sprite_frames.has_animation("golpe"):
 		sprite_2d.play("golpe")
 		
-	# Movimiento de embestida
-	var start := global_position
-	var end := start + dir * lunge_dist
-	_tween = create_tween()
-	_tween.tween_property(self, "global_position", end, lunge_time)
-	_tween.tween_property(self, "global_position", start, lunge_time)
+	# Movimiento de embestida (si no está en hitstun)
+	if not _in_hitstun:
+		var start := global_position
+		var end := start + dir * lunge_dist
+		_tween = create_tween()
+		_tween.tween_property(self, "global_position", end, lunge_time)
+		_tween.tween_property(self, "global_position", start, lunge_time)
 
 	# Cooldown del ataque
 	punch_timer.start(punch_cooldown)
@@ -203,11 +233,13 @@ func _on_punch_timer_timeout() -> void:
 func _on_damage(amount: float) -> void:
 	if bar_4:
 		bar_4.value = clamp(bar_4.value - amount, bar_4.min_value, bar_4.max_value)
+		
 	_stack_value += amount
 	label.text = str(int(_stack_value))
 	label.visible = true
 	label.position = _label_base_pos
 	label.scale = Vector2.ONE
+	
 	var sum := int(_stack_value)
 	var col := Color(1, 1, 1, 1)
 	if sum <= 20:
@@ -217,14 +249,21 @@ func _on_damage(amount: float) -> void:
 	else:
 		col = Color(1, 0, 0, 1)
 	label.modulate = col
+	
 	if _tween and _tween.is_running() and _attack_lock == false:
 		_tween.kill()
+		
 	var t := create_tween()
 	t.tween_property(label, "position:y", _label_base_pos.y - 16.0, 0.22)
 	t.parallel().tween_property(label, "scale", Vector2(1.2, 1.2), 0.16)
 	t.parallel().tween_property(label, "modulate:a", 0.0, 0.32).set_delay(0.04)
+	
 	_stack_timer.start(0.4)
 	random_pitch_variations_gun()
+	
+	# === NUEVO: SISTEMA DE HITSTUN ===
+	_process_hitstun(amount)
+
 	if not dead and bar_4 and bar_4.value <= bar_4.min_value:
 		_die()
 
@@ -234,6 +273,14 @@ func _on_stack_timeout() -> void:
 
 func _die() -> void:
 	dead = true
+	
+	# Limpia hitstun antes de morir
+	if _hitstun_timer:
+		_hitstun_timer.stop()
+	if _combo_timer:
+		_combo_timer.stop()
+	_end_hitstun()	
+	
 	if _is_shocked:
 		_end_electroshock()
 	label.visible = false
@@ -309,3 +356,132 @@ func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 func _end_electroshock() -> void:
 	_is_shocked = false
 	speed = _base_speed
+	
+# === SISTEMA DE HITSTUN PARA ENEMY 2 ===
+func _ready_hitstun_system() -> void:
+	# Timer para duración del hitstun
+	_hitstun_timer = Timer.new()
+	_hitstun_timer.one_shot = true
+	add_child(_hitstun_timer)
+	_hitstun_timer.connect("timeout", Callable(self, "_end_hitstun"))
+	
+	# Timer para ventana de combo
+	_combo_timer = Timer.new()
+	_combo_timer.one_shot = true
+	add_child(_combo_timer)
+	_combo_timer.connect("timeout", Callable(self, "_reset_combo"))
+	
+	# Guardar color original del sprite
+	if sprite_2d:
+		_original_color = sprite_2d.modulate
+		
+# === FUNCIONES DEL HITSTUN ===
+func _process_hitstun(damage_amount: float) -> void:
+	# Solo activa hitstun si el daño es suficiente
+	if damage_amount < hitstun_threshold:
+		return
+	
+	# Incrementa combo si estamos en ventana de combo
+	if _combo_timer.time_left > 0.0:
+		_combo_count += 1
+	else:
+		_combo_count = 1
+	
+	# Reinicia timer de combo
+	_combo_timer.start(combo_window)
+	
+	# Activa/extiende hitstun
+	_enter_hitstun()
+	
+	# Duración del hitstun se extiende con combos (menos que el ranged)
+	var extended_duration = hitstun_duration + (_combo_count * 0.15)  # Menos extensión para melee
+	_hitstun_timer.start(extended_duration)
+	
+	print("🥊 Combo Melee x", _combo_count, " - Hitstun: ", extended_duration, "s")	
+	
+func _enter_hitstun() -> void:
+	if dead:
+		return
+		
+	_in_hitstun = true
+	
+	# Para el timer de ataque melee
+	if punch_timer:
+		punch_timer.paused = true
+	
+	# Si estaba atacando, cancelar el ataque
+	if _attack_lock:
+		_cancel_current_attack()
+	
+	# Cambia color a rojo con animación suave
+	if _hitstun_tween:
+		_hitstun_tween.kill()
+	
+	_hitstun_tween = create_tween()
+	_hitstun_tween.tween_property(sprite_2d, "modulate", hitstun_color, 0.08)
+	
+	# Reducir velocidad durante hitstun (más agresivo para melee)
+	speed *= 0.3  # 30% de velocidad (más severo que ranged)
+	
+	# Efecto visual: sacudida más intensa para melee
+	_screen_shake_effect_melee()
+	
+	# Reproducir animación de hitstun si existe
+	if sprite_2d and sprite_2d.sprite_frames.has_animation("hitstun"):
+		sprite_2d.play("hitstun")
+		
+func _end_hitstun() -> void:
+	if not _in_hitstun:
+		return
+		
+	_in_hitstun = false
+	
+	# Reactiva ataque
+	if punch_timer and not dead:
+		punch_timer.paused = false
+	
+	# Restaura color original
+	if _hitstun_tween:
+		_hitstun_tween.kill()
+	
+	_hitstun_tween = create_tween()
+	_hitstun_tween.tween_property(sprite_2d, "modulate", _original_color, 0.15)
+	
+	# Restaura velocidad (si no está en electroshock)
+	if not _is_shocked:
+		speed = _base_speed
+	
+	# Volver a animación idle
+	if not dead and sprite_2d and sprite_2d.sprite_frames.has_animation("Idle"):
+		sprite_2d.play("Idle")
+	
+	print("🛡️ Hitstun Melee terminado")
+	
+func _cancel_current_attack() -> void:
+	# Cancela ataque en progreso
+	_attack_lock = false
+	
+	# Para cualquier tween de movimiento de ataque
+	if _tween and _tween.is_running():
+		_tween.kill()
+		# No regresar a posición original, quedarse donde está
+	
+	# Para timer de ataque
+	if punch_timer:
+		punch_timer.stop()
+		
+func _reset_combo() -> void:
+	if _combo_count > 1:
+		print("💥 Combo Melee terminado: ", _combo_count, " golpes!")
+	_combo_count = 0
+
+func _screen_shake_effect_melee() -> void:
+	# Efecto de sacudida más intensa para enemigo melee
+	var shake_tween = create_tween()
+	var original_pos = sprite_2d.position
+	
+	# Sacudida más fuerte y más golpes
+	for i in range(4):  # Más sacudidas que el ranged
+		var offset = Vector2(randf_range(-5, 5), randf_range(-5, 5))  # Más intenso
+		shake_tween.tween_property(sprite_2d, "position", original_pos + offset, 0.04)
+		shake_tween.tween_property(sprite_2d, "position", original_pos, 0.04)

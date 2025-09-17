@@ -38,7 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="35_8sajs"]
 [ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
 [ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/enemie_1.tscn" id="38_qejn6"]
-[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="39_p5xse"]
+[ext_resource type="PackedScene" uid="uid://c76e4r2yxqn47" path="res://Scenes/enemie_5.tscn" id="39_p5xse"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5503, 20)
@@ -397,7 +397,7 @@ scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
 [node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
-position = Vector2(266, 273)
+position = Vector2(328, 277)
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
 position = Vector2(305, 417)
@@ -675,8 +675,10 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("31_jqqi2")
 
 [node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
-offset_top = -12.0
-offset_bottom = 634.0
+offset_left = -6.0
+offset_top = -16.0
+offset_right = 1147.0
+offset_bottom = 630.0
 mouse_filter = 2
 
 [node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
@@ -701,10 +703,10 @@ script = ExtResource("13_n6wrj")
 [node name="Enemie_1" parent="." instance=ExtResource("38_qejn6")]
 position = Vector2(686, 328)
 
-[node name="enemie_2" parent="." instance=ExtResource("39_p5xse")]
-position = Vector2(594, 246)
+[node name="enemie_5" parent="." instance=ExtResource("39_p5xse")]
+position = Vector2(656, 380)
 
-[node name="enemie_3" parent="." instance=ExtResource("39_p5xse")]
-position = Vector2(592, 355)
+[node name="enemie_6" parent="." instance=ExtResource("39_p5xse")]
+position = Vector2(544, 276)
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]

@@ -260,6 +260,7 @@ func _update_target() -> void:
 				nearest = p
 
 	player = nearest
+	
 func _drop_coin():
 	var coin_instance = MONEDA.instantiate()
 	get_parent().add_child(coin_instance)
@@ -267,6 +268,7 @@ func _drop_coin():
 	var sprite = coin_instance.get_node("AnimatedSprite2D")
 	if sprite:
 		sprite.play("idle")
+		
 func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 	if dead:
 		return
