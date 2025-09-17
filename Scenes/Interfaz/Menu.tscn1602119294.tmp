@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cnl10kue3lo6a"]
+[gd_scene load_steps=18 format=3 uid="uid://cnl10kue3lo6a"]
 
 [ext_resource type="Script" uid="uid://ck6giv4ro3lu6" path="res://Scripts/Intefaz/menu.gd" id="1_qbx0g"]
 [ext_resource type="Texture2D" uid="uid://cbpn3c0nx2q3x" path="res://Assets/art/background/Menu/Fondo1.png" id="2_1xh45"]
@@ -16,58 +16,14 @@
 [ext_resource type="Texture2D" uid="uid://dkd2a5xr6b4qh" path="res://Assets/art/sprites/Interfaz/botella_3.png" id="11_w4fob"]
 [ext_resource type="Texture2D" uid="uid://d0ke3228vox1a" path="res://Assets/art/background/Menu/3.png" id="12_1xh45"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2qgrd"]
-shader = ExtResource("7_i7q02")
-shader_parameter/transition_progress = 0.0
-shader_parameter/screen_size = Vector2(1152, 648)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mm3o3"]
 shader = ExtResource("7_i7q02")
-shader_parameter/transition_progress = 0.0
-shader_parameter/screen_size = Vector2(800, 600)
+shader_parameter/transition_progress = 0.999999977648
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w4fob"]
-shader = ExtResource("7_i7q02")
-shader_parameter/transition_progress = 0.0
-shader_parameter/screen_size = Vector2(800, 600)
-
-[sub_resource type="Animation" id="Animation_mm3o3"]
-resource_name = "Movimiento"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-673, 0), Vector2(14, -9)]
-}
-
-[sub_resource type="Animation" id="Animation_2qgrd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-673, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4fob"]
-_data = {
-&"Movimiento": SubResource("Animation_mm3o3"),
-&"RESET": SubResource("Animation_2qgrd")
-}
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1xh45"]
 
 [node name="Menu" type="Control"]
+material = SubResource("ShaderMaterial_mm3o3")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,21 +71,20 @@ scale = Vector2(0.8545454, 0.93039215)
 texture = ExtResource("6_i7q02")
 centered = false
 
-[node name="Control" type="Node2D" parent="."]
-position = Vector2(-673, 0)
+[node name="Node2D" type="Control" parent="."]
+material = SubResource("ShaderMaterial_1xh45")
+use_parent_material = true
+anchors_preset = 0
 script = ExtResource("8_mm3o3")
 
-[node name="Título" type="Sprite2D" parent="Control"]
-material = SubResource("ShaderMaterial_2qgrd")
-use_parent_material = true
+[node name="Título" type="Sprite2D" parent="Node2D"]
 position = Vector2(-3.0000002, 2.000002)
 scale = Vector2(0.7126262, 0.717647)
 texture = ExtResource("7_mm3o3")
 centered = false
 
-[node name="Start" type="TextureButton" parent="Control" groups=["ui_botones"]]
-material = SubResource("ShaderMaterial_mm3o3")
-use_parent_material = true
+[node name="Start" type="TextureButton" parent="Node2D" groups=["ui_botones"]]
+layout_mode = 0
 offset_left = 63.0
 offset_top = 261.0
 offset_right = 903.0
@@ -143,9 +98,7 @@ texture_pressed = ExtResource("10_2qgrd")
 texture_hover = ExtResource("11_w4fob")
 texture_focused = ExtResource("11_w4fob")
 
-[node name="Label" type="Label" parent="Control/Start"]
-material = SubResource("ShaderMaterial_w4fob")
-use_parent_material = true
+[node name="Label" type="Label" parent="Node2D/Start"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 116.0
@@ -165,9 +118,8 @@ theme_override_font_sizes/font_size = 128
 text = "Start
  Game"
 
-[node name="Options" type="TextureButton" parent="Control" groups=["ui_botones"]]
-material = SubResource("ShaderMaterial_w4fob")
-use_parent_material = true
+[node name="Options" type="TextureButton" parent="Node2D" groups=["ui_botones"]]
+layout_mode = 0
 offset_left = 151.0
 offset_top = 384.0
 offset_right = 991.0
@@ -181,9 +133,7 @@ texture_pressed = ExtResource("10_2qgrd")
 texture_hover = ExtResource("11_w4fob")
 texture_focused = ExtResource("11_w4fob")
 
-[node name="Label" type="Label" parent="Control/Options"]
-material = SubResource("ShaderMaterial_w4fob")
-use_parent_material = true
+[node name="Label" type="Label" parent="Node2D/Options"]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 156.0
@@ -202,9 +152,8 @@ theme_override_fonts/font = ExtResource("5_erq20")
 theme_override_font_sizes/font_size = 128
 text = "Options"
 
-[node name="Quit" type="TextureButton" parent="Control" groups=["ui_botones"]]
-material = SubResource("ShaderMaterial_w4fob")
-use_parent_material = true
+[node name="Quit" type="TextureButton" parent="Node2D" groups=["ui_botones"]]
+layout_mode = 0
 offset_left = 244.0
 offset_top = 503.0
 offset_right = 1084.0
@@ -218,9 +167,7 @@ texture_pressed = ExtResource("10_2qgrd")
 texture_hover = ExtResource("11_w4fob")
 texture_focused = ExtResource("11_w4fob")
 
-[node name="Label" type="Label" parent="Control/Quit"]
-material = SubResource("ShaderMaterial_w4fob")
-use_parent_material = true
+[node name="Label" type="Label" parent="Node2D/Quit"]
 layout_mode = 0
 offset_left = 78.0
 offset_top = 148.0
@@ -239,10 +186,6 @@ theme_override_fonts/font = ExtResource("5_erq20")
 theme_override_font_sizes/font_size = 128
 text = "Quit"
 
-[node name="Timer" type="Timer" parent="Control"]
-wait_time = 2.0
-autostart = true
-
 [node name="Players" type="Sprite2D" parent="."]
 position = Vector2(29.999985, -159.00002)
 scale = Vector2(0.8, 0.8)
@@ -255,14 +198,7 @@ layout_mode = 0
 
 [node name="Sombra_time" type="Timer" parent="Sombras_transición"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_w4fob")
-}
-autoplay = "Movimiento"
-
-[connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Control/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
-[connection signal="timeout" from="Control/Timer" to="Control" method="_on_timer_timeout"]
+[connection signal="pressed" from="Node2D/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Node2D/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Node2D/Quit" to="." method="_on_quit_pressed"]
 [connection signal="timeout" from="Sombras_transición/Sombra_time" to="." method="_on_sombra_time_timeout"]
