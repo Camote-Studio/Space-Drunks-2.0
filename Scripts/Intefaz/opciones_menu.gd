@@ -3,6 +3,9 @@ extends Control
 
 	
 func _ready():
+	$"Sombras_transición".show()
+	$"Sombras_transición/AnimationPlayer".play("Sombra_off")
+	
 	for button in get_tree().get_nodes_in_group("ui_boton_opciones"):
 		if button is TextureButton:
 			button.mouse_filter = Control.MOUSE_FILTER_IGNORE

@@ -52,51 +52,6 @@ script = ExtResource("1_pnniq")
 
 [node name="MenuOpcionesBackground" parent="." instance=ExtResource("1_eqj40")]
 
-[node name="Label" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -44.0
-offset_top = 38.0
-offset_right = 47.0
-offset_bottom = 61.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_pnniq")
-theme_override_font_sizes/font_size = 56
-text = "OPTIONS"
-
-[node name="Label2" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -402.0
-offset_top = 168.0
-offset_right = -241.0
-offset_bottom = 247.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_pnniq")
-theme_override_font_sizes/font_size = 46
-text = "Music"
-
-[node name="Label3" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -401.0
-offset_top = 278.0
-offset_right = -240.0
-offset_bottom = 357.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_pnniq")
-theme_override_font_sizes/font_size = 46
-text = "Effects"
-
 [node name="Sombras_transición" parent="." instance=ExtResource("4_wsc1c")]
 visible = false
 layout_mode = 0
