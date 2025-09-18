@@ -254,8 +254,10 @@ func _physics_process(delta: float) -> void:
 	if allow_input:
 		direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
 
-	if Input.is_action_just_pressed("jump_2") and not ulti_active:
-		_start_ulti()
+	if Input.is_action_just_pressed("jump_2"):
+		_power()
+
+
 
 	# --- Actualizar facing si hay input
 	if abs(direction.x) > 0.01:
@@ -335,10 +337,11 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 				animated_sprite.play("envenenado")
 
 		"bala":
-			if estado_actual == Estado.NORMAL:
+			if estado_actual == Estado.NORMAL and not ulti_active:  # 🔹 inmune al aturdimiento en ulti
 				estado_actual = Estado.ATURDIDO
 				$Timer.start(2)
 				animated_sprite.play("aturdido")
+
 
 		"bala_gravedad":
 			floating = true
@@ -519,35 +522,45 @@ func gain_ability_from_attack_2(damage_dealt: float) -> void:
 	var gain = max(0.0, damage_dealt)
 	bar_ability_2.value = clamp(bar_ability_2.value + gain, bar_ability_2.min_value, bar_ability_2.max_value)
 	if bar_ability_2.value >= bar_ability_2.max_value:
-		_power()
+		_start_ulti()
 
 func _power() -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
-	if bar_ability_2 and bar_ability_2.value >= bar_ability_2.max_value:
-		bar_ability_2.value = bar_ability_2.min_value
-		var alabarda = $alabarda
-		var hitbox = alabarda.get_node("Hitbox")
-		alabarda.visible = true
-		alabarda.rotation_degrees = 0
-		hitbox.monitoring = true  # activar hitbox
 
-		var t = create_tween()
+	var alabarda = $alabarda
+	var hitbox = alabarda.get_node("Hitbox")
+	alabarda.visible = true
+	alabarda.rotation_degrees = 0
+	hitbox.monitoring = true  # activar hitbox
 
-		# 1. Carga del golpe (wind-up)
-		t.tween_property(alabarda, "rotation_degrees", -45.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var t = create_tween()
 
-		# 2. Swing fuerte
-		t.tween_property(alabarda, "rotation_degrees", 120.0, 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	# 1. Carga del golpe (wind-up)
+	t.tween_property(alabarda, "rotation_degrees", -45.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-		# 3. Regresa
-		t.tween_property(alabarda, "rotation_degrees", 0.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	# 2. Swing fuerte
+	t.tween_property(alabarda, "rotation_degrees", 120.0, 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
-		# 4. Termina
-		t.tween_callback(Callable(self, "_end_power"))
+	# 3. Regresa
+	t.tween_property(alabarda, "rotation_degrees", 0.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	# 4. Termina
+	t.tween_callback(Callable(self, "_end_power"))
 
 func _start_ulti() -> void:
+	if dead:
+		return
+	if bar_ability_2:
+		bar_ability_2.value = bar_ability_2.min_value  # 🔹 Reinicia barra al usar ulti
+
+	# 🔹 Quitar efectos de aturdimiento al activar ulti
+	if estado_actual == Estado.ATURDIDO:
+		estado_actual = Estado.NORMAL
+		if $Timer.is_stopped() == false:
+			$Timer.stop()
+
 	ulti_active = true
 	animated_sprite.play("ulti_pose")
 	punch_left.visible = false
@@ -556,7 +569,7 @@ func _start_ulti() -> void:
 	TimerUlti.start(5.0)
 	if not TimerUlti.is_connected("timeout", Callable(self, "_end_ulti")):
 		TimerUlti.connect("timeout", Callable(self, "_end_ulti"))
-		TimerGolpeUlti.start()
+	TimerGolpeUlti.start()
 
 
 

@@ -993,8 +993,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
-radius = 31.0
-height = 62.0
+radius = 24.0
+height = 108.0
 
 [sub_resource type="Animation" id="Animation_tb6cx"]
 length = 0.001
@@ -1060,12 +1060,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_prblm"]
-
-radius = 85.83332
+radius = 85.8333
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
-radius = 83.43743
-
+radius = 83.4374
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dfurs"]
 a = Vector2(-6.08382, 0.201834)
@@ -1085,7 +1083,7 @@ animation = &"ulti_pose"
 frame_progress = 0.0995656
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 36)
+position = Vector2(1, -5)
 shape = SubResource("CapsuleShape2D_1m887")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1114,6 +1112,7 @@ texture = ExtResource("219_4x7fj")
 position = Vector2(6.66667, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_left/Area2D"]
+position = Vector2(3.33333, 2.5)
 shape = SubResource("CircleShape2D_prblm")
 
 [node name="Punch_right" type="Sprite2D" parent="." groups=["puño_player2"]]

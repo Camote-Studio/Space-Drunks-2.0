@@ -256,8 +256,7 @@ script = ExtResource("1_43v56")
 scale = Vector2(0.583838, 0.635294)
 sprite_frames = SubResource("SpriteFrames_a6dcp")
 autoplay = "default"
-
-frame_progress = 0.08713289
+frame_progress = 0.0871329
 centered = false
 
 [node name="Sombras_transición" parent="." instance=ExtResource("3_jykc7")]
@@ -271,7 +270,7 @@ offset_right = 1080.0
 offset_bottom = 448.0
 theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.6627451, 0.36078432, 0.3019608, 1)
+theme_override_colors/font_outline_color = Color(0.662745, 0.360784, 0.301961, 1)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 15
