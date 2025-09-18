@@ -1,7 +1,8 @@
-[gd_scene load_steps=257 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=258 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
+[ext_resource type="PackedScene" uid="uid://bcumd4ca72ik2" path="res://Scenes/PoisonArea.tscn" id="2_32qke"]
 [ext_resource type="Texture2D" uid="uid://cqxklgykn6by8" path="res://Assets/art/sprites/Personajes/BIGB/frame_00_delay-0.03s.png" id="3_sj0qb"]
 [ext_resource type="Texture2D" uid="uid://u73h8cvpbapi" path="res://Assets/art/sprites/Personajes/BIGB WAL/frame_00_delay-0.03s.png" id="3_uqjhf"]
 [ext_resource type="Texture2D" uid="uid://dr3las3svr06d" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 002.png" id="3_ygfiw"]
@@ -1069,8 +1070,10 @@ a = Vector2(-6.08382, 0.201834)
 b = Vector2(4.81887, 8.14064)
 
 [node name="Player_2" type="CharacterBody2D" groups=["player_2", "puño_player2"]]
+z_index = 1
 collision_mask = 3
 script = ExtResource("1_a3adp")
+poison_area_scene = ExtResource("2_32qke")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -11)

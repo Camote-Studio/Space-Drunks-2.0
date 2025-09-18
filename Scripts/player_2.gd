@@ -5,6 +5,12 @@ extends CharacterBody2D
 # --- Señales ---
 signal damage(amount: float, source: String)
 signal muerte  # Para notificar al GameManager
+# ============================
+# PODER: ÁREA DE VENENO
+# ============================
+@export var poison_area_scene: PackedScene
+var poison_preview: Node2D = null
+var selecting_poison := false
 
 # --- Variables ---
 var coins: int = 0
@@ -212,6 +218,37 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
+# Activar selección de área de veneno
+	# Activar selección de área de veneno
+	if Input.is_action_just_pressed("area_veneno") and not selecting_poison:
+		selecting_poison = true
+		poison_preview = Node2D.new()
+
+		# 🔹 Sprite como círculo celeste transparente
+		var sprite := Sprite2D.new()
+		sprite.texture = preload("res://Assets/art/sprites/Particulas/circle.png") 
+		sprite.modulate = Color(0.3, 0.8, 1.0, 0.4)  # celeste con alpha
+		sprite.scale = Vector2(1.5, 1.5) # tamaño del área
+		sprite.centered = true
+		poison_preview.add_child(sprite)
+
+		get_tree().current_scene.add_child(poison_preview)
+		print("[VENENO] Selección iniciada: mostrando círculo de preview")
+
+	if selecting_poison and poison_preview:
+		poison_preview.global_position = get_global_mouse_position()
+
+		# Colocar veneno con click izquierdo
+		if Input.is_action_just_pressed("veneno_activo"): 
+			var poison_instance = poison_area_scene.instantiate()
+			get_tree().current_scene.add_child(poison_instance)
+			poison_instance.global_position = poison_preview.global_position
+			print("[VENENO] ¡Área de veneno colocada en: ", poison_instance.global_position, "!")
+			poison_preview.queue_free()
+			poison_preview = null
+			selecting_poison = false
+
+
 
 	var direction = Vector2.ZERO
 	if allow_input:
@@ -301,7 +338,7 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 			if estado_actual == Estado.NORMAL:
 				estado_actual = Estado.ATURDIDO
 				$Timer.start(2)
-				animated_sprite.play("aturdio")
+				animated_sprite.play("aturdido")
 
 		"bala_gravedad":
 			floating = true
@@ -394,7 +431,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			modo = "ULTI"
 		else:
 			modo = "NORMAL"
-		print("[PUÑOS] Golpe a %s | Daño: %s | Modo: %s" % [body.name, dmg, modo])
 		body.emit_signal("damage", dmg)
 		gain_ability_from_attack_2(dmg)
 
@@ -414,7 +450,6 @@ func _ulti_punch() -> void:
 			or body.is_in_group("enemy_3") or body.is_in_group("enemy_4") \
 			or body.is_in_group("enemy_5") or body.is_in_group("boss"):
 				if body.has_signal("damage"):
-					print("[ULTI] Golpe automático a %s | Daño: 50" % body.name)
 					body.emit_signal("damage", 50.0)
 
 
