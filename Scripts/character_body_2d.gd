@@ -37,7 +37,7 @@ var has_jet_punches := false
 var has_sleepy_gun := false
 var speed := 200
 
-enum Estado { NORMAL, VENENO, ATURDIDO }
+enum Estado { NORMAL, VENENO, ATURDIDO, ULTI, DEAD, FLOATING }
 var estado_actual : Estado = Estado.NORMAL
 
 var floating := false
@@ -60,6 +60,7 @@ var power_bullet_scale := 1.8
 var power_bullet_extra_damage := 20.0
 @onready var visuals: Node2D = $Visuals
 
+# =============== FUNCIÓN READY =============================
 func _ready() -> void:
 	# Configuración de timers
 	if gun:
@@ -100,7 +101,8 @@ func _ready() -> void:
 		_360_timer.connect("timeout", Callable(self, "_360_gun_instance"))
 
 	_set_gun_active(gun_node, true)
-
+	
+# =============== FUNCIÓN PHYSICS PROCEES ===================================
 func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
@@ -129,7 +131,7 @@ func _physics_process(delta: float) -> void:
 			sonido_flotando.play()
 		_handle_floating(delta)
 
-# ====================== Animaciones
+# ====================== FUNCIÓN UPDATE ANIMACIONES ===========================
 func _update_animation(direction: Vector2) -> void:
 	match estado_actual:
 		Estado.VENENO:
@@ -166,9 +168,8 @@ func _update_animation(direction: Vector2) -> void:
 
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()
-
-
-# ====================== Daño
+		
+# ====================== FUNCIÓN DAÑO ===============================================
 func _on_damage(amount: float, source: String = "desconocido") -> void:
 	if dead: return
 
@@ -198,7 +199,7 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
 		emit_signal("damage", 20.0, "bala")
 
-# ====================== Flotar
+# ====================== FUNCIÓN FLOTAR ==========================================
 func _handle_floating(delta: float) -> void:
 	var target_y
 	var current_lerp_speed
@@ -232,7 +233,7 @@ func _handle_floating(delta: float) -> void:
 		set_collision_layer(1)
 		set_collision_mask(1)
 
-# ====================== Poder
+# ====================== FUNCIONES DE SOPORTE ============================= 
 func gain_ability_from_attack(damage_dealt: float) -> void:
 	if dead or bar_ability_1 == null: return
 	bar_ability_1.value = clamp(bar_ability_1.value + max(0.0, damage_dealt), bar_ability_1.min_value, bar_ability_1.max_value)
@@ -267,7 +268,7 @@ func apply_power_to_bullet(bullet: Node) -> void:
 
 	next_shot_powered = false
 
-# ====================== Muerte
+# ====================== FUNCIONES DE MUERTE / ESTADO ATACADO =====================
 func _die() -> void:
 	if _electro_active:
 		_revert_gun_instance()
@@ -307,7 +308,7 @@ func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
 		estado_actual = Estado.NORMAL
 
-# ====================== Monedas
+# ====================== FUNCIÓN PARA COLECCIONAR MONEDAS =======================
 func collect_coin(amount: int = 1) -> void:
 	coins += amount
 	if coin_label:
@@ -320,7 +321,7 @@ func collect_coin(amount: int = 1) -> void:
 			coin_label.text = str(coins)
 			GameState.set_coins(player_id, coins)
 
-# ====================== Armas especiales
+# ====================== FUNCIÓN DE ARMAS ESPECIALES ================================
 func activate_electro_for(seconds: float = -1.0) -> void:
 	if seconds <= 0.0:
 		seconds = randf_range(electro_duration_min, electro_duration_max)
@@ -389,7 +390,7 @@ func _show_shop() -> void:
 	else:
 		push_warning("[P1] No encontré la tienda (UI_abilities)")
 
-# ====================== Ulti
+# ====================== FUNCIÓN PARA ULTI =======================
 func _activate_ulti() -> void:
 	print("🔥 Ulti ACTIVADA")
 	is_using_ulti = true

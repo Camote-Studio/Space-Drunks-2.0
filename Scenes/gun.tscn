@@ -41,7 +41,7 @@ position = Vector2(13.0654, 15.5502)
 rotation = 0.0174533
 skew = 0.0174533
 sprite_frames = SubResource("SpriteFrames_ft2q4")
-animation = &"metralleta"
+animation = &"idle"
 offset = Vector2(-6.70587, -8.77188)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
