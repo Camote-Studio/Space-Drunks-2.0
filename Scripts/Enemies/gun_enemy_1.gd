@@ -1,9 +1,6 @@
 extends Node2D
 var SPEED := 200
 
-@onready var progress_bar_alien_1: TextureProgressBar = $CanvasLayer/ProgressBar_alien_1
-@onready var progress_bar_alien_2: TextureProgressBar = $CanvasLayer/ProgressBar_alien_2
-
 var alien : CharacterBody2D
 var alien_2 : CharacterBody2D
 

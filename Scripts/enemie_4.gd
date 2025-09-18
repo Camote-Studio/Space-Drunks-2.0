@@ -11,7 +11,6 @@ var player: CharacterBody2D = null
 @onready var area: Area2D = $Area2D
 @onready var sfx_hit: AudioStreamPlayer2D = $hit
 @onready var explosion_timer: Timer = $explosion_timer
-@onready var punch_timer: Timer = $Punch_timer
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 
 const BULLET_ENEMY_1 := preload("res://Scenes/gun_enemy_2.tscn")
