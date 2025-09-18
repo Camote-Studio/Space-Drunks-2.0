@@ -425,3 +425,8 @@ func _on_ulti_timer_timeout() -> void:
 # Empuje temporal que no rompe la física
 func push_temp(offset: Vector2) -> void:
 	global_position += offset
+	
+# En tu script player.gd
+func is_unable_to_act() -> bool:
+	# Aquí pones tu propia lógica.
+	return dead or not allow_input

@@ -1,91 +1,93 @@
+# gun.gd: Versión corregida y refactorizada
 extends Node2D
 
-@export var bullet_scene: PackedScene = preload("res://Scenes/bullet.tscn")
-@export var ray_scene: PackedScene = preload("res://Scenes/Armas/Laser.tscn")
+## --- EXPORTACIONES Y PROPIEDADES ---
+@export var bullet_scene: PackedScene
+@export var ray_scene: PackedScene
+
+# Para hacerlo más robusto, asigna el AnimatedSprite2D del jugador aquí desde el editor.
+@export var player_sprite_path: NodePath
+
+@export_group("Stats Base")
 @export var cooldown: float = 0.5
-var can_fire := true
 
-@onready var timer: Timer = $Timer
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-
+@export_group("Posicionamiento")
 @export var offset_right := Vector2(10, 0)
 @export var offset_left := Vector2(-10, 0)
 @export var extra_left_offset := -40
 
-var player_flipped: bool = false
-var player: Node2D
-var player_sprite: AnimatedSprite2D
-var visuals_node: Node2D
-var base_position: Vector2
-
-enum GunMode { RAY, PISTOL, TURRET}
-var current_mode: GunMode = GunMode.RAY
-
+@export_group("Modo Torreta")
 @export var turret_fire_rate := 0.15
 @export var turret_angle_limit := deg_to_rad(50)
 
-var current_ray: Node = null
-@export var ray_dmg := 30
+@export_group("Modo Rayo")
+@export var ray_dmg := 30.0
 @export var ray_duration_max := 4.0
 @export var ray_dmg_reduction := 5.0
 
-var base_rotation: float = 0.0
-var aim_angle: float = 0.0
+
+## --- REFERENCIAS A NODOS ---
+@onready var timer: Timer = $Timer
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player_sprite: AnimatedSprite2D = get_node_or_null(player_sprite_path)
+@onready var muzzle: Marker2D = $Muzzle
+
+## --- VARIABLES DE ESTADO ---
+enum GunMode { RAY, PISTOL, TURRET }
+var current_mode: GunMode = GunMode.RAY
+
+var can_fire := true
+var player: Node2D
+var current_ray: Node = null
+var base_position: Vector2
+var base_rotation: float
+#var aim_angle: float = 0.0
+
 
 func _ready() -> void:
-	if animated_sprite: animated_sprite.offset = Vector2(-16, 0)
-	timer.one_shot = true
-	# El wait_time se establece dinámicamente
-	if not timer.is_connected("timeout", Callable(self, "_on_timer_timeout")):
-		timer.connect("timeout", Callable(self, "_on_timer_timeout"))
-
 	player = get_parent()
-	if player:
-		if player.has_node("Visuals/AnimatedSprite2D"):
-			visuals_node = player.get_node("Visuals")
-			player_sprite = visuals_node.get_node("AnimatedSprite2D")
-		elif player.has_node("AnimatedSprite2D"):
-			player_sprite = player.get_node("AnimatedSprite2D")
+
+	# Comprobación de seguridad para el sprite del jugador.
+	if not player_sprite:
+		push_warning("⚠️ El sprite del jugador no está asignado en el gun.gd. El arma podría no funcionar correctamente.")
+
+	timer.one_shot = true
+	timer.connect("timeout", _on_timer_timeout)
 
 	base_position = position
 	base_rotation = rotation
-	aim_angle = base_rotation
+	#aim_angle = base_rotation
 
 	if animated_sprite:
 		animated_sprite.play("idle")
-		animated_sprite.flip_h = false
-		animated_sprite.flip_v = false
+
 
 func _process(delta: float) -> void:
-	if not player:
+	if not player or not player_sprite:
 		return
 
-	player_flipped = (player_sprite != null and player_sprite.flip_h)
-
-	var offset = offset_left if player_flipped else offset_right
-	if player_flipped:
-		offset.x += extra_left_offset
-
-	position = base_position + offset
-
-	if animated_sprite:
-		if current_mode == GunMode.TURRET:
-			animated_sprite.flip_h = false
-			animated_sprite.flip_v = player_flipped
-		else:
-			animated_sprite.flip_h = player_flipped
-			animated_sprite.flip_v = false
-
-	if ("dead" in player and player.dead) or ("allow_input" in player and not player.allow_input and not ("is_using_ulti" in player and player.is_using_ulti)):
+	# Comprueba si el jugador puede actuar. Es más seguro usar métodos que acceder a variables directamente.
+	# NOTA: Debes crear un método `is_unable_to_act()` en tu script de jugador.
+	if player.has_method("is_unable_to_act") and player.is_unable_to_act():
+		if current_ray: _stop_ray() # Detiene el rayo si el jugador muere o es deshabilitado.
 		return
 
+	var is_player_flipped := player_sprite.flip_h
+	_update_position_and_flip(is_player_flipped)
+
+	# Lógica principal de apuntado y disparo.
 	if current_mode == GunMode.TURRET:
-		_update_turret_aim(player_flipped)
+		_update_turret_aim(is_player_flipped)
 	else:
 		rotation = base_rotation
-		aim_angle = base_rotation
+		#aim_angle = base_rotation
 
-	# NUEVA LÓGICA DE MANEJO DE INPUT
+	_handle_input(is_player_flipped)
+
+
+## --- LÓGICA INTERNA ---
+
+func _handle_input(is_player_flipped: bool) -> void:
 	match current_mode:
 		GunMode.RAY:
 			if Input.is_action_just_pressed("attack"):
@@ -93,158 +95,178 @@ func _process(delta: float) -> void:
 			elif Input.is_action_just_released("attack"):
 				_stop_ray()
 		GunMode.PISTOL:
-			if Input.is_action_just_pressed("fired") and can_fire:
-				_fire(player_flipped)
+			if Input.is_action_pressed("fired") and can_fire:
+				_fire_pistol()
 		GunMode.TURRET:
 			if Input.is_action_pressed("fired") and can_fire:
-				_fire_at_mouse(player_flipped)
+				_fire_turret()
 
 
-# ========================
-# TURRET aiming (sin cambios)
-# ========================
-func _update_turret_aim(player_flipped: bool) -> void:
-	var mouse_pos = get_global_mouse_position()
-	var dir = (mouse_pos - global_position).normalized()
-	if dir.length() < 0.001:
-		dir = Vector2.RIGHT
+func _update_position_and_flip(is_player_flipped: bool) -> void:
+	# Calcula y aplica el offset de posición del arma.
+	var offset = offset_left if is_player_flipped else offset_right
+	if is_player_flipped:
+		offset.x += extra_left_offset
+	position = base_position + offset
 
-	var forward = Vector2.RIGHT if not player_flipped else Vector2.LEFT
-	var forward_angle = forward.angle()
-	var target_angle = dir.angle()
-
-	var relative = wrapf(target_angle - forward_angle, -PI, PI)
-	var display_rel_angle: float = clamp(relative, -turret_angle_limit, turret_angle_limit)
-	var final_angle = forward_angle + display_rel_angle
-	rotation = final_angle
-	aim_angle = final_angle
-
+	# Ajusta el flip del sprite del arma.
 	if animated_sprite:
-		if animated_sprite.animation != "metralleta":
-			animated_sprite.play("metralleta")
-		animated_sprite.flip_h = false
-		animated_sprite.flip_v = player_flipped
+		if current_mode == GunMode.TURRET:
+			animated_sprite.flip_h = false
+			animated_sprite.flip_v = is_player_flipped
+		else:
+			animated_sprite.flip_h = is_player_flipped
+			animated_sprite.flip_v = false
 
-# ===================================
+
+func _update_turret_aim(is_player_flipped: bool) -> void:
+	var mouse_pos = get_global_mouse_position()
+	var dir_to_mouse = global_position.direction_to(mouse_pos)
+
+	var forward_dir = Vector2.LEFT if is_player_flipped else Vector2.RIGHT
+	var forward_angle = forward_dir.angle()
+	var target_angle = dir_to_mouse.angle()
+
+	var relative_angle = wrapf(target_angle - forward_angle, -PI, PI)
+	var clamped_relative_angle = clamp(relative_angle, -turret_angle_limit, turret_angle_limit)
+	
+	#aim_angle = forward_angle + clamped_relative_angle
+	rotation = forward_angle + clamped_relative_angle
+
+
+## --- MODOS DE DISPARO ---
+
+func _fire_pistol() -> void:
+	if animated_sprite: animated_sprite.play("idle")
+	
+	# La dirección se obtiene directamente del transform del arma. ¡Esto es infalible!
+	var direction = transform.x
+	_spawn_bullet(direction)
+	
+	can_fire = false
+	timer.wait_time = cooldown
+	timer.start()
+
+
+func _fire_turret() -> void:
+	if animated_sprite and animated_sprite.animation != "metralleta":
+		animated_sprite.play("metralleta")
+		
+	var direction = transform.x
+	_spawn_bullet(direction)
+	
+	can_fire = false
+	timer.wait_time = turret_fire_rate
+	timer.start()
+
+# ==========================================
 # RAYO
-# ====================================
+# ==========================================
 
 func _start_ray() -> void:
 	# Si ya hay un rayo, no hagas nada
 	if current_ray != null:
 		return
-
-	#if animated_sprite:
-		#animated_sprite.play("laser_fire")
-
+		
 	var ray_instance = ray_scene.instantiate()
 	if not ray_instance:
 		push_error("La escena del rayo no está bien asignada.")
 		return
 
-	get_tree().current_scene.add_child(ray_instance)
-	ray_instance.global_position = global_position
+		# ===== CAMBIO CLAVE =====
+	# 1. Añade el rayo como HIJO del arma.
+	# Esto hace que se mueva y rote junto al arma automáticamente.
+	add_child(ray_instance)
 	
-	var dir_ray = (Vector2.LEFT if player_flipped else Vector2.RIGHT).rotated(aim_angle)
-	ray_instance.direction = dir_ray
-	ray_instance.rotation = dir_ray.angle()
+	ray_instance.position = muzzle.position
+	ray_instance.rotation = 0 # El láser hereda la rotación del arma.
 
-	# Pasar parámetros al rayo
+	# La dirección del rayo también se basa en el transform del arma.
+	var direction = transform.x
+	ray_instance.rotation = direction.angle()
+
+	# 3. Llama a la nueva función para establecer la longitud del haz.
+	if ray_instance.has_method("setup_beam"):
+		# Usamos el valor por defecto del láser (max_range), que es 800.
+		ray_instance.setup_beam(ray_instance.max_range)
+	
+	# 4. Inicia sus timers de duración y daño.
 	if ray_instance.has_method("start"):
+		# Ahora el rayo ya no necesita una dirección, su rotación lo es todo.
+		# Lo mantenemos por si tu láser lo sigue usando para algo, pero se podría eliminar.
+		if "direction" in ray_instance:
+			ray_instance.direction = direction
 		ray_instance.start(ray_duration_max, ray_dmg, ray_dmg_reduction)
 	
 	# Guardar referencia y conectar la señal
 	current_ray = ray_instance
 	current_ray.connect("tree_exited", Callable(self, "_on_ray_removed"))
 
+
 func _stop_ray() -> void:
-	if current_ray != null:
+	if current_ray:
 		current_ray.queue_free()
-		# El timer de cooldown se activa cuando el rayo es eliminado del árbol en _on_ray_removed
+		# El cooldown se activa cuando el rayo es eliminado en _on_ray_removed.
 
-func _on_ray_removed() -> void:
-	current_ray = null
-	# Aquí iniciamos el cooldown.
-	can_fire = false
-	timer.wait_time = cooldown
-	timer.start()
 
-# Funciones de disparo y efectos (sin cambios mayores)
-# ========================
-func _fire(is_flipped: bool) -> void:
-	if animated_sprite:
-		animated_sprite.play("idle")
+## --- FUNCIONES DE SOPORTE ---
 
-	var bullet_instance = bullet_scene.instantiate()
-	if bullet_instance == null:
-		push_error("❌ bullet_scene no está bien asignado.")
+func _spawn_bullet(direction: Vector2) -> void:
+	if not bullet_scene:
+		push_error("❌ La escena de la bala no está asignada en gun.gd.")
 		return
+		
+	var bullet = bullet_scene.instantiate()
+	# MEJORA: Considera tener un nodo "Projectiles" para mantener la escena limpia.
+	get_tree().current_scene.add_child(bullet)
+	# Usamos la posición GLOBAL del Muzzle para que la bala aparezca en la punta del cañón.
+	bullet.global_position = muzzle.global_position
+	bullet.rotation = direction.angle()
+	
+	# Pasa la dirección a la bala si tiene una variable o método para ello.
+	if "direction" in bullet:
+		bullet.direction = direction
+	
+	_apply_bullet_effects(bullet)
 
-	get_tree().current_scene.add_child(bullet_instance)
-	bullet_instance.global_position = global_position
 
-	var dir = (Vector2.LEFT if is_flipped else Vector2.RIGHT).rotated(aim_angle)
-	bullet_instance.direction = dir
-	bullet_instance.rotation = dir.angle()
+func _apply_bullet_effects(bullet: Node) -> void:
+	if player and player.has_method("apply_power_to_bullet"):
+		player.apply_power_to_bullet(bullet)
 
-	_apply_bullet_effects(bullet_instance)
-
-	can_fire = false
-	timer.wait_time = cooldown
-	timer.start()
-
-func _fire_at_mouse(flipped: bool) -> void:
-	if animated_sprite:
-		animated_sprite.play("metralleta")
-
-	var bullet_dir = Vector2.RIGHT.rotated(aim_angle)
-	var bullet_instance = bullet_scene.instantiate()
-	if bullet_instance == null:
-		push_error("❌ bullet_scene no está bien asignado.")
-		return
-
-	get_tree().current_scene.add_child(bullet_instance)
-	bullet_instance.global_position = global_position
-	bullet_instance.direction = bullet_dir
-	bullet_instance.rotation = bullet_dir.angle()
-
-	_apply_bullet_effects(bullet_instance)
-
-	can_fire = false
-	timer.wait_time = turret_fire_rate
-	timer.start()
-
-func _apply_bullet_effects(bullet_instance: Node2D) -> void:
-	if player:
-		if player.has_method("apply_power_to_bullet"):
-			player.apply_power_to_bullet(bullet_instance)
-		if player.has_method("gain_ability_from_shot"):
-			player.gain_ability_from_shot()
 
 func _on_timer_timeout() -> void:
 	can_fire = true
 
+
+func _on_ray_removed() -> void:
+	current_ray = null
+	can_fire = false
+	timer.wait_time = cooldown
+	timer.start()
+
+
+## --- INTERFAZ PÚBLICA ---
+
 func set_mode(mode: GunMode) -> void:
+	# --- PASO 1: LIMPIAR EL ESTADO DEL MODO ANTERIOR ---
+	# Si hay un rayo láser activo en este momento...
+	if current_ray != null:
+		# ...lo destruimos y limpiamos la referencia para evitar problemas.
+		# Nos desconectamos de la señal para que no active el cooldown por error.
+		if current_ray.is_connected("tree_exited", Callable(self, "_on_ray_removed")):
+			current_ray.disconnect("tree_exited", Callable(self, "_on_ray_removed"))
+		current_ray.queue_free()
+		current_ray = null
+
+	# --- PASO 2: CONFIGURAR EL NUEVO MODO ---
 	current_mode = mode
 	can_fire = true
-	match current_mode:
-		GunMode.RAY:
-			pass
-		GunMode.PISTOL:
-			timer.stop()
-			if animated_sprite:
-				animated_sprite.play("idle")
-				animated_sprite.flip_h = (player_sprite != null and player_sprite.flip_h)
-				animated_sprite.flip_v = false
-			rotation = base_rotation
-			aim_angle = base_rotation
-
-			var offset = offset_left if (player_sprite and player_sprite.flip_h) else offset_right
-			if player_sprite and player_sprite.flip_h:
-				offset.x += extra_left_offset
-			position = base_position + offset
-		GunMode.TURRET:
-			if animated_sprite:
-				animated_sprite.play("metralleta")
-				animated_sprite.flip_h = false
-				animated_sprite.flip_v = (player_sprite != null and player_sprite.flip_h)
+	timer.stop()
+	
+	if not animated_sprite: return
+	
+	if current_mode == GunMode.TURRET:
+		animated_sprite.play("metralleta")
+	else:
+		animated_sprite.play("idle")
