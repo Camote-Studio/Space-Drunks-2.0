@@ -114,7 +114,7 @@ func _physics_process(delta: float) -> void:
 		direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
 
 	if Input.is_action_just_pressed("jump") and not is_using_ulti:
-		_activate_ulti()
+		next_shot_powered = true
 
 	# --- Animaciones solo si NO estamos en ulti y no muertos ---
 	if not is_using_ulti and not dead:
@@ -251,9 +251,11 @@ func gain_ability_from_shot() -> void:
 func _power() -> void:
 	if dead or next_shot_powered: 
 		return
-	if bar_ability_1 and bar_ability_1.value >= bar_ability_1.max_value:
-		next_shot_powered = true
+
+	if bar_ability_1 and not is_using_ulti and bar_ability_1.value >= bar_ability_1.max_value:
+		_activate_ulti()
 		bar_ability_1.value = bar_ability_1.min_value
+
 
 func apply_power_to_bullet(bullet: Node) -> void:
 	if not next_shot_powered: 

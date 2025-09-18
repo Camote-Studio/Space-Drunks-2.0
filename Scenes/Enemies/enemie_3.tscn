@@ -70,7 +70,7 @@ radius = 33.0
 height = 120.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4qff"]
-radius = 81.2219
+radius = 55.0091
 
 [node name="enemie_3" type="CharacterBody2D" groups=["enemy_3"]]
 script = ExtResource("1_jssh4")

@@ -28,7 +28,7 @@ var face_sign := 1.0
 
 var min_range := 70.0
 var max_range := 140.0
-var attack_range := 160.0
+var attack_range :=180.0
 var punch_damage := 10.0
 var punch_cooldown := 0.6
 var lunge_dist := 38.0
@@ -207,7 +207,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 func _on_area_2d_area_entered(a: Area2D) -> void:
 	if a.is_in_group("player_1_bullet"):
-		emit_signal("damage", 10.0)
+		emit_signal("damage", 20.0)
 		if a.has_method("queue_free"):
 			a.queue_free()
 
