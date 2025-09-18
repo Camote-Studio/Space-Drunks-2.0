@@ -198,6 +198,6 @@ offset_bottom = 434.0
 text = "Select Item"
 
 [connection signal="pressed" from="chicken" to="." method="_on_chicken_pressed"]
-[connection signal="pressed" from="gun_360" to="." method="_on_jet_pressed"]
 [connection signal="pressed" from="gun_360" to="." method="_on_gun_360_pressed"]
+[connection signal="pressed" from="gun_360" to="." method="_on_jet_pressed"]
 [connection signal="pressed" from="gun" to="." method="_on_gun_pressed"]

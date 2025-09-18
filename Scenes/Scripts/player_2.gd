@@ -4,6 +4,12 @@ extends CharacterBody2D
 # --- Señales ---
 signal damage(amount: float, source: String)
 signal muerte  # Para notificar al GameManager
+# ============================
+# PODER: ÁREA DE VENENO
+# ============================
+@export var poison_area_scene: PackedScene
+var poison_preview: Node2D = null
+var selecting_poison := false
 
 # --- Variables ---
 var coins: int = 0
@@ -200,6 +206,27 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
+	if Input.is_action_just_pressed("area_veneno") and not selecting_poison:
+		selecting_poison = true
+		poison_preview = Node2D.new()
+		var circle := ColorRect.new()
+		circle.color = Color(0,1,0,0.3)  # verde transparente
+		circle.size = Vector2(100,100)   # tamaño del área
+		circle.position = -circle.size/2
+		poison_preview.add_child(circle)
+		get_tree().current_scene.add_child(poison_preview)
+	if selecting_poison and poison_preview:
+		poison_preview.global_position = get_global_mouse_position()
+
+		# Colocar veneno con click izquierdo
+		if Input.is_action_just_pressed("click_izquierdo"):  # define "click_izquierdo" en Input Map
+			var poison_instance = poison_area_scene.instantiate()
+			get_tree().current_scene.add_child(poison_instance)
+			poison_instance.global_position = poison_preview.global_position
+
+			poison_preview.queue_free()
+			poison_preview = null
+			selecting_poison = false
 
 	# Input y movimiento
 	var direction = Vector2.ZERO
@@ -493,3 +520,4 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		or enemy.is_in_group("enemy_5") 
 		or enemy.is_in_group("boss")) and enemy.has_signal("damage"):
 		enemy.emit_signal("damage", 20.0)  # daño fijo de la alabarda
+		

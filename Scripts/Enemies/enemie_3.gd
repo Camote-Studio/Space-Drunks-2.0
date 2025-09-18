@@ -150,8 +150,6 @@ func _do_punch(dir: Vector2) -> void:
 			face_sign = sign(direction_to_player.x)
 			sprite_2d.flip_h = face_sign > 0.0
 		
-		# Solo aplicar daño y print, sin mover al jugador
-		print("El enemigo golpeó al jugador!")
 		if target_in_range.has_method("emit_signal"):
 			target_in_range.emit_signal("damage", punch_damage)
 		
@@ -196,7 +194,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.is_in_group("player_2"):
 		target_in_range = body as CharacterBody2D
 		# Solo imprimir y aplicar daño, sin mover al jugador
-		print("El enemigo golpeó al jugador!")
 		if body.has_method("emit_signal"):
 			body.emit_signal("damage", punch_damage)
 	if body.is_in_group("player_1_bullet"):
