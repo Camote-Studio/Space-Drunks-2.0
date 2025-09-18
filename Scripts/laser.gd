@@ -1,125 +1,200 @@
+# laser.gd: Modificado para comportarse como un haz estático
 extends Area2D
 
-@export var damage: float = 25.0
+# --- Propiedades ---
+@export var base_damage: float = 25.0
+@export var base_width: float = 30.0 
 @export var intensity: float = 1.0
-@export var duration: float = 1.0
-@export var damage_reduction: float = 0
-@export var tick_rate: float = 0.2
-@export var direction: Vector2 = Vector2.RIGHT
+@export var pierce_count: int = 3
+@export var max_range: float = 800.0 # Ahora representa la LONGITUD del haz
 
-@onready var sprite: Sprite2D = $laserpng
-@onready var timer_duration: Timer = $TimerDuration
-@onready var timer_tick: Timer = $TimerTick
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+# La velocidad y la dirección ya no son necesarias
+# @export var speed: float = 1200.0
 
-# Variables para el tamaño base del láser (ajusta estos valores en el Inspector)
-@export var base_width: float = 20.0
-@export var base_length: float = 100.0
+# --- Componentes ---
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
-var affected_enemies = []
-var can_damage: bool = true
+# --- Variables de Estado ---
+var current_damage: float = 25.0
+var hit_enemies: Array = []
+var pierced_count: int = 0
+var original_scale: Vector2
+
+# La dirección y la distancia recorrida ya no son necesarias
+# var direction: Vector2 = Vector2.RIGHT
+# var distance_traveled: float = 0.0
 
 func _ready() -> void:
-	# Conecta las señales de colisión
+	if sprite:
+		original_scale = sprite.scale
+	
 	connect("area_entered", Callable(self, "_on_area_entered"))
 	connect("body_entered", Callable(self, "_on_body_entered"))
-	connect("area_exited", Callable(self, "_on_area_exited"))
-	connect("body_exited", Callable(self, "_on_body_exited"))
-
-	# Configura los temporizadores
-	if timer_duration:
-		timer_duration.wait_time = duration
-		timer_duration.start()
-		timer_duration.connect("timeout", Callable(self, "_on_timer_duration_timeout"))
-
-	if timer_tick:
-		timer_tick.wait_time = tick_rate
-		timer_tick.connect("timeout", Callable(self, "_on_timer_tick_timeout"))
 	
-	# Aplica la intensidad inicial
 	_apply_intensity()
 	add_to_group("player_1_bullet")
 
-func _process(delta: float) -> void:
-	# Reducir daño progresivamente (mantenemos esta lógica)
-	if damage_reduction > 0:
-		damage = max(0, damage - damage_reduction * delta)
+func _physics_process(delta: float) -> void:
+	# ELIMINADO: El láser ya no se mueve por sí mismo.
+	# Su posición y rotación son controladas por su nodo padre (el arma).
+	pass
 
-func _apply_intensity() -> void:
-	# Aumentar la longitud del sprite y mantener el ancho base
-	var length_factor = 1.0 + (intensity * 1.5) # Aumentar la intensidad al 150%
-	sprite.scale.x = base_width / sprite.texture.get_width() if sprite.texture else 1.0
-	sprite.scale.y = base_length * length_factor / sprite.texture.get_height() if sprite.texture else 1.0
+# NUEVA FUNCIÓN: Configura la longitud visual y de colisión del haz.
+func setup_beam(length: float) -> void:
+	max_range = length
+	if not sprite or not collision or not collision.shape is RectangleShape2D:
+		push_warning("El láser no tiene Sprite2D o su CollisionShape2D no es un rectángulo.")
+		return
 	
-	# Ajustar el color del sprite
-	#var color = Color.CYAN.lerp(Color.RED, intensity)
-	#sprite.modulate = color
+	# Asumimos que el sprite y la colisión en la escena original apuntan hacia la derecha (eje X+).
+	var shape = collision.shape as RectangleShape2D
 	
-	# Escalar la forma de la colisión para que coincida
-	if collision_shape:
-		var shape_rect = collision_shape.shape as RectangleShape2D
-		if shape_rect:
-			shape_rect.size = Vector2(base_width, base_length * length_factor)
-			
-	damage = 15.0 + (intensity * 35.0)
+	# 1. Ajustar la longitud de la colisión
+	shape.size.x = length
+	
+	# 2. Ajustar la longitud visual del sprite
+	# Esto funciona mejor si la propiedad "Texture > Repeat" del sprite está en "Enabled" o "Tile".
+	if sprite.texture:
+		var texture_width = sprite.texture.get_width()
+		sprite.scale.x = original_scale.x * (length / texture_width)
 
-func _damage_affected_enemies() -> void:
-	# Aplica daño a todos los enemigos en la lista
-	for enemy in affected_enemies:
-		if is_instance_valid(enemy): # Valida si el nodo aún existe
-			if enemy.has_signal("damage"):
-				enemy.emit_signal("damage", damage)
-				print("🔥 Láser hit: ", enemy.name, " por ", damage, " daño")
+	# 3. Mover el centro del sprite y la colisión para que el origen (0,0) sea el inicio del haz.
+	# De esta forma, el láser nacerá desde la punta del arma, no desde su centro.
+	var offset = length / 2.0
+	sprite.position.x = offset
+	collision.position.x = offset
+	
+# La función start sigue siendo útil para el timer de duración y la reducción de daño.
+func start(duration: float = 2.0, damage: float = 25.0, damage_reduction: float = 5.0) -> void:
+	base_damage = damage
+	current_damage = damage
+	
+	# El timer de duración máxima sigue funcionando igual.
+	var timer = Timer.new()
+	timer.wait_time = duration
+	timer.one_shot = true
+	timer.connect("timeout", Callable(self, "queue_free"))
+	add_child(timer)
+	timer.start()
+	
+	var damage_timer = Timer.new()
+	damage_timer.wait_time = 1.0
+	damage_timer.connect("timeout", _reduce_damage)
+	add_child(damage_timer)
+	damage_timer.start()
 
-func start(new_duration: float, new_damage: float, new_dmg_reduction: float) -> void:
-	duration = new_duration
-	damage = new_damage
-	damage_reduction = new_dmg_reduction
-	if timer_duration:
-		timer_duration.wait_time = duration
-		timer_duration.start()
-	if not timer_tick.is_stopped():
-		timer_tick.start()
-
+# --- El resto del script (manejo de daño, intensidad, colisiones) permanece igual ---
+# ... (las funciones _apply_intensity, _on_area_entered, _handle_enemy_hit, etc., no necesitan cambios)
+# Permite cambiar la intensidad del láser desde otro script.
 func set_intensity(new_intensity: float) -> void:
+	# Limita el nuevo valor de intensidad entre 0.0 y 1.0.
 	intensity = clamp(new_intensity, 0.0, 1.0)
+	# Vuelve a aplicar los efectos visuales y de daño con la nueva intensidad.
 	_apply_intensity()
 
+# Permite cambiar el daño del láser.
+func set_damage(new_damage: float) -> void:
+	base_damage = new_damage
+	current_damage = new_damage
+
+# Aplica los cambios visuales y de daño basados en la variable `intensity`.
+func _apply_intensity() -> void:
+	# Si el sprite no existe, no hace nada para evitar errores.
+	if not sprite or not collision or not collision.shape is RectangleShape2D:
+		return
+	
+	# Calcula un factor de escala entre 0.5 (intensidad=0) y 1.5 (intensidad=1).
+	var scale_factor = 0.5 + (intensity * 1.0)
+	# Aplica la escala solo en el eje Y, manteniendo la X original.
+	sprite.scale = Vector2(original_scale.x, original_scale.y * scale_factor)
+	
+	# Interpola el color entre CIAN (intensidad=0) y ROJO (intensidad=1).
+	var color = Color.CYAN.lerp(Color.RED, intensity)
+	# Aplica el color al sprite. `modulate` multiplica el color del sprite por este nuevo color.
+	sprite.modulate = color
+	
+	# Si la colisión existe y es un rectángulo...
+	if collision and collision.shape is RectangleShape2D:
+		var shape = collision.shape as RectangleShape2D
+		# ...ajusta su altura según el `scale_factor` (¡AQUÍ ESTÁ EL VALOR HARDCODEADO!).
+		shape.size.y = 10.0 * scale_factor
+	
+	# Ajusta el daño actual: daño base + un extra por intensidad.
+	current_damage = base_damage + (intensity * 35.0)
+
+# --- Colisiones ---
+
+# Se llama automáticamente cuando otro Area2D entra en la colisión de este láser.
 func _on_area_entered(area: Area2D) -> void:
-	if area.get_parent() and not affected_enemies.has(area.get_parent()):
-		_add_to_affected(area.get_parent())
+	# Asume que el nodo principal del enemigo es el padre del área de colisión.
+	var enemy = area.get_parent()
+	_handle_enemy_hit(enemy) # Llama a la función genérica para manejar el golpe.
 
+# Se llama cuando un PhysicsBody2D entra en la colisión.
 func _on_body_entered(body: Node2D) -> void:
-	if not affected_enemies.has(body):
-		_add_to_affected(body)
+	# Llama a la misma función para manejar el golpe.
+	_handle_enemy_hit(body)
 
-func _on_area_exited(area: Area2D) -> void:
-	if affected_enemies.has(area.get_parent()):
-		affected_enemies.erase(area.get_parent())
+# Lógica central para cuando el láser golpea a algo.
+func _handle_enemy_hit(enemy: Node) -> void:
+	# Ignora el golpe si el enemigo no es válido o si ya ha sido golpeado por este láser.
+	if not enemy or enemy in hit_enemies:
+		return
+	
+	# Si el nodo golpeado no está en un grupo de enemigos, lo ignora.
+	if not _is_enemy(enemy):
+		return
+	
+	# Lo añade a la lista de golpeados para no volver a dañarlo.
+	hit_enemies.append(enemy)
+	# Incrementa el contador de enemigos atravesados.
+	pierced_count += 1
+	
+	# Si el enemigo tiene una señal llamada "damage", la emite para que el enemigo procese el daño.
+	if enemy.has_signal("damage"):
+		enemy.emit_signal("damage", current_damage)
+	
+	# Imprime en la consola un mensaje de depuración.
+	print("Laser hit:", enemy.name, "- Damage:", current_damage)
+	
+	# Si el número de enemigos atravesados alcanza el límite...
+	if pierced_count >= pierce_count:
+		# ...el láser se destruye.
+		queue_free()
 
-func _on_body_exited(body: Node2D) -> void:
-	if affected_enemies.has(body):
-		affected_enemies.erase(body)
+# Comprueba si un nodo pertenece a alguno de los grupos de enemigos definidos.
+func _is_enemy(node: Node) -> bool:
+	return (node.is_in_group("enemy_1") or
+			node.is_in_group("enemy_2") or
+			node.is_in_group("enemy_3") or
+			node.is_in_group("enemy_4") or
+			node.is_in_group("enemy_5") or
+			node.is_in_group("boss"))
 
-func _add_to_affected(node: Node) -> void:
-	if node.is_in_group("enemy_1") or node.is_in_group("enemy_2") or node.is_in_group("enemy_3") or node.is_in_group("enemy_4") or node.is_in_group("enemy_5") or node.is_in_group("boss"):
-		affected_enemies.append(node)
-		if timer_tick.is_stopped():
-			timer_tick.start()
-		# Aplica daño instantáneo al entrar por primera vez
-		_damage_enemy_once(node)
+# Se llama cada segundo (por el timer `damage_timer`) para reducir el daño.
+func _reduce_damage() -> void:
+	# Reduce el `current_damage` en 5, pero nunca por debajo del 30% del daño base.
+	current_damage = max(base_damage * 0.3, current_damage - 5.0)
+	
+	# Si el sprite existe, ajusta su transparencia para indicar que el láser se está "debilitando".
+	if sprite:
+		# Calcula qué porcentaje del daño base representa el daño actual.
+		var alpha = current_damage / base_damage
+		# Aplica ese porcentaje al canal alfa (transparencia) del color, con un mínimo de 0.4.
+		sprite.modulate.a = clamp(alpha, 0.4, 1.0)
 
-func _damage_enemy_once(enemy: Node) -> void:
-	if is_instance_valid(enemy) and enemy.has_signal("damage"):
-		enemy.emit_signal("damage", damage)
-		print("⚡️ Láser entró en contacto con ", enemy.name, " por ", damage, " daño inicial.")
+# --- Funciones adicionales simples ---
+# Permiten modificar propiedades del láser de forma segura desde otros scripts.
 
-func _on_timer_tick_timeout() -> void:
-	# Este temporizador se dispara cada tick_rate segundos
-	_damage_affected_enemies()
-	# ¡Cambiamos 'empty()' por 'is_empty()' !
-	if affected_enemies.is_empty():
-		timer_tick.stop()
+func set_piercing(amount: int) -> void:
+	# Establece la cantidad de perforación, asegurando que sea al menos 1.
+	pierce_count = max(1, amount)
 
-func _on_timer_duration_timeout() -> void:
-	queue_free()
+func set_range(range_value: float) -> void:
+	# Establece el rango máximo, asegurando que sea al menos 100.
+	max_range = max(100.0, range_value)
+
+#func set_speed(speed_value: float) -> void:
+	# Establece la velocidad, asegurando que sea al menos 200.
+	#speed = max(200.0, speed_value)

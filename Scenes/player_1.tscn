@@ -885,14 +885,16 @@ volume_db = 20.0
 position = Vector2(2, 2.11758e-22)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
-animation = &"ulti_pose"
+animation = &"death"
 
 [node name="UltiTimer" type="Timer" parent="."]
 
 [node name="Gun" parent="." instance=ExtResource("3_aatkl")]
 position = Vector2(17, 0)
+player_sprite_path = NodePath("../Visuals/AnimatedSprite2D")
 
 [node name="Laser" parent="." instance=ExtResource("185_e0wwm")]
+visible = false
 
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
