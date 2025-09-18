@@ -844,6 +844,7 @@ animations = [{
 }]
 
 [node name="Player_1" type="CharacterBody2D" groups=["player"]]
+z_index = 1
 collision_mask = 3
 script = ExtResource("1_p0e4v")
 
@@ -881,7 +882,7 @@ volume_db = 20.0
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
-position = Vector2(-1, 5.96046e-08)
+position = Vector2(2, 2.11758e-22)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
 animation = &"ulti_pose"

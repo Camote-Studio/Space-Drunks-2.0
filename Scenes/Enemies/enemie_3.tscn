@@ -1,10 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bb6kdi0va62sg"]
+[gd_scene load_steps=17 format=3 uid="uid://bb6kdi0va62sg"]
 
 [ext_resource type="Texture2D" uid="uid://pp8a2uy8ep1o" path="res://Assets/art/sprites/Enemigos/DukaLIEN_2.png" id="1_8g4sv"]
 [ext_resource type="Script" uid="uid://b44jyob5e48n2" path="res://Scripts/Enemies/enemie_3.gd" id="1_jssh4"]
+[ext_resource type="Texture2D" uid="uid://x1q04bdi7yma" path="res://Assets/art/sprites/Enemigos/animacion golpe pollo/1.png" id="2_kt0bo"]
 [ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Assets/art/sprites/Particulas/explosion_1.png" id="3_2lji7"]
+[ext_resource type="Texture2D" uid="uid://c7rw3ji73y8rf" path="res://Assets/art/sprites/Enemigos/animacion golpe pollo/2.png" id="3_74s0f"]
+[ext_resource type="Texture2D" uid="uid://cmhk6iywvfhqd" path="res://Assets/art/sprites/Enemigos/animacion golpe pollo/3.png" id="4_mcbtj"]
 [ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Assets/art/sprites/Particulas/explosion_2.png" id="4_yb55g"]
 [ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Assets/art/sprites/Particulas/explosion_3.png" id="5_dvsnx"]
+[ext_resource type="Texture2D" uid="uid://b1336gtvqli2y" path="res://Assets/art/sprites/Enemigos/animacion golpe pollo/4.png" id="5_tdua5"]
 [ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Assets/art/sprites/Particulas/explosion_4.png" id="6_kt0bo"]
 [ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="7_74s0f"]
 [ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="8_mcbtj"]
@@ -14,11 +18,20 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_8g4sv")
+"texture": ExtResource("2_kt0bo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_74s0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mcbtj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tdua5")
 }],
-"loop": true,
-"name": &"default",
-"speed": 5.0
+"loop": false,
+"name": &"ataque",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -42,14 +55,22 @@ animations = [{
 "loop": true,
 "name": &"explosion",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8g4sv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o5ftm"]
 radius = 33.0
-height = 146.0
+height = 120.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4qff"]
-radius = 65.0308
+radius = 81.2219
 
 [node name="enemie_3" type="CharacterBody2D" groups=["enemy_3"]]
 script = ExtResource("1_jssh4")
@@ -58,7 +79,8 @@ script = ExtResource("1_jssh4")
 texture_filter = 1
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_6v7yl")
-frame_progress = 0.63366
+animation = &"ataque"
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_o5ftm")
