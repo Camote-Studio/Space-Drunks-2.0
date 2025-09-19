@@ -10,7 +10,7 @@ var player: CharacterBody2D = null
 @onready var explosion_timer: Timer = $explosion_timer
 @onready var punch_timer: Timer = $Punch_timer
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D  # AnimatedSprite2D
-
+@onready var audio_ataque: AudioStreamPlayer2D = $ataque_golpe
 var min_range := 70.0
 var max_range := 140.0
 var attack_range := 160.0
@@ -201,9 +201,11 @@ func _do_punch(dir: Vector2) -> void:
 	if target_in_range:
 		print("💥 Enemigo golpea al jugador con daño:", punch_damage)
 		target_in_range.emit_signal("damage", punch_damage)
-		if sfx_hit:
-			sfx_hit.pitch_scale = pitch_variations[rng.randi_range(0, pitch_variations.size() - 1)]
-			sfx_hit.play()
+		# 🔊 sonido del ataque
+		if audio_ataque:
+			audio_ataque.stop()  # reinicia si estaba sonando
+			audio_ataque.play()
+
 			
 	_attack_lock = true
 	if _tween and _tween.is_running():

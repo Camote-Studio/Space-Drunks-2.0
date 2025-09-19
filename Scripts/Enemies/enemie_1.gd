@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal damage(value: float)
 signal died
-
+@onready var audio_laser : AudioStreamPlayer2D = $laser
 var speed := 300
 var player: CharacterBody2D = null
 const BULLET_ENEMY_1 = preload("res://Scenes/gun_enemy_1.tscn")
@@ -141,13 +141,22 @@ func _on_gun_timer_timeout() -> void:
 	_update_target()
 	if dead or player == null:
 		return
+
 	var to_player: Vector2 = player.global_position - global_position
 	if to_player.length() > attack_range:
 		return
+
+	# Instanciar bala
 	var bullet_instance = BULLET_ENEMY_1.instantiate()
 	get_parent().add_child(bullet_instance)
 	bullet_instance.global_position = global_position
 	bullet_instance.rotation = to_player.angle()
+
+	# 🎵 Reproducir sonido láser
+	if audio_laser:
+		audio_laser.stop() # Reinicia el sonido si aún estaba sonando
+		audio_laser.play()
+
 
 func _on_damage(amount: float) -> void:
 	if bar_3:

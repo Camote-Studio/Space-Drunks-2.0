@@ -1,4 +1,4 @@
-[gd_scene load_steps=192 format=3 uid="uid://c3egt0yjxsvrn"]
+[gd_scene load_steps=194 format=3 uid="uid://c3egt0yjxsvrn"]
 
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_p0e4v"]
 [ext_resource type="Texture2D" uid="uid://t1sr0p1gcjrw" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 001.png" id="2_qo81y"]
@@ -185,6 +185,8 @@
 [ext_resource type="Texture2D" uid="uid://d4edlffnyj7py" path="res://Assets/art/sprites/Personajes/militar kirk.png" id="183_e0wwm"]
 [ext_resource type="AudioStream" uid="uid://68jauvq2vtui" path="res://Assets/sfx/Retro Charge Off StereoUP 02.wav" id="183_k774p"]
 [ext_resource type="PackedScene" uid="uid://h5mxjah6wflt" path="res://Scenes/Armas/Laser.tscn" id="185_e0wwm"]
+[ext_resource type="AudioStream" uid="uid://rajbfhsslc1o" path="res://Assets/music/hk-mp5-reload-sound-316892.ogg" id="186_1arlc"]
+[ext_resource type="AudioStream" uid="uid://dil43vqyqb5gr" path="res://Assets/music/fnp90-burst-100583.ogg" id="187_unmkb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
 radius = 19.0
@@ -894,6 +896,14 @@ position = Vector2(17, 0)
 
 [node name="Laser" parent="." instance=ExtResource("185_e0wwm")]
 visible = false
+
+[node name="audio_recarga" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("186_1arlc")
+volume_db = 24.0
+
+[node name="audio_disparo_metra" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("187_unmkb")
+volume_db = 24.0
 
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]

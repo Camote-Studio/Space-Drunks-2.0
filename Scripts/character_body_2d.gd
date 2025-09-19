@@ -1,4 +1,5 @@
 extends CharacterBody2D # player 1
+var _flotar_sound_played := false
 
 signal damage(amount: float, source: String)
 signal muerte
@@ -14,7 +15,8 @@ var coins: int = 0
 @onready var gun_node: Node = $Gun
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
-
+@onready var audio_disparo_metra: AudioStreamPlayer2D = $audio_disparo_metra
+@onready var audio_recarga: AudioStreamPlayer2D = $audio_recarga
 @export var gun_360_scene: PackedScene = preload("res://Scenes/gun_360.tscn")
 var _360_instance: Node2D = null
 var _360_timer: Timer
@@ -62,6 +64,9 @@ var power_bullet_extra_damage := 20.0
 
 # =============== FUNCIÓN READY =============================
 func _ready() -> void:
+	_disable_stream_loop(sonido_flotando)
+
+
 	# Configuración de timers
 	if gun:
 		print("✅ Gun detectado:", gun)
@@ -123,13 +128,14 @@ func _physics_process(delta: float) -> void:
 	velocity = direction.normalized() * speed
 
 	if not floating:
+		velocity = direction * speed
+		move_and_slide()
+		# detener sonido de flotación si estaba sonando
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
-		move_and_slide()
 	else:
-		if not sonido_flotando.playing:
-			sonido_flotando.play()
 		_handle_floating(delta)
+
 
 # ====================== FUNCIÓN UPDATE ANIMACIONES ===========================
 func _update_animation(direction: Vector2) -> void:
@@ -191,9 +197,17 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 				if has_node("AturdidoTimer"):
 					$AturdidoTimer.start(2)
 		"bala_gravedad":
+			if sonido_flotando.playing:
+				sonido_flotando.stop()
+				if sonido_flotando.has_method("seek"):
+					sonido_flotando.seek(0.0)
+
+			_flotar_sound_played = false  # 🔹 fuerza a que vuelva a sonar la próxima vez
 			floating = true
 			invulnerable = true
 			invul_timer = invul_duration
+
+
 
 func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
@@ -201,6 +215,14 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 
 # ====================== FUNCIÓN FLOTAR ==========================================
 func _handle_floating(delta: float) -> void:
+	if floating:
+		if not _flotar_sound_played:
+			sonido_flotando.play()
+			_flotar_sound_played = true
+	else:
+		_flotar_sound_played = false
+		if sonido_flotando.playing:
+			sonido_flotando.stop()
 	var target_y
 	var current_lerp_speed
 	var current_rotation_speed
@@ -401,6 +423,10 @@ func _activate_ulti() -> void:
 	if gun:
 		gun.set_mode(gun.GunMode.TURRET)
 
+	# 🔊 Sonido de recarga al sacar ulti
+	if audio_recarga and not audio_recarga.playing:
+		audio_recarga.play()
+
 	if has_node("Visuals/AnimatedSprite2D"):
 		var anim_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 		if anim_sprite.sprite_frames.has_animation("ulti_pose"):
@@ -410,6 +436,8 @@ func _activate_ulti() -> void:
 			push_warning("Animación 'ulti_pose' no existe en AnimatedSprite2D")
 	if ulti_timer:
 		ulti_timer.start(5.0)
+
+
 
 func _on_ulti_timer_timeout() -> void:
 	print("⏱️ Ulti terminó → regresando a normal")
@@ -432,3 +460,17 @@ func push_temp(offset: Vector2) -> void:
 func is_unable_to_act() -> bool:
 	# Aquí pones tu propia lógica.
 	return dead or not allow_input
+func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
+	if player == null:
+		return
+	var s = player.stream
+	if s == null:
+		return
+	var s_copy = s.duplicate(true)
+	if "loop_mode" in s_copy:
+		s_copy.loop_mode = 0
+	elif "loop" in s_copy:
+		s_copy.loop = false
+	elif "loop_enabled" in s_copy:
+		s_copy.loop_enabled = false
+	player.stream = s_copy

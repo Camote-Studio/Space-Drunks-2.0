@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="7_2e22m"]
 [ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="8_31sr6"]
 [ext_resource type="PackedScene" uid="uid://dpv3uo1xu4wsv" path="res://Scenes/gun__enemie_gravity.tscn" id="9_xlltn"]
-[ext_resource type="AudioStream" uid="uid://hs5wadwnl64m" path="res://Assets/sfx/lasergun-35817_[cut_1sec].mp3" id="10_vndqv"]
+[ext_resource type="AudioStream" uid="uid://cxt1byewr6l0x" path="res://Assets/music/laser-shot-ingame-230500.ogg" id="11_fbg5n"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8q5kh"]
 animations = [{
@@ -98,10 +98,13 @@ show_percentage = false
 wait_time = 4.5
 
 [node name="lasergun" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_vndqv")
-volume_db = 10.0
+stream = ExtResource("11_fbg5n")
+volume_db = 9.85
 
 [node name="Punch_Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_fbg5n")
 
 [connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
