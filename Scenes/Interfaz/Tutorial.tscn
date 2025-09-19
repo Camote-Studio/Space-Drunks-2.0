@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://6bo3oe3f18it"]
+
+[ext_resource type="Texture2D" uid="uid://bma6w4p6xhc1v" path="res://Assets/art/sprites/Enemigos/2.png" id="1_jals5"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 652.0
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(539, 262)
+texture = ExtResource("1_jals5")

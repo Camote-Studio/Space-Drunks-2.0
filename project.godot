@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SoundEffectManager="*res://Scripts/sound_effect_manager.gd"
 MusicManager="*res://Scripts/Intefaz/music_manager.gd"
 GameState="*res://Scenes/GameState.gd"
+Laptop="*res://Scenes/Animaciones/LaptopAnimación.tscn"
 
 [display]
 

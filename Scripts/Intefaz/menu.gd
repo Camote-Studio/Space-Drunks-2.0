@@ -24,7 +24,13 @@ func _on_start_pressed() -> void:
 	$"Sombras_transición".show()
 	$"Sombras_transición/Sombra_time".start()
 	$"Sombras_transición/AnimationPlayer".play("Sombra_on")
+
+
+func _on_tutorial_pressed() -> void:
+	tipo_boton = "tutorial"
+	Laptop.change_scene("res://Tutorial.tscn", "abrir_laptop")
 	
+
 func _on_options_pressed() -> void:
 	tipo_boton = "options"
 	$"Sombras_transición".show()
