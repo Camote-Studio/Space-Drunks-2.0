@@ -28,7 +28,7 @@ var face_sign := 1.0
 
 var min_range := 70.0
 var max_range := 140.0
-var attack_range :=180.0
+var attack_range :=200.0
 var punch_damage := 10.0
 var punch_cooldown := 0.6
 var lunge_dist := 38.0

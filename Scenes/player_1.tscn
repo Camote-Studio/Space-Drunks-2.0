@@ -187,8 +187,8 @@
 [ext_resource type="PackedScene" uid="uid://h5mxjah6wflt" path="res://Scenes/Armas/Laser.tscn" id="185_e0wwm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqug6"]
-radius = 14.0
-height = 40.0
+radius = 19.0
+height = 60.0
 
 [sub_resource type="Animation" id="Animation_tb6cx"]
 length = 0.001
@@ -885,7 +885,7 @@ volume_db = 20.0
 position = Vector2(2, 2.11758e-22)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
-animation = &"ulti_pose"
+animation = &"death"
 
 [node name="UltiTimer" type="Timer" parent="."]
 
@@ -893,6 +893,7 @@ animation = &"ulti_pose"
 position = Vector2(17, 0)
 
 [node name="Laser" parent="." instance=ExtResource("185_e0wwm")]
+visible = false
 
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
