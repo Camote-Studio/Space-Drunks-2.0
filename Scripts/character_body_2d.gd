@@ -8,7 +8,14 @@ signal muerte
 # --- GUN / ULTI ---
 @onready var gun = $Gun
 @onready var ulti_timer: Timer = $UltiTimer
-
+# ====== DASH ======
+@export var dash_speed := 600.0
+@export var dash_duration := 0.2
+@export var dash_cooldown := 0.6
+var _is_dashing := false
+var _dash_timer := 0.0
+var _dash_cooldown_timer := 0.0
+var _dash_dir := Vector2.ZERO
 var coins: int = 0
 @export var player_id: String = "player1" # Identificador único
 
@@ -112,11 +119,27 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
+	# --- DASH ---
+	if _is_dashing:
+		_dash_timer -= delta
+		if _dash_timer <= 0.0:
+			_end_dash()
+		else:
+			velocity = _dash_dir * dash_speed
+			move_and_slide()
+		return
 
+	if _dash_cooldown_timer > 0.0:
+		_dash_cooldown_timer -= delta
 	var direction = Vector2.ZERO
 
 	if allow_input:
 		direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
+	if Input.is_action_just_pressed("dash") and not _is_dashing and _dash_cooldown_timer <= 0.0 and not floating:
+			if direction != Vector2.ZERO:
+				_start_dash(direction)
+			else:
+				_start_dash(Vector2.RIGHT) # default
 
 	if Input.is_action_just_pressed("jump") and not is_using_ulti:
 		_activate_ulti()
@@ -474,3 +497,20 @@ func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
 	elif "loop_enabled" in s_copy:
 		s_copy.loop_enabled = false
 	player.stream = s_copy
+# ====================== DASH FUNCIONES =====================
+func _start_dash(direction: Vector2) -> void:
+	_is_dashing = true
+	_dash_timer = dash_duration
+	_dash_cooldown_timer = dash_cooldown
+	_dash_dir = direction.normalized()
+	invulnerable = true
+
+	if animated_sprite and animated_sprite.sprite_frames.has_animation("dash"):
+		animated_sprite.play("dash")
+
+func _end_dash() -> void:
+	_is_dashing = false
+	invulnerable = false
+	velocity = Vector2.ZERO
+	if animated_sprite and animated_sprite.animation == "dash":
+		animated_sprite.play("idle")
