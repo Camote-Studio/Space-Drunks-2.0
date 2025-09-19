@@ -95,7 +95,7 @@ value = 700.0
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_5uamw")
-volume_db = 20.0
+volume_db = 12.0
 
 [node name="Punch_timer" type="Timer" parent="."]
 

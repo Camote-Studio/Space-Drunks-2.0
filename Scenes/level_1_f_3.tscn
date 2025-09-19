@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=41 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
@@ -24,9 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="18_m74wh"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="19_fnwrx"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="21_r84mv"]
-[ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="22_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="22_v4p21"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
+[ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="27_v4p21"]
+[ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="28_s0j4o"]
+[ext_resource type="Script" uid="uid://ma121f682hnw" path="res://Scripts/next_scene_path_area.gd" id="29_a7g42"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
 size = Vector2(5588.5, 10)
@@ -209,6 +211,9 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r84mv"]
 shader = ExtResource("8_6nii4")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtle1"]
+size = Vector2(20, 667)
+
 [node name="Level1_F3" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -219,6 +224,18 @@ script = ExtResource("1_gupyi")
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
 position = Vector2(817, 171)
+scale = Vector2(0.4085, 0.37451)
+texture = ExtResource("2_tii1t")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(2451, 172)
+scale = Vector2(0.4085, 0.37451)
+texture = ExtResource("2_tii1t")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(4085, 172)
 scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("2_tii1t")
 
@@ -237,7 +254,7 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 [node name="PISO" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-345, 67)
-scale = Vector2(1.08375, 0.566667)
+scale = Vector2(1.3135, 0.566667)
 texture = ExtResource("4_efrga")
 centered = false
 
@@ -288,6 +305,7 @@ theme_override_font_sizes/font_size = 60
 text = "Ready?"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_alien_1" type="TextureProgressBar" parent="CanvasLayer"]
 anchors_preset = -1
@@ -322,6 +340,7 @@ offset_top = 69.0
 offset_right = 191.0
 offset_bottom = 85.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
@@ -330,6 +349,7 @@ offset_top = 69.0
 offset_right = 367.0
 offset_bottom = 85.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(77, 51)
@@ -352,6 +372,21 @@ texture_filter = 1
 position = Vector2(265, 50)
 scale = Vector2(0.21, 0.21)
 texture = ExtResource("11_v4p21")
+
+[node name="cont monedas2" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.155
+anchor_top = 0.198
+anchor_right = 0.155
+anchor_bottom = 0.198
+offset_left = 121.44
+offset_top = -23.304
+offset_right = 148.44
+offset_bottom = 23.696
+theme_override_fonts/font = ExtResource("21_r84mv")
+theme_override_font_sizes/font_size = 33
+text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
@@ -387,36 +422,21 @@ offset_bottom = 36.008
 theme_override_fonts/font = ExtResource("21_r84mv")
 theme_override_font_sizes/font_size = 33
 text = "0"
-
-[node name="cont monedas2" type="Label" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.155
-anchor_top = 0.198
-anchor_right = 0.155
-anchor_bottom = 0.198
-offset_left = 121.44
-offset_top = -23.304
-offset_right = 148.44
-offset_bottom = 23.696
-theme_override_fonts/font = ExtResource("21_r84mv")
-theme_override_font_sizes/font_size = 33
-text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("22_v4p21")]
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara", "main_camera"]]
 position = Vector2(576, 303)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
-speed = 15.0
+speed = 40.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_5ckil")
 }
-
-[node name="Final_Boss" parent="." instance=ExtResource("22_gupyi")]
-position = Vector2(998, 397)
 
 [node name="GameOver" parent="." instance=ExtResource("23_d1i85")]
 
@@ -479,3 +499,16 @@ offset_left = -5.975
 offset_top = 450.0
 offset_right = 104.025
 offset_bottom = 564.0
+
+[node name="Enemies_final" parent="." instance=ExtResource("27_v4p21")]
+
+[node name="enemie_spawn_6" parent="." instance=ExtResource("28_s0j4o")]
+
+[node name="next_scene_path_area" type="Area2D" parent="."]
+script = ExtResource("29_a7g42")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="next_scene_path_area"]
+position = Vector2(3569, 325)
+shape = SubResource("RectangleShape2D_qtle1")
+
+[connection signal="body_entered" from="next_scene_path_area" to="next_scene_path_area" method="_on_body_entered"]

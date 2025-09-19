@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1lvfjfdgnk6r"]
+
+[ext_resource type="Texture2D" uid="uid://b53b0g6a2qciq" path="res://Assets/art/sprites/Armas/Proyectiles/BULLET_BOSS.png" id="1_bxm02"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u23ew"]
+radius = 44.643
+
+[node name="boss_bullet" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_bxm02")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u23ew")
