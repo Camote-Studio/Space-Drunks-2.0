@@ -120,6 +120,7 @@ position = Vector2(314, 489)
 [node name="Final_Boss" parent="." instance=ExtResource("6_reli8")]
 position = Vector2(1042, 383)
 scale = Vector2(1, 1)
+frames_face_right = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
