@@ -1,4 +1,4 @@
-[gd_scene load_steps=259 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=260 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
@@ -220,6 +220,7 @@
 [ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="174_qixq7"]
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="175_rn5h7"]
 [ext_resource type="Texture2D" uid="uid://dap7xhpcnmpjg" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s1.png" id="213_5xl0v"]
+[ext_resource type="Texture2D" uid="uid://bcj28x5k2a6t" path="res://Assets/art/sprites/Personajes/big con botella.png" id="214_b1epr"]
 [ext_resource type="Texture2D" uid="uid://dj3ptn1p22cgc" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s2.png" id="214_nxc58"]
 [ext_resource type="Texture2D" uid="uid://c04fo12rjsjmn" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s3.png" id="215_q8pxg"]
 [ext_resource type="Texture2D" uid="uid://c8b4eeehskqwc" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s4.png" id="216_qehk6"]
@@ -917,6 +918,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("214_b1epr")
+}],
+"loop": true,
+"name": &"lanzar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("213_5xl0v")
 }, {
 "duration": 1.0,
@@ -1080,8 +1089,7 @@ poison_area_scene = ExtResource("2_32qke")
 position = Vector2(1, -11)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_rn5h7")
-animation = &"ulti_pose"
-frame_progress = 0.0995656
+animation = &"lanzar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

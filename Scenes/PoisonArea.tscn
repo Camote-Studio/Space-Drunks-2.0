@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcumd4ca72ik2"]
+[gd_scene load_steps=13 format=3 uid="uid://bcumd4ca72ik2"]
 
 [ext_resource type="Script" uid="uid://dnh1q33cjjmo5" path="res://Scenes/PoisonArea.gd" id="1_ok5wx"]
 [ext_resource type="Texture2D" uid="uid://bffnpwwfvya61" path="res://Assets/art/sprites/abilities/veneno/veneno1.png" id="2_7te8y"]
+[ext_resource type="AudioStream" uid="uid://dgr7741ficc0a" path="res://Assets/music/air-or-steam-pressure-release-29600.ogg" id="2_khq8d"]
 [ext_resource type="Texture2D" uid="uid://dcw5q3t1auq5f" path="res://Assets/art/sprites/abilities/veneno/veneno2.png" id="3_khq8d"]
 [ext_resource type="Texture2D" uid="uid://cxa2eqdg52433" path="res://Assets/art/sprites/abilities/veneno/veneno3.png" id="4_o28ex"]
 [ext_resource type="Texture2D" uid="uid://ckmdotrho4pxr" path="res://Assets/art/sprites/abilities/veneno/veneno4.png" id="5_2kfxj"]
@@ -49,6 +50,9 @@ animations = [{
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("1_ok5wx")
+
+[node name="audio_v" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource("2_khq8d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2, -1)
