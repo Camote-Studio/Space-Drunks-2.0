@@ -1,4 +1,5 @@
 extends CharacterBody2D # player 1
+var _flotar_sound_played := false
 
 signal damage(amount: float, source: String)
 signal muerte
@@ -7,14 +8,22 @@ signal muerte
 # --- GUN / ULTI ---
 @onready var gun = $Gun
 @onready var ulti_timer: Timer = $UltiTimer
-
+# ====== DASH ======
+@export var dash_speed := 600.0
+@export var dash_duration := 0.2
+@export var dash_cooldown := 0.6
+var _is_dashing := false
+var _dash_timer := 0.0
+var _dash_cooldown_timer := 0.0
+var _dash_dir := Vector2.ZERO
 var coins: int = 0
 @export var player_id: String = "player1" # Identificador único
 
 @onready var gun_node: Node = $Gun
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
-
+@onready var audio_disparo_metra: AudioStreamPlayer2D = $audio_disparo_metra
+@onready var audio_recarga: AudioStreamPlayer2D = $audio_recarga
 @export var gun_360_scene: PackedScene = preload("res://Scenes/gun_360.tscn")
 var _360_instance: Node2D = null
 var _360_timer: Timer
@@ -62,6 +71,9 @@ var power_bullet_extra_damage := 20.0
 
 # =============== FUNCIÓN READY =============================
 func _ready() -> void:
+	_disable_stream_loop(sonido_flotando)
+
+
 	# Configuración de timers
 	if gun:
 		print("✅ Gun detectado:", gun)
@@ -107,11 +119,27 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
+	# --- DASH ---
+	if _is_dashing:
+		_dash_timer -= delta
+		if _dash_timer <= 0.0:
+			_end_dash()
+		else:
+			velocity = _dash_dir * dash_speed
+			move_and_slide()
+		return
 
+	if _dash_cooldown_timer > 0.0:
+		_dash_cooldown_timer -= delta
 	var direction = Vector2.ZERO
 
 	if allow_input:
 		direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
+	if Input.is_action_just_pressed("dash") and not _is_dashing and _dash_cooldown_timer <= 0.0 and not floating:
+			if direction != Vector2.ZERO:
+				_start_dash(direction)
+			else:
+				_start_dash(Vector2.RIGHT) # default
 
 	if Input.is_action_just_pressed("jump") and not is_using_ulti:
 		_activate_ulti()
@@ -123,13 +151,14 @@ func _physics_process(delta: float) -> void:
 	velocity = direction.normalized() * speed
 
 	if not floating:
+		velocity = direction * speed
+		move_and_slide()
+		# detener sonido de flotación si estaba sonando
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
-		move_and_slide()
 	else:
-		if not sonido_flotando.playing:
-			sonido_flotando.play()
 		_handle_floating(delta)
+
 
 # ====================== FUNCIÓN UPDATE ANIMACIONES ===========================
 func _update_animation(direction: Vector2) -> void:
@@ -191,9 +220,17 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 				if has_node("AturdidoTimer"):
 					$AturdidoTimer.start(2)
 		"bala_gravedad":
+			if sonido_flotando.playing:
+				sonido_flotando.stop()
+				if sonido_flotando.has_method("seek"):
+					sonido_flotando.seek(0.0)
+
+			_flotar_sound_played = false  # 🔹 fuerza a que vuelva a sonar la próxima vez
 			floating = true
 			invulnerable = true
 			invul_timer = invul_duration
+
+
 
 func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
@@ -201,6 +238,14 @@ func _on_damage_enemy_body_entered(body: Node2D) -> void:
 
 # ====================== FUNCIÓN FLOTAR ==========================================
 func _handle_floating(delta: float) -> void:
+	if floating:
+		if not _flotar_sound_played:
+			sonido_flotando.play()
+			_flotar_sound_played = true
+	else:
+		_flotar_sound_played = false
+		if sonido_flotando.playing:
+			sonido_flotando.stop()
 	var target_y
 	var current_lerp_speed
 	var current_rotation_speed
@@ -251,9 +296,11 @@ func gain_ability_from_shot() -> void:
 func _power() -> void:
 	if dead or next_shot_powered: 
 		return
-	if bar_ability_1 and bar_ability_1.value >= bar_ability_1.max_value:
+
+	if bar_ability_1 and not is_using_ulti and bar_ability_1.value >= bar_ability_1.max_value:
 		next_shot_powered = true
 		bar_ability_1.value = bar_ability_1.min_value
+
 
 func apply_power_to_bullet(bullet: Node) -> void:
 	if not next_shot_powered: 
@@ -399,6 +446,10 @@ func _activate_ulti() -> void:
 	if gun:
 		gun.set_mode(gun.GunMode.TURRET)
 
+	# 🔊 Sonido de recarga al sacar ulti
+	if audio_recarga and not audio_recarga.playing:
+		audio_recarga.play()
+
 	if has_node("Visuals/AnimatedSprite2D"):
 		var anim_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 		if anim_sprite.sprite_frames.has_animation("ulti_pose"):
@@ -408,6 +459,8 @@ func _activate_ulti() -> void:
 			push_warning("Animación 'ulti_pose' no existe en AnimatedSprite2D")
 	if ulti_timer:
 		ulti_timer.start(5.0)
+
+
 
 func _on_ulti_timer_timeout() -> void:
 	print("⏱️ Ulti terminó → regresando a normal")
@@ -430,3 +483,34 @@ func push_temp(offset: Vector2) -> void:
 func is_unable_to_act() -> bool:
 	# Aquí pones tu propia lógica.
 	return dead or not allow_input
+func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
+	if player == null:
+		return
+	var s = player.stream
+	if s == null:
+		return
+	var s_copy = s.duplicate(true)
+	if "loop_mode" in s_copy:
+		s_copy.loop_mode = 0
+	elif "loop" in s_copy:
+		s_copy.loop = false
+	elif "loop_enabled" in s_copy:
+		s_copy.loop_enabled = false
+	player.stream = s_copy
+# ====================== DASH FUNCIONES =====================
+func _start_dash(direction: Vector2) -> void:
+	_is_dashing = true
+	_dash_timer = dash_duration
+	_dash_cooldown_timer = dash_cooldown
+	_dash_dir = direction.normalized()
+	invulnerable = true
+
+	if animated_sprite and animated_sprite.sprite_frames.has_animation("dash"):
+		animated_sprite.play("dash")
+
+func _end_dash() -> void:
+	_is_dashing = false
+	invulnerable = false
+	velocity = Vector2.ZERO
+	if animated_sprite and animated_sprite.animation == "dash":
+		animated_sprite.play("idle")

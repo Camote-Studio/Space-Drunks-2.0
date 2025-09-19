@@ -6,8 +6,9 @@ extends Area2D
 @onready var sprite: AnimatedSprite2D = $"../AnimatedSprite2D"
 @onready var damage_timer: Timer = $"../DamageTimer"
 @onready var life_timer: Timer = $"../LifeTimer"
-
+@onready var audio: AudioStreamPlayer2D = $audio_v
 func _ready() -> void:
+	audio.play()
 	if sprite:
 		sprite.play("idle")
 	if damage_timer:

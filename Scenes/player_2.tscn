@@ -1,4 +1,4 @@
-[gd_scene load_steps=258 format=3 uid="uid://b4fwndsghnvmc"]
+[gd_scene load_steps=260 format=3 uid="uid://b4fwndsghnvmc"]
 
 [ext_resource type="Script" uid="uid://okqfwpqx4lc5" path="res://Scripts/player_2.gd" id="1_a3adp"]
 [ext_resource type="Texture2D" uid="uid://jtqbiyhxarcb" path="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 001.png" id="2_5yg3c"]
@@ -220,6 +220,7 @@
 [ext_resource type="Texture2D" uid="uid://cobndxro02b5f" path="res://Assets/art/sprites/Particulas/EXPLO_5.png" id="174_qixq7"]
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="175_rn5h7"]
 [ext_resource type="Texture2D" uid="uid://dap7xhpcnmpjg" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s1.png" id="213_5xl0v"]
+[ext_resource type="Texture2D" uid="uid://bcj28x5k2a6t" path="res://Assets/art/sprites/Personajes/big con botella.png" id="214_b1epr"]
 [ext_resource type="Texture2D" uid="uid://dj3ptn1p22cgc" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s2.png" id="214_nxc58"]
 [ext_resource type="Texture2D" uid="uid://c04fo12rjsjmn" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s3.png" id="215_q8pxg"]
 [ext_resource type="Texture2D" uid="uid://c8b4eeehskqwc" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s4.png" id="216_qehk6"]
@@ -248,6 +249,7 @@
 [ext_resource type="Texture2D" uid="uid://3aoxntwf2sx1" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s22.png" id="234_klxos"]
 [ext_resource type="Texture2D" uid="uid://c30t4mmfxwawq" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s23.png" id="235_d83bn"]
 [ext_resource type="Texture2D" uid="uid://d3q2kswtw60v1" path="res://Assets/art/sprites/Personajes/sayayin_ulti/s24.png" id="236_n0pwd"]
+[ext_resource type="AudioStream" uid="uid://cgjy3pp8bqbp5" path="res://Assets/music/pixel-level-up-sound-351836.ogg" id="249_ucjq2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rn5h7"]
 animations = [{
@@ -916,6 +918,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("214_b1epr")
+}],
+"loop": true,
+"name": &"lanzar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("213_5xl0v")
 }, {
 "duration": 1.0,
@@ -1060,10 +1070,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_prblm"]
-radius = 180.0
+radius = 156.935
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
-radius = 156.702
+radius = 153.333
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dfurs"]
 a = Vector2(-6.08382, 0.201834)
@@ -1079,10 +1089,10 @@ poison_area_scene = ExtResource("2_32qke")
 position = Vector2(1, -11)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_rn5h7")
-animation = &"ulti_pose"
-frame_progress = 0.0995656
+animation = &"lanzar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, 5)
 shape = SubResource("CapsuleShape2D_1m887")
 
@@ -1112,6 +1122,7 @@ texture = ExtResource("219_4x7fj")
 position = Vector2(6.66667, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_left/Area2D"]
+position = Vector2(3.33333, 2.5)
 shape = SubResource("CircleShape2D_prblm")
 
 [node name="Punch_right" type="Sprite2D" parent="." groups=["puño_player2"]]
@@ -1155,6 +1166,9 @@ gravity = Vector2(0, 0)
 [node name="sonido_flotando" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("223_wrxan")
 volume_db = 20.0
+
+[node name="sonido_ulti" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("249_ucjq2")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]

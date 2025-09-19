@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://tytkyjl3qajp"]
+[gd_scene load_steps=6 format=3 uid="uid://tytkyjl3qajp"]
 
 [ext_resource type="Script" uid="uid://dgwsvxmmyugph" path="res://Scripts/gun.gd" id="1_pey2u"]
-[ext_resource type="PackedScene" uid="uid://codjbf8doy1yv" path="res://Scenes/bullet.tscn" id="2_alhkf"]
 [ext_resource type="Texture2D" uid="uid://dhqi54jg8qvgb" path="res://Assets/art/sprites/Armas/gUN1.png" id="2_pey2u"]
-[ext_resource type="PackedScene" uid="uid://h5mxjah6wflt" path="res://Scenes/Armas/Laser.tscn" id="3_bsipy"]
 [ext_resource type="AudioStream" uid="uid://hs5wadwnl64m" path="res://Assets/sfx/lasergun-35817_[cut_1sec].mp3" id="3_t6ynv"]
 [ext_resource type="Texture2D" uid="uid://d311q8e6htuy6" path="res://Assets/art/sprites/Armas/gun3.png" id="4_k4teu"]
 
@@ -29,8 +27,6 @@ animations = [{
 [node name="Gun" type="Node2D"]
 scale = Vector2(0.15, 0.15)
 script = ExtResource("1_pey2u")
-bullet_scene = ExtResource("2_alhkf")
-ray_scene = ExtResource("3_bsipy")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
@@ -49,6 +45,6 @@ animation = &"idle"
 offset = Vector2(-6.70587, -8.77188)
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(319.99997, 0)
+position = Vector2(320, 0)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
