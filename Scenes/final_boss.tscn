@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cy7nosfcmj6l0"]
+[gd_scene load_steps=15 format=3 uid="uid://cy7nosfcmj6l0"]
 
 [ext_resource type="Script" uid="uid://dhr4nudsalkcc" path="res://Scripts/final_boss.gd" id="1_blxqn"]
 [ext_resource type="Texture2D" uid="uid://ckvb4w6t1iqik" path="res://Assets/art/sprites/Enemigos/FINALboz.png" id="1_xchk6"]
@@ -51,6 +51,14 @@ height = 208.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_xchk6"]
 radius = 142.618
 
+[sub_resource type="Animation" id="Animation_8i2ud"]
+resource_name = "hit_damage"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5uamw"]
+_data = {
+&"hit_damage": SubResource("Animation_8i2ud")
+}
+
 [node name="Final_Boss" type="CharacterBody2D" groups=["boss"]]
 scale = Vector2(0.9, 0.9)
 collision_layer = 0
@@ -95,9 +103,14 @@ value = 700.0
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_5uamw")
-volume_db = 12.0
+volume_db = 10.0
 
 [node name="Punch_timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5uamw")
+}
 
 [connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
