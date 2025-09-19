@@ -134,7 +134,7 @@ offset_left = 63.0
 offset_top = 261.0
 offset_right = 903.0
 offset_bottom = 2396.0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Options")
 button_mask = 0
@@ -165,15 +165,52 @@ theme_override_font_sizes/font_size = 128
 text = "Start
  Game"
 
+[node name="Tutorial" type="TextureButton" parent="Control" groups=["ui_botones"]]
+material = SubResource("ShaderMaterial_mm3o3")
+use_parent_material = true
+offset_left = 94.0
+offset_top = 347.0
+offset_right = 934.0
+offset_bottom = 2482.0
+scale = Vector2(0.4, 0.4)
+focus_neighbor_top = NodePath("../Start")
+focus_neighbor_bottom = NodePath("../Options")
+button_mask = 0
+texture_normal = ExtResource("9_mm3o3")
+texture_pressed = ExtResource("10_2qgrd")
+texture_hover = ExtResource("11_w4fob")
+texture_focused = ExtResource("11_w4fob")
+
+[node name="Label" type="Label" parent="Control/Tutorial"]
+material = SubResource("ShaderMaterial_w4fob")
+use_parent_material = true
+layout_mode = 0
+offset_left = 54.999985
+offset_top = 140.0
+offset_right = 945.0
+offset_bottom = 501.0
+rotation = -0.235619
+scale = Vector2(0.35, 0.35)
+theme_override_colors/font_color = Color(1, 0.858824, 0, 0.854902)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("5_erq20")
+theme_override_font_sizes/font_size = 128
+text = "Tutorial"
+
 [node name="Options" type="TextureButton" parent="Control" groups=["ui_botones"]]
 material = SubResource("ShaderMaterial_w4fob")
 use_parent_material = true
-offset_left = 151.0
-offset_top = 384.0
-offset_right = 991.0
-offset_bottom = 2519.0
-scale = Vector2(0.5, 0.5)
-focus_neighbor_top = NodePath("../Start")
+offset_left = 126.0
+offset_top = 438.0
+offset_right = 966.0
+offset_bottom = 2573.0
+scale = Vector2(0.4, 0.4)
+focus_neighbor_top = NodePath("../Tutorial")
 focus_neighbor_bottom = NodePath("../Quit")
 button_mask = 0
 texture_normal = ExtResource("9_mm3o3")
@@ -205,11 +242,11 @@ text = "Options"
 [node name="Quit" type="TextureButton" parent="Control" groups=["ui_botones"]]
 material = SubResource("ShaderMaterial_w4fob")
 use_parent_material = true
-offset_left = 244.0
-offset_top = 503.0
-offset_right = 1084.0
-offset_bottom = 2638.0
-scale = Vector2(0.5, 0.5)
+offset_left = 162.0
+offset_top = 530.0
+offset_right = 1002.0
+offset_bottom = 2665.0
+scale = Vector2(0.4, 0.4)
 focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Start")
 button_mask = 0
@@ -262,6 +299,7 @@ libraries = {
 autoplay = "Movimiento"
 
 [connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="Control/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
 [connection signal="timeout" from="Control/Timer" to="Control" method="_on_timer_timeout"]

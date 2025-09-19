@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://xx5mma8m43ea"]
+
+[ext_resource type="Script" uid="uid://c4to1lt2h3j1y" path="res://Scripts/Intefaz/laptop_animación.gd" id="1_fv1lm"]
+[ext_resource type="Texture2D" uid="uid://diy2ok3f0coui" path="res://Assets/art/sprites/Interfaz/Sprite Sheet animación pantalla.png" id="1_wpd4m"]
+
+[sub_resource type="Animation" id="Animation_kshs6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fv1lm"]
+resource_name = "abrir_laptop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.76666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+
+[sub_resource type="Animation" id="Animation_wpd4m"]
+resource_name = "cerrar_laptop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.73333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [5, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0t503"]
+_data = {
+&"RESET": SubResource("Animation_kshs6"),
+&"abrir_laptop": SubResource("Animation_fv1lm"),
+&"cerrar_laptop": SubResource("Animation_wpd4m")
+}
+
+[node name="LaptopAnimación" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_fv1lm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -12.0
+offset_right = 1163.0
+offset_bottom = 74.0
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 325)
+texture = ExtResource("1_wpd4m")
+hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0t503")
+}

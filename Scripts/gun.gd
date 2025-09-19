@@ -41,7 +41,7 @@ var player: Node2D
 var current_ray: Node = null
 var base_position: Vector2
 var base_rotation: float
-#var aim_angle: float = 0.0
+var aim_angle: float = 0.0
 
 
 func _ready() -> void:
@@ -56,7 +56,7 @@ func _ready() -> void:
 
 	base_position = position
 	base_rotation = rotation
-	#aim_angle = base_rotation
+	aim_angle = base_rotation
 
 	if animated_sprite:
 		animated_sprite.play("idle")
@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
 		_update_turret_aim(is_player_flipped)
 	else:
 		rotation = base_rotation
-		#aim_angle = base_rotation
+		aim_angle = base_rotation
 
 	_handle_input(is_player_flipped)
 
@@ -96,7 +96,7 @@ func _handle_input(is_player_flipped: bool) -> void:
 				_stop_ray()
 		GunMode.PISTOL:
 			if Input.is_action_pressed("fired") and can_fire:
-				_fire_pistol()
+				_fire_pistol(is_player_flipped)
 		GunMode.TURRET:
 			if Input.is_action_pressed("fired") and can_fire:
 				_fire_turret()
@@ -130,17 +130,15 @@ func _update_turret_aim(is_player_flipped: bool) -> void:
 	var relative_angle = wrapf(target_angle - forward_angle, -PI, PI)
 	var clamped_relative_angle = clamp(relative_angle, -turret_angle_limit, turret_angle_limit)
 	
-	#aim_angle = forward_angle + clamped_relative_angle
-	rotation = forward_angle + clamped_relative_angle
+	aim_angle = forward_angle + clamped_relative_angle
+	rotation = aim_angle
 
 
 ## --- MODOS DE DISPARO ---
 
-func _fire_pistol() -> void:
+func _fire_pistol(is_flipped: bool) -> void:
 	if animated_sprite: animated_sprite.play("idle")
-	
-	# La dirección se obtiene directamente del transform del arma. ¡Esto es infalible!
-	var direction = transform.x
+	var direction = (Vector2.LEFT if is_flipped else Vector2.RIGHT).rotated(aim_angle)
 	_spawn_bullet(direction)
 	
 	can_fire = false
@@ -151,8 +149,7 @@ func _fire_pistol() -> void:
 func _fire_turret() -> void:
 	if animated_sprite and animated_sprite.animation != "metralleta":
 		animated_sprite.play("metralleta")
-		
-	var direction = transform.x
+	var direction = Vector2.RIGHT.rotated(aim_angle)
 	_spawn_bullet(direction)
 	
 	can_fire = false
@@ -181,10 +178,6 @@ func _start_ray() -> void:
 	ray_instance.position = muzzle.position
 	ray_instance.rotation = 0 # El láser hereda la rotación del arma.
 
-	# La dirección del rayo también se basa en el transform del arma.
-	var direction = transform.x
-	ray_instance.rotation = direction.angle()
-
 	# 3. Llama a la nueva función para establecer la longitud del haz.
 	if ray_instance.has_method("setup_beam"):
 		# Usamos el valor por defecto del láser (max_range), que es 800.
@@ -192,10 +185,6 @@ func _start_ray() -> void:
 	
 	# 4. Inicia sus timers de duración y daño.
 	if ray_instance.has_method("start"):
-		# Ahora el rayo ya no necesita una dirección, su rotación lo es todo.
-		# Lo mantenemos por si tu láser lo sigue usando para algo, pero se podría eliminar.
-		if "direction" in ray_instance:
-			ray_instance.direction = direction
 		ray_instance.start(ray_duration_max, ray_dmg, ray_dmg_reduction)
 	
 	# Guardar referencia y conectar la señal
@@ -204,7 +193,7 @@ func _start_ray() -> void:
 
 
 func _stop_ray() -> void:
-	if current_ray:
+	if current_ray != null:
 		current_ray.queue_free()
 		# El cooldown se activa cuando el rayo es eliminado en _on_ray_removed.
 
@@ -249,20 +238,13 @@ func _on_ray_removed() -> void:
 ## --- INTERFAZ PÚBLICA ---
 
 func set_mode(mode: GunMode) -> void:
-	# --- PASO 1: LIMPIAR EL ESTADO DEL MODO ANTERIOR ---
-	# Si hay un rayo láser activo en este momento...
-	if current_ray != null:
-		# ...lo destruimos y limpiamos la referencia para evitar problemas.
-		# Nos desconectamos de la señal para que no active el cooldown por error.
-		if current_ray.is_connected("tree_exited", Callable(self, "_on_ray_removed")):
-			current_ray.disconnect("tree_exited", Callable(self, "_on_ray_removed"))
-		current_ray.queue_free()
-		current_ray = null
-
-	# --- PASO 2: CONFIGURAR EL NUEVO MODO ---
 	current_mode = mode
 	can_fire = true
-	timer.stop()
+	timer.stop() # Detiene cualquier cooldown pendiente al cambiar de modo.
+	
+	# Reinicia rotación y animaciones.
+	rotation = base_rotation
+	aim_angle = base_rotation
 	
 	if not animated_sprite: return
 	
@@ -270,3 +252,4 @@ func set_mode(mode: GunMode) -> void:
 		animated_sprite.play("metralleta")
 	else:
 		animated_sprite.play("idle")
+		
