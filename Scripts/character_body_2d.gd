@@ -114,7 +114,7 @@ func _physics_process(delta: float) -> void:
 		direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
 
 	if Input.is_action_just_pressed("jump") and not is_using_ulti:
-		next_shot_powered = true
+		_activate_ulti()
 
 	# --- Animaciones solo si NO estamos en ulti y no muertos ---
 	if not is_using_ulti and not dead:
@@ -253,7 +253,7 @@ func _power() -> void:
 		return
 
 	if bar_ability_1 and not is_using_ulti and bar_ability_1.value >= bar_ability_1.max_value:
-		_activate_ulti()
+		next_shot_powered = true
 		bar_ability_1.value = bar_ability_1.min_value
 
 
@@ -427,3 +427,8 @@ func _on_ulti_timer_timeout() -> void:
 # Empuje temporal que no rompe la física
 func push_temp(offset: Vector2) -> void:
 	global_position += offset
+	
+# En tu script player.gd
+func is_unable_to_act() -> bool:
+	# Aquí pones tu propia lógica.
+	return dead or not allow_input

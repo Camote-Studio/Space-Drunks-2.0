@@ -44,4 +44,7 @@ sprite_frames = SubResource("SpriteFrames_ft2q4")
 animation = &"idle"
 offset = Vector2(-6.70587, -8.77188)
 
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(320, 0)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
