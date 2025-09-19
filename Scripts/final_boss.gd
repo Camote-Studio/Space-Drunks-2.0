@@ -74,7 +74,24 @@ var _poison_timer: Timer
 var _shock_timer: Timer
 var _base_speed: float
 var _is_shocked := false
+
+@export var frames_face_right := false   # ponlo en false si tus sprites miran a la IZQUIERDA por defecto
+const MOVE_FACE_EPS := 5.0              # umbral de movimiento en px/s para decidir facing
 # ===================================
+@export var dizzy_offset: Vector2 = Vector2(0, -28) # dónde dibujar el “mareo”
+@export var spiral_turns: float = 2.0                 # número de vueltas
+@export var spiral_spacing: float = 3.0              # separación entre “brazos” (b en r=a+bθ)
+@export var spiral_points: int = 180                 # resolución (más puntos = más suave)
+@export var spiral_width: float = 2.0                # grosor de la línea
+# --- STUN / INTERLUDIO DE FASE ---
+var _is_stunned := false
+var _stun_time_left := 0.0
+var _orig_modulate := Color(1,1,1,1)
+var _dizzy_fx: Node2D          # contenedor del efecto
+var _dizzy_radius := 18.0      # radio del “mareo” sobre la cabeza
+var _dizzy_speed := 5.0        # velocidad de rotación (radianes/s aprox)
+# ---------------------------------
+
 
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi()%pitch_variations_gun.size()]
@@ -133,6 +150,42 @@ func _ready() -> void:
 
 	current_state = State.NORMAL
 	_did_dash85 = false
+	
+		# Guarda color original del sprite
+	if sprite_2d:
+		_orig_modulate = sprite_2d.self_modulate
+
+# Guarda color original
+	if sprite_2d:
+		_orig_modulate = sprite_2d.self_modulate
+
+# FX de mareo
+	_dizzy_fx = Node2D.new()
+	add_child(_dizzy_fx)
+	_dizzy_fx.position = dizzy_offset
+	_dizzy_fx.visible = false
+
+	var line := Line2D.new()
+	line.width = 2.0
+	line.default_color = Color(1, 0.9, 0.2, 1.0)
+	line.joint_mode = Line2D.LINE_JOINT_ROUND
+	line.end_cap_mode = Line2D.LINE_CAP_ROUND
+
+	var pts := PackedVector2Array()
+	var max_theta := TAU * spiral_turns
+	for i in range(spiral_points + 1):
+		var t := float(i) / float(spiral_points)          # 0..1
+		var theta := t * max_theta                        # ángulo
+		var r := spiral_spacing * theta                   # r = b·θ (a=0)
+		var x := r * cos(theta)
+		var y := r * sin(theta)
+	# pequeño lift para que quede “encima de la cabeza”
+		pts.push_back(Vector2(x, y - 8.0))
+	line.points = pts
+
+	_dizzy_fx.add_child(line)
+	
+	
 
 func _physics_process(delta: float) -> void:
 	if dead or player == null:
@@ -192,15 +245,53 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(target_vel, accel * delta)
 
 	rotation = 0.0
-	if abs(dir.x) > 0.1:
-		face_sign = sign(dir.x)
-	sprite_2d.flip_h = face_sign < 0.0
+	# ---- FACING ROBUSTO ----
+	var face_dir := face_sign
+
+# a) Si te mueves (por velocity) o estás en dash, usa eso para mirar
+	var moving_x = abs(velocity.x) > MOVE_FACE_EPS or (_is_dashing and abs(_dash_dir.x) > 0.01)
+	if moving_x:
+		var sx := 0.0
+		if _is_dashing:
+			sx = sign(_dash_dir.x)
+		else:
+			sx = sign(velocity.x)
+		if sx != 0:
+			face_dir = sx
+# b) Si no te mueves, mira hacia el jugador (si hay diferencia apreciable)
+	elif player and abs(player.global_position.x - global_position.x) > 2.0:
+		face_dir = sign(player.global_position.x - global_position.x)
+	face_sign = face_dir
+
+# c) Aplica flip según orientación por defecto de tus frames
+	if frames_face_right:
+		sprite_2d.flip_h = face_sign < 0.0   # frames miran a la DERECHA por defecto
+	else:
+		sprite_2d.flip_h = face_sign > 0.0   # frames miran a la IZQUIERDA por defecto
+# ------------------------
+
 
 	move_and_slide()
 
 	# golpe normal si no está dashing
 	if not _is_dashing and dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead:
 		_do_punch(dir)
+# --- manejo de STUN ---
+	if _is_stunned:
+	# quieto
+		velocity = Vector2.ZERO
+		move_and_slide()
+
+	# actualiza timer y rota el “mareo”
+		_stun_time_left -= delta
+		if _dizzy_fx:
+			_dizzy_fx.rotation += _dizzy_speed * delta
+			var s := 1.0 + 0.06 * sin(Time.get_ticks_msec() / 100.0)
+			_dizzy_fx.scale = Vector2(s, s)
+	if _stun_time_left <= 0.0:
+		_end_stun()
+	return
+# -----------------------
 
 # ---------- Helpers de estado ----------
 func _hp_pct() -> float:
@@ -215,16 +306,15 @@ func _hp_pct() -> float:
 func _update_state(dist: float, dir: Vector2) -> void:
 	match current_state:
 		State.NORMAL:
-			# Transición a PHASE_85 cuando la vida <= 85%
 			if _hp_pct() <= 0.85 and not _did_dash85:
 				current_state = State.PHASE_85
 				_did_dash85 = true
+				_enter_stun(3.0) # <- interludio de fase
 		State.PHASE_85:
-			# Aquí puedes alterar parámetros para hacerlo más agresivo
-			# (solo una vez al entrar, pero es inofensivo si se repite)
 			dash_chance = 0.6
 			speed = max(speed, _base_speed * 1.15)
 			accel = max(accel, 1800.0)
+
 # --------------------------------------
 
 func _try_dash(dist: float, dir: Vector2) -> void:
@@ -268,16 +358,24 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.is_in_group("player_2"):
 		target_in_range = body as CharacterBody2D
 	if body.is_in_group("player_1_bullet"):
-		emit_signal("damage", 10.0)
+		emit_signal("damage", 20.0)
 		if body.has_method("queue_free"):
 			body.queue_free()
-
+	elif body.is_in_group("puño_player_2"):
+		emit_signal("damage", 20.0)
+		if body.has_method("queue_free"):
+			
+			body.queue_free()
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body == target_in_range:
 		target_in_range = null
 
 func _on_area_2d_area_entered(a: Area2D) -> void:
 	if a.is_in_group("player_1_bullet"):
+		emit_signal("damage", 10.0)
+		if a.has_method("queue_free"):
+			a.queue_free()
+	if a.is_in_group("puño_player_2"):
 		emit_signal("damage", 10.0)
 		if a.has_method("queue_free"):
 			a.queue_free()
@@ -366,12 +464,34 @@ func _on_sprite_2d_animation_finished() -> void:
 			reported_dead = true
 			emit_signal("died")
 		queue_free()
-
 func _on_explosion_timer_timeout() -> void:
 	if not reported_dead:
 		reported_dead = true
 		emit_signal("died")
 	queue_free()
+func _enter_stun(duration: float) -> void:
+	# Cancela acciones en curso
+	_is_stunned = true
+	_stun_time_left = duration
+	velocity = Vector2.ZERO
+	_attack_lock = true
+	_is_dashing = false
+	_poison_timer.stop()
+	_dash_timer.stop()
 
-func _on_area_2d_area_exited(area: Area2D) -> void:
-	pass
+	# Apariencia (rojo) + FX activado
+	if sprite_2d:
+		sprite_2d.self_modulate = Color(1.0, 0.35, 0.35, 1.0)
+	if _dizzy_fx:
+		_dizzy_fx.visible = true
+		_dizzy_fx.rotation = 0.0
+
+func _end_stun() -> void:
+	_is_stunned = false
+	_attack_lock = false
+	_stun_time_left = 0.0
+	# restaura color y oculta FX
+	if sprite_2d:
+		sprite_2d.self_modulate = _orig_modulate
+	if _dizzy_fx:
+		_dizzy_fx.visible = false
