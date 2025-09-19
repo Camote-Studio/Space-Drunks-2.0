@@ -7,8 +7,7 @@ signal died
 var speed := 40.0
 var accel := 1600.0
 var face_sign := 1.0
-@export var frames_face_right := true     # si tus frames miran a la derecha por defecto
-const MOVE_FACE_EPS := 5.0                # umbral para considerar que "se mueve"
+@export var frames_face_right := true     # true si los frames miran a la DERECHA por defecto
 
 # ---------- TARGET / UI / AUDIO ----------
 var player: CharacterBody2D = null
@@ -258,26 +257,16 @@ func _physics_process(delta: float) -> void:
 		target_vel = target_vel.normalized() * dash_speed
 	velocity = velocity.move_toward(target_vel, accel * delta)
 
-	# ---- Facing robusto ----
-	var face_dir := face_sign
-	var moving_x = abs(velocity.x) > MOVE_FACE_EPS or (_is_dashing and abs(_dash_dir.x) > 0.01)
-	if moving_x:
-		var sx := 0.0
-		if _is_dashing:
-			sx = sign(_dash_dir.x)
-		else:
-			sx = sign(velocity.x)
-		if sx != 0.0:
-			face_dir = sx
-	elif abs(target.global_position.x - global_position.x) > 2.0:
-		face_dir = sign(target.global_position.x - global_position.x)
-	face_sign = face_dir
+	# ---- FACING SIMPLE: mira SIEMPRE al jugador por X ----
+	var dx := target.global_position.x - global_position.x
+	if abs(dx) > 1.0:
+		face_sign = sign(dx)
 
 	if frames_face_right:
 		sprite_2d.flip_h = face_sign < 0.0
 	else:
 		sprite_2d.flip_h = face_sign > 0.0
-	# ------------------------
+	# ------------------------------------------------------
 
 	move_and_slide()
 
@@ -315,8 +304,6 @@ func _update_phase() -> void:
 			pass
 
 func _on_phase_enter(_threshold: float) -> void:
-	# puedes endurecer parámetros por fase si quieres:
-	# dash_chance += 0.1; speed = max(speed, _base_speed * 1.1); etc.
 	_enter_stun(stun_duration)
 
 # ===================== STUN / ESPIRAL ==================
@@ -368,10 +355,8 @@ func _create_dizzy_fx() -> void:
 # ===================== DASH ============================
 func _try_dash(dist: float, dir: Vector2) -> void:
 	if _is_dashing or _attack_lock: return
-	# sólo permitimos dash si ya cumple la distancia mínima pedida (300)
 	if dist < dash_trigger_dist or dist > dash_max_range: return
-	# probabilidad opcional:
-	if rng.randf() > 0.55: return  # algo más agresivo; ajusta a gusto
+	if rng.randf() > 0.55: return
 	_start_dash(dir)
 
 func _start_dash(dir: Vector2) -> void:
@@ -430,36 +415,62 @@ func _end_shoot() -> void:
 		_shoot_timer.connect("timeout", Callable(self, "_on_shoot_timer_timeout"))
 
 func _on_shoot_cd_timeout() -> void:
-	# Nada: el check lo hace _physics_process
 	pass
 
 func _fire_bullet() -> void:
 	var target := _best_target()
-	if bullet_scene == null or target == null: return
+	if bullet_scene == null or target == null:
+		return
 
+	# Boca de fuego según flip
 	var muzzle := muzzle_offset
-	if sprite_2d and sprite_2d.flip_h: muzzle.x = -abs(muzzle.x)
-	else: muzzle.x = abs(muzzle.x)
+	if sprite_2d and sprite_2d.flip_h:
+		muzzle.x = -abs(muzzle.x)
+	else:
+		muzzle.x = abs(muzzle.x)
+	var muzzle_global := global_position + muzzle
+
+	# Dirección hacia el target y rotación de la bala
+	var dir := target.global_position - muzzle_global
+	var dlen := dir.length()
+	if dlen <= 0.0001:
+		return
+	dir = dir / dlen
+	var ang := atan2(dir.y, dir.x)
 
 	var bullet := bullet_scene.instantiate()
-	if bullet == null: return
+	if bullet == null:
+		return
 
 	get_parent().add_child(bullet)
-	bullet.global_position = global_position + muzzle
+	bullet.global_position = muzzle_global
+	bullet.global_rotation = ang
 
-	var d := (target.global_position - (global_position + muzzle)).normalized()
+	# APIs típicas para mover la bala
 	if bullet.has_method("setup"):
-		bullet.call("setup", d, bullet_speed, bullet_lifetime, bullet_damage)
+		bullet.call("setup", dir, bullet_speed, bullet_lifetime, bullet_damage)
 	elif "velocity" in bullet:
-		bullet.velocity = d * bullet_speed
+		bullet.velocity = dir * bullet_speed
 	elif "direction" in bullet and "speed" in bullet:
-		bullet.direction = d; bullet.speed = bullet_speed
+		bullet.direction = dir
+		bullet.speed = bullet_speed
+	elif bullet is RigidBody2D:
+		bullet.apply_impulse(dir * bullet_speed)
+	else:
+		# Si la bala se mueve con su propia lógica usando rotation, ya está orientada.
+		pass
 
+	# Autokill si no lo trae
 	if not bullet.has_node("AutoKill"):
 		var kill := Timer.new()
-		kill.name = "AutoKill"; kill.one_shot = true; kill.wait_time = bullet_lifetime
+		kill.name = "AutoKill"
+		kill.one_shot = true
+		kill.wait_time = bullet_lifetime
 		bullet.add_child(kill)
-		kill.connect("timeout", func(): if is_instance_valid(bullet): bullet.queue_free())
+		kill.connect("timeout", func():
+			if is_instance_valid(bullet):
+				bullet.queue_free()
+		)
 		kill.start()
 
 # ===================== MELEE ===========================
