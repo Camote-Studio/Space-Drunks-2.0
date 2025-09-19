@@ -85,6 +85,7 @@ animations = [{
 }]
 
 [node name="enemie_2" type="CharacterBody2D" groups=["enemy_2"]]
+z_index = 1
 script = ExtResource("1_1vcbv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
