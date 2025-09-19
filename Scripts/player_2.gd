@@ -381,6 +381,9 @@ func push_temp(offset: Vector2) -> void:
 # =====================
 #   DAÑO RECIBIDO
 # =====================
+# =====================
+#   DAÑO RECIBIDO
+# =====================
 func _on_damage(amount: float, source: String = "desconocido") -> void:
 	if dead:
 		return
@@ -405,14 +408,17 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 				animated_sprite.play("aturdido")
 
 		"bala_gravedad":
-			_flotar_sound_played = false        # permitir que se vuelva a reproducir
-			if sonido_flotando.playing:
-				sonido_flotando.stop()         # corta cualquier reproducción anterior
-				if sonido_flotando.has_method("seek"):
-					sonido_flotando.seek(0.0)
-			floating = true
-			invulnerable = true
-			invul_timer = invul_duration
+			if not ulti_active:  # 🔹 aquí agregamos la restricción
+				_flotar_sound_played = false        # permitir que se vuelva a reproducir
+				if sonido_flotando.playing:
+					sonido_flotando.stop()         # corta cualquier reproducción anterior
+					if sonido_flotando.has_method("seek"):
+						sonido_flotando.seek(0.0)
+				floating = true
+				invulnerable = true
+				invul_timer = invul_duration
+
+
 
 
 
@@ -585,12 +591,14 @@ func _update_sword_transform() -> void:
 #  CARGA DE HABILIDAD 2
 # ======================
 func gain_ability_from_attack_2(damage_dealt: float) -> void:
-	if dead or bar_ability_2 == null:
-		return
+	if dead or bar_ability_2 == null or ulti_active:
+		return  # 🔹 Mientras ulti esté activa, no se acumula
 	var gain = max(0.0, damage_dealt)
 	bar_ability_2.value = clamp(bar_ability_2.value + gain, bar_ability_2.min_value, bar_ability_2.max_value)
 	if bar_ability_2.value >= bar_ability_2.max_value:
 		_start_ulti()
+
+
 
 func _power() -> void:
 	if dead:
@@ -684,8 +692,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		enemy.emit_signal("damage", 20.0)  # daño fijo de la alabarda
 func _process(delta: float) -> void:
 	if ulti_active and bar:
-		var increment = 30 * delta  # delta asegura incremento por segundo
-		bar.value = min(bar.value + increment, bar.max_value)
+		var regen = 20 * delta  # Ajusta la velocidad de regeneración
+		bar.value = min(bar.value + regen, bar.max_value)
 
 func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
 	if player == null:

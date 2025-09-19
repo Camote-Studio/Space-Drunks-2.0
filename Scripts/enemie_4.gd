@@ -65,6 +65,10 @@ func random_pitch_variations_gun():
 	$hit.play()
 
 func _ready() -> void:
+	if bar_6:
+		bar_6.min_value = 0
+		bar_6.max_value = 150   # más vida
+		bar_6.value = bar_6.max_value
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		player = players[0]

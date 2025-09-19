@@ -86,6 +86,7 @@ offset_left = -36.0
 offset_top = -67.0
 offset_right = 37.0
 offset_bottom = -54.0
+max_value = 250.0
 show_percentage = false
 
 [node name="explosion_timer" type="Timer" parent="."]

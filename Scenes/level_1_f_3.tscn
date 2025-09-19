@@ -348,6 +348,7 @@ offset_left = 289.0
 offset_top = 69.0
 offset_right = 367.0
 offset_bottom = 85.0
+max_value = 200.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
@@ -437,7 +438,6 @@ speed = 40.0
 libraries = {
 &"": SubResource("AnimationLibrary_5ckil")
 }
-
 
 [node name="GameOver" parent="." instance=ExtResource("23_d1i85")]
 
