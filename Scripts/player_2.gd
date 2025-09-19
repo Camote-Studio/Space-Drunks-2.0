@@ -12,7 +12,17 @@ signal muerte  # Para notificar al GameManager
 @export var poison_area_scene: PackedScene
 var poison_preview: Node2D = null
 var selecting_poison := false
+# ======================
+#        DASH
+# ======================
+@export var dash_speed := 600.0      # Velocidad del dash
+@export var dash_duration := 0.2     # Duración del dash (segundos)
+@export var dash_cooldown := 0.6     # Tiempo antes de volver a usarlo
 
+var _is_dashing := false
+var _dash_timer := 0.0
+var _dash_cooldown_timer := 0.0
+var _dash_dir := Vector2.ZERO
 # --- Variables ---
 var coins: int = 0
 @export var player_id: String = "player2"  # Identificador único
@@ -229,6 +239,19 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
+	if _is_dashing:
+		_dash_timer -= delta
+		if _dash_timer <= 0.0:
+			_end_dash()
+		else:
+			velocity = _dash_dir * dash_speed
+			move_and_slide()
+		return
+
+	# Cooldown
+	if _dash_cooldown_timer > 0.0:
+		_dash_cooldown_timer -= delta
+
 
 	# Activar selección de área de veneno
 	if Input.is_action_just_pressed("area_veneno") and not selecting_poison:
@@ -278,7 +301,12 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector2.ZERO
 	if allow_input:
 		direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
-
+	if Input.is_action_just_pressed("dash2") and not _is_dashing and _dash_cooldown_timer <= 0.0 and not floating:
+		if direction != Vector2.ZERO:
+			_start_dash(direction)
+		else:
+			# si no hay dirección, usa la última facing
+			_start_dash(Vector2(_facing, 0))
 	if Input.is_action_just_pressed("jump_2"):
 		_power()
 
@@ -673,4 +701,27 @@ func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
 	elif "loop_enabled" in s_copy:
 		s_copy.loop_enabled = false
 	player.stream = s_copy
-	
+func _end_dash() -> void:
+	_is_dashing = false
+	invulnerable = false
+	velocity = Vector2.ZERO
+
+	# Volver a idle si no hay input
+	if animated_sprite and animated_sprite.animation == "dash":
+		animated_sprite.play("idle")
+func _start_dash(direction: Vector2) -> void:
+	_is_dashing = true
+	_dash_timer = dash_duration
+	_dash_cooldown_timer = dash_cooldown
+	_dash_dir = direction.normalized()
+
+	# Opcional: invulnerable en dash
+	invulnerable = true
+
+	# Animación de dash
+	if animated_sprite and animated_sprite.animation != "dash":
+		animated_sprite.play("dash")
+
+	# Opcional: sonido dash
+	if has_node("sonido_dash"):
+		$sonido_dash.play()
