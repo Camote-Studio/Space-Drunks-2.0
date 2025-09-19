@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ct0hclkx0o8kc"]
+[gd_scene load_steps=22 format=3 uid="uid://ct0hclkx0o8kc"]
 
 [ext_resource type="Script" uid="uid://mekrbrac0ty5" path="res://Scripts/Enemies/enemie_2.gd" id="1_1vcbv"]
 [ext_resource type="AudioStream" uid="uid://cmp0uxkr0orbl" path="res://Assets/sfx/506326__thevoicesgames__retro-explosion-1.wav" id="9_17ykr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dneuh2s2n4hub" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 04.png" id="16_xfg08"]
 [ext_resource type="Texture2D" uid="uid://3mcvlhfsf62k" path="res://Assets/art/sprites/Enemigos/DukaLIEN_1_g1.png" id="17_78rhx"]
 [ext_resource type="Texture2D" uid="uid://brwap34ykjkew" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 05.png" id="17_aqajp"]
+[ext_resource type="AudioStream" uid="uid://bsmninlvow06v" path="res://Assets/music/punch-03-352040.ogg" id="18_78rhx"]
 [ext_resource type="Texture2D" uid="uid://dlvccr2mixsh6" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 06.png" id="18_isfjh"]
 [ext_resource type="Texture2D" uid="uid://cv2v3jx68l15e" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 07.png" id="19_wy3h6"]
 [ext_resource type="Texture2D" uid="uid://d0xog5e56vxis" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 08.png" id="20_atpl1"]
@@ -84,6 +85,7 @@ animations = [{
 }]
 
 [node name="enemie_2" type="CharacterBody2D" groups=["enemy_2"]]
+z_index = 1
 script = ExtResource("1_1vcbv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -130,6 +132,9 @@ sprite_frames = SubResource("SpriteFrames_ul8mi")
 animation = &"golpe"
 frame_progress = 0.671955
 flip_h = true
+
+[node name="ataque_golpe" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_78rhx")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

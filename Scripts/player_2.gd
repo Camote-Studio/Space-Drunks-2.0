@@ -1,6 +1,7 @@
 extends CharacterBody2D
 # player 2
 @onready var TimerGolpeUlti: Timer = Timer.new()
+var _flotar_sound_played := false
 
 # --- Señales ---
 signal damage(amount: float, source: String)
@@ -11,7 +12,17 @@ signal muerte  # Para notificar al GameManager
 @export var poison_area_scene: PackedScene
 var poison_preview: Node2D = null
 var selecting_poison := false
+# ======================
+#        DASH
+# ======================
+@export var dash_speed := 600.0      # Velocidad del dash
+@export var dash_duration := 0.2     # Duración del dash (segundos)
+@export var dash_cooldown := 0.6     # Tiempo antes de volver a usarlo
 
+var _is_dashing := false
+var _dash_timer := 0.0
+var _dash_cooldown_timer := 0.0
+var _dash_dir := Vector2.ZERO
 # --- Variables ---
 var coins: int = 0
 @export var player_id: String = "player2"  # Identificador único
@@ -29,7 +40,7 @@ var punch_base_dmg := {
 # --- Nodos ---
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
-
+@onready var sonido_ulti: AudioStreamPlayer2D = $sonido_ulti
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_2: ProgressBar = $"../CanvasLayer/ProgressBar_ability_2"
@@ -83,7 +94,7 @@ var _sword_timer: Timer
 # ======================
 func _ready() -> void:
 	# ... lo que ya tienes ...
-	
+	_disable_stream_loop(sonido_flotando)
 	# Timer de golpes de ulti (constante, repetitivo)
 	TimerGolpeUlti.wait_time = 0.5   # intervalo entre golpes
 	TimerGolpeUlti.one_shot = false
@@ -178,6 +189,16 @@ func _on_punch_done()-> void:
 #   FLOTAR
 # ----------------------
 func _handle_floating(delta: float) -> void:
+	if floating:
+		if not _flotar_sound_played:
+			sonido_flotando.play()
+			_flotar_sound_played = true
+	else:
+		_flotar_sound_played = false
+		if sonido_flotando.playing:
+			sonido_flotando.stop()
+
+
 	var target_y
 	var current_lerp_speed
 	var current_rotation_speed
@@ -218,102 +239,148 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
-# Activar selección de área de veneno
+	if _is_dashing:
+		_dash_timer -= delta
+		if _dash_timer <= 0.0:
+			_end_dash()
+		else:
+			velocity = _dash_dir * dash_speed
+			move_and_slide()
+		return
+
+	# Cooldown
+	if _dash_cooldown_timer > 0.0:
+		_dash_cooldown_timer -= delta
+
+
 	# Activar selección de área de veneno
 	if Input.is_action_just_pressed("area_veneno") and not selecting_poison:
 		selecting_poison = true
 		poison_preview = Node2D.new()
 
-		# 🔹 Sprite como círculo celeste transparente
+		if animated_sprite:
+			animated_sprite.play("lanzar")  # 🔹 se queda en lanzar
+			print("vista lanzar")
+			# 🔹 Ocultar puños mientras lanza
+			punch_left.visible = false
+			punch_right.visible = false
+
+		# preview gráfico
 		var sprite := Sprite2D.new()
-		sprite.texture = preload("res://Assets/art/sprites/Particulas/circle.png") 
-		sprite.modulate = Color(0.3, 0.8, 1.0, 0.4)  # celeste con alpha
-		sprite.scale = Vector2(1.5, 1.5) # tamaño del área
+		sprite.texture = preload("res://Assets/art/sprites/Particulas/botella2.png") 
+		sprite.scale = Vector2(1.5, 1.5)
 		sprite.centered = true
 		poison_preview.add_child(sprite)
 
 		get_tree().current_scene.add_child(poison_preview)
-		print("[VENENO] Selección iniciada: mostrando círculo de preview")
 
+
+	# --- Preview movimiento
 	if selecting_poison and poison_preview:
 		poison_preview.global_position = get_global_mouse_position()
 
 		# Colocar veneno con click izquierdo
-		if Input.is_action_just_pressed("veneno_activo"): 
+		if Input.is_action_just_pressed("veneno_activo") and selecting_poison:
 			var poison_instance = poison_area_scene.instantiate()
 			get_tree().current_scene.add_child(poison_instance)
 			poison_instance.global_position = poison_preview.global_position
 			print("[VENENO] ¡Área de veneno colocada en: ", poison_instance.global_position, "!")
+
 			poison_preview.queue_free()
 			poison_preview = null
 			selecting_poison = false
 
+			if animated_sprite:
+				animated_sprite.play("idle")  
+				# 🔹 Restaurar visibilidad de puños
+				punch_left.visible = true
+				punch_right.visible = true
 
 
+	# --- Dirección
 	var direction = Vector2.ZERO
 	if allow_input:
 		direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
-
-	if Input.is_action_just_pressed("jump_2") and not ulti_active:
-		_start_ulti()
+	if Input.is_action_just_pressed("dash2") and not _is_dashing and _dash_cooldown_timer <= 0.0 and not floating:
+		if direction != Vector2.ZERO:
+			_start_dash(direction)
+		else:
+			# si no hay dirección, usa la última facing
+			_start_dash(Vector2(_facing, 0))
+	if Input.is_action_just_pressed("jump_2"):
+		_power()
 
 	# --- Actualizar facing si hay input
 	if abs(direction.x) > 0.01:
 		_set_facing(sign(direction.x))
 
-	# Input de puño
-	if Input.is_action_just_pressed("fired_2"):
+	# --- Input de puño
+	if Input.is_action_just_pressed("fired_2") and not selecting_poison:
 		_punch_alternate()
 
-	# Animaciones / estados
-	match estado_actual:
-		Estado.VENENO:
-			if animated_sprite.animation != "envenenado":
-				animated_sprite.play("envenenado")
-			if abs(direction.x) > 0:
-				animated_sprite.flip_h = direction.x < 0
-
-		Estado.ATURDIDO:
-			if not sonido_aturdido.playing:
-				sonido_aturdido.play()
-			direction = -direction
+	# --- Animaciones / estados
+	if selecting_poison:
+		# 🔹 Permitir que animaciones de daño interrumpan "lanzar"
+		if estado_actual == Estado.ATURDIDO:
 			if animated_sprite.animation != "aturdido":
 				animated_sprite.play("aturdido")
-			if abs(direction.x) > abs(direction.y):
-				animated_sprite.flip_h = direction.x < 0
+		elif estado_actual == Estado.VENENO:
+			if animated_sprite.animation != "envenenado":
+				animated_sprite.play("envenenado")
+		# Si no hay estados que interrumpan → mantener lanzar
+		elif animated_sprite.animation != "lanzar":
+			animated_sprite.play("lanzar")
+	else:
+		match estado_actual:
+			Estado.VENENO:
+				if animated_sprite.animation != "envenenado":
+					animated_sprite.play("envenenado")
+				if abs(direction.x) > 0:
+					animated_sprite.flip_h = direction.x < 0
 
-		Estado.NORMAL:
-			if sonido_aturdido.playing:
-				sonido_aturdido.stop()
-			if ulti_active:
-				if animated_sprite.animation != "ulti_pose":
-					animated_sprite.play("ulti_pose")
-			else:
-				if direction == Vector2.ZERO:
-					animated_sprite.play("idle")
+			Estado.ATURDIDO:
+				if not sonido_aturdido.playing:
+					sonido_aturdido.play()
+				direction = -direction
+				if animated_sprite.animation != "aturdido":
+					animated_sprite.play("aturdido")
+				if abs(direction.x) > abs(direction.y):
+					animated_sprite.flip_h = direction.x < 0
+
+			Estado.NORMAL:
+				if sonido_aturdido.playing:
+					sonido_aturdido.stop()
+				if ulti_active:
+					if animated_sprite.animation != "ulti_pose":
+						animated_sprite.play("ulti_pose")
 				else:
-					if abs(direction.x) > abs(direction.y):
-						animated_sprite.play("caminar")
-						animated_sprite.flip_h = direction.x < 0
-					elif direction.y < 0:
-						animated_sprite.play("caminar_subir")
+					if direction == Vector2.ZERO:
+						animated_sprite.play("idle")
+					else:
+						if abs(direction.x) > abs(direction.y):
+							animated_sprite.play("caminar")
+							animated_sprite.flip_h = direction.x < 0
+						elif direction.y < 0:
+							animated_sprite.play("caminar_subir")
 
 	# --- Movimiento
 	if not floating:
 		velocity = direction * speed
 		move_and_slide()
-		# detener sonido de flotación si estaba sonando
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
 	else:
-		# reproducir sonido flotando
-		if not sonido_flotando.playing:
-			sonido_flotando.play()
 		_handle_floating(delta)
+
+
+
 func push_temp(offset: Vector2) -> void:
 	global_position += offset
 
 
+# =====================
+#   DAÑO RECIBIDO
+# =====================
 # =====================
 #   DAÑO RECIBIDO
 # =====================
@@ -335,15 +402,25 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 				animated_sprite.play("envenenado")
 
 		"bala":
-			if estado_actual == Estado.NORMAL:
+			if estado_actual == Estado.NORMAL and not ulti_active:  # 🔹 inmune al aturdimiento en ulti
 				estado_actual = Estado.ATURDIDO
 				$Timer.start(2)
 				animated_sprite.play("aturdido")
 
 		"bala_gravedad":
-			floating = true
-			invulnerable = true
-			invul_timer = invul_duration
+			if not ulti_active:  # 🔹 aquí agregamos la restricción
+				_flotar_sound_played = false        # permitir que se vuelva a reproducir
+				if sonido_flotando.playing:
+					sonido_flotando.stop()         # corta cualquier reproducción anterior
+					if sonido_flotando.has_method("seek"):
+						sonido_flotando.seek(0.0)
+				floating = true
+				invulnerable = true
+				invul_timer = invul_duration
+
+
+
+
 
 # ----------------------
 #   COLISIONES SALIENTES
@@ -514,51 +591,76 @@ func _update_sword_transform() -> void:
 #  CARGA DE HABILIDAD 2
 # ======================
 func gain_ability_from_attack_2(damage_dealt: float) -> void:
-	if dead or bar_ability_2 == null:
-		return
+	if dead or bar_ability_2 == null or ulti_active:
+		return  # 🔹 Mientras ulti esté activa, no se acumula
 	var gain = max(0.0, damage_dealt)
 	bar_ability_2.value = clamp(bar_ability_2.value + gain, bar_ability_2.min_value, bar_ability_2.max_value)
 	if bar_ability_2.value >= bar_ability_2.max_value:
-		_power()
+		_start_ulti()
+
+
 
 func _power() -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
-	if bar_ability_2 and bar_ability_2.value >= bar_ability_2.max_value:
-		bar_ability_2.value = bar_ability_2.min_value
-		var alabarda = $alabarda
-		var hitbox = alabarda.get_node("Hitbox")
-		alabarda.visible = true
-		alabarda.rotation_degrees = 0
-		hitbox.monitoring = true  # activar hitbox
 
-		var t = create_tween()
+	var alabarda = $alabarda
+	var hitbox = alabarda.get_node("Hitbox")
+	alabarda.visible = true
+	alabarda.rotation_degrees = 0
+	hitbox.monitoring = true  # activar hitbox
 
-		# 1. Carga del golpe (wind-up)
-		t.tween_property(alabarda, "rotation_degrees", -45.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var t = create_tween()
 
-		# 2. Swing fuerte
-		t.tween_property(alabarda, "rotation_degrees", 120.0, 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	# 1. Carga del golpe (wind-up)
+	t.tween_property(alabarda, "rotation_degrees", -45.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-		# 3. Regresa
-		t.tween_property(alabarda, "rotation_degrees", 0.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	# 2. Swing fuerte
+	t.tween_property(alabarda, "rotation_degrees", 120.0, 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
-		# 4. Termina
-		t.tween_callback(Callable(self, "_end_power"))
+	# 3. Regresa
+	t.tween_property(alabarda, "rotation_degrees", 0.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	# 4. Termina
+	t.tween_callback(Callable(self, "_end_power"))
 
 func _start_ulti() -> void:
+	if dead:
+		return
+	if bar_ability_2:
+		bar_ability_2.value = bar_ability_2.min_value
+
+	if estado_actual == Estado.ATURDIDO:
+		estado_actual = Estado.NORMAL
+		if not $Timer.is_stopped():
+			$Timer.stop()
+
 	ulti_active = true
 	animated_sprite.play("ulti_pose")
 	punch_left.visible = false
 	punch_right.visible = false
+
+	# 🔊 reproducir sonido de ulti en loop
+	if sonido_ulti:
+		var s = sonido_ulti.stream
+		if s and ( "loop_mode" in s or "loop" in s or "loop_enabled" in s ):
+			var s_copy = s.duplicate(true)
+			if "loop_mode" in s_copy:
+				s_copy.loop_mode = 2  # 2 = LOOP
+			elif "loop" in s_copy:
+				s_copy.loop = true
+			elif "loop_enabled" in s_copy:
+				s_copy.loop_enabled = true
+			sonido_ulti.stream = s_copy
+		sonido_ulti.stop()
+		sonido_ulti.play()
+
 	TimerUlti.stop()
 	TimerUlti.start(5.0)
 	if not TimerUlti.is_connected("timeout", Callable(self, "_end_ulti")):
 		TimerUlti.connect("timeout", Callable(self, "_end_ulti"))
-		TimerGolpeUlti.start()
-
-
+	TimerGolpeUlti.start()
 
 func _end_ulti() -> void:
 	ulti_active = false
@@ -566,14 +668,11 @@ func _end_ulti() -> void:
 	punch_right.visible = true
 	animated_sprite.play("idle")
 
-	# 🔹 Detiene los golpes automáticos
+	# 🔊 detener sonido de ulti
+	if sonido_ulti and sonido_ulti.playing:
+		sonido_ulti.stop()
+
 	TimerGolpeUlti.stop()
-
-
-	# 🔹 Detiene los golpes automáticos
-	TimerGolpeUlti.stop()
-
-
 
 func _end_power() -> void:
 	var alabarda = $alabarda
@@ -593,5 +692,44 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		enemy.emit_signal("damage", 20.0)  # daño fijo de la alabarda
 func _process(delta: float) -> void:
 	if ulti_active and bar:
-		var increment = 30 * delta  # delta asegura incremento por segundo
-		bar.value = min(bar.value + increment, bar.max_value)
+		var regen = 20 * delta  # Ajusta la velocidad de regeneración
+		bar.value = min(bar.value + regen, bar.max_value)
+
+func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
+	if player == null:
+		return
+	var s = player.stream
+	if s == null:
+		return
+	var s_copy = s.duplicate(true)
+	if "loop_mode" in s_copy:
+		s_copy.loop_mode = 0
+	elif "loop" in s_copy:
+		s_copy.loop = false
+	elif "loop_enabled" in s_copy:
+		s_copy.loop_enabled = false
+	player.stream = s_copy
+func _end_dash() -> void:
+	_is_dashing = false
+	invulnerable = false
+	velocity = Vector2.ZERO
+
+	# Volver a idle si no hay input
+	if animated_sprite and animated_sprite.animation == "dash":
+		animated_sprite.play("idle")
+func _start_dash(direction: Vector2) -> void:
+	_is_dashing = true
+	_dash_timer = dash_duration
+	_dash_cooldown_timer = dash_cooldown
+	_dash_dir = direction.normalized()
+
+	# Opcional: invulnerable en dash
+	invulnerable = true
+
+	# Animación de dash
+	if animated_sprite and animated_sprite.animation != "dash":
+		animated_sprite.play("dash")
+
+	# Opcional: sonido dash
+	if has_node("sonido_dash"):
+		$sonido_dash.play()

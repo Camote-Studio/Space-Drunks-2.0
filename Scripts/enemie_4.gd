@@ -12,6 +12,7 @@ var player: CharacterBody2D = null
 @onready var sfx_hit: AudioStreamPlayer2D = $hit
 @onready var explosion_timer: Timer = $explosion_timer
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
+@onready var audio_laser: AudioStreamPlayer2D = $lasergun
 
 const BULLET_ENEMY_1 := preload("res://Scenes/gun_enemy_2.tscn")
 
@@ -64,6 +65,10 @@ func random_pitch_variations_gun():
 	$hit.play()
 
 func _ready() -> void:
+	if bar_6:
+		bar_6.min_value = 0
+		bar_6.max_value = 150   # más vida
+		bar_6.value = bar_6.max_value
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		player = players[0]
@@ -144,6 +149,7 @@ func _physics_process(delta: float) -> void:
 	# (Punch desactivado en este tipo)
 
 # --- DISPARO ------------------------------------------------------
+
 func _on_gun_timer_timeout() -> void:
 	_update_target() 
 	if dead or player == null:
@@ -151,12 +157,19 @@ func _on_gun_timer_timeout() -> void:
 	var to_player := player.global_position - global_position
 	if to_player.length() > shoot_range:
 		return
+
 	var bullet_instance = BULLET_ENEMY_1.instantiate()
 	get_parent().add_child(bullet_instance)
 	bullet_instance.global_position = global_position
 	bullet_instance.rotation = to_player.angle()
 	# Si tu bala usa grupos, puedes añadir:
 	# bullet_instance.add_to_group("enemy_bullet")
+
+	# 🔊 reproducir sonido láser
+	if audio_laser:
+		audio_laser.stop()   # por si estaba sonando antes
+		audio_laser.play()
+
 
 # --- Colisiones/daño ----------------------------------------------
 func _on_area_2d_body_entered(body: Node2D) -> void:
