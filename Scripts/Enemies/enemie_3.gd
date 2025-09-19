@@ -8,7 +8,7 @@ var player: CharacterBody2D = null
 var dead := false
 var reported_dead := false
 var target_in_range: CharacterBody2D = null
-
+@onready var audio_ataque: AudioStreamPlayer2D = $audio_golpe
 @onready var label: Label = $Label
 @onready var bar_5: ProgressBar = $ProgressBar_enemy_3
 @onready var area: Area2D = $Area2D
@@ -142,7 +142,6 @@ func _physics_process(delta: float) -> void:
 	if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead and not _attack_lock and not _attack_anim_lock:
 		_do_punch(dir)
 
-# ---------------------------
 func _do_punch(dir: Vector2) -> void:
 	if target_in_range:
 		var direction_to_player = (target_in_range.global_position - global_position).normalized()
@@ -152,7 +151,12 @@ func _do_punch(dir: Vector2) -> void:
 		
 		if target_in_range.has_method("emit_signal"):
 			target_in_range.emit_signal("damage", punch_damage)
-		
+	
+	# --- reproducir sonido de golpe ---
+	if audio_ataque:
+		audio_ataque.stop() # 🔹 por si ya se estaba reproduciendo
+		audio_ataque.play()
+	
 	if sprite_2d:
 		sprite_2d.play("ataque")
 		_attack_anim_lock = true
@@ -168,6 +172,8 @@ func _do_punch(dir: Vector2) -> void:
 	_tween.tween_property(self, "global_position", start, lunge_time)
 	
 	punch_timer.start(punch_cooldown)
+
+
 
 func _on_punch_timer_timeout() -> void:
 	_attack_lock = false

@@ -93,18 +93,21 @@ func _process(delta: float) -> void:
 	# Modo de disparo
 	if current_mode == GunMode.TURRET:
 		_update_turret_aim(player_flipped)
+
+		if Input.is_action_pressed("fired") and can_fire:
+			_fire_at_mouse(player_flipped)
+		elif not Input.is_action_pressed("fired"):
+			# 🔊 Detener metralleta cuando se deja de disparar
+			if player and player.has_node("audio_disparo_metra"):
+				var metra = player.get_node("audio_disparo_metra") as AudioStreamPlayer2D
+				if metra.playing:
+					metra.stop()
 	else:
 		rotation = base_rotation
 		aim_angle = base_rotation
 
-	match current_mode:
-		GunMode.PISTOL:
-			if Input.is_action_just_pressed("fired") and can_fire:
-				_fire(player_flipped)
-		GunMode.TURRET:
-			if Input.is_action_pressed("fired") and can_fire:
-				_fire_at_mouse(player_flipped)
-
+		if Input.is_action_just_pressed("fired") and can_fire:
+			_fire(player_flipped)
 
 ## ========================
 ## OFFSET
@@ -170,7 +173,6 @@ func _fire(is_flipped: bool) -> void:
 	timer.wait_time = cooldown
 	timer.start()
 
-
 func _fire_at_mouse(flipped: bool) -> void:
 	if not bullet_scene:
 		push_error("❌ bullet_scene no está asignado.")
@@ -189,7 +191,12 @@ func _fire_at_mouse(flipped: bool) -> void:
 
 	_apply_bullet_effects(bullet_instance)
 	_do_recoil()
-	_play_effects()
+
+	# 🔊 Inicia audio de metralleta si no está sonando
+	if player and player.has_node("audio_disparo_metra"):
+		var metra = player.get_node("audio_disparo_metra") as AudioStreamPlayer2D
+		if not metra.playing:
+			metra.play()
 
 	can_fire = false
 	timer.wait_time = turret_fire_rate

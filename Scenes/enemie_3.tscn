@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bb6kdi0va62sg"]
+[gd_scene load_steps=18 format=3 uid="uid://bb6kdi0va62sg"]
 
 [ext_resource type="Texture2D" uid="uid://pp8a2uy8ep1o" path="res://Assets/art/sprites/Enemigos/DukaLIEN_2.png" id="1_8g4sv"]
 [ext_resource type="Script" uid="uid://b44jyob5e48n2" path="res://Scripts/Enemies/enemie_3.gd" id="1_jssh4"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="7_74s0f"]
 [ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="8_mcbtj"]
 [ext_resource type="AudioStream" uid="uid://cmp0uxkr0orbl" path="res://Assets/sfx/506326__thevoicesgames__retro-explosion-1.wav" id="9_tdua5"]
+[ext_resource type="AudioStream" uid="uid://c5270imqek6l0" path="res://Assets/music/deadly-strike-352458.ogg" id="14_ggbrg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6v7yl"]
 animations = [{
@@ -115,6 +116,10 @@ stream = ExtResource("9_tdua5")
 volume_db = 10.0
 
 [node name="Punch_timer" type="Timer" parent="."]
+
+[node name="audio_golpe" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ggbrg")
+volume_db = 9.589
 
 [connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

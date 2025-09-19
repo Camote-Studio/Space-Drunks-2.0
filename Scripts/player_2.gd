@@ -1,6 +1,7 @@
 extends CharacterBody2D
 # player 2
 @onready var TimerGolpeUlti: Timer = Timer.new()
+var _flotar_sound_played := false
 
 # --- Señales ---
 signal damage(amount: float, source: String)
@@ -29,7 +30,7 @@ var punch_base_dmg := {
 # --- Nodos ---
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
-
+@onready var sonido_ulti: AudioStreamPlayer2D = $sonido_ulti
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_2: ProgressBar = $"../CanvasLayer/ProgressBar_ability_2"
@@ -83,7 +84,7 @@ var _sword_timer: Timer
 # ======================
 func _ready() -> void:
 	# ... lo que ya tienes ...
-	
+	_disable_stream_loop(sonido_flotando)
 	# Timer de golpes de ulti (constante, repetitivo)
 	TimerGolpeUlti.wait_time = 0.5   # intervalo entre golpes
 	TimerGolpeUlti.one_shot = false
@@ -178,6 +179,16 @@ func _on_punch_done()-> void:
 #   FLOTAR
 # ----------------------
 func _handle_floating(delta: float) -> void:
+	if floating:
+		if not _flotar_sound_played:
+			sonido_flotando.play()
+			_flotar_sound_played = true
+	else:
+		_flotar_sound_played = false
+		if sonido_flotando.playing:
+			sonido_flotando.stop()
+
+
 	var target_y
 	var current_lerp_speed
 	var current_rotation_speed
@@ -308,9 +319,6 @@ func _physics_process(delta: float) -> void:
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
 	else:
-		# reproducir sonido flotando
-		if not sonido_flotando.playing:
-			sonido_flotando.play()
 		_handle_floating(delta)
 func push_temp(offset: Vector2) -> void:
 	global_position += offset
@@ -342,11 +350,17 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 				$Timer.start(2)
 				animated_sprite.play("aturdido")
 
-
 		"bala_gravedad":
+			_flotar_sound_played = false        # permitir que se vuelva a reproducir
+			if sonido_flotando.playing:
+				sonido_flotando.stop()         # corta cualquier reproducción anterior
+				if sonido_flotando.has_method("seek"):
+					sonido_flotando.seek(0.0)
 			floating = true
 			invulnerable = true
 			invul_timer = invul_duration
+
+
 
 # ----------------------
 #   COLISIONES SALIENTES
@@ -553,25 +567,38 @@ func _start_ulti() -> void:
 	if dead:
 		return
 	if bar_ability_2:
-		bar_ability_2.value = bar_ability_2.min_value  # 🔹 Reinicia barra al usar ulti
+		bar_ability_2.value = bar_ability_2.min_value
 
-	# 🔹 Quitar efectos de aturdimiento al activar ulti
 	if estado_actual == Estado.ATURDIDO:
 		estado_actual = Estado.NORMAL
-		if $Timer.is_stopped() == false:
+		if not $Timer.is_stopped():
 			$Timer.stop()
 
 	ulti_active = true
 	animated_sprite.play("ulti_pose")
 	punch_left.visible = false
 	punch_right.visible = false
+
+	# 🔊 reproducir sonido de ulti en loop
+	if sonido_ulti:
+		var s = sonido_ulti.stream
+		if s and ( "loop_mode" in s or "loop" in s or "loop_enabled" in s ):
+			var s_copy = s.duplicate(true)
+			if "loop_mode" in s_copy:
+				s_copy.loop_mode = 2  # 2 = LOOP
+			elif "loop" in s_copy:
+				s_copy.loop = true
+			elif "loop_enabled" in s_copy:
+				s_copy.loop_enabled = true
+			sonido_ulti.stream = s_copy
+		sonido_ulti.stop()
+		sonido_ulti.play()
+
 	TimerUlti.stop()
 	TimerUlti.start(5.0)
 	if not TimerUlti.is_connected("timeout", Callable(self, "_end_ulti")):
 		TimerUlti.connect("timeout", Callable(self, "_end_ulti"))
 	TimerGolpeUlti.start()
-
-
 
 func _end_ulti() -> void:
 	ulti_active = false
@@ -579,14 +606,11 @@ func _end_ulti() -> void:
 	punch_right.visible = true
 	animated_sprite.play("idle")
 
-	# 🔹 Detiene los golpes automáticos
+	# 🔊 detener sonido de ulti
+	if sonido_ulti and sonido_ulti.playing:
+		sonido_ulti.stop()
+
 	TimerGolpeUlti.stop()
-
-
-	# 🔹 Detiene los golpes automáticos
-	TimerGolpeUlti.stop()
-
-
 
 func _end_power() -> void:
 	var alabarda = $alabarda
@@ -608,3 +632,18 @@ func _process(delta: float) -> void:
 	if ulti_active and bar:
 		var increment = 30 * delta  # delta asegura incremento por segundo
 		bar.value = min(bar.value + increment, bar.max_value)
+
+func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
+	if player == null:
+		return
+	var s = player.stream
+	if s == null:
+		return
+	var s_copy = s.duplicate(true)
+	if "loop_mode" in s_copy:
+		s_copy.loop_mode = 0
+	elif "loop" in s_copy:
+		s_copy.loop = false
+	elif "loop_enabled" in s_copy:
+		s_copy.loop_enabled = false
+	player.stream = s_copy
