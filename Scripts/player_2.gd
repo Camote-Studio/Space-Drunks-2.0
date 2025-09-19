@@ -229,38 +229,52 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
-# Activar selección de área de veneno
+
 	# Activar selección de área de veneno
 	if Input.is_action_just_pressed("area_veneno") and not selecting_poison:
 		selecting_poison = true
 		poison_preview = Node2D.new()
 
-		# 🔹 Sprite como círculo celeste transparente
+		if animated_sprite:
+			animated_sprite.play("lanzar")  # 🔹 se queda en lanzar
+			print("vista lanzar")
+			# 🔹 Ocultar puños mientras lanza
+			punch_left.visible = false
+			punch_right.visible = false
+
+		# preview gráfico
 		var sprite := Sprite2D.new()
-		sprite.texture = preload("res://Assets/art/sprites/Particulas/circle.png") 
-		sprite.modulate = Color(0.3, 0.8, 1.0, 0.4)  # celeste con alpha
-		sprite.scale = Vector2(1.5, 1.5) # tamaño del área
+		sprite.texture = preload("res://Assets/art/sprites/Particulas/botella2.png") 
+		sprite.scale = Vector2(1.5, 1.5)
 		sprite.centered = true
 		poison_preview.add_child(sprite)
 
 		get_tree().current_scene.add_child(poison_preview)
-		print("[VENENO] Selección iniciada: mostrando círculo de preview")
 
+
+	# --- Preview movimiento
 	if selecting_poison and poison_preview:
 		poison_preview.global_position = get_global_mouse_position()
 
 		# Colocar veneno con click izquierdo
-		if Input.is_action_just_pressed("veneno_activo"): 
+		if Input.is_action_just_pressed("veneno_activo") and selecting_poison:
 			var poison_instance = poison_area_scene.instantiate()
 			get_tree().current_scene.add_child(poison_instance)
 			poison_instance.global_position = poison_preview.global_position
 			print("[VENENO] ¡Área de veneno colocada en: ", poison_instance.global_position, "!")
+
 			poison_preview.queue_free()
 			poison_preview = null
 			selecting_poison = false
 
+			if animated_sprite:
+				animated_sprite.play("idle")  
+				# 🔹 Restaurar visibilidad de puños
+				punch_left.visible = true
+				punch_right.visible = true
 
 
+	# --- Dirección
 	var direction = Vector2.ZERO
 	if allow_input:
 		direction = Input.get_vector("left_player_2", "right_player_2", "up_player_2", "down_player_2")
@@ -268,58 +282,70 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump_2"):
 		_power()
 
-
-
 	# --- Actualizar facing si hay input
 	if abs(direction.x) > 0.01:
 		_set_facing(sign(direction.x))
 
-	# Input de puño
-	if Input.is_action_just_pressed("fired_2"):
+	# --- Input de puño
+	if Input.is_action_just_pressed("fired_2") and not selecting_poison:
 		_punch_alternate()
 
-	# Animaciones / estados
-	match estado_actual:
-		Estado.VENENO:
-			if animated_sprite.animation != "envenenado":
-				animated_sprite.play("envenenado")
-			if abs(direction.x) > 0:
-				animated_sprite.flip_h = direction.x < 0
-
-		Estado.ATURDIDO:
-			if not sonido_aturdido.playing:
-				sonido_aturdido.play()
-			direction = -direction
+	# --- Animaciones / estados
+	if selecting_poison:
+		# 🔹 Permitir que animaciones de daño interrumpan "lanzar"
+		if estado_actual == Estado.ATURDIDO:
 			if animated_sprite.animation != "aturdido":
 				animated_sprite.play("aturdido")
-			if abs(direction.x) > abs(direction.y):
-				animated_sprite.flip_h = direction.x < 0
+		elif estado_actual == Estado.VENENO:
+			if animated_sprite.animation != "envenenado":
+				animated_sprite.play("envenenado")
+		# Si no hay estados que interrumpan → mantener lanzar
+		elif animated_sprite.animation != "lanzar":
+			animated_sprite.play("lanzar")
+	else:
+		match estado_actual:
+			Estado.VENENO:
+				if animated_sprite.animation != "envenenado":
+					animated_sprite.play("envenenado")
+				if abs(direction.x) > 0:
+					animated_sprite.flip_h = direction.x < 0
 
-		Estado.NORMAL:
-			if sonido_aturdido.playing:
-				sonido_aturdido.stop()
-			if ulti_active:
-				if animated_sprite.animation != "ulti_pose":
-					animated_sprite.play("ulti_pose")
-			else:
-				if direction == Vector2.ZERO:
-					animated_sprite.play("idle")
+			Estado.ATURDIDO:
+				if not sonido_aturdido.playing:
+					sonido_aturdido.play()
+				direction = -direction
+				if animated_sprite.animation != "aturdido":
+					animated_sprite.play("aturdido")
+				if abs(direction.x) > abs(direction.y):
+					animated_sprite.flip_h = direction.x < 0
+
+			Estado.NORMAL:
+				if sonido_aturdido.playing:
+					sonido_aturdido.stop()
+				if ulti_active:
+					if animated_sprite.animation != "ulti_pose":
+						animated_sprite.play("ulti_pose")
 				else:
-					if abs(direction.x) > abs(direction.y):
-						animated_sprite.play("caminar")
-						animated_sprite.flip_h = direction.x < 0
-					elif direction.y < 0:
-						animated_sprite.play("caminar_subir")
+					if direction == Vector2.ZERO:
+						animated_sprite.play("idle")
+					else:
+						if abs(direction.x) > abs(direction.y):
+							animated_sprite.play("caminar")
+							animated_sprite.flip_h = direction.x < 0
+						elif direction.y < 0:
+							animated_sprite.play("caminar_subir")
 
 	# --- Movimiento
 	if not floating:
 		velocity = direction * speed
 		move_and_slide()
-		# detener sonido de flotación si estaba sonando
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
 	else:
 		_handle_floating(delta)
+
+
+
 func push_temp(offset: Vector2) -> void:
 	global_position += offset
 
@@ -647,3 +673,4 @@ func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
 	elif "loop_enabled" in s_copy:
 		s_copy.loop_enabled = false
 	player.stream = s_copy
+	
