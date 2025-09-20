@@ -16,5 +16,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.emit_signal("damage", 20.0)
 		queue_free()
 	elif body.is_in_group("boss") and body.has_signal("damage"):
-		body.emit_signal("damage", 10.0)
+		body.emit_signal("damage", 30.0)
 		queue_free()
