@@ -111,7 +111,7 @@ centered = false
 
 [node name="Fondo" type="Sprite2D" parent="."]
 position = Vector2(-55, -265)
-scale = Vector2(0.8545454, 0.93039215)
+scale = Vector2(0.854545, 0.930392)
 texture = ExtResource("6_i7q02")
 centered = false
 
@@ -122,8 +122,8 @@ script = ExtResource("8_mm3o3")
 [node name="Título" type="Sprite2D" parent="Control"]
 material = SubResource("ShaderMaterial_2qgrd")
 use_parent_material = true
-position = Vector2(-3.0000002, 2.000002)
-scale = Vector2(0.7126262, 0.717647)
+position = Vector2(-3, 2)
+scale = Vector2(0.712626, 0.717647)
 texture = ExtResource("7_mm3o3")
 centered = false
 
@@ -185,7 +185,7 @@ texture_focused = ExtResource("11_w4fob")
 material = SubResource("ShaderMaterial_w4fob")
 use_parent_material = true
 layout_mode = 0
-offset_left = 54.999985
+offset_left = 55.0
 offset_top = 140.0
 offset_right = 945.0
 offset_bottom = 501.0
@@ -281,7 +281,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="Players" type="Sprite2D" parent="."]
-position = Vector2(29.999985, -159.00002)
+position = Vector2(30, -159)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("12_1xh45")
 centered = false
