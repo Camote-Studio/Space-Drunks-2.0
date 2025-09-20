@@ -270,7 +270,6 @@ position = Vector2(278, 340)
 
 [node name="Player_2" parent="." instance=ExtResource("3_c5os2")]
 position = Vector2(266, 481)
-poison_area_scene = null
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(17, 178)
