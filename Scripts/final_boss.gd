@@ -8,16 +8,16 @@ var speed := 40.0
 var accel := 1600.0
 var face_sign := 1.0
 @export var frames_face_right := true     # true si los frames miran a la DERECHA por defecto
+@export var default_anim := "idle"        # animación con la que arranca el boss
 
 # ---------- TARGET / UI / AUDIO ----------
 var player: CharacterBody2D = null
 @onready var label: Label = $Label
-@onready var bar_boss: ProgressBar = $ProgressBar_boss
 @onready var area: Area2D = $Area2D
 @onready var sfx_hit: AudioStreamPlayer2D = $hit
-@onready var explosion_timer: Timer = $explosion_timer
 @onready var punch_timer: Timer = $Punch_timer
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
+@onready var bar_boss: TextureProgressBar = $"../CanvasLayer/ProgressBar_boss"
 
 # ---------- RANGOS / ATAQUE ----------
 var min_range := 70.0
@@ -56,7 +56,7 @@ var _attack_lock := false
 @export var dash_time := 0.35
 @export var dash_cooldown := 2.2
 @export var dash_max_range := 520.0
-@export var dash_trigger_dist := 300.0    # dash sólo si el target está a 300 o más
+@export var dash_trigger_dist := 300.0
 
 @export var poison_scene: PackedScene
 @export var poison_spawn_interval := 0.08
@@ -70,7 +70,7 @@ var _dash_timer: Timer
 var _dash_cd_timer: Timer
 var _poison_timer: Timer
 
-# --- Shock (placeholder para tu lógica de lentitud) ---
+# --- Shock placeholder ---
 @export var shock_duration: float = 1.5
 @export var shock_factor: float   = 0.35
 var _shock_timer: Timer
@@ -87,7 +87,7 @@ var _is_shocked := false
 @export var bullet_lifetime := 3.0
 @export var bullet_damage := 12.0
 @export var muzzle_offset := Vector2(20, -6)
-@export var shoot_min_dist := 600.0       # dispara sólo si el target está a 600 o más
+@export var shoot_min_dist := 600.0
 
 var _is_shooting := false
 var _shoot_timer: Timer
@@ -114,7 +114,7 @@ var _is_stunned := false
 var _stun_time_left := 0.0
 
 # ---------- COLORES ----------
-var _base_modulate := Color(1,1,1,1)      # color original del sprite
+var _base_modulate := Color(1,1,1,1)
 
 # ------------------------------------------------------------
 
@@ -148,14 +148,12 @@ func _ready() -> void:
 	_stack_timer = Timer.new(); _stack_timer.one_shot = true; add_child(_stack_timer)
 	_stack_timer.connect("timeout", Callable(self, "_on_stack_timeout"))
 
-	if sprite_2d:
-		_base_modulate = sprite_2d.self_modulate
-		if not sprite_2d.is_connected("animation_finished", Callable(self, "_on_sprite_2d_animation_finished")):
-			sprite_2d.connect("animation_finished", Callable(self, "_on_sprite_2d_animation_finished"))
+	if sprite_2d and not sprite_2d.is_connected("animation_finished", Callable(self, "_on_sprite_2d_animation_finished")):
+		sprite_2d.connect("animation_finished", Callable(self, "_on_sprite_2d_animation_finished"))
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 
-	# ---- Dash / Veneno ----
+	# Dash / veneno
 	_dash_timer = Timer.new(); _dash_timer.one_shot = true; add_child(_dash_timer)
 	_dash_timer.connect("timeout", Callable(self, "_on_dash_timer_timeout"))
 	_dash_cd_timer = Timer.new(); _dash_cd_timer.one_shot = true; add_child(_dash_cd_timer)
@@ -163,13 +161,13 @@ func _ready() -> void:
 	_poison_timer.wait_time = poison_spawn_interval
 	_poison_timer.connect("timeout", Callable(self, "_spawn_poison_here"))
 
-	# --- Shock placeholder ---
+	# Shock placeholder
 	_base_speed = speed
 	_shock_timer = Timer.new(); _shock_timer.one_shot = true; add_child(_shock_timer)
 	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
 		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
 
-	# --- Shooting ---
+	# Shooting
 	_shoot_timer = Timer.new(); _shoot_timer.one_shot = true; add_child(_shoot_timer)
 	_shoot_timer.connect("timeout", Callable(self, "_on_shoot_timer_timeout"))
 	_shoot_cd_timer = Timer.new(); _shoot_cd_timer.one_shot = true; add_child(_shoot_cd_timer)
@@ -177,8 +175,31 @@ func _ready() -> void:
 	_shoot_next_time = rng.randf_range(shoot_interval_min, shoot_interval_max)
 	_shoot_cd_timer.start(_shoot_next_time)
 
-	# --- FX Espiral ---
+	# FX espiral
 	_create_dizzy_fx()
+
+	# Animación por defecto al arrancar
+	_play_default_anim()
+
+# ---------- Default anim ----------
+func _play_default_anim() -> void:
+	if not sprite_2d:
+		return
+	sprite_2d.self_modulate = _base_modulate
+	face_sign = 1.0
+	# Queremos mirar a la derecha al inicio:
+	if frames_face_right:
+		sprite_2d.flip_h = false
+	else:
+		sprite_2d.flip_h = true
+	# anim por defecto o la primera disponible
+	var anim := default_anim
+	if not sprite_2d.sprite_frames or not sprite_2d.sprite_frames.has_animation(anim):
+		var names := sprite_2d.sprite_frames.get_animation_names()
+		if names.size() > 0:
+			anim = names[0]
+	sprite_2d.play(anim)
+	sprite_2d.frame = 0
 
 # ------------------------------------------------------------
 
@@ -195,10 +216,9 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
-	# actualizar estado por vida / fases (puede activar stun)
 	_update_phase()
 
-	# si está stuneado: quieto + espiral rotando
+	# STUN
 	if _is_stunned:
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -209,7 +229,7 @@ func _physics_process(delta: float) -> void:
 			_end_stun()
 		return
 
-	# limpiar shock visual
+	# limpiar shock
 	if _shock_timer: _shock_timer.stop()
 	_is_shocked = false
 	speed = _base_speed
@@ -244,20 +264,20 @@ func _physics_process(delta: float) -> void:
 			else:
 				target_vel = dir * (speed * 0.55) + offset * 0.4
 
-		# REGLA DASH: sólo si target está a 300 o más y dentro del rango máximo
+		# DASH (>= 300 y <= max)
 		if not _is_dashing and not _attack_lock and dist >= dash_trigger_dist and dist <= dash_max_range:
 			_try_dash(dist, dir)
 
-		# REGLA SHOOT: dispara sólo si está a 600 o más y cooldown listo
+		# DISPARO (>= 600, cd listo)
 		if not _is_dashing and not _attack_lock and dist >= shoot_min_dist and _shoot_cd_timer.time_left <= 0.0:
 			_try_shoot(dist, dir)
 
-	# clamp y movimiento
+	# mover
 	if target_vel.length() > dash_speed and not _is_dashing:
 		target_vel = target_vel.normalized() * dash_speed
 	velocity = velocity.move_toward(target_vel, accel * delta)
 
-	# ---- FACING SIMPLE: mira SIEMPRE al jugador por X ----
+	# FACING: mira siempre al objetivo por X
 	var dx := target.global_position.x - global_position.x
 	if abs(dx) > 1.0:
 		face_sign = sign(dx)
@@ -266,11 +286,10 @@ func _physics_process(delta: float) -> void:
 		sprite_2d.flip_h = face_sign < 0.0
 	else:
 		sprite_2d.flip_h = face_sign > 0.0
-	# ------------------------------------------------------
 
 	move_and_slide()
 
-	# REGLA MELEE: si está lo bastante cerca y no dashing → golpea
+	# MELEE
 	if not _is_dashing and dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead and not _attack_lock:
 		_do_punch(dir)
 
@@ -315,7 +334,6 @@ func _enter_stun(duration: float) -> void:
 	velocity = Vector2.ZERO
 	if _poison_timer: _poison_timer.stop()
 	if _dash_timer: _dash_timer.stop()
-	# Rojo + espiral visible
 	if sprite_2d: sprite_2d.self_modulate = Color(1.0, 0.35, 0.35, 1.0)
 	if _dizzy_fx:
 		_dizzy_fx.visible = true
@@ -422,7 +440,6 @@ func _fire_bullet() -> void:
 	if bullet_scene == null or target == null:
 		return
 
-	# Boca de fuego según flip
 	var muzzle := muzzle_offset
 	if sprite_2d and sprite_2d.flip_h:
 		muzzle.x = -abs(muzzle.x)
@@ -430,7 +447,6 @@ func _fire_bullet() -> void:
 		muzzle.x = abs(muzzle.x)
 	var muzzle_global := global_position + muzzle
 
-	# Dirección hacia el target y rotación de la bala
 	var dir := target.global_position - muzzle_global
 	var dlen := dir.length()
 	if dlen <= 0.0001:
@@ -446,7 +462,6 @@ func _fire_bullet() -> void:
 	bullet.global_position = muzzle_global
 	bullet.global_rotation = ang
 
-	# APIs típicas para mover la bala
 	if bullet.has_method("setup"):
 		bullet.call("setup", dir, bullet_speed, bullet_lifetime, bullet_damage)
 	elif "velocity" in bullet:
@@ -456,11 +471,7 @@ func _fire_bullet() -> void:
 		bullet.speed = bullet_speed
 	elif bullet is RigidBody2D:
 		bullet.apply_impulse(dir * bullet_speed)
-	else:
-		# Si la bala se mueve con su propia lógica usando rotation, ya está orientada.
-		pass
 
-	# Autokill si no lo trae
 	if not bullet.has_node("AutoKill"):
 		var kill := Timer.new()
 		kill.name = "AutoKill"
@@ -494,9 +505,16 @@ func _on_punch_timer_timeout() -> void:
 
 # ===================== SENSE ===========================
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	# Marca target cercano (para melee)
 	if body.is_in_group("player") or body.is_in_group("player_2"):
 		target_in_range = body as CharacterBody2D
-	if body.is_in_group("player_1_bullet"):
+
+	# Daño por puños/áreas de Player 2 (ajusta grupos si usas otros)
+	if body.is_in_group("puño_player_2") or body.is_in_group("golpe_player_2"):
+		emit_signal("damage", 20.0)
+
+	# Balas de jugadores
+	if body.is_in_group("player_1_bullet") or body.is_in_group("player_2_bullet"):
 		emit_signal("damage", 10.0)
 		if body.has_method("queue_free"): body.queue_free()
 
@@ -505,7 +523,10 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		target_in_range = null
 
 func _on_area_2d_area_entered(a: Area2D) -> void:
-	if a.is_in_group("player_1_bullet"):
+	# Por si los golpes/balas llegan como Area2D
+	if a.is_in_group("puño_player_2") or a.is_in_group("golpe_player_2"):
+		emit_signal("damage", 20.0)
+	if a.is_in_group("player_1_bullet") or a.is_in_group("player_2_bullet"):
 		emit_signal("damage", 10.0)
 		if a.has_method("queue_free"): a.queue_free()
 
@@ -551,27 +572,24 @@ func _die() -> void:
 	if _dash_timer: _dash_timer.stop()
 	var col := get_node_or_null("CollisionShape2D")
 	if col: col.set_deferred("disabled", true)
-	if sprite_2d and sprite_2d.sprite_frames and sprite_2d.sprite_frames.has_animation("explosion"):
-		sprite_2d.sprite_frames.set_animation_loop("explosion", false)
-		sprite_2d.frame = 0
-		sprite_2d.play("explosion")
-		if explosion_timer.time_left > 0.0: explosion_timer.stop()
-	else:
-		explosion_timer.start(0.3)
 
-func _on_sprite_2d_animation_finished() -> void:
-	if sprite_2d.animation == "explosion":
-		if explosion_timer and explosion_timer.time_left > 0.0: explosion_timer.stop()
+	# Mantener animación "death" hasta terminar
+	if sprite_2d and sprite_2d.sprite_frames and sprite_2d.sprite_frames.has_animation("death"):
+		sprite_2d.sprite_frames.set_animation_loop("death", false)
+		sprite_2d.frame = 0
+		sprite_2d.play("death")
+	else:
 		if not reported_dead:
 			reported_dead = true
 			emit_signal("died")
 		queue_free()
 
-func _on_explosion_timer_timeout() -> void:
-	if not reported_dead:
-		reported_dead = true
-		emit_signal("died")
-	queue_free()
+func _on_sprite_2d_animation_finished() -> void:
+	if sprite_2d.animation == "death":
+		if not reported_dead:
+			reported_dead = true
+			emit_signal("died")
+		queue_free()
 
 # ===================== SHOCK END =======================
 func _end_electroshock() -> void:

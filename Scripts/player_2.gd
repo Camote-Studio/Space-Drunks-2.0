@@ -37,7 +37,7 @@ var punch_base_dmg := {
 	"enemy_3": 10.0,
 	"enemy_4": 10.0,
 	"enemy_5": 20.0,
-	"boss": 10.0
+	"boss": 30.0
 }
 
 @onready var TimerUlti: Timer = $TimerUlti
@@ -92,11 +92,13 @@ var _sword_instance: Node2D = null
 var _sword_active := false
 var _sword_timer: Timer
 
-
+@onready var punchs: AudioStreamPlayer2D = $punchs
+var _punch_variations := [0.5, 1.0, 1.5]
 # ======================
 #   FUNCIONES BÁSICAS
 # ======================
 func _ready() -> void:
+	randomize()
 	# ... lo que ya tienes ...
 	_disable_stream_loop(sonido_flotando)
 	# Timer de golpes de ulti (constante, repetitivo)
@@ -170,6 +172,7 @@ func _punch_alternate()-> void:
 	if _punch_lock:
 		return
 	_punch_lock = true
+	_play_punch_sfx()
 	if _use_left:
 		var base_l = punch_left.position
 		var dir_l = -1.0 if $Punch_left.flip_h else 1.0
@@ -535,7 +538,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _ulti_punch() -> void:
 	if not ulti_active:
 		return
-
+	_play_punch_sfx()
 	# Simula un golpe alternado visual
 	_punch_alternate()
 
@@ -761,3 +764,9 @@ func _start_dash(direction: Vector2) -> void:
 	# Opcional: sonido dash
 	if has_node("sonido_dash"):
 		$sonido_dash.play()
+		
+func _play_punch_sfx() -> void:
+	if punchs:
+		var p = _punch_variations[randi() % _punch_variations.size()]
+		punchs.pitch_scale = p
+		punchs.play()
