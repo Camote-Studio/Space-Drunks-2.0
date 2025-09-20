@@ -1,0 +1,156 @@
+[gd_scene load_steps=37 format=3 uid="uid://beif8ubpee3oa"]
+
+[ext_resource type="Texture2D" uid="uid://dipwdvfbm1646" path="res://Assets/art/mesa_rick/m1.png" id="1_hlw3r"]
+[ext_resource type="Script" uid="uid://bj2fsaulhiog3" path="res://Scenes/rick_fondo.gd" id="1_lsurw"]
+[ext_resource type="Texture2D" uid="uid://bunwbbs41omgo" path="res://Assets/art/mesa_rick/m2.png" id="2_lsurw"]
+[ext_resource type="Texture2D" uid="uid://dxfklhm7gjfgi" path="res://Assets/art/mesa_rick/m3.png" id="3_nq15w"]
+[ext_resource type="Texture2D" uid="uid://b7hgapxekwq7h" path="res://Assets/art/mesa_rick/m4.png" id="4_whlj8"]
+[ext_resource type="Texture2D" uid="uid://3vu552cfqbi5" path="res://Assets/art/mesa_rick/m5.png" id="5_es3gk"]
+[ext_resource type="Texture2D" uid="uid://bhydu6eymo50m" path="res://Assets/art/mesa_rick/m6.png" id="6_kxigk"]
+[ext_resource type="Texture2D" uid="uid://8n5snkmx8mpk" path="res://Assets/art/mesa_rick/m7.png" id="7_ew0qo"]
+[ext_resource type="Texture2D" uid="uid://br5hd0lxu8yc6" path="res://Assets/art/mesa_rick/m8.png" id="8_msuot"]
+[ext_resource type="Texture2D" uid="uid://cepklxobm6wod" path="res://Assets/art/mesa_rick/m9.png" id="9_s276s"]
+[ext_resource type="Texture2D" uid="uid://dq3rs4occ64n5" path="res://Assets/art/mesa_rick/m10.png" id="10_x68m2"]
+[ext_resource type="Texture2D" uid="uid://bhosp305e4nyj" path="res://Assets/art/mesa_rick/m11.png" id="11_jvpwy"]
+[ext_resource type="Texture2D" uid="uid://cb6p1bkm38t85" path="res://Assets/art/mesa_rick/m12.png" id="12_frw5l"]
+[ext_resource type="Texture2D" uid="uid://cplclmuo8fqb1" path="res://Assets/art/mesa_rick/m13.png" id="13_cq41w"]
+[ext_resource type="Texture2D" uid="uid://bgy8832mhwtgi" path="res://Assets/art/mesa_rick/m14.png" id="14_8tu4o"]
+[ext_resource type="Texture2D" uid="uid://ct3r3tk65qkcs" path="res://Assets/art/mesa_rick/m15.png" id="15_gfa4s"]
+[ext_resource type="Texture2D" uid="uid://d1qseepiw0yme" path="res://Assets/art/mesa_rick/m16.png" id="16_x80oi"]
+[ext_resource type="Texture2D" uid="uid://n1ei0hry6ktv" path="res://Assets/art/mesa_rick/m17.png" id="17_pgq17"]
+[ext_resource type="Texture2D" uid="uid://bijn33h3c750p" path="res://Assets/art/mesa_rick/m18.png" id="18_c1nvp"]
+[ext_resource type="Texture2D" uid="uid://cfa0tvdxuhgeb" path="res://Assets/art/mesa_rick/m19.png" id="19_cu2qt"]
+[ext_resource type="Texture2D" uid="uid://c3b8nfoy0nkyv" path="res://Assets/art/mesa_rick/m20.png" id="20_x5k3h"]
+[ext_resource type="Texture2D" uid="uid://c400j1qvj3nru" path="res://Assets/art/mesa_rick/m21.png" id="21_ps8oi"]
+[ext_resource type="Texture2D" uid="uid://c8kxur3oh0oji" path="res://Assets/art/mesa_rick/m22.png" id="22_ljh0j"]
+[ext_resource type="Texture2D" uid="uid://bptyvmamtkhlk" path="res://Assets/art/mesa_rick/m23.png" id="23_lpuup"]
+[ext_resource type="Texture2D" uid="uid://b0ddlph6kwuei" path="res://Assets/art/mesa_rick/m24.png" id="24_pydcm"]
+[ext_resource type="Texture2D" uid="uid://btveuqcd5lidd" path="res://Assets/art/mesa_rick/m25.png" id="25_kr2sp"]
+[ext_resource type="Texture2D" uid="uid://b5ni1wtuv7rwc" path="res://Assets/art/mesa_rick/m26.png" id="26_5na84"]
+[ext_resource type="Texture2D" uid="uid://bll2uis3gduwk" path="res://Assets/art/mesa_rick/m27.png" id="27_yguf7"]
+[ext_resource type="Texture2D" uid="uid://cp0rcycl0kxfs" path="res://Assets/art/mesa_rick/m28.png" id="28_peehx"]
+[ext_resource type="Texture2D" uid="uid://boa3ugq5yimf7" path="res://Assets/art/mesa_rick/m29.png" id="29_cqyev"]
+[ext_resource type="Texture2D" uid="uid://c2542at7aye1e" path="res://Assets/art/mesa_rick/m30.png" id="30_llfli"]
+[ext_resource type="Texture2D" uid="uid://e11l6k3hkuf4" path="res://Assets/art/mesa_rick/m31.png" id="31_pbgcu"]
+[ext_resource type="Texture2D" uid="uid://mpnf7vm8btdl" path="res://Assets/art/mesa_rick/m32.png" id="32_xx5sj"]
+[ext_resource type="Texture2D" uid="uid://4r7icstqfy6a" path="res://Assets/art/mesa_rick/m33.png" id="33_7o5a3"]
+[ext_resource type="Texture2D" uid="uid://b5svvk2pss1rp" path="res://Assets/art/mesa_rick/m34.png" id="34_x65sa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6ncd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hlw3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lsurw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nq15w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_whlj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_es3gk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kxigk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ew0qo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_msuot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s276s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_x68m2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jvpwy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_frw5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_cq41w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8tu4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_gfa4s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_x80oi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_pgq17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_c1nvp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_cu2qt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_x5k3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ps8oi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ljh0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_lpuup")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_pydcm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_kr2sp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_5na84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_yguf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_peehx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_cqyev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_llfli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_pbgcu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_xx5sj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_7o5a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_x65sa")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="RickFondo" type="Node2D"]
+script = ExtResource("1_lsurw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(11, -6)
+scale = Vector2(0.267734, 0.312136)
+sprite_frames = SubResource("SpriteFrames_o6ncd")
+animation = &"idle"

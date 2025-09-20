@@ -1,0 +1,103 @@
+[gd_scene load_steps=23 format=3 uid="uid://bkguq30cybuhk"]
+
+[ext_resource type="Texture2D" uid="uid://dgmmt43x3qirv" path="res://Assets/art/comiendo/c1.png" id="1_xonvu"]
+[ext_resource type="Texture2D" uid="uid://be0ojuvs3tgt2" path="res://Assets/art/comiendo/c2.png" id="2_1gsbg"]
+[ext_resource type="Texture2D" uid="uid://iahiqo8r3pdw" path="res://Assets/art/comiendo/c3.png" id="3_odped"]
+[ext_resource type="Texture2D" uid="uid://b5mwkau21p7dw" path="res://Assets/art/comiendo/c4.png" id="4_2271m"]
+[ext_resource type="Texture2D" uid="uid://dpa325t6wge83" path="res://Assets/art/comiendo/c5.png" id="5_2lx0h"]
+[ext_resource type="Texture2D" uid="uid://djed2nc5041d8" path="res://Assets/art/comiendo/c6.png" id="6_qkn6x"]
+[ext_resource type="Texture2D" uid="uid://udstkf6aiv0x" path="res://Assets/art/comiendo/c7.png" id="7_gpqyf"]
+[ext_resource type="Texture2D" uid="uid://bkqg2riqy06fg" path="res://Assets/art/comiendo/c8.png" id="8_n554v"]
+[ext_resource type="Texture2D" uid="uid://bctdfgihdb8fe" path="res://Assets/art/comiendo/c9.png" id="9_r6bf5"]
+[ext_resource type="Texture2D" uid="uid://dbkhc7vbu36ep" path="res://Assets/art/comiendo/c10.png" id="10_qm624"]
+[ext_resource type="Texture2D" uid="uid://20riqyeg1h6l" path="res://Assets/art/comiendo/c11.png" id="11_ne3bv"]
+[ext_resource type="Texture2D" uid="uid://cnv1hnny70dhj" path="res://Assets/art/comiendo/c12.png" id="12_46wam"]
+[ext_resource type="Texture2D" uid="uid://bw81bva8a4sle" path="res://Assets/art/comiendo/c13.png" id="13_6vntf"]
+[ext_resource type="Texture2D" uid="uid://bvo16gmnyaqit" path="res://Assets/art/comiendo/c14.png" id="14_32jur"]
+[ext_resource type="Texture2D" uid="uid://cumofdk84ceyt" path="res://Assets/art/comiendo/c15.png" id="15_4d8vh"]
+[ext_resource type="Texture2D" uid="uid://cd5jah7h5382i" path="res://Assets/art/comiendo/c16.png" id="16_eifq6"]
+[ext_resource type="Texture2D" uid="uid://devkxf8ycfst3" path="res://Assets/art/comiendo/c17.png" id="17_73c5j"]
+[ext_resource type="Texture2D" uid="uid://pxo7wmfq787n" path="res://Assets/art/comiendo/c19.png" id="18_juep3"]
+[ext_resource type="Texture2D" uid="uid://bngxq11scxenq" path="res://Assets/art/comiendo/c20.png" id="19_3hxkl"]
+[ext_resource type="Texture2D" uid="uid://bo256fd3rqknp" path="res://Assets/art/comiendo/c21.png" id="20_qdh3y"]
+[ext_resource type="Texture2D" uid="uid://dv6emacno18ll" path="res://Assets/art/comiendo/c22.png" id="21_pbpop"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q4h6x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xonvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1gsbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_odped")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2271m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2lx0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qkn6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gpqyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_n554v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r6bf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qm624")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ne3bv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_46wam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6vntf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_32jur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4d8vh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_eifq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_73c5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_juep3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_3hxkl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_qdh3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_pbpop")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="AlienFondo" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(11.4687, -10)
+scale = Vector2(0.265013, 0.320736)
+sprite_frames = SubResource("SpriteFrames_q4h6x")
+animation = &"idle"
+frame_progress = 0.778368

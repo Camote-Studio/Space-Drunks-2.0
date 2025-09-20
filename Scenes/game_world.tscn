@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dkt37yghdsm2q"]
+[gd_scene load_steps=58 format=3 uid="uid://dkt37yghdsm2q"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -38,6 +38,11 @@
 [ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
 [ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="38_p5xse"]
 [ext_resource type="PackedScene" uid="uid://batawvymfltb3" path="res://Scenes/enemie_4.tscn" id="38_qejn6"]
+[ext_resource type="PackedScene" uid="uid://cv7d5uk4kvkke" path="res://Scenes/among_fondo.tscn" id="39_p5xse"]
+[ext_resource type="PackedScene" uid="uid://beif8ubpee3oa" path="res://Scenes/rick_fondo.tscn" id="40_6kdy0"]
+[ext_resource type="PackedScene" uid="uid://cdrh8t72fkp5a" path="res://Scenes/pato_fondo.tscn" id="41_7hocu"]
+[ext_resource type="PackedScene" uid="uid://b8tjfgcynpqgj" path="res://Scenes/martin_fondo.tscn" id="42_7hocu"]
+[ext_resource type="PackedScene" uid="uid://bkguq30cybuhk" path="res://Scenes/alien_fondo.tscn" id="43_cjtyq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5503, 20)
@@ -739,5 +744,21 @@ position = Vector2(682, 244)
 [node name="enemie_6" parent="." instance=ExtResource("38_p5xse")]
 z_index = 0
 position = Vector2(403, 243)
+
+[node name="ScaredBackgroundCharacter" parent="." instance=ExtResource("39_p5xse")]
+z_index = 3
+position = Vector2(1415, 152)
+
+[node name="RickFondo" parent="." instance=ExtResource("40_6kdy0")]
+position = Vector2(2154, 160)
+
+[node name="PatoFondo" parent="." instance=ExtResource("41_7hocu")]
+position = Vector2(3222, 115)
+
+[node name="MartinFondo" parent="." instance=ExtResource("42_7hocu")]
+position = Vector2(492, 126)
+
+[node name="AlienFondo" parent="." instance=ExtResource("43_cjtyq")]
+position = Vector2(4511, 148)
 
 [connection signal="body_entered" from="Portal/Area2D" to="Portal" method="_on_area_2d_body_entered"]
