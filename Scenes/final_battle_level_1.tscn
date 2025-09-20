@@ -117,6 +117,7 @@ position = Vector2(288, 322)
 
 [node name="Player_2" parent="." instance=ExtResource("5_hvwlt")]
 position = Vector2(314, 489)
+poison_area_scene = null
 
 [node name="Final_Boss" parent="." instance=ExtResource("6_reli8")]
 position = Vector2(1042, 383)

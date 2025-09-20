@@ -1,0 +1,110 @@
+[gd_scene load_steps=25 format=3 uid="uid://cxsmi37r8jgfg"]
+
+[ext_resource type="Texture2D" uid="uid://b270ryl8domiv" path="res://Assets/art/bender/b1.png" id="1_b3ecl"]
+[ext_resource type="Texture2D" uid="uid://cfkjybns86ewd" path="res://Assets/art/bender/b2.png" id="2_nsact"]
+[ext_resource type="Texture2D" uid="uid://d2gu7foqgxgtw" path="res://Assets/art/bender/b3.png" id="3_jugt3"]
+[ext_resource type="Texture2D" uid="uid://h3jxcrqd4j8c" path="res://Assets/art/bender/b4.png" id="4_hdrd3"]
+[ext_resource type="Texture2D" uid="uid://cavd3htgpw25q" path="res://Assets/art/bender/b5.png" id="5_jl6mc"]
+[ext_resource type="Texture2D" uid="uid://dirgwbxpeog87" path="res://Assets/art/bender/b6.png" id="6_fs1xs"]
+[ext_resource type="Texture2D" uid="uid://dh4ahdna71jyt" path="res://Assets/art/bender/b7.png" id="7_ftfq7"]
+[ext_resource type="Texture2D" uid="uid://fxxkws77ikea" path="res://Assets/art/bender/b8.png" id="8_w54gk"]
+[ext_resource type="Texture2D" uid="uid://jywjk2lhk33w" path="res://Assets/art/bender/b9.png" id="9_tjxnm"]
+[ext_resource type="Texture2D" uid="uid://d4mw6i2xs6w6l" path="res://Assets/art/bender/b10.png" id="10_8u0cj"]
+[ext_resource type="Texture2D" uid="uid://drrc541c57urr" path="res://Assets/art/bender/b11 y medio.png" id="11_u5vqd"]
+[ext_resource type="Texture2D" uid="uid://b4a1g034dp3gd" path="res://Assets/art/bender/b11.png" id="12_dqick"]
+[ext_resource type="Texture2D" uid="uid://bonvwi40iw28e" path="res://Assets/art/bender/b12.png" id="13_ds6oa"]
+[ext_resource type="Texture2D" uid="uid://laanlbjfwe5c" path="res://Assets/art/bender/b13.png" id="14_hn81p"]
+[ext_resource type="Texture2D" uid="uid://bfee4st0nx37r" path="res://Assets/art/bender/b14.png" id="15_j7pib"]
+[ext_resource type="Texture2D" uid="uid://b8hl8ond1hd2k" path="res://Assets/art/bender/b15.png" id="16_h675f"]
+[ext_resource type="Texture2D" uid="uid://dky1to3nk2k0r" path="res://Assets/art/bender/b16.png" id="17_v6m33"]
+[ext_resource type="Texture2D" uid="uid://dyowo2of02sfa" path="res://Assets/art/bender/b17.png" id="18_mansj"]
+[ext_resource type="Texture2D" uid="uid://b4mnljon0ohca" path="res://Assets/art/bender/b18.png" id="19_yna1j"]
+[ext_resource type="Texture2D" uid="uid://bmdhyy53vdii" path="res://Assets/art/bender/b19.png" id="20_dxnw8"]
+[ext_resource type="Texture2D" uid="uid://dhnjk644wyq7y" path="res://Assets/art/bender/b20.png" id="21_opu8i"]
+[ext_resource type="Texture2D" uid="uid://c1oxl53wawtn6" path="res://Assets/art/bender/b21.png" id="22_wuas8"]
+[ext_resource type="Texture2D" uid="uid://bv431jdd8d5g4" path="res://Assets/art/bender/n22.png" id="23_432mx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_saq0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b3ecl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nsact")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jugt3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hdrd3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jl6mc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fs1xs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ftfq7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w54gk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_tjxnm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8u0cj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_u5vqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_dqick")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ds6oa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hn81p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_j7pib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_h675f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_v6m33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_mansj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_yna1j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_dxnw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_opu8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_wuas8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_432mx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BenderFondo" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.00001, -3)
+scale = Vector2(0.351201, 0.343992)
+sprite_frames = SubResource("SpriteFrames_saq0y")
+frame_progress = 0.697082

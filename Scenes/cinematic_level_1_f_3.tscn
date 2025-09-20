@@ -220,6 +220,7 @@ position = Vector2(465, 330)
 
 [node name="Player_2" parent="." instance=ExtResource("5_gefvj")]
 position = Vector2(458, 489)
+poison_area_scene = null
 
 [node name="cinamatic_level_1_f_3_camera" type="Camera2D" parent="."]
 position = Vector2(610, 333)
