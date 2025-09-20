@@ -390,7 +390,8 @@ func collect_coin(amount: int = 1) -> void:
 		coin_label.text = str(coins)
 	GameState.set_coins(player_id, coins)
 	if coins >= 20:
-		_show_shop()
+		bar.value = clamp(bar.value + 20, bar.min_value, bar.max_value)
+		#_show_shop()
 		coins = 0
 		if coin_label:
 			coin_label.text = str(coins)
