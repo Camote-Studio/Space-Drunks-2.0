@@ -288,7 +288,7 @@ position = Vector2(50, 500)
 position = Vector2(50, 400)
 
 [node name="Portal_2" type="Node2D" parent="." groups=["portal"]]
-position = Vector2(2036.9999, 76.00001)
+position = Vector2(2037, 76)
 scale = Vector2(0.628, 1.252)
 script = ExtResource("6_2ltu8")
 
@@ -300,7 +300,7 @@ texture = ExtResource("6_wxuq6")
 [node name="Area2D" type="Area2D" parent="Portal_2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal_2/Area2D"]
-position = Vector2(5433.121, 306.7093)
+position = Vector2(5433.12, 306.709)
 shape = SubResource("CapsuleShape2D_1evay")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["main_camera"]]
