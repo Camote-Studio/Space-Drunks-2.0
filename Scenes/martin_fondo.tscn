@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8tjfgcynpqgj"]
+
+[ext_resource type="Script" uid="uid://crd58uspjxge6" path="res://Scenes/martin_fondo.gd" id="1_ihaso"]
+[ext_resource type="Texture2D" uid="uid://da1c16bf2xdk5" path="res://Assets/art/martin/martin1.png" id="2_ad4v4"]
+[ext_resource type="Texture2D" uid="uid://vuxhpjqrprgb" path="res://Assets/art/martin/martin2.png" id="3_0wq8b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g2ikr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ad4v4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0wq8b")
+}],
+"loop": true,
+"name": &"preocupado",
+"speed": 5.0
+}]
+
+[node name="MartinFondo" type="Node2D"]
+script = ExtResource("1_ihaso")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3.8147e-06, 9.53674e-07)
+scale = Vector2(0.446679, 0.516556)
+sprite_frames = SubResource("SpriteFrames_g2ikr")
+animation = &"preocupado"
+
+[node name="Timer" type="Timer" parent="."]
