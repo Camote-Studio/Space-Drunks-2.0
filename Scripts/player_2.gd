@@ -10,8 +10,13 @@ signal muerte  # Para notificar al GameManager
 # PODER: ÁREA DE VENENO
 # ============================
 @export var poison_area_scene: PackedScene
+@export var poison_cursor_speed := 700.0
 var poison_preview: Node2D = null
 var selecting_poison := false
+# --- NUEVO: Variables de Cooldown para el Veneno ---
+@export var poison_cooldown_duration := 20.0
+var _poison_cooldown_remaining := 0.0
+@onready var poison_cooldown_bar: ProgressBar = $"../CanvasLayer/PoisonCooldownBar"
 # ======================
 #        DASH
 # ======================
@@ -273,48 +278,37 @@ func _physics_process(delta: float) -> void:
 		_dash_cooldown_timer -= delta
 
 
-	# Activar selección de área de veneno
-	if Input.is_action_just_pressed("area_veneno") and not selecting_poison and not floating:
-		selecting_poison = true
-		poison_preview = Node2D.new()
+	
 
-		if animated_sprite:
-			animated_sprite.play("lanzar")  # 🔹 se queda en lanzar
-			print("vista lanzar")
-			# 🔹 Ocultar puños mientras lanza
-			punch_left.visible = false
-			punch_right.visible = false
+	# --- LÓGICA DE VENENO MEJORADA ---
+	# 1. Activar o cancelar el modo de apuntado
+	if Input.is_action_just_pressed("toggle_poison_aim_p2"):
+		if selecting_poison:
+			_cancel_poison_selection() # Si ya estamos apuntando, cancelamos.
+		elif not floating:
+			_enter_poison_selection() # Si no, entramos en el modo de apuntado.
 
-		# preview gráfico
-		var sprite := Sprite2D.new()
-		sprite.texture = preload("res://Assets/art/sprites/Particulas/botella2.png") 
-		sprite.scale = Vector2(1.5, 1.5)
-		sprite.centered = true
-		poison_preview.add_child(sprite)
-
-		get_tree().current_scene.add_child(poison_preview)
-
-
-	# --- Preview movimiento
+	# 2. Lógica mientras estamos apuntando
 	if selecting_poison and poison_preview:
-		poison_preview.global_position = get_global_mouse_position()
+		# Mover el cursor (con joystick o ratón)
+		var joy_cursor_vector = Input.get_vector("cursor_left_p2", "cursor_right_p2", "cursor_up_p2", "cursor_down_p2")
+		if joy_cursor_vector.length() > 0.1:
+			poison_preview.global_position += joy_cursor_vector * poison_cursor_speed * delta
+		else:
+			poison_preview.global_position = get_global_mouse_position()
 
-		# Colocar veneno con click izquierdo
-		if Input.is_action_just_pressed("veneno_activo") and selecting_poison:
+		# Confirmar y colocar el veneno (con A/X o click)
+		if (Input.is_action_just_pressed("veneno_activo") or Input.is_action_just_pressed("confirm_action_p2")):
 			var poison_instance = poison_area_scene.instantiate()
 			get_tree().current_scene.add_child(poison_instance)
-			poison_instance.global_position = poison_preview.global_position
-			print("[VENENO] ¡Área de veneno colocada en: ", poison_instance.global_position, "!")
+			poison_instance.global_position = poison_preview.global_position			
+			# Usamos la función de cancelar para limpiar todo
+			_cancel_poison_selection()
 
-			poison_preview.queue_free()
-			poison_preview = null
-			selecting_poison = false
-
-			if animated_sprite:
-				animated_sprite.play("idle")  
-				# 🔹 Restaurar visibilidad de puños
-				punch_left.visible = true
-				punch_right.visible = true
+		# Detenemos al personaje mientras apunta
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 
 
 	# --- Dirección
@@ -462,7 +456,6 @@ func _die() -> void:
 	rotation = 0.0
 	set_collision_layer(0)
 	set_collision_mask(0)
-	TimerUlti.stop()
 	TimerGolpeUlti.stop()
 	$Timer.stop()
 	$venenoTimer.stop()
@@ -770,3 +763,34 @@ func _play_punch_sfx() -> void:
 		var p = _punch_variations[randi() % _punch_variations.size()]
 		punchs.pitch_scale = p
 		punchs.play()
+		
+
+func _enter_poison_selection() -> void:
+	selecting_poison = true
+	poison_preview = Node2D.new()	
+	
+	if animated_sprite:
+		animated_sprite.play("lanzar")
+		punch_left.visible = false
+		punch_right.visible = false
+
+	# Crear el sprite de preview
+	var sprite := Sprite2D.new()
+	sprite.texture = preload("res://Assets/art/sprites/Particulas/botella2.png")
+	sprite.scale = Vector2(1.5, 1.5)
+	sprite.centered = true
+	poison_preview.add_child(sprite)	
+	get_tree().current_scene.add_child(poison_preview)
+	poison_preview.global_position = self.global_position + Vector2(60 * _facing, -30)	
+	
+func _cancel_poison_selection() -> void:
+	selecting_poison = false
+
+	if is_instance_valid(poison_preview):
+		poison_preview.queue_free()
+		poison_preview = null
+
+	if animated_sprite and animated_sprite.animation == "lanzar":
+		animated_sprite.play("idle")
+		punch_left.visible = true
+		punch_right.visible = true
