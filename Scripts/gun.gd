@@ -124,14 +124,25 @@ func _update_offset(player_flipped: bool) -> void:
 ## TURRET aiming
 ## ========================
 func _update_turret_aim(player_flipped: bool) -> void:
-	var mouse_pos = get_global_mouse_position()
-	var dir = (mouse_pos - global_position).normalized()
-	if dir.length() < 0.001:
-		dir = Vector2.RIGHT
+
+	var aim_dir := Vector2.ZERO
+	
+	# 1. Intentamos obtener la dirección del joystick
+	var joy_vector := Input.get_vector("aim_left_p1", "aim_right_p1", "aim_up_p1", "aim_down_p1")
+	
+	# 2. Si el joystick se está moviendo, usamos su dirección
+	if joy_vector.length() > 0.5: # Usamos 0.5 como "deadzone" para evitar drift
+		aim_dir = joy_vector.normalized()
+	else: # 3. Si no, usamos la posición del ratón como antes
+		aim_dir = (get_global_mouse_position() - global_position).normalized()
+
+	# El resto de la función es igual, pero usa aim_dir
+	if aim_dir.length() < 0.001:
+		aim_dir = Vector2.RIGHT
 
 	var forward = Vector2.RIGHT if not player_flipped else Vector2.LEFT
 	var forward_angle = forward.angle()
-	var target_angle = dir.angle()
+	var target_angle = aim_dir.angle()
 
 	var relative = wrapf(target_angle - forward_angle, -PI, PI)
 	var display_rel_angle: float = clamp(relative, -turret_angle_limit, turret_angle_limit)

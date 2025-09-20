@@ -58,7 +58,7 @@ size = Vector2(5497, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o87y8"]
 radius = 29.0
-height = 166.0
+height = 556.0
 
 [sub_resource type="Animation" id="Animation_o87y8"]
 length = 0.001
@@ -439,14 +439,14 @@ shape = SubResource("RectangleShape2D_tpm8x")
 script = ExtResource("10_nmac2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Portal"]
-position = Vector2(5410, 373)
-scale = Vector2(0.5, 0.5)
+position = Vector2(5448.375, 408.5)
+scale = Vector2(0.62770385, 1.2515724)
 texture = ExtResource("11_4asma")
 
 [node name="Area2D" type="Area2D" parent="Portal"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal/Area2D"]
-position = Vector2(5417, 368)
+position = Vector2(5436, 368)
 shape = SubResource("CapsuleShape2D_o87y8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -550,19 +550,42 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 98.0
-offset_top = 69.0
-offset_right = 191.0
-offset_bottom = 85.0
+offset_left = 103.0
+offset_top = 63.0
+offset_right = 196.0
+offset_bottom = 79.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.48703897, 0.59199494, 0.080554865, 1)
+anchors_preset = -1
+anchor_bottom = -0.016975308
+offset_left = 100.0
+offset_top = 89.0
+offset_right = 193.0
+offset_bottom = 105.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 289.0
-offset_top = 69.0
-offset_right = 367.0
-offset_bottom = 85.0
+offset_left = 297.0
+offset_top = 63.0
+offset_right = 375.0
+offset_bottom = 79.0
+max_value = 200.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Veneno_p2" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.47986448, 0.10558201, 0.50094223, 1)
+anchors_preset = -1
+anchor_bottom = -0.016975308
+offset_left = 291.0
+offset_top = 89.0
+offset_right = 384.0
+offset_bottom = 105.0
 max_value = 200.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
