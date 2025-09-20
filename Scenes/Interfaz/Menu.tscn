@@ -183,7 +183,6 @@ texture_hover = ExtResource("11_w4fob")
 texture_focused = ExtResource("11_w4fob")
 
 [node name="Label" type="Label" parent="Control/Tutorial"]
-visible = false
 material = SubResource("ShaderMaterial_w4fob")
 use_parent_material = true
 layout_mode = 0
