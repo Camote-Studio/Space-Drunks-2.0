@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=44 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="27_v4p21"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="28_s0j4o"]
 [ext_resource type="Script" uid="uid://ma121f682hnw" path="res://Scripts/next_scene_path_area.gd" id="29_a7g42"]
+[ext_resource type="Script" uid="uid://c8gc0vqsrgeyv" path="res://Scripts/block_collider_body.gd" id="30_s0j4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
 size = Vector2(5588.5, 10)
@@ -214,6 +215,12 @@ shader = ExtResource("8_6nii4")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtle1"]
 size = Vector2(20, 667)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7g42"]
+size = Vector2(24, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tv5bt"]
+size = Vector2(5126.5, 20)
+
 [node name="Level1_F3" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -316,7 +323,8 @@ offset_top = 24.0
 offset_right = 190.125
 offset_bottom = 57.0
 scale = Vector2(0.12157, 0.612286)
-value = 100.0
+max_value = 200.0
+value = 200.0
 texture_under = ExtResource("9_6nii4")
 texture_progress = ExtResource("10_sij3j")
 metadata/_edit_use_anchors_ = true
@@ -328,7 +336,8 @@ offset_right = 1245.0
 offset_bottom = 93.0
 rotation = -0.00284467
 scale = Vector2(0.122, 0.612)
-value = 100.0
+max_value = 400.0
+value = 400.0
 texture_under = ExtResource("9_6nii4")
 texture_progress = ExtResource("10_sij3j")
 metadata/_edit_use_anchors_ = true
@@ -428,11 +437,38 @@ metadata/_edit_use_anchors_ = true
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("22_v4p21")]
 metadata/_edit_use_anchors_ = true
 
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="warning_label" type="Label" parent="CanvasLayer/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 1791.0
+offset_top = 395.0
+offset_right = 2099.0
+offset_bottom = 424.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("21_r84mv")
+theme_override_font_sizes/font_size = 20
+text = "¡No puedes avanzar más!"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/warning_label"]
+layout_mode = 0
+offset_right = 315.0
+offset_bottom = 40.0
+
 [node name="Camera2D" type="Camera2D" parent="." groups=["camara", "main_camera"]]
 position = Vector2(576, 303)
 position_smoothing_enabled = true
 script = ExtResource("6_tii1t")
-speed = 40.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -512,4 +548,20 @@ script = ExtResource("29_a7g42")
 position = Vector2(3569, 325)
 shape = SubResource("RectangleShape2D_qtle1")
 
+[node name="BlockColliderBody" type="Area2D" parent="."]
+script = ExtResource("30_s0j4o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockColliderBody"]
+position = Vector2(1169, 332)
+shape = SubResource("RectangleShape2D_a7g42")
+
+[node name="warning_timer" type="Timer" parent="."]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(2478.25, 643)
+shape = SubResource("RectangleShape2D_tv5bt")
+
 [connection signal="body_entered" from="next_scene_path_area" to="next_scene_path_area" method="_on_body_entered"]
+[connection signal="body_entered" from="BlockColliderBody" to="BlockColliderBody" method="_on_body_entered"]
