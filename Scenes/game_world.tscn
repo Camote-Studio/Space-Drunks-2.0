@@ -514,7 +514,14 @@ offset_left = 337.0
 offset_top = 186.0
 offset_right = 718.0
 offset_bottom = 315.0
-theme_override_font_sizes/font_size = 60
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("29_q27iu")
+theme_override_font_sizes/font_size = 80
 text = "Ready?"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -621,6 +628,12 @@ offset_left = -13.568
 offset_top = -10.992
 offset_right = 9.43199
 offset_bottom = 12.008
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("29_q27iu")
 text = "0"
 
 [node name="cont monedas2" type="Label" parent="CanvasLayer"]
@@ -633,6 +646,11 @@ offset_left = -11.952
 offset_top = -11.64
 offset_right = 15.048
 offset_bottom = 11.36
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("29_q27iu")
 text = "0"
 
 [node name="Label2" type="Label" parent="CanvasLayer"]

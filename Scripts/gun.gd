@@ -87,7 +87,8 @@ func _process(delta: float) -> void:
 			animated_sprite.flip_v = false
 
 	# Evitar input si está muerto o bloqueado
-	if ("dead" in player and player.dead) or ("allow_input" in player and not player.allow_input and not ("is_using_ulti" in player and player.is_using_ulti)):
+# DESPUÉS (Añade la comprobación de 'floating'):
+	if ("dead" in player and player.dead) or ("floating" in player and player.floating) or ("allow_input" in player and not player.allow_input and not ("is_using_ulti" in player and player.is_using_ulti)):
 		return
 
 	# Modo de disparo
@@ -158,6 +159,7 @@ func _fire(is_flipped: bool) -> void:
 		animated_sprite.play("idle")
 
 	var bullet_instance = bullet_scene.instantiate()
+	bullet_instance.owner_node = player 
 	get_tree().current_scene.add_child(bullet_instance)
 
 	bullet_instance.global_position = global_position
@@ -183,6 +185,9 @@ func _fire_at_mouse(flipped: bool) -> void:
 
 	var bullet_dir = Vector2.RIGHT.rotated(aim_angle)
 	var bullet_instance = bullet_scene.instantiate()
+	
+	bullet_instance.owner_node = player
+	
 	get_tree().current_scene.add_child(bullet_instance)
 
 	bullet_instance.global_position = global_position
@@ -210,6 +215,8 @@ func _apply_bullet_effects(bullet_instance: Node2D) -> void:
 	if player:
 		if player.has_method("apply_power_to_bullet"):
 			player.apply_power_to_bullet(bullet_instance)
+		
+		# BORRA O COMENTA LA SIGUIENTE LÍNEA
 		if player.has_method("gain_ability_from_shot"):
 			player.gain_ability_from_shot()
 

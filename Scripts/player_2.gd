@@ -26,7 +26,11 @@ var _dash_dir := Vector2.ZERO
 # --- Variables ---
 var coins: int = 0
 @export var player_id: String = "player2"  # Identificador único
+
 var ulti_active: bool = false
+var ulti_ready := false # <-- NUEVA VARIABLE: para saber si el ulti está listo
+@export var ulti_drain_rate := 30.0 # <-- NUEVA VARIABLE: velocidad de consumo
+
 var punch_base_dmg := {
 	"enemy_1": 30.0,
 	"enemy_2": 30.0,
@@ -239,6 +243,19 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
+	if ulti_active:
+		# Consumir la barra de habilidad con el tiempo
+		bar_ability_2.value -= ulti_drain_rate * delta
+		
+		# Regenerar vida mientras el ulti está activo
+		if bar:
+			var regen = 20 * delta
+			bar.value = min(bar.value + regen, bar.max_value)
+
+		# Si la barra se agota, desactivar el ulti
+		if bar_ability_2.value <= 0:
+			_end_ulti()
+
 	if _is_dashing:
 		_dash_timer -= delta
 		if _dash_timer <= 0.0:
@@ -254,7 +271,7 @@ func _physics_process(delta: float) -> void:
 
 
 	# Activar selección de área de veneno
-	if Input.is_action_just_pressed("area_veneno") and not selecting_poison:
+	if Input.is_action_just_pressed("area_veneno") and not selecting_poison and not floating:
 		selecting_poison = true
 		poison_preview = Node2D.new()
 
@@ -307,15 +324,18 @@ func _physics_process(delta: float) -> void:
 		else:
 			# si no hay dirección, usa la última facing
 			_start_dash(Vector2(_facing, 0))
-	if Input.is_action_just_pressed("jump_2"):
+	if Input.is_action_just_pressed("jump_2") and not floating:
 		_power()
+		
+	if Input.is_action_just_pressed("ulti_player_2") and ulti_ready and not ulti_active:
+		_start_ulti()
 
 	# --- Actualizar facing si hay input
 	if abs(direction.x) > 0.01:
 		_set_facing(sign(direction.x))
 
 	# --- Input de puño
-	if Input.is_action_just_pressed("fired_2") and not selecting_poison:
+	if Input.is_action_just_pressed("fired_2") and not selecting_poison and not floating:
 		_punch_alternate()
 
 	# --- Animaciones / estados
@@ -590,14 +610,21 @@ func _update_sword_transform() -> void:
 # ======================
 #  CARGA DE HABILIDAD 2
 # ======================
+# Reemplaza tu función actual con esta
 func gain_ability_from_attack_2(damage_dealt: float) -> void:
 	if dead or bar_ability_2 == null or ulti_active:
-		return  # 🔹 Mientras ulti esté activa, no se acumula
-	var gain = max(0.0, damage_dealt)
-	bar_ability_2.value = clamp(bar_ability_2.value + gain, bar_ability_2.min_value, bar_ability_2.max_value)
-	if bar_ability_2.value >= bar_ability_2.max_value:
-		_start_ulti()
+		return
 
+	# 1. Solo cargamos la barra si el ulti no está ya listo
+	if not ulti_ready:
+		var gain = max(0.0, damage_dealt)
+		bar_ability_2.value = clamp(bar_ability_2.value + gain, bar_ability_2.min_value, bar_ability_2.max_value)
+		
+		# 2. Si con esa carga se llenó, lo marcamos como listo
+		if bar_ability_2.value >= bar_ability_2.max_value:
+			ulti_ready = true
+			print("🚀 ¡ULTI DEL JUGADOR 2 LISTO!")
+			# 3. YA NO llamamos a _start_ulti() aquí
 
 
 func _power() -> void:
@@ -628,8 +655,13 @@ func _power() -> void:
 func _start_ulti() -> void:
 	if dead:
 		return
-	if bar_ability_2:
-		bar_ability_2.value = bar_ability_2.min_value
+	
+	# 1. "Gastamos" la carga del ulti
+	ulti_ready = false
+
+	# 2. YA NO reiniciamos la barra de habilidad aquí. La dejamos llena.
+	# if bar_ability_2:
+	#	 bar_ability_2.value = bar_ability_2.min_value
 
 	if estado_actual == Estado.ATURDIDO:
 		estado_actual = Estado.NORMAL
@@ -656,11 +688,6 @@ func _start_ulti() -> void:
 		sonido_ulti.stop()
 		sonido_ulti.play()
 
-	TimerUlti.stop()
-	TimerUlti.start(5.0)
-	if not TimerUlti.is_connected("timeout", Callable(self, "_end_ulti")):
-		TimerUlti.connect("timeout", Callable(self, "_end_ulti"))
-	TimerGolpeUlti.start()
 
 func _end_ulti() -> void:
 	ulti_active = false
@@ -690,6 +717,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		or enemy.is_in_group("enemy_5") 
 		or enemy.is_in_group("boss")) and enemy.has_signal("damage"):
 		enemy.emit_signal("damage", 20.0)  # daño fijo de la alabarda
+		
 func _process(delta: float) -> void:
 	if ulti_active and bar:
 		var regen = 20 * delta  # Ajusta la velocidad de regeneración

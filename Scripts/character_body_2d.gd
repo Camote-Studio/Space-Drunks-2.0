@@ -7,7 +7,6 @@ signal muerte
 
 # --- GUN / ULTI ---
 @onready var gun = $Gun
-@onready var ulti_timer: Timer = $UltiTimer
 # ====== DASH ======
 @export var dash_speed := 600.0
 @export var dash_duration := 0.2
@@ -62,6 +61,8 @@ var return_lerp_speed := 3.0
 var dead := false
 var allow_input := true
 var is_using_ulti := false
+var ulti_ready := false 
+@export var ulti_drain_rate := 20.0 # Puntos de barra por segundo
 
 # ====== Poder de disparo potenciado ======
 var next_shot_powered := false
@@ -79,11 +80,6 @@ func _ready() -> void:
 		print("✅ Gun detectado:", gun)
 	else:
 		push_error("❌ Gun no está conectado en Player")
-		
-	if ulti_timer:
-		ulti_timer.one_shot = true
-		if not ulti_timer.is_connected("timeout", Callable(self, "_on_ulti_timer_timeout")):
-			ulti_timer.connect("timeout", Callable(self, "_on_ulti_timer_timeout"))
 
 	coins = GameState.get_coins(player_id)
 	GameState.set_coins(player_id, coins)
@@ -119,6 +115,16 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
+	# --- LÓGICA DEL ULTI ACTIVO ---
+	if is_using_ulti:
+		# Reducir el valor de la barra con el tiempo
+		bar_ability_1.value -= ulti_drain_rate * delta
+		
+		# Si la barra se agota, desactivar el ulti
+		if bar_ability_1.value <= 0:
+			_deactivate_ulti() # Llamamos a una nueva función para terminarlo
+		# Detenemos el resto del procesamiento físico normal
+		return
 	# --- DASH ---
 	if _is_dashing:
 		_dash_timer -= delta
@@ -141,7 +147,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				_start_dash(Vector2.RIGHT) # default
 
-	if Input.is_action_just_pressed("jump") and not is_using_ulti:
+	if Input.is_action_just_pressed("jump") and ulti_ready and not is_using_ulti:
 		_activate_ulti()
 
 	# --- Animaciones solo si NO estamos en ulti y no muertos ---
@@ -280,18 +286,40 @@ func _handle_floating(delta: float) -> void:
 
 # ====================== FUNCIONES DE SOPORTE ============================= 
 func gain_ability_from_attack(damage_dealt: float) -> void:
+	# --- INICIO: Bloque de depuración ---
+	print("--- DEBUG: Intentando cargar barra ---")
+	print("-> ulti_ready actual: ", ulti_ready)
+	if not ulti_ready:
+		print("--> Condición CUMPLIDA. La barra debería cargar.")
+	else:
+		print("--> Condición NO CUMPLIDA. ¡Este es el problema!")
+	# --- FIN: Bloque de depuración ---
 	if dead or bar_ability_1 == null: return
-	bar_ability_1.value = clamp(bar_ability_1.value + max(0.0, damage_dealt), bar_ability_1.min_value, bar_ability_1.max_value)
-	if bar_ability_1.value >= bar_ability_1.max_value:
-		_power()
+	
+	# 1. Comprobamos si podemos cargar la barra (si el ulti NO está listo)
+	if not ulti_ready:
+		# 2. Si podemos, cargamos la barra
+		bar_ability_1.value = clamp(bar_ability_1.value + max(0.0, damage_dealt), bar_ability_1.min_value, bar_ability_1.max_value)
+		
+		# 3. Y AHORA, DENTRO de este bloque, comprobamos si ESA carga la llenó
+		if bar_ability_1.value >= bar_ability_1.max_value:
+			ulti_ready = true
+			print("🚀 ¡ULTI LISTO PARA USAR!")
 
 func gain_ability_from_shot() -> void:
 	if dead or bar_ability_1 == null: return
 	var shots_required := 10.0
 	var gain := (bar_ability_1.max_value - bar_ability_1.min_value) / shots_required
-	bar_ability_1.value = clamp(bar_ability_1.value + gain, bar_ability_1.min_value, bar_ability_1.max_value)
-	if bar_ability_1.value >= bar_ability_1.max_value:
-		_power()
+	
+	# 1. Comprobamos si podemos cargar la barra
+	if not ulti_ready:
+		# 2. Si podemos, la cargamos
+		bar_ability_1.value = clamp(bar_ability_1.value + gain, bar_ability_1.min_value, bar_ability_1.max_value)
+		
+		# 3. Y comprobamos si se llenó
+		if bar_ability_1.value >= bar_ability_1.max_value:
+			ulti_ready = true
+			print("🚀 ¡ULTI LISTO PARA USAR!")
 
 func _power() -> void:
 	if dead or next_shot_powered: 
@@ -439,6 +467,14 @@ func _show_shop() -> void:
 
 # ====================== FUNCIÓN PARA ULTI =======================
 func _activate_ulti() -> void:
+	if not ulti_ready: return # Doble chequeo por si acaso
+	
+	ulti_ready = false
+	is_using_ulti = true
+	allow_input = false
+
+	if gun:
+		gun.set_mode(gun.GunMode.TURRET)
 	print("🔥 Ulti ACTIVADA")
 	is_using_ulti = true
 	allow_input = false
@@ -457,15 +493,18 @@ func _activate_ulti() -> void:
 			anim_sprite.play("ulti_pose")
 		else:
 			push_warning("Animación 'ulti_pose' no existe en AnimatedSprite2D")
-	if ulti_timer:
-		ulti_timer.start(5.0)
 
-
-
-func _on_ulti_timer_timeout() -> void:
-	print("⏱️ Ulti terminó → regresando a normal")
+func _deactivate_ulti() -> void:
+	# --- INICIO: Bloque de depuración ---
+	print("--- DEBUG: Desactivando Ulti ---")
+	print("-> Valor de la barra al entrar: ", bar_ability_1.value)
+	print("-> ulti_ready al entrar: ", ulti_ready)
+	print("-> is_using_ulti al entrar: ", is_using_ulti)
+	# --- FIN: Bloque de depuración ---
+	print("⏱️ Barra de Ulti agotada → regresando a normal")
 	is_using_ulti = false
 	allow_input = true
+	ulti_ready = false
 
 	if gun and gun.has_method("set_mode"):
 		gun.set_mode(gun.GunMode.PISTOL)
@@ -475,6 +514,7 @@ func _on_ulti_timer_timeout() -> void:
 		var anim_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 		if anim_sprite.sprite_frames and anim_sprite.sprite_frames.has_animation("idle"):
 			anim_sprite.play("idle")
+			
 # Empuje temporal que no rompe la física
 func push_temp(offset: Vector2) -> void:
 	global_position += offset
