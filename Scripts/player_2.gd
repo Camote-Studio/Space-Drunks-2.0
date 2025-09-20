@@ -2,20 +2,32 @@ extends CharacterBody2D
 # player 2
 @onready var TimerGolpeUlti: Timer = Timer.new()
 var _flotar_sound_played := false
+var poison_charge: int = 0
+var poison_max_charge: int = 10
+var poison_ready: bool = false
+var selecting_poison: bool = false
+var poison_preview: Node2D = null
 
+@onready var veneno_couldown: ProgressBar = $"../CanvasLayer/Veneno_p2"
+@export var poison_area_scene: PackedScene
+@export var poison_cursor_speed := 700.0
+@export var poison_cooldown_duration := 20.0
+var _poison_cooldown_remaining := 0.0
 # --- Señales ---
 signal damage(amount: float, source: String)
 signal muerte  # Para notificar al GameManager
 # ============================
 # PODER: ÁREA DE VENENO
-# ============================
-@export var poison_area_scene: PackedScene
-@export var poison_cursor_speed := 700.0
-var poison_preview: Node2D = null
-var selecting_poison := false
+
+
+
+
+var poison_in_selection: bool = false
+
+@onready var poison_timer: Timer = Timer.new()
+
 # --- NUEVO: Variables de Cooldown para el Veneno ---
-@export var poison_cooldown_duration := 20.0
-var _poison_cooldown_remaining := 0.0
+
 @onready var poison_cooldown_bar: ProgressBar = $"../CanvasLayer/PoisonCooldownBar"
 # ======================
 #        DASH
@@ -97,12 +109,29 @@ var _sword_instance: Node2D = null
 var _sword_active := false
 var _sword_timer: Timer
 
+
+
+
+
+
+
 @onready var punchs: AudioStreamPlayer2D = $punchs
 var _punch_variations := [0.5, 1.0, 1.5]
 # ======================
 #   FUNCIONES BÁSICAS
 # ======================
 func _ready() -> void:
+		# Configurar ProgressBar
+	veneno_couldown.min_value = 0
+	veneno_couldown.max_value = poison_max_charge
+	veneno_couldown.value = 0
+
+	# Configurar timer de carga
+	poison_timer.wait_time = 1.0  # cada segundo
+	poison_timer.one_shot = false
+	poison_timer.timeout.connect(_on_poison_timer_timeout)
+	add_child(poison_timer)
+	poison_timer.start()
 	randomize()
 	# ... lo que ya tienes ...
 	_disable_stream_loop(sonido_flotando)
@@ -248,6 +277,18 @@ func _handle_floating(delta: float) -> void:
 #   PROCESO PRINCIPAL
 # =====================
 func _physics_process(delta: float) -> void:
+	# si está listo pero aún no seleccionando → activar preludio
+	# Si está en cooldown → bajar la barra
+	if _poison_cooldown_remaining > 0:
+		_poison_cooldown_remaining = max(0.0, _poison_cooldown_remaining - delta)
+		veneno_couldown.value = _poison_cooldown_remaining
+
+		# Cuando termina el cooldown → volver a cargar
+		if _poison_cooldown_remaining <= 0:
+			poison_charge = 0
+			veneno_couldown.max_value = poison_max_charge
+			veneno_couldown.value = 0
+
 	if dead:
 		velocity = Vector2.ZERO
 		return
@@ -282,11 +323,11 @@ func _physics_process(delta: float) -> void:
 
 	# --- LÓGICA DE VENENO MEJORADA ---
 	# 1. Activar o cancelar el modo de apuntado
-	if Input.is_action_just_pressed("toggle_poison_aim_p2"):
-		if selecting_poison:
-			_cancel_poison_selection() # Si ya estamos apuntando, cancelamos.
-		elif not floating:
-			_enter_poison_selection() # Si no, entramos en el modo de apuntado.
+	#if Input.is_action_just_pressed("toggle_poison_aim_p2"):
+	#	if selecting_poison:
+		#	_cancel_poison_selection() # Si ya estamos apuntando, cancelamos.
+	#	elif not floating:
+		#	_enter_poison_selection() # Si no, entramos en el modo de apuntado.
 
 	# 2. Lógica mientras estamos apuntando
 	if selecting_poison and poison_preview:
@@ -782,10 +823,15 @@ func _enter_poison_selection() -> void:
 	poison_preview.add_child(sprite)	
 	get_tree().current_scene.add_child(poison_preview)
 	poison_preview.global_position = self.global_position + Vector2(60 * _facing, -30)	
-	
-func _cancel_poison_selection() -> void:
+# =========================
+# CANCELAR PRELUDIO
+# =========================
+func _cancel_poison_selection():
+	if is_instance_valid(poison_preview):
+		poison_preview.queue_free()
+	poison_preview = null
 	selecting_poison = false
-
+	
 	if is_instance_valid(poison_preview):
 		poison_preview.queue_free()
 		poison_preview = null
@@ -794,3 +840,67 @@ func _cancel_poison_selection() -> void:
 		animated_sprite.play("idle")
 		punch_left.visible = true
 		punch_right.visible = true
+		
+func _on_poison_timer_timeout():
+	# Solo cargar si no está en cooldown
+	if _poison_cooldown_remaining <= 0 and not poison_ready:
+		poison_charge = clamp(poison_charge + 1, 0, poison_max_charge)
+		veneno_couldown.max_value = poison_max_charge
+		veneno_couldown.value = poison_charge
+
+		if poison_charge >= poison_max_charge:
+			poison_ready = true
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("fired_2") and poison_ready:
+		if not poison_in_selection:
+			# Primera vez → activar preludio (preview/botella)
+			_enter_poison_selection()
+			poison_in_selection = true
+			print("🍾 Preludio de veneno activado")
+		else:
+			# Segunda vez → confirmar lanzamiento
+			_activate_poison()
+			_cancel_poison_selection()
+			# Reiniciar cooldown
+			poison_charge = 0
+			veneno_couldown.value = 0
+			poison_ready = false
+			poison_in_selection = false
+			print("☠️ Veneno lanzado, cooldown reiniciado")
+
+
+
+
+func _activate_poison() -> void:
+	if poison_area_scene == null or poison_preview == null:
+		return
+
+	var poison_instance = poison_area_scene.instantiate()
+	get_tree().current_scene.add_child(poison_instance)
+	poison_instance.global_position = poison_preview.global_position
+	print("☠️ Veneno lanzado en ", poison_instance.global_position)
+# =========================
+# COLOCAR EL VENENO
+# =========================
+
+func _place_poison_area():
+	var poison_instance = poison_area_scene.instantiate()
+	get_tree().current_scene.add_child(poison_instance)
+	poison_instance.global_position = poison_preview.global_position
+
+	_cancel_poison_selection()
+
+	# Resetear barra para cooldown
+	poison_ready = false
+	poison_charge = 0
+	_poison_cooldown_remaining = poison_cooldown_duration
+
+	veneno_couldown.max_value = poison_cooldown_duration
+	veneno_couldown.value = poison_cooldown_duration
+
+
+func _on_poison_charged():
+	poison_ready = true
+	print("✅ Veneno listo para usar")
