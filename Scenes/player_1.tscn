@@ -889,8 +889,6 @@ scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
 animation = &"death"
 
-[node name="UltiTimer" type="Timer" parent="."]
-
 [node name="Gun" parent="." instance=ExtResource("3_aatkl")]
 position = Vector2(17, 0)
 
@@ -908,4 +906,3 @@ volume_db = 24.0
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
 [connection signal="animation_finished" from="Visuals/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="timeout" from="UltiTimer" to="." method="_on_ulti_timer_timeout"]

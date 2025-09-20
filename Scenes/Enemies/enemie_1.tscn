@@ -105,6 +105,7 @@ shape = SubResource("CircleShape2D_08ug1")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_jto8a")
 
 [node name="gun_timer" type="Timer" parent="."]
