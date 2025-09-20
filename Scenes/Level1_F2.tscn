@@ -286,7 +286,6 @@ position = Vector2(50, 500)
 
 [node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
 position = Vector2(50, 400)
-poison_area_scene = null
 
 [node name="Portal_2" type="Node2D" parent="." groups=["portal"]]
 position = Vector2(2037, 76)
