@@ -1,12 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://cy7nosfcmj6l0"]
+[gd_scene load_steps=22 format=3 uid="uid://cy7nosfcmj6l0"]
 
 [ext_resource type="Script" uid="uid://dhr4nudsalkcc" path="res://Scripts/final_boss.gd" id="1_blxqn"]
-[ext_resource type="Texture2D" uid="uid://ckvb4w6t1iqik" path="res://Assets/art/sprites/Enemigos/FINALboz.png" id="1_xchk6"]
+[ext_resource type="Texture2D" uid="uid://myuuecrhgpfi" path="res://Assets/art/sprites/Enemigos/animacion golpe pollo/death_1.png" id="2_y3ron"]
+[ext_resource type="Texture2D" uid="uid://c705edopq286q" path="res://Assets/art/sprites/Enemigos/animacion golpe pollo/death_2.png" id="3_cdlae"]
 [ext_resource type="Texture2D" uid="uid://bkwhr777vossm" path="res://Assets/art/sprites/Particulas/explosion_1.png" id="4_8i2ud"]
+[ext_resource type="Texture2D" uid="uid://c65lr61k7wfdy" path="res://Assets/art/sprites/Enemigos/animacion golpe pollo/death_3.png" id="4_gu1ue"]
 [ext_resource type="Texture2D" uid="uid://duyl7dquawm65" path="res://Assets/art/sprites/Particulas/explosion_2.png" id="5_5uamw"]
+[ext_resource type="Texture2D" uid="uid://b1iqwtk5a8vgm" path="res://Assets/art/sprites/Enemigos/animacion golpe pollo/death_4.png" id="5_j8was"]
+[ext_resource type="Texture2D" uid="uid://ccfvct5yvy3y4" path="res://Assets/art/sprites/Enemigos/1.png" id="6_b4s0j"]
 [ext_resource type="Texture2D" uid="uid://cxclutw0k851d" path="res://Assets/art/sprites/Particulas/explosion_3.png" id="6_mxp2g"]
+[ext_resource type="Texture2D" uid="uid://bma6w4p6xhc1v" path="res://Assets/art/sprites/Enemigos/2.png" id="7_fqk3l"]
 [ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Assets/art/sprites/Particulas/explosion_4.png" id="7_wvg44"]
 [ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="8_nfcs1"]
+[ext_resource type="Texture2D" uid="uid://c48q81hv7dorh" path="res://Assets/art/sprites/Enemigos/3.png" id="8_xuwwk"]
+[ext_resource type="Texture2D" uid="uid://br0a1f6kw8a7e" path="res://Assets/art/sprites/Enemigos/4.png" id="9_3pttn"]
 [ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="9_l5jvj"]
 [ext_resource type="AudioStream" uid="uid://bmhyjsn2qfnwt" path="res://Assets/sfx/gross-slimy-goo-foley-2-164290.mp3" id="10_5uamw"]
 
@@ -14,11 +21,37 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_xchk6")
+"texture": ExtResource("2_y3ron")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cdlae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gu1ue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_j8was")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_b4s0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fqk3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xuwwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3pttn")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -68,6 +101,7 @@ script = ExtResource("1_blxqn")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_60rb2")
+frame_progress = 0.718333
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(15, -20)
@@ -91,6 +125,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar_boss" type="ProgressBar" parent="."]
+visible = false
 modulate = Color(1, 0.270588, 1, 1)
 offset_left = -103.333
 offset_top = -223.333
