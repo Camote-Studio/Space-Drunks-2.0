@@ -340,16 +340,13 @@ func _physics_process(delta: float) -> void:
 
 		# Confirmar y colocar el veneno (con A/X o click)
 		if (Input.is_action_just_pressed("veneno_activo") or Input.is_action_just_pressed("confirm_action_p2")):
-			var poison_instance = poison_area_scene.instantiate()
-			get_tree().current_scene.add_child(poison_instance)
-			poison_instance.global_position = poison_preview.global_position			
-			# Usamos la función de cancelar para limpiar todo
+			_activate_poison()
 			_cancel_poison_selection()
-
-		# Detenemos al personaje mientras apunta
-		velocity = Vector2.ZERO
-		move_and_slide()
-		return
+			poison_ready = false
+			poison_charge = 0
+			veneno_couldown.value = 0
+			poison_in_selection = false
+			veneno_couldown.value = 0
 
 
 	# --- Dirección
@@ -835,19 +832,25 @@ func _enter_poison_selection() -> void:
 # CANCELAR PRELUDIO
 # =========================
 func _cancel_poison_selection():
+	# Elimina preview si existe
 	if is_instance_valid(poison_preview):
 		poison_preview.queue_free()
 	poison_preview = null
-	selecting_poison = false
-	
-	if is_instance_valid(poison_preview):
-		poison_preview.queue_free()
-		poison_preview = null
 
+	selecting_poison = false
+
+	# Asegúrate de que los puños vuelvan a ser visibles
+	if has_node("Punch_left"):
+		$Punch_left.visible = true
+	if has_node("Punch_right"):
+		$Punch_right.visible = true
+
+	# Animación idle si estaba lanzando
 	if animated_sprite and animated_sprite.animation == "lanzar":
 		animated_sprite.play("idle")
-		punch_left.visible = true
-		punch_right.visible = true
+
+		
+		
 		
 func _on_poison_timer_timeout():
 	# Solo cargar si no está en cooldown
@@ -861,7 +864,7 @@ func _on_poison_timer_timeout():
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("fired_2") and poison_ready:
+	if event.is_action_pressed("area_veneno") and poison_ready:
 		if not poison_in_selection:
 			# Primera vez → activar preludio (preview/botella)
 			_enter_poison_selection()
@@ -889,7 +892,12 @@ func _activate_poison() -> void:
 	get_tree().current_scene.add_child(poison_instance)
 	poison_instance.global_position = poison_preview.global_position
 	print("☠️ Veneno lanzado en ", poison_instance.global_position)
-# =========================
+
+	# Aseguramos que los puños vuelvan a aparecer
+	_cancel_poison_selection()
+
+
+
 # COLOCAR EL VENENO
 # =========================
 

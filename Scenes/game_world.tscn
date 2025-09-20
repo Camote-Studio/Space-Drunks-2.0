@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dkt37yghdsm2q"]
+[gd_scene load_steps=60 format=3 uid="uid://dkt37yghdsm2q"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="6_f8pys"]
 [ext_resource type="Texture2D" uid="uid://capb2ldwe3yo7" path="res://Assets/art/background/MESAS1.png" id="6_gf2tg"]
 [ext_resource type="Texture2D" uid="uid://c0h4nq4245hx5" path="res://Assets/art/background/SILLA_MESA1.png" id="7_kpup2"]
+[ext_resource type="PackedScene" uid="uid://bcumd4ca72ik2" path="res://Scenes/PoisonArea.tscn" id="9_m7xit"]
 [ext_resource type="Script" uid="uid://cpufpisex7oqp" path="res://Scripts/Level1/portal.gd" id="10_nmac2"]
 [ext_resource type="Texture2D" uid="uid://bg7a0x7n1spia" path="res://Assets/art/sprites/Portales/portal.png" id="11_4asma"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="13_n6wrj"]
@@ -406,7 +407,7 @@ position = Vector2(221, 234)
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
 position = Vector2(305, 417)
-poison_area_scene = null
+poison_area_scene = ExtResource("9_m7xit")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 3
