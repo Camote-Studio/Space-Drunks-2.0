@@ -4,24 +4,23 @@ extends Area2D
 const ENEMY4 = preload("res://Scenes/enemie_4.tscn")
 
 @export var cam_path: NodePath
+@export var spawn_offset_x: float = 560.0  # distancia delante de la cámara
 
 # --------- FASE 1 ---------
 @export var phase1_max_spawns: int = 3
-@export var phase1_x_spawn: float = 1734.0
-@export var phase1_y_min: float = 330.0   # antes 204.0
+@export var phase1_y_min: float = 330.0
 @export var phase1_y_max: float = 480.0
 @export var x_after_phase1: float = 2999.0
 
 # --------- FASE 2 ---------
 @export var phase2_max_spawns: int = 3
-@export var phase2_x_spawn: float = 2999.0
 @export var phase2_y_min: float = 204.0
 @export var phase2_y_max: float = 482.0
 @export var x_after_phase2: float = 5132.0
 
 # Intervalo entre spawns dentro de cada fase
 @export var interval_min: float = 0.6
-@export var interval_max: float = 1
+@export var interval_max: float = 1.0
 
 # Estados
 enum { S_PHASE1, S_WAIT_CLEAR1, S_WAIT_CAM1, S_PHASE2, S_WAIT_CLEAR2, S_DONE }
@@ -52,19 +51,18 @@ func _ready() -> void:
 	if cam == null:
 		cam = get_tree().get_first_node_in_group("main_camera") as Camera2D
 
-	# Si tu cámara emite "reached_target(x)", nos conectamos
+	# Señal de cámara
 	if cam and not cam.is_connected("reached_target", Callable(self, "_on_cam_reached")):
 		_cam_has_signal = cam.connect("reached_target", Callable(self, "_on_cam_reached")) == OK
 	else:
-		_cam_has_signal = true  # si ya estaba conectada
+		_cam_has_signal = true
 
-	# Timer de spawn (usar el que tengas en la escena o crear uno)
+	# Timer
 	_timer = $spawn_timer if has_node("spawn_timer") else null
 	if _timer == null:
 		_timer = Timer.new()
 		_timer.name = "spawn_timer"
 		add_child(_timer)
-	# SIEMPRE one_shot para que no se dispare dos veces
 	_timer.one_shot = true
 	if not _timer.is_connected("timeout", Callable(self, "_on_spawn_timer_timeout")):
 		_timer.connect("timeout", Callable(self, "_on_spawn_timer_timeout"))
@@ -82,7 +80,7 @@ func _on_spawn_timer_timeout() -> void:
 			if spawned >= phase1_max_spawns:
 				state = S_WAIT_CLEAR1
 				return
-			_spawn_one(phase1_x_spawn, phase1_y_min, phase1_y_max)
+			_spawn_one(phase1_y_min, phase1_y_max)
 			spawned += 1
 			_timer.start(rng.randf_range(interval_min, interval_max))
 
@@ -90,12 +88,11 @@ func _on_spawn_timer_timeout() -> void:
 			if spawned >= phase2_max_spawns:
 				state = S_WAIT_CLEAR2
 				return
-			_spawn_one(phase2_x_spawn, phase2_y_min, phase2_y_max)
+			_spawn_one(phase2_y_min, phase2_y_max)
 			spawned += 1
 			_timer.start(rng.randf_range(interval_min, interval_max))
 
 		_:
-			# En otros estados no spawneamos
 			pass
 
 func _process(_dt: float) -> void:
@@ -111,15 +108,12 @@ func _process(_dt: float) -> void:
 				state = S_WAIT_CAM1
 
 		S_WAIT_CAM1:
-			# Si NO tenemos señal de la cámara, hacemos fallback por polling
 			if not _cam_has_signal and cam:
 				var moving := false
 				if cam.has_method("is_moving"):
 					moving = cam.is_moving()
-				else:
-					# leer propiedad "moving" si existe
-					if cam.has_method("get"):
-						moving = cam.get("moving") if cam.has_method("get") else false
+				elif cam.has_method("get"):
+					moving = cam.get("moving")
 				if not moving and abs(cam.global_position.x - x_after_phase1) < 1.0:
 					_start_phase2()
 
@@ -137,7 +131,6 @@ func _process(_dt: float) -> void:
 			pass
 
 func _on_cam_reached(x: float) -> void:
-	# Solo nos importa cuando esperamos a que llegue a x_after_phase1
 	if state == S_WAIT_CAM1 and abs(x - x_after_phase1) < 1.0:
 		_start_phase2()
 
@@ -146,12 +139,15 @@ func _start_phase2() -> void:
 	spawned = 0
 	_timer.start(rng.randf_range(interval_min, interval_max))
 
-func _spawn_one(x_spawn: float, y_min: float, y_max: float) -> void:
+func _spawn_one(y_min: float, y_max: float) -> void:
+	if cam == null:
+		return
 	var e = ENEMY4.instantiate()
 	var y := rng.randf_range(y_min, y_max)
-	e.global_position = Vector2(x_spawn, y)
+	# Spawn relativo a la cámara (más cerca de la acción)
+	var x := cam.global_position.x + spawn_offset_x
+	e.global_position = Vector2(x, y)
 	get_parent().add_child(e)
 
 func _alive_enemy4() -> int:
-	# Asegúrate que Enemy4 haga add_to_group("enemy_4")
 	return get_tree().get_nodes_in_group("enemy_4").size()

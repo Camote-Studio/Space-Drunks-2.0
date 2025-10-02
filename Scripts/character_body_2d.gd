@@ -147,7 +147,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				_start_dash(Vector2.RIGHT) # default
 
-	if Input.is_action_just_pressed("jump") and ulti_ready and not is_using_ulti:
+	if Input.is_action_just_pressed("jump") and ulti_ready and not is_using_ulti and not floating:
 		_activate_ulti()
 
 	# --- Animaciones solo si NO estamos en ulti y no muertos ---
@@ -287,13 +287,8 @@ func _handle_floating(delta: float) -> void:
 # ====================== FUNCIONES DE SOPORTE ============================= 
 func gain_ability_from_attack(damage_dealt: float) -> void:
 	# --- INICIO: Bloque de depuración ---
-	print("--- DEBUG: Intentando cargar barra ---")
-	print("-> ulti_ready actual: ", ulti_ready)
-	if not ulti_ready:
-		print("--> Condición CUMPLIDA. La barra debería cargar.")
-	else:
-		print("--> Condición NO CUMPLIDA. ¡Este es el problema!")
-	# --- FIN: Bloque de depuración ---
+
+
 	if dead or bar_ability_1 == null: return
 	
 	# 1. Comprobamos si podemos cargar la barra (si el ulti NO está listo)
@@ -304,7 +299,6 @@ func gain_ability_from_attack(damage_dealt: float) -> void:
 		# 3. Y AHORA, DENTRO de este bloque, comprobamos si ESA carga la llenó
 		if bar_ability_1.value >= bar_ability_1.max_value:
 			ulti_ready = true
-			print("🚀 ¡ULTI LISTO PARA USAR!")
 
 func gain_ability_from_shot() -> void:
 	if dead or bar_ability_1 == null: return
@@ -319,7 +313,6 @@ func gain_ability_from_shot() -> void:
 		# 3. Y comprobamos si se llenó
 		if bar_ability_1.value >= bar_ability_1.max_value:
 			ulti_ready = true
-			print("🚀 ¡ULTI LISTO PARA USAR!")
 
 func _power() -> void:
 	if dead or next_shot_powered: 
@@ -476,7 +469,7 @@ func _activate_ulti() -> void:
 
 	if gun:
 		gun.set_mode(gun.GunMode.TURRET)
-	print("🔥 Ulti ACTIVADA")
+
 	is_using_ulti = true
 	allow_input = false
 
@@ -496,13 +489,7 @@ func _activate_ulti() -> void:
 			push_warning("Animación 'ulti_pose' no existe en AnimatedSprite2D")
 
 func _deactivate_ulti() -> void:
-	# --- INICIO: Bloque de depuración ---
-	print("--- DEBUG: Desactivando Ulti ---")
-	print("-> Valor de la barra al entrar: ", bar_ability_1.value)
-	print("-> ulti_ready al entrar: ", ulti_ready)
-	print("-> is_using_ulti al entrar: ", is_using_ulti)
-	# --- FIN: Bloque de depuración ---
-	print("⏱️ Barra de Ulti agotada → regresando a normal")
+
 	is_using_ulti = false
 	allow_input = true
 	ulti_ready = false

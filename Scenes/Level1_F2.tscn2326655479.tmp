@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://82ef3cmon8x5"]
+[gd_scene load_steps=48 format=3 uid="uid://82ef3cmon8x5"]
 
 [ext_resource type="Script" uid="uid://dtj8n72t1er10" path="res://Scripts/Level2/Level1F2.gd" id="1_8fs40"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_i54yl"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://b3h6fo1lgsbnj" path="res://Scripts/portal_2.gd" id="6_2ltu8"]
 [ext_resource type="Texture2D" uid="uid://bg7a0x7n1spia" path="res://Assets/art/sprites/Portales/portal.png" id="6_wxuq6"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="7_e2b77"]
-[ext_resource type="PackedScene" uid="uid://bcumd4ca72ik2" path="res://Scenes/PoisonArea.tscn" id="8_5awdr"]
 [ext_resource type="PackedScene" uid="uid://b0djmgwpwxxuu" path="res://Scenes/enemy_spawn_3.tscn" id="8_wxuq6"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="9_xbg64"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="10_gdlfp"]
@@ -36,8 +35,6 @@
 [ext_resource type="Texture2D" uid="uid://c2wggx3w4wwt" path="res://Assets/art/background/BG2_TUBO.png" id="29_8fs40"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="31_jrhcu"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="34_d5vqw"]
-[ext_resource type="PackedScene" uid="uid://bq5usv3gkvmba" path="res://Scenes/Enemies/enemie_3.tscn" id="37_u8voy"]
-[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="38_oytlj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq78c"]
 size = Vector2(5558.5, 20)
@@ -224,8 +221,8 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d5vqw"]
 shader = ExtResource("10_gdlfp")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5vqw"]
-size = Vector2(49, 320)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8fs40"]
+shader = ExtResource("10_gdlfp")
 
 [node name="Level1F2" type="Node2D"]
 script = ExtResource("1_8fs40")
@@ -251,9 +248,8 @@ script = ExtResource("3_dfrea")
 polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
 
 [node name="PISO" type="Sprite2D" parent="."]
-z_index = -2
-position = Vector2(-282, 73)
-scale = Vector2(1.4685, 0.552941)
+position = Vector2(-279, 85)
+scale = Vector2(1.44925, 0.552941)
 texture = ExtResource("4_3dh15")
 centered = false
 
@@ -289,8 +285,7 @@ shape = SubResource("RectangleShape2D_e2b77")
 position = Vector2(50, 500)
 
 [node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
-position = Vector2(711, 490)
-poison_area_scene = ExtResource("8_5awdr")
+position = Vector2(50, 400)
 
 [node name="Portal_2" type="Node2D" parent="." groups=["portal"]]
 position = Vector2(2037, 76)
@@ -364,6 +359,19 @@ offset_left = 289.0
 offset_top = 69.0
 offset_right = 367.0
 offset_bottom = 85.0
+max_value = 200.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Veneno_p2" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.479864, 0.105582, 0.500942, 1)
+anchors_preset = -1
+anchor_top = -0.0169753
+anchor_bottom = -0.0169753
+offset_left = 291.0
+offset_top = 89.0
+offset_right = 384.0
+offset_bottom = 105.0
 max_value = 200.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
@@ -462,12 +470,9 @@ theme_override_fonts/font = ExtResource("26_6ftvt")
 theme_override_font_sizes/font_size = 33
 text = "0"
 
-[node name="OffscreenPeekHUD2" type="CanvasLayer" parent="CanvasLayer" node_paths=PackedStringArray("player1", "player2", "main_cam")]
+[node name="OffscreenPeekHUD2" type="CanvasLayer" parent="CanvasLayer"]
 layer = 3
 script = ExtResource("9_xbg64")
-player1 = NodePath("../../Player_1")
-player2 = NodePath("../../Player_2")
-main_cam = NodePath("../../Camera2D")
 
 [node name="Peek1" type="Control" parent="CanvasLayer/OffscreenPeekHUD2"]
 layout_mode = 3
@@ -524,44 +529,19 @@ metadata/_edit_use_anchors_ = true
 
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("28_d5vqw")]
 
-[node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0.487039, 0.591995, 0.0805549, 1)
-anchors_preset = -1
-anchor_top = -0.0169753
-anchor_bottom = -0.0169753
-offset_left = 97.0
-offset_top = 98.0
-offset_right = 190.0
-offset_bottom = 114.0
-show_percentage = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Veneno_p2" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0.479864, 0.105582, 0.500942, 1)
-anchors_preset = -1
-anchor_top = -0.0169753
-anchor_bottom = -0.0169753
-offset_left = 289.0
-offset_top = 100.0
-offset_right = 382.0
-offset_bottom = 116.0
-max_value = 200.0
-show_percentage = false
-metadata/_edit_use_anchors_ = true
-
 [node name="enemy_spawn_4" parent="." instance=ExtResource("22_gdlfp")]
 position = Vector2(19, -19)
 
 [node name="Bocinas" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(171, 605)
+position = Vector2(173, 589)
 scale = Vector2(0.264713, 0.266854)
 texture = ExtResource("25_gnd3l")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Bocinas"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bocinas/StaticBody2D2"]
-position = Vector2(3.7777, 7.49458)
+position = Vector2(1.38939, 3.204)
 polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 32.5, 97.5, 32.5, 115, 5, 115, -42.5, 105, -65, 85, -127.5, 65, -150, 42.5, -162.5, 10)
 
 [node name="Mesa" type="Sprite2D" parent="."]
@@ -608,14 +588,14 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Mesa2" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(646, 614)
+position = Vector2(642, 597)
 scale = Vector2(0.33169, 0.349788)
 texture = ExtResource("28_6ftvt")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Mesa2"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mesa2/StaticBody2D2"]
-position = Vector2(54.2675, 2.85868)
+position = Vector2(60.3075, -16.1885)
 scale = Vector2(1.76984, 0.903496)
 polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 32.5, 97.5, 29.9608, 124.909, 9.2433, 124.909, -43.4921, 128.599, -116.945, 117.531, -127.5, 65, -150, 42.5, -162.5, 10)
 
@@ -751,7 +731,7 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Mesa5" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(2010, 584)
+position = Vector2(2013, 548)
 scale = Vector2(0.289906, 0.444915)
 texture = ExtResource("28_6ftvt")
 
@@ -764,21 +744,21 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Mesa6" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(2350, 252)
+position = Vector2(2348, 272)
 scale = Vector2(0.284124, 0.411377)
 texture = ExtResource("28_6ftvt")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Mesa6"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mesa6/StaticBody2D2"]
-position = Vector2(59.8332, -34.0321)
+position = Vector2(60.3075, -28.6851)
 scale = Vector2(1.76984, 0.822991)
 polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 22.427, 73.2582, 5.47632, 73.2582, -14.2996, 67.7241, -51.0259, 73.2582, -113.178, 67.7241, -127.5, 65, -150, 42.5, -162.5, 10)
 
 [node name="Bocinas7" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(2694, 602)
-scale = Vector2(0.440191, 0.402247)
+position = Vector2(2722.3, 538.7)
+scale = Vector2(0.575598, 0.694382)
 texture = ExtResource("25_gnd3l")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Bocinas7"]
@@ -789,8 +769,8 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas8" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(2865, 606)
-scale = Vector2(0.331313, 0.372169)
+position = Vector2(2900.3, 623.7)
+scale = Vector2(0.331313, 0.482166)
 texture = ExtResource("25_gnd3l")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Bocinas8"]
@@ -801,12 +781,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas9" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(2993, 564)
-scale = Vector2(0.223996, 0.186555)
+position = Vector2(2925.3, 492.7)
+scale = Vector2(0.253256, 0.262997)
 texture = ExtResource("25_gnd3l")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Bocinas9"]
-position = Vector2(235.788, 155.959)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bocinas9/StaticBody2D2"]
 visible = false
@@ -814,14 +793,14 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Mesa7" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(2619, 263)
+position = Vector2(2620, 272)
 scale = Vector2(0.284124, 0.411377)
 texture = ExtResource("28_6ftvt")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Mesa7"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mesa7/StaticBody2D2"]
-position = Vector2(59.8332, -53.4789)
+position = Vector2(60.3075, -28.6851)
 scale = Vector2(1.76984, 0.822991)
 polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 22.427, 73.2582, 5.47632, 73.2582, -14.2996, 67.7241, -51.0259, 73.2582, -113.178, 67.7241, -127.5, 65, -150, 42.5, -162.5, 10)
 
@@ -883,29 +862,29 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Mesa8" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(3615, 581)
+position = Vector2(3727.68, 551.638)
 scale = Vector2(0.411557, 0.600161)
 texture = ExtResource("28_6ftvt")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Mesa8"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mesa8/StaticBody2D2"]
-position = Vector2(46.1659, -31.6581)
+position = Vector2(60.3075, -28.6851)
 scale = Vector2(1.76984, 0.822991)
-polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 31.5762, -99.205, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 22.427, 73.2582, 5.47632, 73.2582, -14.2996, 67.7241, -51.0259, 73.2582, -113.178, 67.7241, -127.5, 65, -150, 42.5, -162.5, 10)
+polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 22.427, 73.2582, 5.47632, 73.2582, -14.2996, 67.7241, -51.0259, 73.2582, -113.178, 67.7241, -127.5, 65, -150, 42.5, -162.5, 10)
 
 [node name="Mesa9" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(4199, 592)
-scale = Vector2(0.301735, 0.378184)
+position = Vector2(4142, 560)
+scale = Vector2(0.399244, 0.514843)
 texture = ExtResource("28_6ftvt")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Mesa9"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mesa9/StaticBody2D2"]
-position = Vector2(112.682, -63.4612)
+position = Vector2(60.3075, -28.6851)
 scale = Vector2(1.76984, 0.822991)
-polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 65.54, -48.194, -35.5791, -86.7493, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 22.427, 73.2582, 5.47632, 73.2582, -14.2996, 67.7241, -51.0259, 73.2582, -113.178, 67.7241, -127.5, 65, -150, 42.5, -162.5, 10)
+polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 22.427, 73.2582, 5.47632, 73.2582, -14.2996, 67.7241, -51.0259, 73.2582, -113.178, 67.7241, -127.5, 65, -150, 42.5, -162.5, 10)
 
 [node name="Tubo8" type="Sprite2D" parent="."]
 z_index = 3
@@ -950,27 +929,24 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas12" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(4654, 252)
+position = Vector2(4652, 312)
 scale = Vector2(0.430884, 0.455032)
 texture = ExtResource("25_gnd3l")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Bocinas12"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bocinas12/StaticBody2D2"]
-position = Vector2(-18.5665, -13.1859)
 polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 32.5, 97.5, 32.5, 115, 5, 115, -42.5, 105, -65, 85, -127.5, 65, -150, 42.5, -162.5, 10)
 
 [node name="Bocinas13" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(4957, 606.75)
-scale = Vector2(0.423445, 0.395131)
+position = Vector2(4963.5, 573.5)
+scale = Vector2(0.423445, 0.468165)
 texture = ExtResource("25_gnd3l")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Bocinas13"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bocinas13/StaticBody2D2"]
-position = Vector2(4.72432, 3.32094)
-scale = Vector2(1, 0.981577)
 polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5, 77.5, -102.5, 100, -97.5, 72.5, -75, 67.5, -65, 92.5, -17.5, 92.5, 2.5, 75, 42.5, 45, 72.5, 35, 72.5, 32.5, 97.5, 32.5, 115, 5, 115, -42.5, 105, -65, 85, -127.5, 65, -150, 42.5, -162.5, 10)
 
 [node name="Pausa" parent="." instance=ExtResource("31_jrhcu")]
@@ -978,25 +954,66 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 [node name="GameOver" parent="." instance=ExtResource("26_lsce1")]
 
 [node name="Sombras_transición" parent="." instance=ExtResource("34_d5vqw")]
-offset_left = 27.0
-offset_top = -20.0
-offset_right = 1181.0
-offset_bottom = 626.0
+offset_left = -76.0
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(5309, 461)
+[node name="OffscreenPeekHUD2" type="CanvasLayer" parent="." node_paths=PackedStringArray("player1", "player2", "main_cam")]
+layer = 3
+script = ExtResource("9_xbg64")
+player1 = NodePath("../Player_1")
+player2 = NodePath("../Player_2")
+main_cam = NodePath("../Camera2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(2.5, -6)
-shape = SubResource("RectangleShape2D_d5vqw")
+[node name="Peek1" type="Control" parent="OffscreenPeekHUD2"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
-[node name="enemie_3" parent="." instance=ExtResource("37_u8voy")]
-position = Vector2(1259, 305)
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD2/Peek1"]
+material = SubResource("ShaderMaterial_8fs40")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.275
+anchor_right = 0.25
+anchor_bottom = 0.275
+offset_top = 233.0
+offset_right = 110.0
+offset_bottom = 347.0
+metadata/_edit_use_anchors_ = true
 
-[node name="enemie_4" parent="." instance=ExtResource("37_u8voy")]
-position = Vector2(1216, 442)
+[node name="SVP1" type="SubViewport" parent="OffscreenPeekHUD2"]
+process_priority = 3
+transparent_bg = true
 
-[node name="enemie_2" parent="." instance=ExtResource("38_oytlj")]
-position = Vector2(-29, 543)
+[node name="PeekCamera1" type="Camera2D" parent="OffscreenPeekHUD2/SVP1"]
+
+[node name="SVP2" type="SubViewport" parent="OffscreenPeekHUD2"]
+transparent_bg = true
+
+[node name="PeekCamera2" type="Camera2D" parent="OffscreenPeekHUD2/SVP2"]
+
+[node name="Peek2" type="Control" parent="OffscreenPeekHUD2"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD2/Peek2"]
+material = SubResource("ShaderMaterial_8fs40")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.399375
+anchor_top = 0.525
+anchor_right = 0.399375
+anchor_bottom = 0.525
+offset_left = -5.975
+offset_top = 450.0
+offset_right = 104.025
+offset_bottom = 564.0
 
 [connection signal="body_entered" from="Portal_2/Area2D" to="Portal_2" method="_on_area_2d_body_entered"]

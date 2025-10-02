@@ -44,7 +44,6 @@ func _ready() -> void:
 	if cam:
 		last_cam_x = cam.global_position.x
 	set_process(true)
-	print("Enemy spawner listo, cámara:", cam)
 
 func _process(_delta: float) -> void:
 	if cam == null:
@@ -66,7 +65,6 @@ func _process(_delta: float) -> void:
 	if current_phase < phase_positions.size() and cam.global_position.x >= phase_positions[current_phase]:
 		if wave_active:
 			_stop_wave()
-		print("Cámara llegó a fase ", current_phase + 1)
 		current_phase += 1
 
 	last_cam_x = cam.global_position.x

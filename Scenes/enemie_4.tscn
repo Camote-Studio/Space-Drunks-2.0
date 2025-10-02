@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://batawvymfltb3"]
+[gd_scene load_steps=15 format=3 uid="uid://batawvymfltb3"]
 
 [ext_resource type="Texture2D" uid="uid://cv8kpsuyk8cko" path="res://Assets/art/sprites/Enemigos/ALien_Cuchillas.png" id="1_coqv0"]
 [ext_resource type="Script" uid="uid://cg6qf3lakb3u3" path="res://Scripts/enemie_4.gd" id="1_qes82"]
@@ -8,8 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cn7o86lwnw2ru" path="res://Assets/art/sprites/Particulas/explosion_4.png" id="6_v5ojg"]
 [ext_resource type="Texture2D" uid="uid://bresepnf51cdy" path="res://Assets/art/sprites/Particulas/explosion_5.png" id="7_2e22m"]
 [ext_resource type="Texture2D" uid="uid://cwnl465sbrvj3" path="res://Assets/art/sprites/Particulas/explosion_6.png" id="8_31sr6"]
-[ext_resource type="PackedScene" uid="uid://dpv3uo1xu4wsv" path="res://Scenes/gun__enemie_gravity.tscn" id="9_xlltn"]
+[ext_resource type="Texture2D" uid="uid://bj8kvsqukofap" path="res://Assets/art/sprites/Armas/gUN2.png" id="10_fbg5n"]
 [ext_resource type="AudioStream" uid="uid://cxt1byewr6l0x" path="res://Assets/music/laser-shot-ingame-230500.ogg" id="11_fbg5n"]
+[ext_resource type="AudioStream" uid="uid://hs5wadwnl64m" path="res://Assets/sfx/lasergun-35817_[cut_1sec].mp3" id="11_ix744"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8q5kh"]
 animations = [{
@@ -51,7 +52,7 @@ height = 48.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_puqnj"]
 radius = 29.0689
 
-[node name="enemie_4" type="CharacterBody2D" groups=["enemy_4"]]
+[node name="enemie_4" type="CharacterBody2D" groups=["enemies", "enemy_4"]]
 z_index = 4
 script = ExtResource("1_qes82")
 
@@ -93,8 +94,6 @@ show_percentage = false
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 
-[node name="Gun__enemie_gravity" parent="." instance=ExtResource("9_xlltn")]
-
 [node name="gun_timer" type="Timer" parent="."]
 wait_time = 4.5
 
@@ -106,6 +105,22 @@ volume_db = 9.85
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_fbg5n")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-3, 26)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("10_fbg5n")
+flip_h = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="laser" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_ix744")
+volume_db = 10.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-26, 23)
 
 [connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

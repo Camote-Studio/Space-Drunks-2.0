@@ -28,7 +28,6 @@ var poison_in_selection: bool = false
 
 # --- NUEVO: Variables de Cooldown para el Veneno ---
 
-@onready var poison_cooldown_bar: ProgressBar = $"../CanvasLayer/PoisonCooldownBar"
 # ======================
 #        DASH
 # ======================
@@ -665,7 +664,6 @@ func gain_ability_from_attack_2(damage_dealt: float) -> void:
 		# 2. Si con esa carga se llenó, lo marcamos como listo
 		if bar_ability_2.value >= bar_ability_2.max_value:
 			ulti_ready = true
-			print("🚀 ¡ULTI DEL JUGADOR 2 LISTO!")
 			# 3. YA NO llamamos a _start_ulti() aquí
 
 
@@ -869,7 +867,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			# Primera vez → activar preludio (preview/botella)
 			_enter_poison_selection()
 			poison_in_selection = true
-			print("🍾 Preludio de veneno activado")
 		else:
 			# Segunda vez → confirmar lanzamiento
 			_activate_poison()
@@ -879,7 +876,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			veneno_couldown.value = 0
 			poison_ready = false
 			poison_in_selection = false
-			print("☠️ Veneno lanzado, cooldown reiniciado")
 
 
 
@@ -891,7 +887,6 @@ func _activate_poison() -> void:
 	var poison_instance = poison_area_scene.instantiate()
 	get_tree().current_scene.add_child(poison_instance)
 	poison_instance.global_position = poison_preview.global_position
-	print("☠️ Veneno lanzado en ", poison_instance.global_position)
 
 	# Aseguramos que los puños vuelvan a aparecer
 	_cancel_poison_selection()
@@ -919,4 +914,3 @@ func _place_poison_area():
 
 func _on_poison_charged():
 	poison_ready = true
-	print("✅ Veneno listo para usar")

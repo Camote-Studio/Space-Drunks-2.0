@@ -87,7 +87,7 @@ _data = {
 &"hit": SubResource("Animation_8tpct")
 }
 
-[node name="Enemie_1" type="CharacterBody2D" groups=["enemy_1"]]
+[node name="Enemie_1" type="CharacterBody2D" groups=["enemies", "enemy_1"]]
 z_index = 2
 rotation = 0.736588
 script = ExtResource("1_k5ikt")

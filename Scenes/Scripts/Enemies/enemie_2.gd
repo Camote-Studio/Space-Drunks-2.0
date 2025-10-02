@@ -169,7 +169,6 @@ func _on_area_2d_area_entered(a: Area2D) -> void:
 			
 func _do_punch(dir: Vector2) -> void:
 	if target_in_range:
-		print("💥 Enemigo golpea al jugador con daño:", punch_damage)
 		target_in_range.emit_signal("damage", punch_damage)
 		if sfx_hit:
 			sfx_hit.pitch_scale = pitch_variations[rng.randi_range(0, pitch_variations.size() - 1)]

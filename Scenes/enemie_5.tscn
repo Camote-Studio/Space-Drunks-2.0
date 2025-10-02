@@ -52,7 +52,7 @@ height = 52.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_xqvy2"]
 radius = 39.0128
 
-[node name="enemie_5" type="CharacterBody2D" groups=["enemy_5"]]
+[node name="enemie_5" type="CharacterBody2D" groups=["enemies", "enemy_5"]]
 script = ExtResource("1_wc0u5")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
