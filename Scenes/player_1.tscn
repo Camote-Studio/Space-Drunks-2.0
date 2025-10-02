@@ -851,7 +851,7 @@ collision_mask = 3
 script = ExtResource("1_p0e4v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-27, 25)
+position = Vector2(-2, 15)
 shape = SubResource("CapsuleShape2D_yqug6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -884,16 +884,17 @@ volume_db = 20.0
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
-position = Vector2(2, 2.11758e-22)
+position = Vector2(2, 2.52435e-29)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
-animation = &"death"
+animation = &"caminar"
 
 [node name="Gun" parent="." instance=ExtResource("3_aatkl")]
 position = Vector2(17, 0)
 
 [node name="Laser" parent="." instance=ExtResource("185_e0wwm")]
 visible = false
+script = null
 
 [node name="audio_recarga" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("186_1arlc")
