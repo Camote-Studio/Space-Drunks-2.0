@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bgtlosh2hldab" path="res://Assets/art/sprites/Armas/Proyectiles/Dirk_Laser.png" id="2_2cboi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fe57j"]
-size = Vector2(118, 23.599998)
+size = Vector2(118, 23.6)
 
 [node name="Laser" type="Area2D"]
 script = ExtResource("1_xwoyh")

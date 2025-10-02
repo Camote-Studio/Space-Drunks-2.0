@@ -1003,7 +1003,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m887"]
-radius = 27.0
+radius = 33.0
 height = 86.0
 
 [sub_resource type="Animation" id="Animation_tb6cx"]
@@ -1070,10 +1070,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_prblm"]
-radius = 79.9001
+radius = 44.2923
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
-radius = 80.0694
+radius = 40.5518
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dfurs"]
 a = Vector2(-6.08382, 0.201834)
@@ -1091,7 +1091,6 @@ sprite_frames = SubResource("SpriteFrames_rn5h7")
 animation = &"lanzar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-1, 5)
 shape = SubResource("CapsuleShape2D_1m887")
 
@@ -1113,7 +1112,7 @@ autoplay = "explosion_death"
 [node name="venenoTimer" type="Timer" parent="."]
 
 [node name="Punch_left" type="Sprite2D" parent="." groups=["puño_player2"]]
-position = Vector2(-38, -21)
+position = Vector2(-31, -21)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("219_4x7fj")
 
@@ -1121,15 +1120,15 @@ texture = ExtResource("219_4x7fj")
 position = Vector2(6.66667, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_left/Area2D"]
-position = Vector2(3.33333, 2.5)
+position = Vector2(16.6667, 0)
 shape = SubResource("CircleShape2D_prblm")
 
 [node name="Punch_right" type="Sprite2D" parent="." groups=["puño_player2"]]
-position = Vector2(45, -20)
+position = Vector2(32, -21)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("220_58h14")
 
-[node name="Area2D" type="Area2D" parent="Punch_right"]
+[node name="Area2D" type="Area2D" parent="Punch_right" groups=["puño_player2"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_right/Area2D"]
 position = Vector2(-3.33333, -6.66667)

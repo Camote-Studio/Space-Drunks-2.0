@@ -56,7 +56,6 @@ var punch_base_dmg := {
 	"boss": 30.0
 }
 
-@onready var TimerUlti: Timer = $TimerUlti
 # --- Nodos ---
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
