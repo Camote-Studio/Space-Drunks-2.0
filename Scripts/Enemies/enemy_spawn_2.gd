@@ -44,7 +44,6 @@ func _ready() -> void:
 	if cam:
 		last_cam_x = cam.global_position.x
 	set_process(true)
-	print("Enemy spawner listo, cámara:", cam)
 
 func _process(_delta: float) -> void:
 	if cam == null:
@@ -66,7 +65,6 @@ func _process(_delta: float) -> void:
 	if current_phase < phase_positions.size() and cam.global_position.x >= phase_positions[current_phase]:
 		if wave_active:
 			_stop_wave()
-		print("Cámara llegó a fase ", current_phase + 1)
 		current_phase += 1
 
 	last_cam_x = cam.global_position.x
@@ -77,11 +75,9 @@ func _start_wave() -> void:
 	current_batch_id = 0
 	batch_alive = 0
 	inflight_scheduled = 0
-	print("Oleada iniciada (spawn activo)")
 
 func _stop_wave() -> void:
 	wave_active = false
-	print("Oleada detenida (spawn pausado)")
 
 # --- Spawning ---
 func _try_spawn_next_batch() -> void:
@@ -98,7 +94,6 @@ func _try_spawn_next_batch() -> void:
 	# Ahora se pueden spawnear hasta 2 enemigos a la vez
 	var to_spawn: int = min(rng.randi_range(1, 2), free_slots)
 	current_batch_id += 1
-	print("Spawning batch", current_batch_id, "- a spawnear:", to_spawn, "enemigos")
 
 	for i in range(to_spawn):
 		var delay := rng.randf_range(0.0, wave_spread)
@@ -115,7 +110,6 @@ func _spawn_delayed(delay: float, batch_id: int) -> void:
 
 	var spawn_pos := _get_valid_spawn_position()
 	if spawn_pos == Vector2.ZERO:
-		print("No se encontró posición válida para spawnear")
 		return
 
 	# --- Selección del enemigo con probabilidad ---
@@ -126,7 +120,6 @@ func _spawn_delayed(delay: float, batch_id: int) -> void:
 
 	alive_total += 1
 	batch_alive += 1
-	print("Enemigo spawned en", spawn_pos, "| Alive total:", alive_total, "| Batch alive:", batch_alive)
 
 	if e.has_signal("died") and not e.is_connected("died", Callable(self, "_on_enemy_died")):
 		e.connect("died", Callable(self, "_on_enemy_died").bind(batch_id))
@@ -166,9 +159,7 @@ func _on_enemy_died(batch_id: int) -> void:
 	enemies_dead += 1
 	if batch_id == current_batch_id:
 		batch_alive = max(0, batch_alive - 1)
-	print("Enemigo muerto | Alive:", alive_total, "| Dead:", enemies_dead, "| Batch alive:", batch_alive)
 
 func _on_enemy_tree_exited() -> void:
 	alive_total = max(0, alive_total - 1)
 	batch_alive = max(0, batch_alive - 1)
-	print("Enemigo salido del árbol | Alive:", alive_total, "| Batch alive:", batch_alive)

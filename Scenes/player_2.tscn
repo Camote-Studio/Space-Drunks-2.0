@@ -1070,10 +1070,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_prblm"]
-radius = 156.935
+radius = 79.9001
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
-radius = 153.333
+radius = 80.0694
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dfurs"]
 a = Vector2(-6.08382, 0.201834)

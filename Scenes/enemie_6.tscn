@@ -4,7 +4,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xmwxw"]
 
-[node name="enemie_spawn_6" type="Area2D"]
+[node name="enemie_spawn_6" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_nw487")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -80,7 +80,7 @@ func random_pitch_variations_gun():
 func _ready() -> void:
 	if bar_6:
 		bar_6.min_value = 0
-		bar_6.max_value = 150   # más vida
+		bar_6.max_value = 100  
 		bar_6.value = bar_6.max_value
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
@@ -264,6 +264,7 @@ func _on_damage(amount: float) -> void:
 	_process_hitstun(amount)
 
 	if not dead and bar_6 and bar_6.value <= bar_6.min_value:
+		$Sprite2D2.queue_free()
 		_die()
 
 func _process_hitstun(damage_amount: float) -> void:
@@ -287,7 +288,6 @@ func _process_hitstun(damage_amount: float) -> void:
 	var extended_duration = hitstun_duration + (_combo_count * 0.18)  # Extensión intermedia
 	_hitstun_timer.start(extended_duration)
 	
-	print("Combo Ranged x", _combo_count, " - Hitstun: ", extended_duration, "s")
 
 func _enter_hitstun() -> void:
 	if dead:
@@ -341,11 +341,8 @@ func _end_hitstun() -> void:
 	if not dead and sprite_2d and sprite_2d.sprite_frames.has_animation("idle"):
 		sprite_2d.play("idle")
 	
-	print("Hitstun Ranged terminado")
 
 func _reset_combo() -> void:
-	if _combo_count > 1:
-		print("Combo Ranged terminado: ", _combo_count, " golpes!")
 	_combo_count = 0
 
 func _screen_shake_effect_ranged() -> void:
@@ -395,6 +392,7 @@ func _die() -> void:
 
 func _on_sprite_2d_animation_finished() -> void:
 	if sprite_2d.animation == "explosion":
+		
 		if explosion_timer and explosion_timer.time_left > 0.0:
 			explosion_timer.stop()
 		if _is_shocked:
@@ -407,7 +405,9 @@ func _on_sprite_2d_animation_finished() -> void:
 				pass
 			_drop_coin()
 			reported_dead = true
+
 			emit_signal("died")
+			
 		queue_free()
 
 func _determine_killer() -> String:

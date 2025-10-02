@@ -351,7 +351,6 @@ func _process_hitstun(damage_amount: float) -> void:
 	var extended_duration = hitstun_duration + (_combo_count * 0.15)
 	_hitstun_timer.start(extended_duration)
 	
-	print("Combo Melee x", _combo_count, " - Hitstun: ", extended_duration, "s")
 
 func _enter_hitstun() -> void:
 	if dead:
@@ -409,7 +408,6 @@ func _end_hitstun() -> void:
 	if not dead and sprite_2d and sprite_2d.sprite_frames.has_animation("idle"):
 		sprite_2d.play("idle")
 	
-	print("Hitstun Melee terminado")
 
 func _cancel_current_attack() -> void:
 	# Cancela ataque en progreso

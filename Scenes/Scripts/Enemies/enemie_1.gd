@@ -216,7 +216,6 @@ func _update_target() -> void:
 				nearest = p
 	player = nearest
 func _drop_coin():
-	print("crear moneda")
 	var coin_instance = MONEDA.instantiate()
 	get_parent().add_child(coin_instance)
 	coin_instance.global_position = global_position

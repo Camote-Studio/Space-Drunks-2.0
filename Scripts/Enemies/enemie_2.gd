@@ -61,7 +61,11 @@ var _combo_count := 0
 var _original_color: Color
 var _hitstun_tween: Tween
 
-
+# === NUEVAS VARIABLES ===
+var random_move_dir := Vector2.ZERO
+var random_move_timer: Timer
+var random_move_chance := 0.1   # 10% probabilidad de moverse aleatorio mientras persigue
+var random_move_duration := 0.8 # cuánto dura el movimiento aleatorio
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi()%pitch_variations_gun.size()]
 	$hit.pitch_scale = random_pitch
@@ -110,56 +114,101 @@ func _ready() -> void:
 		sprite_2d.play("Idle")
 		
 	_ready_hitstun_system()
+		# Timer para cambiar movimiento aleatorio
+	random_move_timer = Timer.new()
+	random_move_timer.one_shot = true
+	add_child(random_move_timer)
+	random_move_timer.connect("timeout", Callable(self, "_end_random_move"))
+
+
+func _update_target() -> void:
+	# Actualiza la referencia al jugador más cercano (grupos "player" y "player_2")
+	var players := []
+	players += get_tree().get_nodes_in_group("player")
+	players += get_tree().get_nodes_in_group("player_2")
+	var nearest: CharacterBody2D = null
+	var nearest_dist := INF
+	for p in players:
+		if p and p is Node2D:
+			var d := global_position.distance_to(p.global_position)
+			if d < nearest_dist:
+				nearest_dist = d
+				nearest = p
+	player = nearest
 
 func _physics_process(delta: float) -> void:
 	_update_target()
-	if dead or player == null:
+
+	# Si enemigo está muerto, no hace nada
+	if dead:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 
-	var to_player := player.global_position - global_position
-	var dist := to_player.length()
-	var dir := to_player.normalized()
-	var tangent := Vector2(-dir.y, dir.x)
+	# === CASO 1: TIENE JUGADOR DETECTADO ===
+	if player != null:
+		var to_player := player.global_position - global_position
+		var dist := to_player.length()
+		var dir := Vector2.ZERO
+		if dist > 0.0:
+			dir = to_player / dist
+		var tangent := Vector2(-dir.y, dir.x)
 
-	walk_phase += delta
-	var calm = clamp((dist - calm_end) / max(1.0, calm_start - calm_end), 0.12, 1.0)
+		# Oscilaciones orgánicas
+		walk_phase += delta
+		var calm = clamp((dist - calm_end) / max(1.0, calm_start - calm_end), 0.12, 1.0)
+		var offset = tangent * (sin(walk_phase * TAU * walk_freq + walk_seed) * side_amp * calm)
+		offset += Vector2(0, 1) * (sin(walk_phase * TAU * up_freq + walk_seed * 0.73) * up_amp * calm)
 
-	var offset = tangent * (sin(walk_phase * TAU * walk_freq + walk_seed) * side_amp * calm)
-	offset += Vector2(0, 1) * (sin(walk_phase * TAU * up_freq + walk_seed * 0.73) * up_amp * calm)
+		if _in_hitstun:
+			offset *= 0.3
+			calm *= 0.3
 
-	# === MODIFICACIÓN: Movimiento reducido durante hitstun ===
-	var movement_multiplier = 1.0
-	if _in_hitstun:
-		movement_multiplier = 0.2  # 20% velocidad durante hitstun (muy lento)
-		# Durante hitstun, reducir también las oscilaciones
-		offset *= 0.3
-		calm *= 0.3
+		# Desviación aleatoria pequeña
+		var deviation := Vector2.ZERO
+		if rng.randf() < random_move_chance:
+			deviation = Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0)).normalized() * 0.35
 
-	var target_vel := Vector2.ZERO
-	if _attack_lock:
-		target_vel = Vector2.ZERO
+		var target_vel := Vector2.ZERO
+		if not _attack_lock:
+			var base_dir := dir
+			var mixed := base_dir + deviation
+			if mixed.length() > 0.0:
+				base_dir = mixed.normalized()
+
+			if dist > max_range:
+				target_vel = base_dir * speed + offset
+			elif dist < min_range:
+				target_vel = base_dir * (speed * 0.15) + offset * 0.25
+			else:
+				target_vel = base_dir * (speed * 0.35) + offset * 0.6
+
+			if target_vel.length() > speed:
+				target_vel = target_vel.normalized() * speed
+
+		velocity = velocity.move_toward(target_vel, accel * delta)
+
+		if sprite_2d:
+			sprite_2d.flip_h = dir.x > 0.0
+
+		move_and_slide()
+
+		# Intentar atacar
+		if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not _in_hitstun:
+			_do_punch(dir)
+
+	# === CASO 2: NO HAY JUGADOR DETECTADO (PATRULLA ALEATORIA) ===
 	else:
-		if dist > max_range:
-			target_vel = dir * speed + offset
-		elif dist < min_range:
-			target_vel = dir * (speed * 0.15) + offset * 0.25
+		if random_move_dir == Vector2.ZERO and not random_move_timer.is_stopped():
+			# ya está esperando al siguiente movimiento -> quedarse quieto un momento
+			velocity = Vector2.ZERO
 		else:
-			target_vel = dir * (speed * 0.35) + offset * 0.6
-		if target_vel.length() > speed:
-			target_vel = target_vel.normalized() * speed
+			# si no tiene dirección, iniciar movimiento aleatorio
+			if random_move_dir == Vector2.ZERO:
+				_start_random_move()
+			velocity = random_move_dir * (speed * 0.4)  # patrulla más lento que persecución
 
-	velocity = velocity.move_toward(target_vel, accel * delta)
-	rotation = 0.0
-	
-	# 👀 Corrección aquí:
-	sprite_2d.flip_h = dir.x > 0.0
-
-	move_and_slide()
-
-	if dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 and not dead and not _in_hitstun:
-		_do_punch(dir)
+		move_and_slide()
 
 
 func _drop_coin():
@@ -328,20 +377,6 @@ func _on_explosion_timer_timeout() -> void:
 		emit_signal("died")
 	queue_free()
 
-func _update_target() -> void:
-	var players := []
-	players += get_tree().get_nodes_in_group("player")
-	players += get_tree().get_nodes_in_group("player_2")
-	var nearest: CharacterBody2D = null
-	var nearest_dist := INF
-	for p in players:
-		if p and p is Node2D:
-			var dist = global_position.distance_to(p.global_position)
-			if dist < nearest_dist:
-				nearest_dist = dist
-				nearest = p
-	player = nearest
-	
 func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 	if dead:
 		return
@@ -487,3 +522,11 @@ func _screen_shake_effect_melee() -> void:
 		var offset = Vector2(randf_range(-5, 5), randf_range(-5, 5))  # Más intenso
 		shake_tween.tween_property(sprite_2d, "position", original_pos + offset, 0.04)
 		shake_tween.tween_property(sprite_2d, "position", original_pos, 0.04)
+func _start_random_move() -> void:
+	random_move_dir = Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
+	random_move_timer.start(random_move_duration)
+
+func _end_random_move() -> void:
+	random_move_dir = Vector2.ZERO
+	# después de quedarse quieto un poco, inicia nuevo movimiento
+	_start_random_move()
