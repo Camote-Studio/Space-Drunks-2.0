@@ -74,6 +74,21 @@ var power_bullet_extra_damage := 20.0
 func _ready() -> void:
 	_disable_stream_loop(sonido_flotando)
 
+	# --- Recuperar monedas ---
+	coins = GameState.get_coins(player_id)
+	GameState.set_coins(player_id, coins)
+	if coin_label:
+		coin_label.text = str(coins)
+
+# --- Recuperar vida ---
+	var vida_guardada = GameState.get_vida(player_id)
+
+	if vida_guardada <= 0:
+		bar.value = bar.max_value   # vida completa al empezar el juego
+		GameState.set_vida(player_id, bar.value)
+	else:
+		bar.value = vida_guardada   # continuar con la vida guardada
+
 
 	# Configuración de timers
 	if gun:
@@ -210,6 +225,7 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 
 	if bar:
 		bar.value = clamp(bar.value - amount, bar.min_value, bar.max_value)
+		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
 		if bar.value <= bar.min_value:
 			_die()
 			return
@@ -384,6 +400,7 @@ func collect_coin(amount: int = 1) -> void:
 	GameState.set_coins(player_id, coins)
 	if coins >= 20:
 		bar.value = clamp(bar.value + 200, bar.min_value, bar.max_value)
+		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
 		#_show_shop()
 		coins = 0
 		if coin_label:
