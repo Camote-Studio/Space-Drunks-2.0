@@ -150,7 +150,15 @@ func _ready() -> void:
 		coin_label.text = str(coins)
 	else:
 		push_error("⚠️ No se encontró el nodo Label de monedas en el árbol de nodos.")
+	# --- Recuperar vida ---
+	var vida_guardada = GameState.get_vida(player_id)
 
+	if vida_guardada <= 0:
+		# 🔹 Si estaba en 0 o menos, darle 30 de vida
+		bar.value = bar.max_value
+		GameState.set_vida(player_id, bar.value)
+	else:
+		bar.value = vida_guardada
 	if bar_ability_2:
 		bar_ability_2.min_value = 0
 		bar_ability_2.max_value = 150
@@ -298,6 +306,7 @@ func _physics_process(delta: float) -> void:
 		if bar:
 			var regen = 20 * delta
 			bar.value = min(bar.value + regen, bar.max_value)
+			GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
 
 		# Si la barra se agota, desactivar el ulti
 		if bar_ability_2.value <= 0:
@@ -443,6 +452,7 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 
 	if bar:
 		bar.value = clamp(bar.value - amount, bar.min_value, bar.max_value)
+		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
 		if bar.value <= bar.min_value:
 			_die()
 			return
@@ -528,6 +538,7 @@ func collect_coin(amount: int = 1) -> void:
 	GameState.set_coins(player_id, coins)
 	if coins >= 20:
 		bar.value = clamp(bar.value + 200, bar.min_value, bar.max_value)
+		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
 		#_show_shop()
 		coins = 0
 		if coin_label:
@@ -761,6 +772,7 @@ func _process(delta: float) -> void:
 	if ulti_active and bar:
 		var regen = 20 * delta  # Ajusta la velocidad de regeneración
 		bar.value = min(bar.value + regen, bar.max_value)
+		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
 
 func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
 	if player == null:
