@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://stt7obo8thv8"]
+
+[ext_resource type="Script" uid="uid://cfq3gorvgw0la" path="res://Scenes/robot_npc.gd" id="1_i6gwy"]
+[ext_resource type="Texture2D" uid="uid://de6q7x5ekdvod" path="res://Assets/art/robot/robo5.png" id="2_p88qv"]
+[ext_resource type="Texture2D" uid="uid://bh1joor7irwil" path="res://Assets/art/robot/robot1.png" id="3_l1er6"]
+[ext_resource type="Texture2D" uid="uid://bsuow0ggtnh84" path="res://Assets/art/robot/robot2.png" id="4_uscln"]
+[ext_resource type="Texture2D" uid="uid://xg4tso4uecw0" path="res://Assets/art/robot/robot3.png" id="5_yjnf5"]
+[ext_resource type="Texture2D" uid="uid://djne1yl8ltxxw" path="res://Assets/art/robot/robot4.png" id="6_2v0ib"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x7v8b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p88qv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l1er6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uscln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yjnf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2v0ib")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 40.0
+}]
+
+[node name="RobotNpc" type="Node2D"]
+script = ExtResource("1_i6gwy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 4)
+scale = Vector2(0.30694, 0.400032)
+sprite_frames = SubResource("SpriteFrames_x7v8b")
+animation = &"idle"

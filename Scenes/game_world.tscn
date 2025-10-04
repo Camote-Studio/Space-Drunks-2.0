@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dkt37yghdsm2q"]
+[gd_scene load_steps=64 format=3 uid="uid://dkt37yghdsm2q"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -45,6 +45,9 @@
 [ext_resource type="PackedScene" uid="uid://bkguq30cybuhk" path="res://Scenes/alien_fondo.tscn" id="43_cjtyq"]
 [ext_resource type="PackedScene" uid="uid://cxsmi37r8jgfg" path="res://Scenes/bender_fondo.tscn" id="44_pjdg7"]
 [ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/enemie_1.tscn" id="45_m7xit"]
+[ext_resource type="PackedScene" uid="uid://rc0ffrli8ngm" path="res://Scenes/predator_npc.tscn" id="46_qhnxb"]
+[ext_resource type="PackedScene" uid="uid://stt7obo8thv8" path="res://Scenes/robot_npc.tscn" id="47_0h5a3"]
+[ext_resource type="PackedScene" uid="uid://dqcwjwglrlg6i" path="res://Scenes/alien_feliz.tscn" id="48_c7seg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5765, 20)
@@ -767,7 +770,7 @@ script = ExtResource("13_n6wrj")
 
 [node name="ScaredBackgroundCharacter" parent="." instance=ExtResource("39_p5xse")]
 z_index = 3
-position = Vector2(1415, 152)
+position = Vector2(1657, 144)
 
 [node name="RickFondo" parent="." instance=ExtResource("40_6kdy0")]
 position = Vector2(2154, 160)
@@ -776,7 +779,7 @@ position = Vector2(2154, 160)
 position = Vector2(3222, 115)
 
 [node name="MartinFondo" parent="." instance=ExtResource("42_7hocu")]
-position = Vector2(506, 110)
+position = Vector2(310, 127)
 
 [node name="AlienFondo" parent="." instance=ExtResource("43_cjtyq")]
 position = Vector2(4081, 176)
@@ -817,6 +820,17 @@ position = Vector2(727, 392)
 
 [node name="enemie_7" parent="." instance=ExtResource("38_p5xse")]
 position = Vector2(748, 484)
+
+[node name="PredatorNpc" parent="." instance=ExtResource("46_qhnxb")]
+position = Vector2(1231, 147)
+
+[node name="RobotNpc" parent="." instance=ExtResource("47_0h5a3")]
+position = Vector2(2594, 550)
+scale = Vector2(0.709635, 0.877434)
+
+[node name="AlienFeliz" parent="." instance=ExtResource("48_c7seg")]
+position = Vector2(1484, 596)
+scale = Vector2(0.969607, 1.46611)
 
 [connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
 [connection signal="body_entered" from="final_nivel" to="." method="_on_final_nivel_body_entered"]
