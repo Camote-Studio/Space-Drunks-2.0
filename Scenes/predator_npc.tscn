@@ -1,0 +1,117 @@
+[gd_scene load_steps=27 format=3 uid="uid://rc0ffrli8ngm"]
+
+[ext_resource type="Script" uid="uid://bn8ijomdbyn4v" path="res://Scenes/predator_npc.gd" id="1_5is78"]
+[ext_resource type="Texture2D" uid="uid://c5so5u4507jgf" path="res://Assets/art/predator_fondo/pre_01.png" id="2_ao05j"]
+[ext_resource type="Texture2D" uid="uid://3sfkrei8wq43" path="res://Assets/art/predator_fondo/pre_02.png" id="3_ff07d"]
+[ext_resource type="Texture2D" uid="uid://d4ak7dmlb7pg8" path="res://Assets/art/predator_fondo/pre_03.png" id="4_ieykj"]
+[ext_resource type="Texture2D" uid="uid://cvvsw5qu1acoq" path="res://Assets/art/predator_fondo/pre_04.png" id="5_5215v"]
+[ext_resource type="Texture2D" uid="uid://dn12a52ovwttt" path="res://Assets/art/predator_fondo/pre_05.png" id="6_0bims"]
+[ext_resource type="Texture2D" uid="uid://b1s1qgyqmudke" path="res://Assets/art/predator_fondo/pre_06.png" id="7_5aghf"]
+[ext_resource type="Texture2D" uid="uid://b1sndx6ln1fnl" path="res://Assets/art/predator_fondo/pre_07.png" id="8_k4opq"]
+[ext_resource type="Texture2D" uid="uid://co4ogqlji6yp2" path="res://Assets/art/predator_fondo/pre_08.png" id="9_8rmjp"]
+[ext_resource type="Texture2D" uid="uid://bt4na75c864nf" path="res://Assets/art/predator_fondo/pre_09.png" id="10_afnnj"]
+[ext_resource type="Texture2D" uid="uid://bo53rxqj2q44o" path="res://Assets/art/predator_fondo/pre_010.png" id="11_b5put"]
+[ext_resource type="Texture2D" uid="uid://budhyx6idfvdm" path="res://Assets/art/predator_fondo/pre_011.png" id="12_o6j68"]
+[ext_resource type="Texture2D" uid="uid://cp4mpe1hw3su3" path="res://Assets/art/predator_fondo/pre_012.png" id="13_4xjk1"]
+[ext_resource type="Texture2D" uid="uid://dsofipv4dqbge" path="res://Assets/art/predator_fondo/pre_013.png" id="14_7jt65"]
+[ext_resource type="Texture2D" uid="uid://cxwhk7yunjw3l" path="res://Assets/art/predator_fondo/pre_014.png" id="15_j5n81"]
+[ext_resource type="Texture2D" uid="uid://b50pd76uye1d7" path="res://Assets/art/predator_fondo/pre_015.png" id="16_5e80k"]
+[ext_resource type="Texture2D" uid="uid://ge70y3358xbv" path="res://Assets/art/predator_fondo/pre_016.png" id="17_xgpq0"]
+[ext_resource type="Texture2D" uid="uid://byirbjpyp5l4m" path="res://Assets/art/predator_fondo/pre_017.png" id="18_p1e1q"]
+[ext_resource type="Texture2D" uid="uid://dh4tuu7ldo2s3" path="res://Assets/art/predator_fondo/pre_018.png" id="19_5oipw"]
+[ext_resource type="Texture2D" uid="uid://71y24lvkwxt0" path="res://Assets/art/predator_fondo/pre_019.png" id="20_mdyf4"]
+[ext_resource type="Texture2D" uid="uid://c3oo7tbthdb68" path="res://Assets/art/predator_fondo/pre_020.png" id="21_xeum1"]
+[ext_resource type="Texture2D" uid="uid://cfywoc7162df7" path="res://Assets/art/predator_fondo/pre_021.png" id="22_lttcu"]
+[ext_resource type="Texture2D" uid="uid://bf8a2ay618egt" path="res://Assets/art/predator_fondo/pre_022.png" id="23_ppgl3"]
+[ext_resource type="Texture2D" uid="uid://c0t8x1u8yhdch" path="res://Assets/art/predator_fondo/pre_023.png" id="24_bs2wr"]
+[ext_resource type="Texture2D" uid="uid://c1hxbmwjyt1tl" path="res://Assets/art/predator_fondo/pre_024.png" id="25_s3cpb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fwdwi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ao05j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ff07d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ieykj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5215v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0bims")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5aghf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_k4opq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_8rmjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_afnnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b5put")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_o6j68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4xjk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7jt65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_j5n81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_5e80k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_xgpq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_p1e1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5oipw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_mdyf4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_xeum1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_lttcu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ppgl3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_bs2wr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_s3cpb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="PredatorNpc" type="Node2D"]
+script = ExtResource("1_5is78")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 13.625)
+scale = Vector2(0.714521, 0.53394)
+sprite_frames = SubResource("SpriteFrames_fwdwi")
+animation = &"idle"
+frame_progress = 0.535528
