@@ -819,25 +819,31 @@ func _play_punch_sfx() -> void:
 		punchs.pitch_scale = p
 		punchs.play()
 		
-
 func _enter_poison_selection() -> void:
+	# Protecciones: no permitir si muerto, sin input o flotando
+	if dead or not allow_input or floating:
+		return
+
 	selecting_poison = true
-	poison_preview = Node2D.new()	
-	
+	poison_preview = Node2D.new()
+
 	if animated_sprite:
 		animated_sprite.play("lanzar")
-		punch_left.visible = false
-		punch_right.visible = false
+		if has_node("Punch_left"):
+			$Punch_left.visible = false
+		if has_node("Punch_right"):
+			$Punch_right.visible = false
 
 	# Crear el sprite de preview
 	var sprite := Sprite2D.new()
 	sprite.texture = preload("res://Assets/art/sprites/Particulas/botella2.png")
 	sprite.scale = Vector2(1.5, 1.5)
 	sprite.centered = true
-	poison_preview.add_child(sprite)	
+	poison_preview.add_child(sprite)
 	get_tree().current_scene.add_child(poison_preview)
-	poison_preview.global_position = self.global_position + Vector2(60 * _facing, -30)	
-# =========================
+	poison_preview.global_position = self.global_position + Vector2(60 * _facing, -30)
+
+
 # CANCELAR PRELUDIO
 # =========================
 func _cancel_poison_selection():

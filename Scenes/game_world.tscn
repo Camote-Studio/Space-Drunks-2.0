@@ -800,5 +800,23 @@ position = Vector2(874, 454)
 [node name="Enemie_4" parent="." instance=ExtResource("45_m7xit")]
 position = Vector2(503, 534)
 
+[node name="enemie_2" parent="." instance=ExtResource("38_p5xse")]
+position = Vector2(441, 293)
+
+[node name="enemie_3" parent="." instance=ExtResource("38_p5xse")]
+position = Vector2(204, 518)
+
+[node name="enemie_4" parent="." instance=ExtResource("38_p5xse")]
+position = Vector2(505, 416)
+
+[node name="enemie_5" parent="." instance=ExtResource("38_p5xse")]
+position = Vector2(659, 496)
+
+[node name="enemie_6" parent="." instance=ExtResource("38_p5xse")]
+position = Vector2(727, 392)
+
+[node name="enemie_7" parent="." instance=ExtResource("38_p5xse")]
+position = Vector2(748, 484)
+
 [connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
 [connection signal="body_entered" from="final_nivel" to="." method="_on_final_nivel_body_entered"]
