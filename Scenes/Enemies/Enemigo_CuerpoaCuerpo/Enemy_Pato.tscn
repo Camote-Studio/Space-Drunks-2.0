@@ -1,0 +1,147 @@
+[gd_scene load_steps=22 format=3 uid="uid://ct0hclkx0o8kc"]
+
+[ext_resource type="Script" uid="uid://mekrbrac0ty5" path="res://Scripts/Enemies/enemie_2.gd" id="1_8rmgh"]
+[ext_resource type="AudioStream" uid="uid://cmp0uxkr0orbl" path="res://Assets/sfx/506326__thevoicesgames__retro-explosion-1.wav" id="2_0p751"]
+[ext_resource type="Texture2D" uid="uid://xy07fhawgyea" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 00.png" id="3_dytav"]
+[ext_resource type="Texture2D" uid="uid://bcq5fjlrfqens" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 01.png" id="4_jef3d"]
+[ext_resource type="Texture2D" uid="uid://dlcgljy53wdfi" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 02.png" id="5_ckud3"]
+[ext_resource type="Texture2D" uid="uid://cdvivhlspbic0" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 03.png" id="6_mtqu6"]
+[ext_resource type="Texture2D" uid="uid://dneuh2s2n4hub" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 04.png" id="7_d3h3m"]
+[ext_resource type="Texture2D" uid="uid://brwap34ykjkew" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 05.png" id="8_cbeb2"]
+[ext_resource type="Texture2D" uid="uid://dlvccr2mixsh6" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 06.png" id="9_7mb74"]
+[ext_resource type="Texture2D" uid="uid://cv2v3jx68l15e" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 07.png" id="10_d32jm"]
+[ext_resource type="Texture2D" uid="uid://d0xog5e56vxis" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 08.png" id="11_ucgpj"]
+[ext_resource type="Texture2D" uid="uid://c0aktrmmjqckh" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 09.png" id="12_4lp0s"]
+[ext_resource type="Texture2D" uid="uid://tek7ixsrqn7j" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 10.png" id="13_bc0tw"]
+[ext_resource type="Texture2D" uid="uid://lt6gdh5cb1a3" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 11.png" id="14_ilgeu"]
+[ext_resource type="Texture2D" uid="uid://bwaduncm7wrsp" path="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 12.png" id="15_3omuq"]
+[ext_resource type="Texture2D" uid="uid://cfri5nehve6yh" path="res://Assets/art/sprites/Enemigos/DukaLIEN_1_g0.png" id="16_gvf1i"]
+[ext_resource type="Texture2D" uid="uid://3mcvlhfsf62k" path="res://Assets/art/sprites/Enemigos/DukaLIEN_1_g1.png" id="17_553ux"]
+[ext_resource type="AudioStream" uid="uid://bsmninlvow06v" path="res://Assets/music/punch-03-352040.ogg" id="18_2e4qu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vcbv"]
+radius = 15.0
+height = 44.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_htokm"]
+radius = 28.0179
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ul8mi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dytav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jef3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ckud3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mtqu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d3h3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_cbeb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7mb74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_d32jm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ucgpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4lp0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_bc0tw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ilgeu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3omuq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_gvf1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_553ux")
+}],
+"loop": true,
+"name": &"golpe",
+"speed": 5.0
+}]
+
+[node name="enemie_2" type="CharacterBody2D" groups=["enemy_2"]]
+z_index = 1
+script = ExtResource("1_8rmgh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_1vcbv")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.4168, 1.59882)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_htokm")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+texture_filter = 1
+offset_left = -23.0
+offset_top = -67.0
+offset_right = 17.0
+offset_bottom = -44.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="ProgressBar_enemy_2" type="ProgressBar" parent="."]
+visible = false
+offset_left = -34.0
+offset_top = -56.0
+offset_right = 32.0
+offset_bottom = -45.0
+value = 100.0
+show_percentage = false
+
+[node name="explosion_timer" type="Timer" parent="."]
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_0p751")
+volume_db = 10.0
+
+[node name="Punch_timer" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 3)
+scale = Vector2(0.45663, 0.461583)
+sprite_frames = SubResource("SpriteFrames_ul8mi")
+animation = &"golpe"
+frame_progress = 0.671955
+flip_h = true
+
+[node name="ataque_golpe" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_2e4qu")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="explosion_timer" to="." method="_on_explosion_timer_timeout"]
+[connection signal="timeout" from="Punch_timer" to="." method="_on_punch_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

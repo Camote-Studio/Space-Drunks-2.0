@@ -1,7 +1,7 @@
 extends Area2D
 
 # Cambia esta ruta si tu escena del enemigo 4 está en otra carpeta
-const ENEMY4 = preload("res://Scenes/enemie_4.tscn")
+const ENEMY4 = preload("res://Scenes/Enemies/Enemigo_Distancia/Enemy_AlienGravedad.tscn")
 
 @export var cam_path: NodePath
 @export var spawn_offset_x: float = 560.0  # distancia delante de la cámara

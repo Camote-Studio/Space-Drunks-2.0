@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dr3ph5ptlxpbf" path="res://Assets/art/background/Menu/111.png" id="6_i7q02"]
 [ext_resource type="Shader" uid="uid://com58ff036i8q" path="res://Scripts/Shaders/Menu.gdshader" id="7_i7q02"]
 [ext_resource type="Texture2D" uid="uid://d3s5oalc3sbaj" path="res://Assets/art/background/Menu/2.png" id="7_mm3o3"]
-[ext_resource type="Script" uid="uid://dc3qawe6568dg" path="res://Scenes/Scripts/Shaders/Shader_Menu.gd" id="8_mm3o3"]
+[ext_resource type="Script" uid="uid://dc3qawe6568dg" path="res://Scripts/Shaders/Shader_Menu.gd" id="8_mm3o3"]
 [ext_resource type="Texture2D" uid="uid://dq21b1oy4geks" path="res://Assets/art/sprites/Interfaz/botella_1.png" id="9_mm3o3"]
 [ext_resource type="Texture2D" uid="uid://c4tjccgcl8xd" path="res://Assets/art/sprites/Interfaz/botella_2.png" id="10_2qgrd"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="10_t8o0a"]
@@ -280,7 +280,6 @@ texture = ExtResource("12_1xh45")
 centered = false
 
 [node name="Sombras_transición" parent="." instance=ExtResource("10_t8o0a")]
-visible = false
 layout_mode = 0
 
 [node name="Sombra_time" type="Timer" parent="Sombras_transición"]

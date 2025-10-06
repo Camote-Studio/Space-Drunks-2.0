@@ -1,8 +1,9 @@
 extends Area2D
 
 # Escenas de enemigos
-const ENEMY = preload("res://Scenes/Enemies/enemie_2.tscn")   # principal
-const ENEMY2 = preload("res://Scenes/enemie_3.tscn")          # secundario
+const ENEMY = preload("res://Scenes/Enemies/Enemigo_CuerpoaCuerpo/Enemy_Pato.tscn")   # principal
+const ENEMY2 = preload("res://Scenes/Enemies/Enemigo_CuerpoaCuerpo/Enemy_SuperPato.tscn")          # secundario
+
 
 @export var cam_path: NodePath
 

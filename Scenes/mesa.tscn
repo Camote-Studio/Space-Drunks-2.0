@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnkt7wssmcldm"]
 
-[ext_resource type="Script" uid="uid://da1iyj8j4f45r" path="res://Scenes/mesa.gd" id="1_o3usn"]
+[ext_resource type="Script" uid="uid://da1iyj8j4f45r" path="res://Scripts/Npcs/mesa.gd" id="1_o3usn"]
 [ext_resource type="Texture2D" uid="uid://capb2ldwe3yo7" path="res://Assets/art/background/MESAS1.png" id="2_hc3ql"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3usn"]
