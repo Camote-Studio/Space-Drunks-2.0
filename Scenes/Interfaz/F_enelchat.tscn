@@ -163,7 +163,7 @@ _data = {
 script = ExtResource("1_47cka")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.581818, 0.635294)
+scale = Vector2(1, 1.0715686)
 sprite_frames = SubResource("SpriteFrames_cjaag")
 animation = &"gg"
 autoplay = "gg"
@@ -183,7 +183,7 @@ theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
 theme_override_colors/font_shadow_color = Color(1, 0.698039, 0, 1)
 theme_override_colors/font_outline_color = Color(0.5036, 0.539205, 1.92523e-07, 1)
 theme_override_fonts/font = ExtResource("21_02rku")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 200
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
 libraries = {
@@ -193,15 +193,15 @@ autoplay = "Retry"
 
 [node name="continue" type="Label" parent="."]
 texture_filter = 1
-offset_left = 616.0
-offset_top = 593.0
-offset_right = 1358.0
-offset_bottom = 664.0
+offset_left = 1137.0
+offset_top = 940.0
+offset_right = 1879.0
+offset_bottom = 1038.0
 theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
 theme_override_colors/font_shadow_color = Color(1, 0.698039, 0, 1)
 theme_override_colors/font_outline_color = Color(0.5036, 0.539205, 1.92523e-07, 1)
 theme_override_fonts/font = ExtResource("21_02rku")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 70
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="continue"]
 libraries = {

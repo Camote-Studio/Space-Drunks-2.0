@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=46 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="2_sv6kg"]
@@ -28,8 +28,10 @@
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/enemies_final.tscn" id="27_v4p21"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/enemie_6.tscn" id="28_s0j4o"]
-[ext_resource type="Script" uid="uid://ma121f682hnw" path="res://Scripts/next_scene_path_area.gd" id="29_a7g42"]
-[ext_resource type="Script" uid="uid://c8gc0vqsrgeyv" path="res://Scripts/block_collider_body.gd" id="30_s0j4o"]
+[ext_resource type="Script" path="res://Scripts/next_scene_path_area.gd" id="29_a7g42"]
+[ext_resource type="Script" path="res://Scripts/block_collider_body.gd" id="30_s0j4o"]
+[ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="31_a7g42"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_qtle1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kl2"]
 size = Vector2(5588.5, 10)
@@ -230,25 +232,25 @@ script = ExtResource("1_gupyi")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(817, 171)
-scale = Vector2(0.4085, 0.37451)
+position = Vector2(2226.5, 201.5)
+scale = Vector2(1.70475, 1.059804)
 texture = ExtResource("2_tii1t")
 
 [node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+visible = false
 texture_filter = 1
-position = Vector2(2451, 172)
-scale = Vector2(0.4085, 0.37451)
+position = Vector2(3002, -1142)
 texture = ExtResource("2_tii1t")
 
 [node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+visible = false
 texture_filter = 1
 position = Vector2(4085, 172)
 scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("2_tii1t")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(717, 201.5)
-scale = Vector2(0.3115, 0.39902)
+position = Vector2(1819, 121)
 texture = ExtResource("3_sij3j")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
@@ -260,28 +262,28 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 
 [node name="PISO" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-345, 67)
-scale = Vector2(1.3135, 0.566667)
+position = Vector2(-441, 67)
+scale = Vector2(1.52675, 1)
 texture = ExtResource("4_efrga")
 centered = false
 
 [node name="Player_1" parent="." instance=ExtResource("2_sv6kg")]
-position = Vector2(278, 340)
+position = Vector2(278, 528)
 
 [node name="Player_2" parent="." instance=ExtResource("3_c5os2")]
-position = Vector2(266, 481)
+position = Vector2(266, 669)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(17, 178)
+position = Vector2(-317, 178)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2699.25, 80)
+position = Vector2(2699, 221)
 shape = SubResource("RectangleShape2D_b0kl2")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(-78, 88)
+position = Vector2(-415, 296)
 shape = SubResource("RectangleShape2D_u0fq8")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
@@ -345,9 +347,9 @@ metadata/_edit_use_anchors_ = true
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
 offset_left = 98.0
-offset_top = 69.0
+offset_top = 62.0
 offset_right = 191.0
-offset_bottom = 85.0
+offset_bottom = 78.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
@@ -356,10 +358,10 @@ modulate = Color(0.479864, 0.105582, 0.500942, 1)
 anchors_preset = -1
 anchor_top = -0.0169753
 anchor_bottom = -0.0169753
-offset_left = 291.0
-offset_top = 89.0
-offset_right = 384.0
-offset_bottom = 105.0
+offset_left = 287.0
+offset_top = 102.33333
+offset_right = 380.0
+offset_bottom = 118.33333
 max_value = 200.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
@@ -367,9 +369,9 @@ metadata/_edit_use_anchors_ = true
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
 offset_left = 289.0
-offset_top = 69.0
+offset_top = 63.0
 offset_right = 367.0
-offset_bottom = 85.0
+offset_bottom = 79.0
 max_value = 200.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
@@ -402,10 +404,10 @@ anchor_left = 0.155
 anchor_top = 0.198
 anchor_right = 0.155
 anchor_bottom = 0.198
-offset_left = 121.44
-offset_top = -23.304
-offset_right = 148.44
-offset_bottom = 23.696
+offset_left = -8.600006
+offset_top = -116.84
+offset_right = 18.399994
+offset_bottom = -69.84
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 10
@@ -442,10 +444,10 @@ anchor_left = 0.109
 anchor_top = 0.179
 anchor_right = 0.109
 anchor_bottom = 0.179
-offset_left = -13.568
-offset_top = -10.992
-offset_right = 10.432
-offset_bottom = 36.008
+offset_left = -106.28
+offset_top = -98.32001
+offset_right = -82.28
+offset_bottom = -51.320007
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 10
@@ -566,14 +568,14 @@ offset_bottom = 564.0
 script = ExtResource("29_a7g42")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="next_scene_path_area"]
-position = Vector2(3569, 325)
+position = Vector2(3569, 541)
 shape = SubResource("RectangleShape2D_qtle1")
 
 [node name="BlockColliderBody" type="Area2D" parent="."]
 script = ExtResource("30_s0j4o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockColliderBody"]
-position = Vector2(1169, 332)
+position = Vector2(1169, 548)
 shape = SubResource("RectangleShape2D_a7g42")
 
 [node name="warning_timer" type="Timer" parent="."]
@@ -581,8 +583,13 @@ shape = SubResource("RectangleShape2D_a7g42")
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(2478.25, 643)
+position = Vector2(2145, 860)
 shape = SubResource("RectangleShape2D_tv5bt")
+
+[node name="Pausa" parent="." instance=ExtResource("31_a7g42")]
+
+[node name="Sombras_transición" parent="." instance=ExtResource("32_qtle1")]
+visible = true
 
 [connection signal="body_entered" from="next_scene_path_area" to="next_scene_path_area" method="_on_body_entered"]
 [connection signal="body_entered" from="BlockColliderBody" to="BlockColliderBody" method="_on_body_entered"]

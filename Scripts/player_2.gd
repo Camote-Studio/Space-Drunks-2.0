@@ -120,7 +120,7 @@ var _punch_variations := [0.5, 1.0, 1.5]
 # ======================
 func _ready() -> void:
 		# Configurar ProgressBar
-	veneno_couldown.min_value = 0
+	veneno_couldown.min_value = 1
 	veneno_couldown.max_value = poison_max_charge
 	veneno_couldown.value = 0
 

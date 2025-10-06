@@ -61,11 +61,10 @@ layout_mode = 0
 [node name="music_scroller" type="HSlider" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 348.0
-offset_top = 158.0
-offset_right = 1329.0
-offset_bottom = 240.0
-scale = Vector2(0.622, 0.876)
+offset_left = 698.0
+offset_top = 265.0
+offset_right = 1679.0
+offset_bottom = 347.0
 theme_override_icons/grabber = ExtResource("7_m18yc")
 theme_override_icons/grabber_highlight = ExtResource("7_m18yc")
 theme_override_styles/slider = SubResource("StyleBoxTexture_54551")
@@ -78,11 +77,10 @@ script = ExtResource("5_8jn6b")
 [node name="sound_effect_scroller" type="HSlider" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 348.0
-offset_top = 300.0
-offset_right = 1329.0
-offset_bottom = 382.0
-scale = Vector2(0.622, 0.876)
+offset_left = 715.0
+offset_top = 542.0
+offset_right = 1696.0
+offset_bottom = 624.0
 theme_override_icons/grabber = ExtResource("7_m18yc")
 theme_override_icons/grabber_highlight = ExtResource("7_m18yc")
 theme_override_styles/slider = SubResource("StyleBoxTexture_4hstq")
@@ -94,11 +92,10 @@ script = ExtResource("6_ca0yn")
 
 [node name="Quit_menu" type="TextureButton" parent="." groups=["ui_boton_opciones"]]
 layout_mode = 0
-offset_left = 454.0
-offset_top = 494.0
-offset_right = 1294.0
-offset_bottom = 2629.0
-scale = Vector2(0.5, 0.5)
+offset_left = 707.0
+offset_top = 785.0
+offset_right = 1547.0
+offset_bottom = 2920.0
 button_mask = 0
 texture_normal = ExtResource("6_esbkl")
 texture_pressed = ExtResource("7_ca0yn")
@@ -107,12 +104,12 @@ texture_focused = ExtResource("8_on7rc")
 
 [node name="Label" type="Label" parent="Quit_menu"]
 layout_mode = 0
-offset_left = 108.0
-offset_top = 140.0
-offset_right = 998.0
-offset_bottom = 319.0
+offset_left = 70.0
+offset_top = 134.0
+offset_right = 960.0
+offset_bottom = 313.0
 rotation = -0.235619
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.6, 0.6)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -121,22 +118,22 @@ theme_override_font_sizes/font_size = 128
 text = "Quit"
 
 [node name="test_effect_sound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(363, 3)
 stream = ExtResource("10_ca0yn")
 
 [node name="Título" type="Sprite2D" parent="."]
-position = Vector2(350, 18)
+position = Vector2(713, 21)
+scale = Vector2(1.4, 1.4)
 texture = ExtResource("11_2lg05")
 centered = false
 
 [node name="Sfx_symbol" type="Sprite2D" parent="."]
-position = Vector2(178, 246)
-scale = Vector2(0.515, 0.551)
+position = Vector2(418, 488)
 texture = ExtResource("12_koc4y")
 centered = false
 
 [node name="Musica_symbol" type="Sprite2D" parent="."]
-position = Vector2(174, 106)
-scale = Vector2(0.533333, 0.55144)
+position = Vector2(397, 213)
 texture = ExtResource("13_0vold")
 centered = false
 

@@ -13,18 +13,17 @@ script = ExtResource("1_hcvwa")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
-offset_right = 1232.0
-offset_bottom = 648.0
+offset_right = 1930.0
+offset_bottom = 1094.0
 texture = ExtResource("2_podca")
 expand_mode = 1
 
 [node name="Volver" type="TextureButton" parent="."]
 visible = false
 offset_left = 42.0
-offset_top = 466.0
+offset_top = 783.0
 offset_right = 573.0
-offset_bottom = 763.0
-scale = Vector2(0.5, 0.5)
+offset_bottom = 1080.0
 button_mask = 0
 texture_normal = ExtResource("3_l3m5h")
 texture_pressed = ExtResource("4_6cqya")

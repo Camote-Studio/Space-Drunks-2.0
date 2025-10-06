@@ -271,7 +271,6 @@ _data = {
 size = Vector2(60, 419)
 
 [node name="GameWorld" type="Node2D"]
-position = Vector2(3, 4)
 script = ExtResource("1_8d0et")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -279,22 +278,22 @@ script = ExtResource("2_ygye0")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Pared" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(629.25, 241.25)
-scale = Vector2(0.309875, 0.520098)
+position = Vector2(242, 599.00006)
+scale = Vector2(1, 1.5784314)
 texture = ExtResource("3_pe6h5")
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
+[node name="Floor" type="Sprite2D" parent="."]
 z_index = -3
 texture_filter = 1
-position = Vector2(-23, -132)
-scale = Vector2(1.44025, 0.789216)
+position = Vector2(-456, -11)
+scale = Vector2(1.60725, 1.0764706)
 texture = ExtResource("5_gf2tg")
 centered = false
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="." groups=["table"]]
-position = Vector2(2382, 206)
+position = Vector2(2078, 229)
 scale = Vector2(0.5, 0.5)
 
 [node name="BgMesas" type="Sprite2D" parent="StaticBody2D7"]
@@ -390,7 +389,7 @@ scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
 [node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
-position = Vector2(221, 234)
+position = Vector2(-127, 624)
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
 position = Vector2(319, 403)
@@ -401,20 +400,20 @@ z_index = 3
 position = Vector2(5, 42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2839.5, 124)
+position = Vector2(2392, 302)
 shape = SubResource("RectangleShape2D_1m887")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(-2.5, 84.5)
+position = Vector2(-396, 351)
 shape = SubResource("RectangleShape2D_nmac2")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 position = Vector2(0, 164)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(5717, 147)
+position = Vector2(5267.9995, 380)
 rotation = 1.56824
 shape = SubResource("RectangleShape2D_4asma")
 
@@ -422,29 +421,29 @@ shape = SubResource("RectangleShape2D_4asma")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4/StaticBody2D2"]
 z_index = 3
-position = Vector2(2852, 474)
+position = Vector2(2384, 746)
 shape = SubResource("RectangleShape2D_tpm8x")
 
 [node name="Portal" type="Area2D" parent="." groups=["portal"]]
 script = ExtResource("10_nmac2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Portal"]
-position = Vector2(5574, 376.25)
+position = Vector2(5128, 633.75073)
 scale = Vector2(0.627704, 1.10168)
 texture = ExtResource("11_4asma")
 
 [node name="mensaje_portal" type="Label" parent="Portal"]
-offset_left = 5299.0
-offset_top = 214.0
-offset_right = 5508.0
-offset_bottom = 368.0
+offset_left = 4853.0
+offset_top = 471.50064
+offset_right = 5062.0
+offset_bottom = 625.50073
 theme_override_font_sizes/font_size = 30
 text = "mata a todos
  los enemigos 
 para pasar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
-position = Vector2(5573, 389)
+position = Vector2(5127, 646.50073)
 shape = SubResource("CapsuleShape2D_o87y8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -513,196 +512,6 @@ metadata/_edit_use_anchors_ = true
 [node name="SVP3" type="SubViewport" parent="OffscreenPeekHUD"]
 transparent_bg = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-modulate = Color(1, 1, 1, 0)
-offset_left = 337.0
-offset_top = 186.0
-offset_right = 718.0
-offset_bottom = 315.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 10
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 10
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = ExtResource("29_q27iu")
-theme_override_font_sizes/font_size = 80
-text = "Ready?"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="ProgressBar_alien_1" type="TextureProgressBar" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_right = 0.76378
-anchor_bottom = 0.0555556
-offset_left = 98.0
-offset_top = 24.0
-offset_right = 190.125
-offset_bottom = 57.0
-scale = Vector2(0.12157, 0.612286)
-max_value = 200.0
-value = 200.0
-texture_under = ExtResource("15_dcn6k")
-texture_progress = ExtResource("16_8sajs")
-metadata/_edit_use_anchors_ = true
-
-[node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(1, 1, 0, 1)
-offset_left = 103.0
-offset_top = 63.0
-offset_right = 196.0
-offset_bottom = 79.0
-show_percentage = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0.487039, 0.591995, 0.0805549, 1)
-anchors_preset = -1
-anchor_top = -0.0169753
-anchor_bottom = -0.0169753
-offset_left = 100.0
-offset_top = 89.0
-offset_right = 193.0
-offset_bottom = 105.0
-show_percentage = false
-metadata/_edit_use_anchors_ = true
-
-[node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(1, 1, 0, 1)
-offset_left = 297.0
-offset_top = 63.0
-offset_right = 375.0
-offset_bottom = 79.0
-max_value = 200.0
-show_percentage = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Veneno_p2" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0.479864, 0.105582, 0.500942, 1)
-anchors_preset = -1
-anchor_top = -0.0169753
-anchor_bottom = -0.0169753
-offset_left = 291.0
-offset_top = 89.0
-offset_right = 384.0
-offset_bottom = 105.0
-max_value = 200.0
-show_percentage = false
-metadata/_edit_use_anchors_ = true
-
-[node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 273.0
-offset_top = 24.0
-offset_right = 1245.0
-offset_bottom = 93.0
-rotation = -0.00284467
-scale = Vector2(0.122, 0.612)
-max_value = 400.0
-value = 400.0
-texture_under = ExtResource("15_dcn6k")
-texture_progress = ExtResource("16_8sajs")
-metadata/_edit_use_anchors_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(77, 51)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("20_jqqi2")
-
-[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(264, 58)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("20_jqqi2")
-
-[node name="Characater1Profile" type="Sprite2D" parent="CanvasLayer"]
-texture_filter = 1
-position = Vector2(80, 51)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("21_krfk8")
-
-[node name="Character2Profile" type="Sprite2D" parent="CanvasLayer"]
-texture_filter = 1
-position = Vector2(265, 50)
-scale = Vector2(0.21, 0.21)
-texture = ExtResource("22_thxnh")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
-texture_filter = 1
-position = Vector2(77, 118)
-scale = Vector2(0.15, 0.15)
-sprite_frames = SubResource("SpriteFrames_yyss1")
-autoplay = "default"
-frame_progress = 0.711345
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
-texture_filter = 1
-position = Vector2(267, 121)
-scale = Vector2(0.15, 0.15)
-sprite_frames = SubResource("SpriteFrames_yyss1")
-autoplay = "default"
-frame_progress = 0.515691
-
-[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer"]
-modulate = Color(1, 1, 1, 0)
-texture_filter = 1
-position = Vector2(1073, 140)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("25_cfgxb")
-
-[node name="cont monedas" type="Label" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.109
-anchor_top = 0.179
-anchor_right = 0.109
-anchor_bottom = 0.179
-offset_left = -13.568
-offset_top = -10.992
-offset_right = 9.43199
-offset_bottom = 12.008
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_constants/shadow_offset_x = 10
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 10
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = ExtResource("29_q27iu")
-text = "0"
-
-[node name="cont monedas2" type="Label" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.276
-anchor_top = 0.18
-anchor_right = 0.276
-anchor_bottom = 0.18
-offset_left = -11.952
-offset_top = -11.64
-offset_right = 15.048
-offset_bottom = 11.36
-theme_override_constants/shadow_offset_x = 10
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 10
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = ExtResource("29_q27iu")
-text = "0"
-
-[node name="Label2" type="Label" parent="CanvasLayer"]
-modulate = Color(1, 1, 1, 0)
-offset_left = 340.0
-offset_top = 271.0
-offset_right = 670.0
-offset_bottom = 313.0
-theme_override_fonts/font = ExtResource("29_q27iu")
-theme_override_font_sizes/font_size = 30
-text = "SPACE CHICKEN'S TIME"
-
-[node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("35_8sajs")]
-visible = false
-offset_left = 342.0
-offset_top = -3.0
-offset_right = 342.0
-offset_bottom = -3.0
-
 [node name="Pausa" parent="." instance=ExtResource("30_8yf3i")]
 visible = false
 
@@ -733,6 +542,197 @@ position = Vector2(3189, 342)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("31_jqqi2")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 337.0
+offset_top = 186.0
+offset_right = 718.0
+offset_bottom = 315.0
+scale = Vector2(1.5, 1.5)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("29_q27iu")
+theme_override_font_sizes/font_size = 80
+text = "Ready?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar_alien_1" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.76378
+anchor_bottom = 0.0555556
+offset_left = 127.49997
+offset_top = 59.499985
+offset_right = 219.625
+offset_bottom = 92.499985
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.12157, 0.612286)
+max_value = 200.0
+value = 200.0
+texture_under = ExtResource("15_dcn6k")
+texture_progress = ExtResource("16_8sajs")
+
+[node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+offset_left = 132.49997
+offset_top = 98.499985
+offset_right = 225.49997
+offset_bottom = 114.499985
+show_percentage = false
+
+[node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.487039, 0.591995, 0.0805549, 1)
+anchors_preset = -1
+anchor_top = -0.0169753
+anchor_bottom = -0.0169753
+offset_left = 132.0
+offset_top = 136.33333
+offset_right = 225.0
+offset_bottom = 152.33333
+show_percentage = false
+
+[node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+offset_left = 326.49997
+offset_top = 98.499985
+offset_right = 404.49997
+offset_bottom = 114.499985
+max_value = 200.0
+show_percentage = false
+
+[node name="Veneno_p2" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.479864, 0.105582, 0.500942, 1)
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 323.0
+offset_top = 116.0
+offset_right = -1516.0
+offset_bottom = -948.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 200.0
+show_percentage = false
+
+[node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = -1
+offset_left = 313.0
+offset_top = 59.0
+offset_right = 1285.0
+offset_bottom = 128.0
+rotation = -0.00284467
+scale = Vector2(0.122, 0.612)
+max_value = 400.0
+value = 400.0
+texture_under = ExtResource("15_dcn6k")
+texture_progress = ExtResource("16_8sajs")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(106.49997, 86.499985)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("20_jqqi2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(293.49997, 93.499985)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("20_jqqi2")
+
+[node name="Characater1Profile" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(109.49997, 86.499985)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("21_krfk8")
+
+[node name="Character2Profile" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(294.49997, 85.499985)
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("22_thxnh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(106.49997, 153.49998)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_yyss1")
+autoplay = "default"
+frame_progress = 0.711345
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(296.49997, 156.49998)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_yyss1")
+autoplay = "default"
+frame_progress = 0.515691
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+position = Vector2(1605, 221.5)
+scale = Vector2(1, 0.4)
+texture = ExtResource("25_cfgxb")
+
+[node name="cont monedas" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.109
+anchor_top = 0.179
+anchor_right = 0.109
+anchor_bottom = 0.179
+offset_left = -67.28
+offset_top = -53.320007
+offset_right = -41.992004
+offset_bottom = -28.64801
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("29_q27iu")
+text = "0"
+
+[node name="cont monedas2" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.276
+anchor_top = 0.18
+anchor_right = 0.276
+anchor_bottom = 0.18
+offset_left = -200.91998
+offset_top = -54.400024
+offset_right = -173.91998
+offset_bottom = -31.40001
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("29_q27iu")
+text = "0"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 369.49997
+offset_top = 306.5
+offset_right = 772.5
+offset_bottom = 349.5
+theme_override_fonts/font = ExtResource("29_q27iu")
+theme_override_font_sizes/font_size = 30
+text = "SPACE CHICKEN'S TIME"
+
+[node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("35_8sajs")]
+visible = false
+offset_left = 342.0
+offset_top = -3.0
+offset_right = 342.0
+offset_bottom = -3.0
+
 [node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
 visible = false
 offset_left = 435.0
@@ -762,31 +762,31 @@ script = ExtResource("13_n6wrj")
 
 [node name="ScaredBackgroundCharacter" parent="." instance=ExtResource("39_p5xse")]
 z_index = 3
-position = Vector2(1415, 152)
+position = Vector2(1092, 388)
 
 [node name="RickFondo" parent="." instance=ExtResource("40_6kdy0")]
-position = Vector2(2154, 160)
+position = Vector2(1831, 396)
 
 [node name="PatoFondo" parent="." instance=ExtResource("41_7hocu")]
-position = Vector2(3222, 115)
+position = Vector2(2899, 351)
 
 [node name="MartinFondo" parent="." instance=ExtResource("42_7hocu")]
-position = Vector2(506, 110)
+position = Vector2(183, 346)
 
 [node name="AlienFondo" parent="." instance=ExtResource("43_cjtyq")]
-position = Vector2(4081, 176)
+position = Vector2(3758, 412)
 
 [node name="BenderFondo" parent="." instance=ExtResource("44_pjdg7")]
-position = Vector2(4843, 176)
+position = Vector2(4520, 412)
 
 [node name="enemie_9" parent="." instance=ExtResource("38_p5xse")]
-position = Vector2(670, 281)
+position = Vector2(731, 661)
 
 [node name="final_nivel" type="Area2D" parent="."]
 position = Vector2(5233, 437)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="final_nivel"]
-position = Vector2(185, -39)
+position = Vector2(-203, 201)
 shape = SubResource("RectangleShape2D_m7xit")
 
 [node name="Enemie_2" parent="." instance=ExtResource("45_m7xit")]
