@@ -4,6 +4,7 @@ var _flotar_sound_played := false
 signal damage(amount: float, source: String)
 signal muerte
 @onready var shop: Control = $"../CanvasLayer/UI_abilities"
+@export var bomb_scene: PackedScene = preload("res://Scenes/Armas/bomba.tscn")
 
 # --- GUN / ULTI ---
 @onready var gun = $Gun
@@ -74,6 +75,21 @@ var power_bullet_extra_damage := 20.0
 func _ready() -> void:
 	_disable_stream_loop(sonido_flotando)
 
+	# --- Recuperar monedas ---
+	coins = GameState.get_coins(player_id)
+	GameState.set_coins(player_id, coins)
+	if coin_label:
+		coin_label.text = str(coins)
+
+# --- Recuperar vida ---
+	var vida_guardada = GameState.get_vida(player_id)
+
+	if vida_guardada <= 0:
+		bar.value = bar.max_value   # vida completa al empezar el juego
+		GameState.set_vida(player_id, bar.value)
+	else:
+		bar.value = vida_guardada   # continuar con la vida guardada
+
 
 	# Configuración de timers
 	if gun:
@@ -134,7 +150,8 @@ func _physics_process(delta: float) -> void:
 			velocity = _dash_dir * dash_speed
 			move_and_slide()
 		return
-
+	if Input.is_action_just_pressed("bomba") and not dead and allow_input:
+		_throw_bomb()
 	if _dash_cooldown_timer > 0.0:
 		_dash_cooldown_timer -= delta
 	var direction = Vector2.ZERO
@@ -210,6 +227,7 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 
 	if bar:
 		bar.value = clamp(bar.value - amount, bar.min_value, bar.max_value)
+		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
 		if bar.value <= bar.min_value:
 			_die()
 			return
@@ -384,6 +402,7 @@ func collect_coin(amount: int = 1) -> void:
 	GameState.set_coins(player_id, coins)
 	if coins >= 20:
 		bar.value = clamp(bar.value + 200, bar.min_value, bar.max_value)
+		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
 		#_show_shop()
 		coins = 0
 		if coin_label:
@@ -542,3 +561,29 @@ func _end_dash() -> void:
 	velocity = Vector2.ZERO
 	if animated_sprite and animated_sprite.animation == "dash":
 		animated_sprite.play("idle")
+func _throw_bomb() -> void:
+	if bomb_scene == null:
+		push_warning("[P1] bomb_scene no asignada.")
+		return
+
+	var bomb = bomb_scene.instantiate()
+	get_parent().add_child(bomb)
+	bomb.global_position = gun.global_position
+
+	# Ángulo de lanzamiento
+	var angle = deg_to_rad(43)
+	var speed = 350.0
+
+	# Revisar si el sprite principal está volteado
+	var dir_x = 1
+	if animated_sprite.flip_h:
+		dir_x = -1
+
+	# Dirección con flip
+	var direction = Vector2(cos(angle) * dir_x, -sin(angle))
+
+	# Impulso inicial
+	bomb.linear_velocity = direction * speed
+
+	# Altura donde explota
+	bomb.target_y = global_position.y + 10

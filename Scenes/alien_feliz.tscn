@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://dqcwjwglrlg6i"]
+
+[ext_resource type="Script" uid="uid://dalqctfxf34nu" path="res://Scenes/alien_feliz.gd" id="1_apy20"]
+[ext_resource type="Texture2D" uid="uid://wn1jsv48bvi0" path="res://Assets/art/alien_lloro/2.png" id="1_m7kph"]
+[ext_resource type="Texture2D" uid="uid://bb3ol8hjfc2tc" path="res://Assets/art/alien_lloro/a001.png" id="2_apy20"]
+[ext_resource type="Texture2D" uid="uid://bq3ohuye1jc5o" path="res://Assets/art/alien_lloro/a002.png" id="3_5loh3"]
+[ext_resource type="Texture2D" uid="uid://bai0trkum7hcj" path="res://Assets/art/alien_lloro/a003.png" id="4_yng6w"]
+[ext_resource type="Texture2D" uid="uid://cqhej1vqygbgn" path="res://Assets/art/alien_lloro/a004.png" id="5_m58jd"]
+[ext_resource type="Texture2D" uid="uid://btdvv6dv0rbbh" path="res://Assets/art/alien_lloro/a005.png" id="6_r7hr0"]
+[ext_resource type="Texture2D" uid="uid://nupttk227v57" path="res://Assets/art/alien_lloro/a006.png" id="7_gl4qb"]
+[ext_resource type="Texture2D" uid="uid://i07u3sh8o7x4" path="res://Assets/art/alien_lloro/a007.png" id="8_r5kfx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dn5je"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m7kph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_apy20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5loh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yng6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_m58jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_r7hr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gl4qb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_r5kfx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="AlienFeliz" type="Node2D"]
+script = ExtResource("1_apy20")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(12.9375, -17.5)
+scale = Vector2(0.469059, 0.42053)
+sprite_frames = SubResource("SpriteFrames_dn5je")
+animation = &"idle"
