@@ -1,10 +1,10 @@
 extends Area2D
 
 # --- Pool de enemigos aleatorios (1–4) ---
-const ENEMY1 = preload("res://Scenes/Enemies/enemie_1.tscn")
-const ENEMY2 = preload("res://Scenes/Enemies/enemie_2.tscn")
-const ENEMY3 = preload("res://Scenes/enemie_3.tscn")
-const ENEMY4 = preload("res://Scenes/enemie_4.tscn") # <- corregida la ruta
+const ENEMY1 = preload("res://Scenes/Enemies/Enemigo_Distancia/Enemy_Ovni_Gato.tscn")
+const ENEMY2 = preload("res://Scenes/Enemies/Enemigo_CuerpoaCuerpo/Enemy_Pato.tscn")
+const ENEMY3 = preload("res://Scenes/Enemies/Enemigo_CuerpoaCuerpo/Enemy_SuperPato.tscn")
+const ENEMY4 = preload("res://Scenes/Enemies/Enemigo_Distancia/Enemy_AlienGravedad.tscn") # <- corregida la ruta
 const MOVE_ENEMY_POOL := [ENEMY1, ENEMY2, ENEMY3, ENEMY4]
 
 @export var cam_path: NodePath

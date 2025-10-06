@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqgpuoigd3t4p"]
+
+[ext_resource type="Script" uid="uid://w2522sj6xfm4" path="res://Scripts/enemie_6.gd" id="1_nw487"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xmwxw"]
+
+[node name="enemie_spawn_calamar" type="Area2D" groups=["enemies"]]
+script = ExtResource("1_nw487")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xmwxw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

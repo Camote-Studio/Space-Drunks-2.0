@@ -32,10 +32,10 @@
 [ext_resource type="AudioStream" uid="uid://7t50crxvlos8" path="res://Assets/sfx/ready-set-go-sound-268353.mp3" id="30_jua36"]
 [ext_resource type="Texture2D" uid="uid://rq0mwrl4053j" path="res://Assets/art/sprites/complements_sprites/box_1.png" id="31_tyafn"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_yjcgu"]
-[ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/enemy_spawn.tscn" id="33_vqbk2"]
-[ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/enemy_spawn_2.tscn" id="34_qtfrd"]
+[ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/System/Spawns/enemy_spawn.tscn" id="33_vqbk2"]
+[ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/System/Spawns/enemy_spawn_2.tscn" id="34_qtfrd"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="35_mcpc7"]
-[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="36_u3qqv"]
+[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/Enemigo_CuerpoaCuerpo/Enemy_Pato.tscn" id="36_u3qqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5503, 20)

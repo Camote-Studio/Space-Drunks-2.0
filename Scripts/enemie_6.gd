@@ -1,7 +1,7 @@
 extends Area2D
 # Spawner por fases que evita spawnear dentro del viewport de la cámara
 
-const ENEMY = preload("res://Scenes/enemie_5.tscn")
+const ENEMY = preload("res://Scenes/Enemies/Enemigo_CuerpoaCuerpo/Enemy_calamar.tscn")
 
 @export var cam_path: NodePath
 
