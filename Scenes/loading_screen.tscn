@@ -97,7 +97,6 @@ motion_mirroring = Vector2(1149, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Loading_interface/Parallax/ParallaxBackground/Espacio"]
 texture_filter = 1
-scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_iom8t")
 centered = false
 
@@ -106,7 +105,6 @@ motion_scale = Vector2(0.8, 0.8)
 motion_mirroring = Vector2(1153.92, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Loading_interface/Parallax/ParallaxBackground/Estrellas Grandes"]
-scale = Vector2(0.600521, 0.599074)
 texture = ExtResource("5_nw6gx")
 centered = false
 
@@ -114,19 +112,18 @@ centered = false
 motion_mirroring = Vector2(1153.92, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Loading_interface/Parallax/ParallaxBackground/Estrellas Pequeñas"]
-scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_x8yqx")
 centered = false
 
 [node name="Label" type="Label" parent="Loading_interface"]
 offset_left = 389.0
 offset_top = 253.0
-offset_right = 789.0
-offset_bottom = 338.0
+offset_right = 1221.0
+offset_bottom = 449.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_qbyj8")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 140
 text = "Cargando"
 
 [node name="Loading_animation" type="AnimationPlayer" parent="."]

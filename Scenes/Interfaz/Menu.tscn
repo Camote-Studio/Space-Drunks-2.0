@@ -88,7 +88,6 @@ motion_mirroring = Vector2(1149, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxBackground/Espacio"]
 texture_filter = 1
-scale = Vector2(0.672396, 0.6)
 texture = ExtResource("2_1xh45")
 centered = false
 
@@ -97,7 +96,6 @@ motion_scale = Vector2(0.8, 0.8)
 motion_mirroring = Vector2(1153.92, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxBackground/Estrellas Grandes"]
-scale = Vector2(0.600521, 0.599074)
 texture = ExtResource("3_i7q02")
 centered = false
 
@@ -105,13 +103,12 @@ centered = false
 motion_mirroring = Vector2(1153.92, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxBackground/Estrellas Pequeñas"]
-scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_mm3o3")
 centered = false
 
 [node name="Fondo" type="Sprite2D" parent="."]
-position = Vector2(-55, -265)
-scale = Vector2(0.854545, 0.930392)
+position = Vector2(1.9999924, -372)
+scale = Vector2(1.1454546, 1.4245099)
 texture = ExtResource("6_i7q02")
 centered = false
 
@@ -123,18 +120,16 @@ script = ExtResource("8_mm3o3")
 material = SubResource("ShaderMaterial_2qgrd")
 use_parent_material = true
 position = Vector2(-3, 2)
-scale = Vector2(0.712626, 0.717647)
 texture = ExtResource("7_mm3o3")
 centered = false
 
 [node name="Start" type="TextureButton" parent="Control" groups=["ui_botones"]]
 material = SubResource("ShaderMaterial_mm3o3")
 use_parent_material = true
-offset_left = 63.0
-offset_top = 261.0
-offset_right = 903.0
-offset_bottom = 2396.0
-scale = Vector2(0.4, 0.4)
+offset_left = 80.0
+offset_top = 367.0
+offset_right = 920.0
+offset_bottom = 2502.0
 focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Tutorial")
 button_mask = 0
@@ -173,7 +168,6 @@ offset_left = 94.0
 offset_top = 347.0
 offset_right = 934.0
 offset_bottom = 2482.0
-scale = Vector2(0.4, 0.4)
 focus_neighbor_top = NodePath("../Start")
 focus_neighbor_bottom = NodePath("../Options")
 button_mask = 0
@@ -191,7 +185,7 @@ offset_top = 140.0
 offset_right = 945.0
 offset_bottom = 501.0
 rotation = -0.235619
-scale = Vector2(0.35, 0.35)
+scale = Vector2(0.4, 0.4)
 theme_override_colors/font_color = Color(1, 0.858824, 0, 0.854902)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -206,11 +200,10 @@ text = "Tutorial"
 [node name="Options" type="TextureButton" parent="Control" groups=["ui_botones"]]
 material = SubResource("ShaderMaterial_w4fob")
 use_parent_material = true
-offset_left = 126.0
-offset_top = 390.0
-offset_right = 966.0
-offset_bottom = 2525.0
-scale = Vector2(0.4, 0.4)
+offset_left = 143.0
+offset_top = 590.0
+offset_right = 983.0
+offset_bottom = 2725.0
 focus_neighbor_top = NodePath("../Tutorial")
 focus_neighbor_bottom = NodePath("../Quit")
 button_mask = 0
@@ -243,11 +236,10 @@ text = "Options"
 [node name="Quit" type="TextureButton" parent="Control" groups=["ui_botones"]]
 material = SubResource("ShaderMaterial_w4fob")
 use_parent_material = true
-offset_left = 162.0
-offset_top = 530.0
-offset_right = 1002.0
-offset_bottom = 2665.0
-scale = Vector2(0.4, 0.4)
+offset_left = 179.0
+offset_top = 813.0
+offset_right = 1019.0
+offset_bottom = 2948.0
 focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Start")
 button_mask = 0
@@ -282,7 +274,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="Players" type="Sprite2D" parent="."]
-position = Vector2(30, -159)
+position = Vector2(384, 122.00001)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("12_1xh45")
 centered = false

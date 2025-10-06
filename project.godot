@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Alien Bar"
 run/main_scene="uid://c4wyasp8w20no"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -29,6 +29,8 @@ runtime/balloon_path="res://Scenes/dialogue/balloon.tscn"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"

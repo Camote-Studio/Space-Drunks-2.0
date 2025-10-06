@@ -53,8 +53,9 @@ _data = {
 }
 
 [node name="Sombras_transición" type="ColorRect"]
-offset_right = 1153.0
-offset_bottom = 646.0
+visible = false
+offset_right = 1923.0
+offset_bottom = 1087.0
 color = Color(0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
