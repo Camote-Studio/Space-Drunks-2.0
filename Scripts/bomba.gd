@@ -31,7 +31,9 @@ func _explode() -> void:
 
 	print("[BOMBA] ¡Explota en posición ", global_position, "!")
 
-	var explosion_scene = preload("res://Scenes/Armas/explosion.tscn")
+
+
+	var explosion_scene = preload("res://Scenes/Players/Player 1/Armas_P1/explosion.tscn")
 	var explosion = explosion_scene.instantiate()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://t1sr0p1gcjrw" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 001.png" id="2_qo81y"]
 [ext_resource type="Texture2D" uid="uid://dxfwjerj8nojr" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 002.png" id="2_tw51m"]
 [ext_resource type="Texture2D" uid="uid://bv1ncaop86ao2" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 003.png" id="3_6vfcg"]
-[ext_resource type="PackedScene" uid="uid://tytkyjl3qajp" path="res://Scenes/gun.tscn" id="3_aatkl"]
+[ext_resource type="PackedScene" uid="uid://tytkyjl3qajp" path="res://Scenes/Players/Player 1/Armas_P1/gun.tscn" id="3_aatkl"]
 [ext_resource type="Texture2D" uid="uid://co3h3qdsffnum" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_00_delay-0.03s.png" id="3_gcs77"]
 [ext_resource type="Texture2D" uid="uid://ccf3e70xy10d2" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_01_delay-0.03s.png" id="4_6i1ax"]
 [ext_resource type="Texture2D" uid="uid://bqb1m2lwwa7uh" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 002 y medio.png" id="4_35b2c"]
@@ -184,7 +184,7 @@
 [ext_resource type="AudioStream" uid="uid://bns3qc8v3jfu4" path="res://Assets/sfx/Retro Birds 07.wav" id="182_r4lpj"]
 [ext_resource type="Texture2D" uid="uid://d4edlffnyj7py" path="res://Assets/art/sprites/Personajes/militar kirk.png" id="183_e0wwm"]
 [ext_resource type="AudioStream" uid="uid://68jauvq2vtui" path="res://Assets/sfx/Retro Charge Off StereoUP 02.wav" id="183_k774p"]
-[ext_resource type="PackedScene" uid="uid://h5mxjah6wflt" path="res://Scenes/Armas/Laser.tscn" id="185_e0wwm"]
+[ext_resource type="PackedScene" uid="uid://h5mxjah6wflt" path="res://Scenes/Players/Player 1/Armas_P1/Laser.tscn" id="185_e0wwm"]
 [ext_resource type="AudioStream" uid="uid://rajbfhsslc1o" path="res://Assets/music/hk-mp5-reload-sound-316892.ogg" id="186_1arlc"]
 [ext_resource type="AudioStream" uid="uid://dil43vqyqb5gr" path="res://Assets/music/fnp90-burst-100583.ogg" id="187_unmkb"]
 

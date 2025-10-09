@@ -217,6 +217,16 @@ shape = SubResource("RectangleShape2D_xeu1h")
 
 [node name="Player_1" parent="." instance=ExtResource("4_e3l03")]
 position = Vector2(465, 330)
+bomb_scene = null
+dash_speed = null
+dash_duration = null
+dash_cooldown = null
+player_id = null
+gun_360_scene = null
+electro_gun_scene = null
+electro_duration_min = null
+electro_duration_max = null
+ulti_drain_rate = null
 
 [node name="Player_2" parent="." instance=ExtResource("5_gefvj")]
 position = Vector2(458, 489)
