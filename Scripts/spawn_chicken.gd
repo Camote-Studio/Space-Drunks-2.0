@@ -1,6 +1,6 @@
 extends Area2D  # puede ser Node2D aunque spawnees Area2D
 # Qué escena vas a spawnear (cámbialo si necesitas otro prefab)
-@export var spawn_scene: PackedScene = preload("res://Scenes/chicken_crazy.tscn")
+@export var spawn_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/chicken_crazy.tscn")
 
 # Intervalo aleatorio entre spawns
 @export var interval_min: float = 0.6

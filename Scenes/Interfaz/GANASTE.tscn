@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://d7nmo4v4sth3"]
 
-[ext_resource type="Script" path="res://Scripts/Intefaz/ganaste.gd" id="1_05nj0"]
+[ext_resource type="Script" uid="uid://dihdgbx0r4kg6" path="res://Scripts/Intefaz/ganaste.gd" id="1_05nj0"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="2_hbenx"]
 [ext_resource type="Texture2D" uid="uid://brgr140eg45id" path="res://Assets/art/background/WIN/ezgif-frame-001.png" id="3_vrmvo"]
 [ext_resource type="Texture2D" uid="uid://bvx2ld0qfjjde" path="res://Assets/art/background/WIN/ezgif-frame-002.png" id="4_kybl0"]

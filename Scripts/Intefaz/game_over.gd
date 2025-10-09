@@ -19,7 +19,7 @@ func _game_over():
 	add_child(timer)
 	timer.start()
 	
-	# Esperar a que termine
+	# Esperar a que termineb
 	await timer.timeout
 	$"Sombras_transición/AnimationPlayer".play("Sombra_off")
 	# Cambiar de escena después del delay

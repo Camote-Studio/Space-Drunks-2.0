@@ -78,7 +78,7 @@ var _base_speed: float
 var _is_shocked := false
 
 # ========== SHOOTING ==========
-@export var bullet_scene: PackedScene = preload("res://Scenes/boss_bullet.tscn")
+@export var bullet_scene: PackedScene = preload("res://Scenes/Enemies/Jefes/Jefe_Pulpo/Ataques/boss_bullet.tscn")
 @export var shoot_interval_min := 1.6
 @export var shoot_interval_max := 2.8
 @export var shoot_windup := 0.35

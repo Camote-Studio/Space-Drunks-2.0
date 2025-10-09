@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqkuka33kxcqu"]
+
+[ext_resource type="Texture2D" uid="uid://blex0n2rdxghj" path="res://Assets/art/sprites/Armas/Punch1.png" id="1_71g2a"]
+[ext_resource type="Script" uid="uid://d070ppq8fg2le" path="res://Scripts/punch.gd" id="1_gaxiv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h8w4d"]
+radius = 32.0156
+
+[node name="Punch" type="Node2D" groups=["puño_player2"]]
+script = ExtResource("1_gaxiv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_71g2a")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, -4)
+shape = SubResource("CircleShape2D_h8w4d")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

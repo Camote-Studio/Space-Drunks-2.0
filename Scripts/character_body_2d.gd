@@ -4,7 +4,8 @@ var _flotar_sound_played := false
 signal damage(amount: float, source: String)
 signal muerte
 @onready var shop: Control = $"../CanvasLayer/UI_abilities"
-@export var bomb_scene: PackedScene = preload("res://Scenes/Armas/bomba.tscn")
+@export var bomb_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/bomba.tscn")
+
 
 # --- GUN / ULTI ---
 @onready var gun = $Gun
@@ -24,17 +25,18 @@ var coins: int = 0
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
 @onready var audio_disparo_metra: AudioStreamPlayer2D = $audio_disparo_metra
 @onready var audio_recarga: AudioStreamPlayer2D = $audio_recarga
-@export var gun_360_scene: PackedScene = preload("res://Scenes/gun_360.tscn")
+@export var gun_360_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/gun_360.tscn")
 var _360_instance: Node2D = null
 var _360_timer: Timer
 var _360_active := false
 
-@export var electro_gun_scene: PackedScene = preload("res://Scenes/electro_gun.tscn")
+@export var electro_gun_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/electro_gun.tscn")
 @export var electro_duration_min: float = 15.0
 @export var electro_duration_max: float = 20.0
 var _electro_instance: Node2D = null
 var _revert_timer: Timer
 var _electro_active := false
+
 
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
 @onready var animated_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D

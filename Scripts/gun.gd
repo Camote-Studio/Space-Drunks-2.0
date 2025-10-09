@@ -2,8 +2,9 @@ extends Node2D
 # Gun.gd - arma con comportamiento PISTOL / TURRET
 
 ## --- EXPORTACIONES ---
-@export var bullet_scene: PackedScene = preload("res://Scenes/bullet.tscn")
+@export var bullet_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/bullet.tscn")
 @export var cooldown: float = 0.5
+
 
 # Offset del arma respecto al jugador
 @export var offset_right := Vector2(10, 0)

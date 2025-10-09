@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://bcumd4ca72ik2"]
+
+[ext_resource type="Script" uid="uid://dnh1q33cjjmo5" path="res://Scripts/PoisonArea.gd" id="1_ok5wx"]
+[ext_resource type="Texture2D" uid="uid://bffnpwwfvya61" path="res://Assets/art/sprites/abilities/veneno/veneno1.png" id="2_7te8y"]
+[ext_resource type="AudioStream" uid="uid://dgr7741ficc0a" path="res://Assets/music/air-or-steam-pressure-release-29600.ogg" id="2_khq8d"]
+[ext_resource type="Texture2D" uid="uid://dcw5q3t1auq5f" path="res://Assets/art/sprites/abilities/veneno/veneno2.png" id="3_khq8d"]
+[ext_resource type="Texture2D" uid="uid://cxa2eqdg52433" path="res://Assets/art/sprites/abilities/veneno/veneno3.png" id="4_o28ex"]
+[ext_resource type="Texture2D" uid="uid://ckmdotrho4pxr" path="res://Assets/art/sprites/abilities/veneno/veneno4.png" id="5_2kfxj"]
+[ext_resource type="Texture2D" uid="uid://dmlxdjtngp5kw" path="res://Assets/art/sprites/abilities/veneno/veneno5.png" id="6_f0au3"]
+[ext_resource type="Texture2D" uid="uid://djceq6oqhis77" path="res://Assets/art/sprites/abilities/veneno/veneno6.png" id="7_8fm8s"]
+[ext_resource type="Texture2D" uid="uid://cp3jtvnjux4pu" path="res://Assets/art/sprites/abilities/veneno/veneno7.png" id="8_tcjgb"]
+[ext_resource type="Texture2D" uid="uid://ic2u3q4dfcjs" path="res://Assets/art/sprites/abilities/veneno/veneno.png" id="9_s454w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0306"]
+radius = 111.45
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsbij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7te8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_khq8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o28ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2kfxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f0au3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8fm8s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tcjgb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s454w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="PoisonArea" type="Node2D"]
+z_index = -1
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_ok5wx")
+
+[node name="audio_v" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource("2_khq8d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, -1)
+shape = SubResource("CircleShape2D_e0306")
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -39)
+scale = Vector2(0.257818, 0.388184)
+sprite_frames = SubResource("SpriteFrames_jsbij")
+animation = &"idle"
+frame_progress = 0.58505
+
+[node name="LifeTimer" type="Timer" parent="."]

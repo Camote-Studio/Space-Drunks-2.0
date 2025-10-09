@@ -1,0 +1,377 @@
+[gd_scene load_steps=30 format=3 uid="uid://qeb3bvcpouuv"]
+
+[ext_resource type="Texture2D" uid="uid://xenlds0o8ci6" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="1_ngw7g"]
+[ext_resource type="Script" path="res://Scripts/cinematic_level_1_f_3.gd" id="1_s6en7"]
+[ext_resource type="Texture2D" uid="uid://dwy5qcmvangbi" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-1.png" id="2_npmql"]
+[ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ok2xn"]
+[ext_resource type="Texture2D" uid="uid://c8ctvirugussx" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-2.png" id="3_b6u4q"]
+[ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/Players/Player 1/player_1.tscn" id="4_e3l03"]
+[ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/Players/Player 2/player_2.tscn" id="5_gefvj"]
+[ext_resource type="Script" uid="uid://b56g8gt1y61aq" path="res://Scripts/static_body_2d.gd" id="5_rg7yo"]
+[ext_resource type="Script" path="res://Scripts/cinamatic_level_1_f_3_camera.gd" id="6_npmql"]
+[ext_resource type="Texture2D" uid="uid://ccfvct5yvy3y4" path="res://Assets/art/sprites/Enemigos/1.png" id="7_xeu1h"]
+[ext_resource type="Texture2D" uid="uid://bma6w4p6xhc1v" path="res://Assets/art/sprites/Enemigos/2.png" id="8_jhjwr"]
+[ext_resource type="Script" path="res://Scripts/bossfight_interaction.gd" id="9_2nd7h"]
+[ext_resource type="Texture2D" uid="uid://c48q81hv7dorh" path="res://Assets/art/sprites/Enemigos/3.png" id="9_s6en7"]
+[ext_resource type="Texture2D" uid="uid://br0a1f6kw8a7e" path="res://Assets/art/sprites/Enemigos/4.png" id="10_2nd7h"]
+[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="11_jhjwr"]
+[ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="16_3yglq"]
+[ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="17_foaxk"]
+[ext_resource type="Script" path="res://Scripts/block_collider.gd" id="18_vx3yo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xeu1h"]
+size = Vector2(110, 660)
+
+[sub_resource type="Animation" id="Animation_ok2xn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3026, 396)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Que es esto? Un par de borrachos vencio a mi ejercito especial?!"]
+}
+
+[sub_resource type="Animation" id="Animation_gnga6"]
+resource_name = "new_animation"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3026, 396), Vector2(3026, 396), Vector2(2058, 396)]
+}
+
+[sub_resource type="Animation" id="Animation_2nd7h"]
+resource_name = "new_animation_2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["¡¿Acaso mis soldados se quedaron bebiendo con ustedes?!", "¡¿Acaso mis soldados se quedaron bebiendo con ustedes?!"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rg7yo"]
+_data = {
+&"RESET": SubResource("Animation_ok2xn"),
+&"new_animation": SubResource("Animation_gnga6"),
+&"new_animation_2": SubResource("Animation_2nd7h")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_egeh8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_xeu1h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jhjwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s6en7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2nd7h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gnga6"]
+radius = 447.04
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egeh8"]
+size = Vector2(3275, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya0jw"]
+shader = ExtResource("17_foaxk")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_puveb"]
+size = Vector2(3263, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kg7m"]
+size = Vector2(24, 640)
+
+[node name="Cinematic_level_1_f_3" type="Node2D"]
+script = ExtResource("1_s6en7")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("2_ok2xn")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D6" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(817, 171)
+scale = Vector2(0.4085, 0.37451)
+texture = ExtResource("1_ngw7g")
+
+[node name="Sprite2D7" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(2445, 172)
+scale = Vector2(0.4085, 0.37451)
+texture = ExtResource("1_ngw7g")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(2451, 172)
+scale = Vector2(0.4085, 0.37451)
+texture = ExtResource("1_ngw7g")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(4085, 172)
+scale = Vector2(0.4085, 0.37451)
+texture = ExtResource("1_ngw7g")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(717, 201.5)
+scale = Vector2(0.3115, 0.39902)
+texture = ExtResource("2_npmql")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(817, 171)
+scale = Vector2(0.4085, 0.37451)
+texture = ExtResource("1_ngw7g")
+
+[node name="Sprite2D5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(717, 201.5)
+scale = Vector2(0.3115, 0.39902)
+texture = ExtResource("2_npmql")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
+visible = false
+script = ExtResource("5_rg7yo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ParallaxBackground/StaticBody2D"]
+polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 291, 133, 293, 140, 308, 175, 306, 179, 296, 212, 294, 214, 304, 237, 303, 249, 295, 253, 286, 286, 277, 284, 227, 275, 215, 251, 210, 198, 205, 163, 201, 73, 206)
+
+[node name="PISO" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-345, 67)
+scale = Vector2(1.08375, 0.566667)
+texture = ExtResource("3_b6u4q")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(45, 320)
+shape = SubResource("RectangleShape2D_xeu1h")
+
+[node name="Player_1" parent="." instance=ExtResource("4_e3l03")]
+position = Vector2(465, 330)
+bomb_scene = null
+dash_speed = null
+dash_duration = null
+dash_cooldown = null
+player_id = null
+gun_360_scene = null
+electro_gun_scene = null
+electro_duration_min = null
+electro_duration_max = null
+ulti_drain_rate = null
+
+[node name="Player_2" parent="." instance=ExtResource("5_gefvj")]
+position = Vector2(458, 489)
+
+[node name="cinamatic_level_1_f_3_camera" type="Camera2D" parent="."]
+position = Vector2(610, 333)
+position_smoothing_enabled = true
+script = ExtResource("6_npmql")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rg7yo")
+}
+autoplay = "new_animation"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+offset_left = 103.0
+offset_top = 584.0
+offset_right = 1106.0
+offset_bottom = 620.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("11_jhjwr")
+theme_override_font_sizes/font_size = 25
+text = "Que es esto? Un par de borrachos vencio a mi ejercito especial?!"
+
+[node name="Sprite2D4" type="AnimatedSprite2D" parent="."]
+position = Vector2(3026, 396)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_egeh8")
+autoplay = "default"
+
+[node name="bossfight_interaction" type="Area2D" parent="Sprite2D4"]
+position = Vector2(-10086.7, -1320)
+scale = Vector2(3.33333, 3.33333)
+script = ExtResource("9_2nd7h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D4/bossfight_interaction"]
+position = Vector2(3052, 382)
+shape = SubResource("CircleShape2D_gnga6")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(1639, 259)
+shape = SubResource("RectangleShape2D_egeh8")
+
+[node name="OffscreenPeekHUD2" type="CanvasLayer" parent="."]
+layer = 3
+script = ExtResource("16_3yglq")
+
+[node name="Peek1" type="Control" parent="OffscreenPeekHUD2"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD2/Peek1"]
+material = SubResource("ShaderMaterial_ya0jw")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.275
+anchor_right = 0.25
+anchor_bottom = 0.275
+offset_top = 233.0
+offset_right = 110.0
+offset_bottom = 347.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SVP1" type="SubViewport" parent="OffscreenPeekHUD2"]
+process_priority = 3
+transparent_bg = true
+
+[node name="PeekCamera1" type="Camera2D" parent="OffscreenPeekHUD2/SVP1"]
+
+[node name="SVP2" type="SubViewport" parent="OffscreenPeekHUD2"]
+transparent_bg = true
+
+[node name="PeekCamera2" type="Camera2D" parent="OffscreenPeekHUD2/SVP2"]
+
+[node name="Peek2" type="Control" parent="OffscreenPeekHUD2"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Circle" type="TextureRect" parent="OffscreenPeekHUD2/Peek2"]
+material = SubResource("ShaderMaterial_ya0jw")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.399375
+anchor_top = 0.525
+anchor_right = 0.399375
+anchor_bottom = 0.525
+offset_left = -5.975
+offset_top = 450.0
+offset_right = 104.025
+offset_bottom = 564.0
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(1695.5, 636)
+shape = SubResource("RectangleShape2D_puveb")
+
+[node name="BlockCollider" type="Area2D" parent="."]
+script = ExtResource("18_vx3yo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockCollider"]
+position = Vector2(1932, 408)
+shape = SubResource("RectangleShape2D_0kg7m")
+
+[node name="warning_label" type="Label" parent="BlockCollider"]
+visible = false
+texture_filter = 1
+offset_left = 1791.0
+offset_top = 395.0
+offset_right = 2099.0
+offset_bottom = 424.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("11_jhjwr")
+theme_override_font_sizes/font_size = 20
+text = "¡No puedes avanzar más!"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BlockCollider/warning_label"]
+layout_mode = 0
+offset_right = 315.0
+offset_bottom = 40.0
+
+[node name="warning_timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Sprite2D4/bossfight_interaction" to="Sprite2D4/bossfight_interaction" method="_on_area_entered"]
+[connection signal="area_exited" from="Sprite2D4/bossfight_interaction" to="Sprite2D4/bossfight_interaction" method="_on_area_exited"]
+[connection signal="body_entered" from="BlockCollider" to="BlockCollider" method="_on_body_entered"]
+[connection signal="timeout" from="warning_timer" to="BlockCollider" method="_on_warning_timer_timeout"]
