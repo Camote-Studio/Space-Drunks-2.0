@@ -8,7 +8,7 @@ var player: CharacterBody2D = null
 var dead := false
 var reported_dead := false
 var target_in_range: CharacterBody2D = null
-@onready var audio_ataque: AudioStreamPlayer2D = $audio_golpe
+@onready var audio_ataque: AudioStreamPlayer2D = $hit
 @onready var label: Label = $Label
 @onready var bar_5: ProgressBar = $ProgressBar_enemy_3
 @onready var area: Area2D = $Area2D
@@ -64,7 +64,7 @@ var _combo_count := 0
 var _original_color: Color
 var _hitstun_tween: Tween
 
-const MONEDA = preload("res://Scenes/moneda.tscn")
+const MONEDA = preload("res://Scenes/Items/items_interectables/moneda.tscn")
 
 func _ready() -> void:
 	var players = get_tree().get_nodes_in_group("player")

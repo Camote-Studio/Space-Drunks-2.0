@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var next_scene_path: String = "res://Scenes/cinematic_level_1_f_3.tscn"
+@export var next_scene_path: String = "res://Scenes/Juego/Niveles/Nivel1/cinematic_level_1_f_3.tscn"
 var _scene_change_done := false
 
 func _on_body_entered(body: Node2D) -> void:

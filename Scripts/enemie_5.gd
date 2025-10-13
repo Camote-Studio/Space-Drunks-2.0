@@ -6,7 +6,7 @@ signal died
 # ===== Movimiento directo =====
 var speed := 200.0
 var accel := 1800.0
-const MONEDA = preload("res://Scenes/moneda.tscn")
+const MONEDA = preload("res://Scenes/Items/items_interectables/moneda.tscn")
 
 # ===== Agarre =====
 enum State { CHASE, GRAB }

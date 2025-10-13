@@ -1,11 +1,11 @@
-[gd_scene load_steps=34 format=3 uid="uid://boerlu017qoxc"]
+[gd_scene load_steps=35 format=3 uid="uid://boerlu017qoxc"]
 
 [ext_resource type="Script" path="res://Scripts/final_battle_level_1.gd" id="1_nkr87"]
 [ext_resource type="Texture2D" uid="uid://xenlds0o8ci6" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tk0fa"]
 [ext_resource type="Texture2D" uid="uid://c8ctvirugussx" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-2.png" id="3_f1e4r"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/Players/Player 1/player_1.tscn" id="4_f60m1"]
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/Players/Player 2/player_2.tscn" id="5_hvwlt"]
-[ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/final_boss.tscn" id="6_reli8"]
+[ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/Juego/Niveles/Nivel1/final_boss.tscn" id="6_reli8"]
 [ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="7_0mfdm"]
 [ext_resource type="PackedScene" uid="uid://cj0wechyf4nf1" path="res://Scenes/Players/Player 2/Armas_P2/poison_cloud.tscn" id="7_214cm"]
 [ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="8_0jhcm"]
@@ -22,11 +22,12 @@
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="18_5xp07"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="19_drcxw"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="20_3xxpn"]
-[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="21_g6gy1"]
+[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/Interfaz/UI/ui_abilities.tscn" id="21_g6gy1"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="22_xt53k"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_8hkf8"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="24_wnopm"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="25_oj735"]
+[ext_resource type="PackedScene" uid="uid://d7nmo4v4sth3" path="res://Scenes/Interfaz/GANASTE.tscn" id="28_eg25c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_082u5"]
 size = Vector2(139, 666)
@@ -377,3 +378,9 @@ scale = Vector2(1.3, 1.3)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(869, 245)
 shape = SubResource("RectangleShape2D_0jhcm")
+
+[node name="Ganaste" parent="." instance=ExtResource("28_eg25c")]
+visible = false
+position = Vector2(273, 24)
+rotation = -0.00284467
+scale = Vector2(0.122, 0.612)

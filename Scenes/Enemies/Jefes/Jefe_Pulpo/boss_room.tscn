@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dva108ycg7xae"]
 
-[ext_resource type="PackedScene" uid="uid://dtmkqgu30b82b" path="res://Scenes/final_boss_fight.tscn" id="1_4kqfc"]
+[ext_resource type="PackedScene" uid="uid://dtmkqgu30b82b" path="res://Scenes/Juego/Niveles/Nivel1/final_boss_fight.tscn" id="1_4kqfc"]
 
 [node name="BossRoom" type="Node2D"]
 

@@ -582,6 +582,7 @@ func _die() -> void:
 		if not reported_dead:
 			reported_dead = true
 			emit_signal("died")
+			
 		queue_free()
 
 func _on_sprite_2d_animation_finished() -> void:

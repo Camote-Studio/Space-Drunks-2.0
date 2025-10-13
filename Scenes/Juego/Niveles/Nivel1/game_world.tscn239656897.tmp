@@ -35,8 +35,8 @@
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_gf2tg"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="32_thxnh"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="33_8d0et"]
-[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/Interfaz/UI/ui_abilities.tscn" id="35_8sajs"]
-[ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/Enemies/System/Spawns/spawn_chicken.tscn" id="37_lmfx7"]
+[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="35_8sajs"]
+[ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
 [ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/Enemigo_CuerpoaCuerpo/Enemy_Pato.tscn" id="38_p5xse"]
 [ext_resource type="PackedScene" uid="uid://cv7d5uk4kvkke" path="res://Scenes/Npcs/Level1_1/among_fondo.tscn" id="39_p5xse"]
 [ext_resource type="PackedScene" uid="uid://beif8ubpee3oa" path="res://Scenes/Npcs/Level1_1/rick_fondo.tscn" id="40_6kdy0"]
@@ -513,6 +513,7 @@ metadata/_edit_use_anchors_ = true
 transparent_bg = true
 
 [node name="Pausa" parent="." instance=ExtResource("30_8yf3i")]
+visible = false
 
 [node name="starts_audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_o87y8")
