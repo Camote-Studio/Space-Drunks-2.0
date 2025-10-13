@@ -4,7 +4,7 @@ extends Area2D
 @export_enum("LEFT", "RIGHT", "TOP", "BOTTOM") var side: int = 0
 @export var push_strength: float = 30.0
 
-@onready var warning_label: Label = $warning_label
+@onready var warning_label: Label = $"../CanvasLayer/Control/warning_label"
 @onready var warning_timer: Timer = $"../warning_timer"
 
 func _ready() -> void:

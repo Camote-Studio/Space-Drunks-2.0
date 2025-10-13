@@ -3,7 +3,8 @@ extends Area2D
 var is_player_close := false
 const UNTITLED := preload("res://dialogues/untitled.dialogue")
 var is_dialogue_active := false
-@export var next_scene_path: String = "res://Scenes/final_battle_level_1.tscn"
+@export var next_scene_path: String = "res://Scenes/Juego/Niveles/Nivel1/final_battle_level_1.tscn"
+
 
 var _scene_change_done := false
 var _transitioning := false

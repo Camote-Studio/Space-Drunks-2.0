@@ -31,7 +31,7 @@ var walk_seed := 0.0
 var calm_start := 120.0
 var calm_end := 80.0
 
-const MONEDA = preload("res://Scenes/moneda.tscn")
+const MONEDA = preload("res://Scenes/Items/items_interectables/moneda.tscn")
 
 var _stack_value := 0.0
 var _label_base_pos := Vector2.ZERO

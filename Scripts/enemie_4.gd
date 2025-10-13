@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal damage(value: float)
 signal died
-const MONEDA = preload("res://Scenes/moneda.tscn")
+const MONEDA = preload("res://Scenes/Items/items_interectables/moneda.tscn")
 
 var speed := 150.0
 var player: CharacterBody2D = null
@@ -14,7 +14,7 @@ var player: CharacterBody2D = null
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var audio_laser: AudioStreamPlayer2D = $lasergun
 
-const BULLET_ENEMY_1 := preload("res://Scenes/gun_enemy_2.tscn")
+const BULLET_ENEMY_1 := preload("res://Scenes/Enemies/System/Weapons/gun_enemy_2.tscn")
 
 # "Anillo" de distancias (huye si está muy cerca, se acerca suave si está lejos)
 var min_range := 70.0

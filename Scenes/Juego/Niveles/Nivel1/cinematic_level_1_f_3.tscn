@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://qeb3bvcpouuv"]
+[gd_scene load_steps=46 format=3 uid="uid://qeb3bvcpouuv"]
 
 [ext_resource type="Texture2D" uid="uid://xenlds0o8ci6" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="1_ngw7g"]
 [ext_resource type="Script" path="res://Scripts/cinematic_level_1_f_3.gd" id="1_s6en7"]
@@ -11,13 +11,28 @@
 [ext_resource type="Script" path="res://Scripts/cinamatic_level_1_f_3_camera.gd" id="6_npmql"]
 [ext_resource type="Texture2D" uid="uid://ccfvct5yvy3y4" path="res://Assets/art/sprites/Enemigos/1.png" id="7_xeu1h"]
 [ext_resource type="Texture2D" uid="uid://bma6w4p6xhc1v" path="res://Assets/art/sprites/Enemigos/2.png" id="8_jhjwr"]
-[ext_resource type="Script" path="res://Scripts/bossfight_interaction.gd" id="9_2nd7h"]
+[ext_resource type="Script" uid="uid://d0e153eiw5cfr" path="res://Scripts/bossfight_interaction.gd" id="9_2nd7h"]
 [ext_resource type="Texture2D" uid="uid://c48q81hv7dorh" path="res://Assets/art/sprites/Enemigos/3.png" id="9_s6en7"]
 [ext_resource type="Texture2D" uid="uid://br0a1f6kw8a7e" path="res://Assets/art/sprites/Enemigos/4.png" id="10_2nd7h"]
+[ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="10_a6eeg"]
+[ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="11_7xdka"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="11_jhjwr"]
+[ext_resource type="Texture2D" uid="uid://ch6hbtjs06x3l" path="res://Assets/art/sprites/complements_sprites/shape_character.png" id="12_evb1v"]
+[ext_resource type="Texture2D" uid="uid://wgdd4pjcahpm" path="res://Assets/art/sprites/complements_sprites/characater_1_profile.png" id="13_s48h6"]
+[ext_resource type="Texture2D" uid="uid://3i466vl6hlny" path="res://Assets/art/sprites/complements_sprites/character_2_profile.png" id="14_01wa6"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="16_3yglq"]
+[ext_resource type="Texture2D" uid="uid://78uicu7sheov" path="res://Assets/art/sprites/complements_sprites/coin_1.png" id="16_top6e"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="17_foaxk"]
+[ext_resource type="Texture2D" uid="uid://dn3imkkyfogyt" path="res://Assets/art/sprites/complements_sprites/coin_2.png" id="17_rwtr5"]
+[ext_resource type="Texture2D" uid="uid://c5udsfo1kf8ja" path="res://Assets/art/sprites/complements_sprites/coin_3.png" id="18_6drji"]
 [ext_resource type="Script" path="res://Scripts/block_collider.gd" id="18_vx3yo"]
+[ext_resource type="Texture2D" uid="uid://bd3b6n6yc4blk" path="res://Assets/art/sprites/complements_sprites/coin_4.png" id="19_5iucp"]
+[ext_resource type="Texture2D" uid="uid://cyuhv8fianx7e" path="res://Assets/art/sprites/complements_sprites/coin_5.png" id="20_qs8ms"]
+[ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="21_fiidx"]
+[ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="22_nba51"]
+[ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="23_rr4kl"]
+[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/Interfaz/UI/ui_abilities.tscn" id="24_wp8tb"]
+[ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="33_7xdka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xeu1h"]
 size = Vector2(110, 660)
@@ -35,30 +50,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(3026, 396)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/Label:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/Label:text")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Que es esto? Un par de borrachos vencio a mi ejercito especial?!"]
 }
 
 [sub_resource type="Animation" id="Animation_gnga6"]
@@ -80,30 +71,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_2nd7h"]
 resource_name = "new_animation_2"
 length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/Label:text")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": ["¡¿Acaso mis soldados se quedaron bebiendo con ustedes?!", "¡¿Acaso mis soldados se quedaron bebiendo con ustedes?!"]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rg7yo"]
 _data = {
@@ -111,6 +78,35 @@ _data = {
 &"new_animation": SubResource("Animation_gnga6"),
 &"new_animation_2": SubResource("Animation_2nd7h")
 }
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b0d7d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_top6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_rwtr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_6drji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5iucp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_qs8ms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_fiidx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_nba51")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_egeh8"]
 animations = [{
@@ -236,17 +232,187 @@ autoplay = "new_animation"
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
+offset_left = 337.0
+offset_top = 186.0
+offset_right = 718.0
+offset_bottom = 315.0
+theme_override_font_sizes/font_size = 60
+text = "Ready?"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar_alien_1" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.76378
+anchor_bottom = 0.0555556
+offset_left = 98.0
+offset_top = 24.0
+offset_right = 190.125
+offset_bottom = 57.0
+scale = Vector2(0.12157, 0.612286)
+max_value = 200.0
+value = 200.0
+texture_under = ExtResource("10_a6eeg")
+texture_progress = ExtResource("11_7xdka")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 273.0
+offset_top = 24.0
+offset_right = 1245.0
+offset_bottom = 93.0
+rotation = -0.00284467
+scale = Vector2(0.122, 0.612)
+max_value = 400.0
+value = 400.0
+texture_under = ExtResource("10_a6eeg")
+texture_progress = ExtResource("11_7xdka")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+offset_left = 98.0
+offset_top = 62.0
+offset_right = 191.0
+offset_bottom = 78.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Veneno_p2" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.479864, 0.105582, 0.500942, 1)
+anchors_preset = -1
+anchor_top = -0.0169753
+anchor_bottom = -0.0169753
+offset_left = 287.0
+offset_top = 102.33333
+offset_right = 380.0
+offset_bottom = 118.33333
+max_value = 200.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+offset_left = 289.0
+offset_top = 63.0
+offset_right = 367.0
+offset_bottom = 79.0
+max_value = 200.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(77, 51)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_evb1v")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(264, 58)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_evb1v")
+
+[node name="Characater1Profile" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-offset_left = 103.0
-offset_top = 584.0
-offset_right = 1106.0
-offset_bottom = 620.0
+position = Vector2(80, 51)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_s48h6")
+
+[node name="Character2Profile" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(265, 50)
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("14_01wa6")
+
+[node name="cont monedas2" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.155
+anchor_top = 0.198
+anchor_right = 0.155
+anchor_bottom = 0.198
+offset_left = -8.600006
+offset_top = -116.84
+offset_right = 18.399994
+offset_bottom = -69.84
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("11_jhjwr")
+theme_override_font_sizes/font_size = 33
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(77, 118)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_b0d7d")
+autoplay = "default"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(267, 121)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_b0d7d")
+autoplay = "default"
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+position = Vector2(1073, 140)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("23_rr4kl")
+
+[node name="cont monedas" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.109
+anchor_top = 0.179
+anchor_right = 0.109
+anchor_bottom = 0.179
+offset_left = -106.28
+offset_top = -98.32001
+offset_right = -82.28
+offset_bottom = -51.320007
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("11_jhjwr")
+theme_override_font_sizes/font_size = 33
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("24_wp8tb")]
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="warning_label" type="Label" parent="CanvasLayer/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 1791.0
+offset_top = 395.0
+offset_right = 2099.0
+offset_bottom = 424.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 15
 theme_override_fonts/font = ExtResource("11_jhjwr")
-theme_override_font_sizes/font_size = 25
-text = "Que es esto? Un par de borrachos vencio a mi ejercito especial?!"
+theme_override_font_sizes/font_size = 20
+text = "¡No puedes avanzar más!"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/warning_label"]
+layout_mode = 0
+offset_right = 315.0
+offset_bottom = 40.0
 
 [node name="Sprite2D4" type="AnimatedSprite2D" parent="."]
 position = Vector2(3026, 396)
@@ -359,6 +525,8 @@ offset_right = 315.0
 offset_bottom = 40.0
 
 [node name="warning_timer" type="Timer" parent="."]
+
+[node name="Pausa" parent="." instance=ExtResource("33_7xdka")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Sprite2D4/bossfight_interaction" to="Sprite2D4/bossfight_interaction" method="_on_area_entered"]

@@ -5,11 +5,11 @@ signal died
 @onready var audio_laser : AudioStreamPlayer2D = $laser
 var speed := 300
 var player: CharacterBody2D = null
-const BULLET_ENEMY_1 = preload("res://Scenes/gun_enemy_1.tscn")
+const BULLET_ENEMY_1 = preload("res://Scenes/Enemies/System/Weapons/gun_enemy_1.tscn")
 @onready var label: Label = $Label
 @onready var bar_3: ProgressBar = $ProgressBar_enemy
 @onready var anim: AnimatedSprite2D = $Sprite2D
-const MONEDA = preload("res://Scenes/moneda.tscn")
+const MONEDA = preload("res://Scenes/Items/items_interectables/moneda.tscn")
 var min_range := 250.0
 var max_range := 280.0
 var attack_range := 400.0

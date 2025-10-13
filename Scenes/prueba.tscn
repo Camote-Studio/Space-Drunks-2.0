@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c032kec47evi8"]
+[gd_scene load_steps=48 format=3 uid="uid://b0axgdu0b3kqu"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_j428k"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_pkve7"]
