@@ -8,7 +8,7 @@ var poison_ready: bool = false
 var selecting_poison: bool = false
 var poison_preview: Node2D = null
 
-@onready var veneno_couldown: ProgressBar = $"../CanvasLayer/Veneno_p2"
+@onready var veneno_couldown: ProgressBar = $"../../CanvasLayer/Veneno_p2"
 @export var poison_area_scene: PackedScene
 @export var poison_cursor_speed := 700.0
 @export var poison_cooldown_duration := 20.0
@@ -60,10 +60,10 @@ var punch_base_dmg := {
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
 @onready var sonido_ulti: AudioStreamPlayer2D = $sonido_ulti
-@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
+@onready var bar: TextureProgressBar = $"../../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var bar_ability_2: ProgressBar = $"../CanvasLayer/ProgressBar_ability_2"
-@onready var coin_label: Label = $"../CanvasLayer/cont monedas2"
+@onready var bar_ability_2: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_2"
+@onready var coin_label: Label = $"../../CanvasLayer/cont monedas2"
 
 # --- Movimiento ---
 var speed := 220

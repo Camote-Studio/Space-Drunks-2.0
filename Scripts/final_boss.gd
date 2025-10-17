@@ -17,7 +17,7 @@ var player: CharacterBody2D = null
 @onready var sfx_hit: AudioStreamPlayer2D = $hit
 @onready var punch_timer: Timer = $Punch_timer
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
-@onready var bar_boss: TextureProgressBar = $"../CanvasLayer/ProgressBar_boss"
+@onready var bar_boss: ProgressBar = $ProgressBar_boss 
 
 # ---------- RANGOS / ATAQUE ----------
 var min_range := 70.0

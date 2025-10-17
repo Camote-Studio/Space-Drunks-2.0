@@ -56,11 +56,9 @@ _data = {
 }
 
 [node name="LaptopAnimación" type="CanvasLayer"]
-visible = false
 script = ExtResource("1_fv1lm")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 offset_left = -12.0
 offset_right = 1163.0
 offset_bottom = 74.0
