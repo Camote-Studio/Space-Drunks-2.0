@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://boerlu017qoxc"]
+[gd_scene load_steps=36 format=3 uid="uid://boerlu017qoxc"]
 
 [ext_resource type="Script" path="res://Scripts/final_battle_level_1.gd" id="1_nkr87"]
 [ext_resource type="Texture2D" uid="uid://xenlds0o8ci6" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tk0fa"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="24_wnopm"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="25_oj735"]
 [ext_resource type="PackedScene" uid="uid://d7nmo4v4sth3" path="res://Scenes/Interfaz/GANASTE.tscn" id="28_eg25c"]
+[ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="29_qwisf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_082u5"]
 size = Vector2(139, 666)
@@ -37,6 +38,9 @@ size = Vector2(139, 661)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbu76"]
 size = Vector2(1722, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jhcm"]
+size = Vector2(1587, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8fis1"]
 animations = [{
@@ -70,63 +74,83 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uoq7l"]
 shader = ExtResource("25_oj735")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jhcm"]
-size = Vector2(1587, 18)
-
 [node name="Final_battle_level_1" type="Node2D"]
 script = ExtResource("1_nkr87")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Ganaste" parent="." node_paths=PackedStringArray("final_boss", "mundo_del_juego", "interfaz_juego") instance=ExtResource("28_eg25c")]
+visible = false
+final_boss = NodePath("../Gameworld/Final_Boss")
+mundo_del_juego = NodePath("../Gameworld")
+interfaz_juego = NodePath("../CanvasLayer")
+
+[node name="Gameworld" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Gameworld" groups=["camara", "main_camera"]]
+position = Vector2(706, 301)
+position_smoothing_enabled = true
+script = ExtResource("22_xt53k")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gameworld"]
 visible = false
 texture_filter = 1
 position = Vector2(817, 171)
 texture = ExtResource("2_tk0fa")
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
+[node name="Sprite2D3" type="Sprite2D" parent="Gameworld"]
 texture_filter = 1
 position = Vector2(1344, 151)
 texture = ExtResource("2_tk0fa")
 
-[node name="PISO" type="Sprite2D" parent="."]
+[node name="PISO" type="Sprite2D" parent="Gameworld"]
 texture_filter = 1
 position = Vector2(-345, 56)
 scale = Vector2(1.084, 1)
 texture = ExtResource("3_f1e4r")
 centered = false
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="Gameworld"]
 position = Vector2(-249, 212)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D"]
 position = Vector2(59.5, 317)
 shape = SubResource("RectangleShape2D_082u5")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="Gameworld"]
 position = Vector2(420, 223)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D2"]
 position = Vector2(1247, 297)
 shape = SubResource("RectangleShape2D_dwh8s")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+[node name="StaticBody2D3" type="StaticBody2D" parent="Gameworld"]
 position = Vector2(-104, 213)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D3"]
 position = Vector2(844, 637)
 shape = SubResource("RectangleShape2D_gbu76")
 
-[node name="Player_1" parent="." instance=ExtResource("4_f60m1")]
+[node name="Player_1" parent="Gameworld" instance=ExtResource("4_f60m1")]
 position = Vector2(288, 519)
 
-[node name="Player_2" parent="." instance=ExtResource("5_hvwlt")]
+[node name="Player_2" parent="Gameworld" instance=ExtResource("5_hvwlt")]
 position = Vector2(314, 686)
 
-[node name="Final_Boss" parent="." instance=ExtResource("6_reli8")]
+[node name="Final_Boss" parent="Gameworld" instance=ExtResource("6_reli8")]
 position = Vector2(1298, 597)
 scale = Vector2(1, 1)
 frames_face_right = false
 default_anim = "default"
 poison_scene = ExtResource("7_214cm")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Gameworld"]
+position = Vector2(-317.00003, 99)
+scale = Vector2(1.3, 1.3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D4"]
+position = Vector2(869, 245)
+shape = SubResource("RectangleShape2D_0jhcm")
+
+[node name="Sombras_transición2" parent="Gameworld" instance=ExtResource("29_qwisf")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -307,11 +331,6 @@ metadata/_edit_use_anchors_ = true
 [node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("21_g6gy1")]
 metadata/_edit_use_anchors_ = true
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["camara", "main_camera"]]
-position = Vector2(706, 301)
-position_smoothing_enabled = true
-script = ExtResource("22_xt53k")
-
 [node name="GameOver" parent="." instance=ExtResource("23_8hkf8")]
 
 [node name="OffscreenPeekHUD2" type="CanvasLayer" parent="."]
@@ -370,17 +389,3 @@ offset_left = -5.975
 offset_top = 450.0
 offset_right = 104.025
 offset_bottom = 564.0
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(-317.00003, 99)
-scale = Vector2(1.3, 1.3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(869, 245)
-shape = SubResource("RectangleShape2D_0jhcm")
-
-[node name="Ganaste" parent="." instance=ExtResource("28_eg25c")]
-visible = false
-position = Vector2(273, 24)
-rotation = -0.00284467
-scale = Vector2(0.122, 0.612)
