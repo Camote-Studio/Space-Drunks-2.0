@@ -1,3 +1,24 @@
-# Godot 4+ specific ignores
+# Godot 4 (cache/editor)
 .godot/
-/android/
+
+# Godot 3 legacy cache
+.import/
+
+# Builds/exportados
+/export/
+/bin/
+*.pck
+*.exe
+*.apk
+*.aab
+*.zip
+*.html
+*.wasm
+
+# IDE/OS basura
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
