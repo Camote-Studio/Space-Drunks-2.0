@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bisd4uj4asd8c"
-path="res://.godot/imported/gato.png-bfc904afbb3807e8e3f4c743db5077f7.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/gato.png"
-dest_files=["res://.godot/imported/gato.png-bfc904afbb3807e8e3f4c743db5077f7.ctex"]
 
 [params]
 

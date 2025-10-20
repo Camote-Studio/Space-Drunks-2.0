@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cv8kpsuyk8cko"
-path="res://.godot/imported/ALien_Cuchillas.png-f2235b7ff0335e00ea97c230c6d68c77.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Enemigos/ALien_Cuchillas.png"
-dest_files=["res://.godot/imported/ALien_Cuchillas.png-f2235b7ff0335e00ea97c230c6d68c77.ctex"]
 
 [params]
 

@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://di04auyf1hqbe"
-path="res://.godot/imported/Sin_titulo-2.png-50991e29e7a0437bd7d73368db32a081.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/Sin_titulo-2.png"
-dest_files=["res://.godot/imported/Sin_titulo-2.png-50991e29e7a0437bd7d73368db32a081.ctex"]
 
 [params]
 

@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dv4mxe6xtocju"
-path="res://.godot/imported/ded2.png-7ae8b7f5214032f4755d37403e2d0cff.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/ded2.png"
-dest_files=["res://.godot/imported/ded2.png-7ae8b7f5214032f4755d37403e2d0cff.ctex"]
 
 [params]
 

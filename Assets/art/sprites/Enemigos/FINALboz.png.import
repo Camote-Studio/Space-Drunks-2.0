@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckvb4w6t1iqik"
-path="res://.godot/imported/FINALboz.png-02f7908ce697e47792b05be4c2eae7cc.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Enemigos/FINALboz.png"
-dest_files=["res://.godot/imported/FINALboz.png-02f7908ce697e47792b05be4c2eae7cc.ctex"]
 
 [params]
 

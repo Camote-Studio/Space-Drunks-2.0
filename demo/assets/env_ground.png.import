@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cc7b22sy46gwn"
-path="res://.godot/imported/env_ground.png-b29c6c47be0779294403cf6615d9dae2.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://demo/assets/env_ground.png"
-dest_files=["res://.godot/imported/env_ground.png-b29c6c47be0779294403cf6615d9dae2.ctex"]
 
 [params]
 

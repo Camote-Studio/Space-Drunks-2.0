@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b53b0g6a2qciq"
-path="res://.godot/imported/BULLET_BOSS.png-8531b9f8ebe9f30d47676f6b9074aee0.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Armas/Proyectiles/BULLET_BOSS.png"
-dest_files=["res://.godot/imported/BULLET_BOSS.png-8531b9f8ebe9f30d47676f6b9074aee0.ctex"]
 
 [params]
 

@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4qa57b30eobn"
-path="res://.godot/imported/EFFECT_ICON.png-9b8ed86e2be3e34ab10a31c3021a91d4.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/Options/EFFECT_ICON.png"
-dest_files=["res://.godot/imported/EFFECT_ICON.png-9b8ed86e2be3e34ab10a31c3021a91d4.ctex"]
 
 [params]
 

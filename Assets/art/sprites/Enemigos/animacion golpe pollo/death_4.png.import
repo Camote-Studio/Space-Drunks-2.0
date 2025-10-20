@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1iqwtk5a8vgm"
-path="res://.godot/imported/death_4.png-d44b923fce80af6adb1f7cedf833e6a7.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Enemigos/animacion golpe pollo/death_4.png"
-dest_files=["res://.godot/imported/death_4.png-d44b923fce80af6adb1f7cedf833e6a7.ctex"]
 
 [params]
 

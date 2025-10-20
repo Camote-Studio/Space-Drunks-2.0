@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1s1qgyqmudke"
-path="res://.godot/imported/pre_06.png-ad76b7b46edda599dee542429ded3af0.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/predator_fondo/pre_06.png"
-dest_files=["res://.godot/imported/pre_06.png-ad76b7b46edda599dee542429ded3af0.ctex"]
 
 [params]
 

@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bj8kvsqukofap"
-path="res://.godot/imported/gUN2.png-6f43c0b62bb34970a5139b66b793eaad.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Armas/gUN2.png"
-dest_files=["res://.godot/imported/gUN2.png-6f43c0b62bb34970a5139b66b793eaad.ctex"]
 
 [params]
 

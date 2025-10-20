@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://laanlbjfwe5c"
-path="res://.godot/imported/b13.png-0afafa92f151097c9c3ce2ea40684425.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/bender/b13.png"
-dest_files=["res://.godot/imported/b13.png-0afafa92f151097c9c3ce2ea40684425.ctex"]
 
 [params]
 

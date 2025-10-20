@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbcbw34lsvswd"
-path="res://.godot/imported/XEno.png-dc72e6bf136be89416faadd4bf971c54.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/XEno.png"
-dest_files=["res://.godot/imported/XEno.png-dc72e6bf136be89416faadd4bf971c54.ctex"]
 
 [params]
 

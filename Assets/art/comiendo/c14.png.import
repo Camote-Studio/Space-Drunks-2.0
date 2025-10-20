@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvo16gmnyaqit"
-path="res://.godot/imported/c14.png-7507ee15d4f6363c78353747fde4f66b.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/comiendo/c14.png"
-dest_files=["res://.godot/imported/c14.png-7507ee15d4f6363c78353747fde4f66b.ctex"]
 
 [params]
 

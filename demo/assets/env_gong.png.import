@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://i476iia1ua8q"
-path="res://.godot/imported/env_gong.png-22c1657db8aed530e7d811b2b20b4a2d.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://demo/assets/env_gong.png"
-dest_files=["res://.godot/imported/env_gong.png-22c1657db8aed530e7d811b2b20b4a2d.ctex"]
 
 [params]
 

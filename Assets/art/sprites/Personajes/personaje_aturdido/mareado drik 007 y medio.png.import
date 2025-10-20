@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://brit4vh8mksc0"
-path="res://.godot/imported/mareado drik 007 y medio.png-a35c9bf6d45bccf42097ec58af2a42cc.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 007 y medio.png"
-dest_files=["res://.godot/imported/mareado drik 007 y medio.png-a35c9bf6d45bccf42097ec58af2a42cc.ctex"]
 
 [params]
 

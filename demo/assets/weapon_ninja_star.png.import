@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2uyxh7sy8qny"
-path="res://.godot/imported/weapon_ninja_star.png-be058a7d9eff80095d1c513b22f898e0.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://demo/assets/weapon_ninja_star.png"
-dest_files=["res://.godot/imported/weapon_ninja_star.png-be058a7d9eff80095d1c513b22f898e0.ctex"]
 
 [params]
 

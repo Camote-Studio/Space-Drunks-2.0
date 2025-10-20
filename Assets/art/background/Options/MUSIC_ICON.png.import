@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5wi4qad3ilxa"
-path="res://.godot/imported/MUSIC_ICON.png-1c7e4b653dcb6a1741db80518d76eccc.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/Options/MUSIC_ICON.png"
-dest_files=["res://.godot/imported/MUSIC_ICON.png-1c7e4b653dcb6a1741db80518d76eccc.ctex"]
 
 [params]
 

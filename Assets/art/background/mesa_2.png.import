@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cmg5786amr7vb"
-path="res://.godot/imported/mesa_2.png-cab0325617867db33b37df452e8547e6.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/mesa_2.png"
-dest_files=["res://.godot/imported/mesa_2.png-cab0325617867db33b37df452e8547e6.ctex"]
 
 [params]
 

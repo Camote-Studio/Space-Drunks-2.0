@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://buyk5u1o0yp5g"
-path="res://.godot/imported/Ominit.png-ae208cc83170ddd8d045824e04aec96e.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/Ominit.png"
-dest_files=["res://.godot/imported/Ominit.png-ae208cc83170ddd8d045824e04aec96e.ctex"]
 
 [params]
 

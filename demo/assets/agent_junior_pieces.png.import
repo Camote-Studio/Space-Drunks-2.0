@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0oeqsc0xksto"
-path="res://.godot/imported/agent_junior_pieces.png-95690b27968ceea039daac5098fd3722.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://demo/assets/agent_junior_pieces.png"
-dest_files=["res://.godot/imported/agent_junior_pieces.png-95690b27968ceea039daac5098fd3722.ctex"]
 
 [params]
 

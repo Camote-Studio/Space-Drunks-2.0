@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jwwhfgs4q7a8"
-path="res://.godot/imported/EXPLO_2.png-afd75ad67c13df127c87e4fe646662fb.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Particulas/EXPLO_2.png"
-dest_files=["res://.godot/imported/EXPLO_2.png-afd75ad67c13df127c87e4fe646662fb.ctex"]
 
 [params]
 

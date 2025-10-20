@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbhiqlbuk1stk"
-path="res://.godot/imported/17_felspell_spritesheet.png-c8e1449b1b2ec156bcf718cdc64f55db.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Armas/17_felspell_spritesheet.png"
-dest_files=["res://.godot/imported/17_felspell_spritesheet.png-c8e1449b1b2ec156bcf718cdc64f55db.ctex"]
 
 [params]
 

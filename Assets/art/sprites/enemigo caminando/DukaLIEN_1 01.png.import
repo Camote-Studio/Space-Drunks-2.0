@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcq5fjlrfqens"
-path="res://.godot/imported/DukaLIEN_1 01.png-d1251e398f1a3a8aa43228e60ab8a367.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/enemigo caminando/DukaLIEN_1 01.png"
-dest_files=["res://.godot/imported/DukaLIEN_1 01.png-d1251e398f1a3a8aa43228e60ab8a367.ctex"]
 
 [params]
 

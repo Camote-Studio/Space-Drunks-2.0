@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xg4tso4uecw0"
-path="res://.godot/imported/robot3.png-827efbc9e571cfdf83cfb1e7bc049828.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/robot/robot3.png"
-dest_files=["res://.godot/imported/robot3.png-827efbc9e571cfdf83cfb1e7bc049828.ctex"]
 
 [params]
 

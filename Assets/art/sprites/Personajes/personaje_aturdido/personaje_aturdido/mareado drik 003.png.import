@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwyxsdcenf3d2"
-path="res://.godot/imported/mareado drik 003.png-35312606ef2f774aab0774a3bc247b95.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/personaje_aturdido/personaje_aturdido/mareado drik 003.png"
-dest_files=["res://.godot/imported/mareado drik 003.png-35312606ef2f774aab0774a3bc247b95.ctex"]
 
 [params]
 

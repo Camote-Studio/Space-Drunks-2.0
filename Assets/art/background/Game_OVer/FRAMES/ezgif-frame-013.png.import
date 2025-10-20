@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjtv81m824cpw"
-path="res://.godot/imported/ezgif-frame-013.png-e43c61c669a6199e95883500a0f23577.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/Game_OVer/FRAMES/ezgif-frame-013.png"
-dest_files=["res://.godot/imported/ezgif-frame-013.png-e43c61c669a6199e95883500a0f23577.ctex"]
 
 [params]
 

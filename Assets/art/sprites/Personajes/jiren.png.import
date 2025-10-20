@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pm4yf024fqrx"
-path="res://.godot/imported/jiren.png-900adb829ac4c8612e004f72091a4125.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/jiren.png"
-dest_files=["res://.godot/imported/jiren.png-900adb829ac4c8612e004f72091a4125.ctex"]
 
 [params]
 

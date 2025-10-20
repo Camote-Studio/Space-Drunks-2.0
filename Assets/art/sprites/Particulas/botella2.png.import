@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0bgh5tclpcu"
-path="res://.godot/imported/botella2.png-059848094baf2fc28ad16887d6f136dc.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Particulas/botella2.png"
-dest_files=["res://.godot/imported/botella2.png-059848094baf2fc28ad16887d6f136dc.ctex"]
 
 [params]
 

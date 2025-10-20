@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://crrpeva67ee5v"
-path="res://.godot/imported/drunk_tubbi.png-73cc6f56181ae170f65d75912d4546c1.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/drunk_tubbi.png"
-dest_files=["res://.godot/imported/drunk_tubbi.png-73cc6f56181ae170f65d75912d4546c1.ctex"]
 
 [params]
 

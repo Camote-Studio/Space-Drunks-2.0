@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://l042ovqqsy3l"
-path="res://.godot/imported/agent_skirmisher.png-fb22c42e0c82e689e3a451b83b1f6ff9.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://demo/assets/agent_skirmisher.png"
-dest_files=["res://.godot/imported/agent_skirmisher.png-fb22c42e0c82e689e3a451b83b1f6ff9.ctex"]
 
 [params]
 

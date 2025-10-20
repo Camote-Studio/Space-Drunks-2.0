@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://yyky48pqoy0o"
-path="res://.godot/imported/B0t_Parlante.png-1cb71e5ef5531482c94861af803ee736.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/B0t_Parlante.png"
-dest_files=["res://.godot/imported/B0t_Parlante.png-1cb71e5ef5531482c94861af803ee736.ctex"]
 
 [params]
 

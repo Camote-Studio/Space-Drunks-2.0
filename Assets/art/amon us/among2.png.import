@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2ep0fmj85wm8"
-path="res://.godot/imported/among2.png-b2657b7de19b697d3115868d375e6889.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/amon us/among2.png"
-dest_files=["res://.godot/imported/among2.png-b2657b7de19b697d3115868d375e6889.ctex"]
 
 [params]
 

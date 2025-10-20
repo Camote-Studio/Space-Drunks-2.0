@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ce16nc0wy2s8"
-path="res://.godot/imported/agent_charger.png-4fbef6fc86342f0b358c84f3e6790641.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://demo/assets/agent_charger.png"
-dest_files=["res://.godot/imported/agent_charger.png-4fbef6fc86342f0b358c84f3e6790641.ctex"]
 
 [params]
 

@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cejvgf4718hib"
-path="res://.godot/imported/Punch3.png-11d0945fd4020af9496681abe93add2c.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Armas/Punch3.png"
-dest_files=["res://.godot/imported/Punch3.png-11d0945fd4020af9496681abe93add2c.ctex"]
 
 [params]
 

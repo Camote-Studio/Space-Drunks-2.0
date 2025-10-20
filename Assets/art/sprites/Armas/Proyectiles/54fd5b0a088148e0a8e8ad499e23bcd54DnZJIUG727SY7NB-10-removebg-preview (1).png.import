@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbk0pyovu88o1"
-path="res://.godot/imported/54fd5b0a088148e0a8e8ad499e23bcd54DnZJIUG727SY7NB-10-removebg-preview (1).png-802b4aaf0e2b59f97bdaea655d5017cc.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Armas/Proyectiles/54fd5b0a088148e0a8e8ad499e23bcd54DnZJIUG727SY7NB-10-removebg-preview (1).png"
-dest_files=["res://.godot/imported/54fd5b0a088148e0a8e8ad499e23bcd54DnZJIUG727SY7NB-10-removebg-preview (1).png-802b4aaf0e2b59f97bdaea655d5017cc.ctex"]
 
 [params]
 

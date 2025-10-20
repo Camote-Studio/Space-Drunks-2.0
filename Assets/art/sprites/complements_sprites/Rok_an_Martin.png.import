@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwpjle83jyh81"
-path="res://.godot/imported/Rok_an_Martin.png-9666154775e75c1deaad95250d95573b.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/Rok_an_Martin.png"
-dest_files=["res://.godot/imported/Rok_an_Martin.png-9666154775e75c1deaad95250d95573b.ctex"]
 
 [params]
 

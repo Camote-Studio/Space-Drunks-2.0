@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3i466vl6hlny"
-path="res://.godot/imported/character_2_profile.png-d08e7acc1c2311aa6d2cceff5691a8ed.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/character_2_profile.png"
-dest_files=["res://.godot/imported/character_2_profile.png-d08e7acc1c2311aa6d2cceff5691a8ed.ctex"]
 
 [params]
 

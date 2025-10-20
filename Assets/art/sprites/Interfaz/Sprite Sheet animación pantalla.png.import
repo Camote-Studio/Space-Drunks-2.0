@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://diy2ok3f0coui"
-path="res://.godot/imported/Sprite Sheet animación pantalla.png-176fc5cf2aafb49a141149ce598dbdab.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Interfaz/Sprite Sheet animación pantalla.png"
-dest_files=["res://.godot/imported/Sprite Sheet animación pantalla.png-176fc5cf2aafb49a141149ce598dbdab.ctex"]
 
 [params]
 

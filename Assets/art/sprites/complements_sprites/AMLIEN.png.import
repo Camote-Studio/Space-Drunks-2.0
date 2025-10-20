@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhxc55aqocsqf"
-path="res://.godot/imported/AMLIEN.png-45d04098c7053a2d84b6024c2a3da20e.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/AMLIEN.png"
-dest_files=["res://.godot/imported/AMLIEN.png-45d04098c7053a2d84b6024c2a3da20e.ctex"]
 
 [params]
 

@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bh0s2evkskx2s"
-path="res://.godot/imported/UX.jpg-c96e9fc131c44bb559226775a8508eaa.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/Options/UX.jpg"
-dest_files=["res://.godot/imported/UX.jpg-c96e9fc131c44bb559226775a8508eaa.ctex"]
 
 [params]
 

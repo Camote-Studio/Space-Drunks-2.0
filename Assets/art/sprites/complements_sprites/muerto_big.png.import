@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfdl2a85ebqll"
-path="res://.godot/imported/muerto_big.png-f4ce2b1e9209a2e2b780b61766d8726c.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/muerto_big.png"
-dest_files=["res://.godot/imported/muerto_big.png-f4ce2b1e9209a2e2b780b61766d8726c.ctex"]
 
 [params]
 

@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjvvb4lk2yv8t"
-path="res://.godot/imported/SmolT.png-a0d518dc9bccdbbdec29dbcd778f485a.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/SmolT.png"
-dest_files=["res://.godot/imported/SmolT.png-a0d518dc9bccdbbdec29dbcd778f485a.ctex"]
 
 [params]
 

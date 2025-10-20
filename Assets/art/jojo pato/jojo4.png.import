@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3jyi500bcllk"
-path="res://.godot/imported/jojo4.png-7be118af271f1ab9b24b8ab1a8c864c2.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/jojo pato/jojo4.png"
-dest_files=["res://.godot/imported/jojo4.png-7be118af271f1ab9b24b8ab1a8c864c2.ctex"]
 
 [params]
 

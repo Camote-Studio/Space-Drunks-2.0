@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://h1vd3es682lp"
-path="res://.godot/imported/descarga.png-d4caf399d8328dfa5bb5970c4f01e311.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/descarga.png"
-dest_files=["res://.godot/imported/descarga.png-d4caf399d8328dfa5bb5970c4f01e311.ctex"]
 
 [params]
 

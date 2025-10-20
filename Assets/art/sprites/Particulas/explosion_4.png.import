@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cn7o86lwnw2ru"
-path="res://.godot/imported/explosion_4.png-ebcc66e757c11143c48ff867b8205e6f.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Particulas/explosion_4.png"
-dest_files=["res://.godot/imported/explosion_4.png-ebcc66e757c11143c48ff867b8205e6f.ctex"]
 
 [params]
 

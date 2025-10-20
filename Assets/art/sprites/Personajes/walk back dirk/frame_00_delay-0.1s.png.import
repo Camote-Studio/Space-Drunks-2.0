@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0naf7veiepit"
-path="res://.godot/imported/frame_00_delay-0.1s.png-d570880c35469a752565672b335eafd0.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/walk back dirk/frame_00_delay-0.1s.png"
-dest_files=["res://.godot/imported/frame_00_delay-0.1s.png-d570880c35469a752565672b335eafd0.ctex"]
 
 [params]
 

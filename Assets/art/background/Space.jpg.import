@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkwdwtyxnwitn"
-path="res://.godot/imported/Space.jpg-962f1981303007d478428a2e3f627b89.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/Space.jpg"
-dest_files=["res://.godot/imported/Space.jpg-962f1981303007d478428a2e3f627b89.ctex"]
 
 [params]
 

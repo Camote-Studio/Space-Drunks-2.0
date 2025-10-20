@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d4edlffnyj7py"
-path="res://.godot/imported/militar kirk.png-9bc18eb0d5233d5dac292a403601e8d1.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/militar kirk.png"
-dest_files=["res://.godot/imported/militar kirk.png-9bc18eb0d5233d5dac292a403601e8d1.ctex"]
 
 [params]
 

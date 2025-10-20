@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://do1elbfuu5pbn"
-path="res://.godot/imported/PAUSA.png-2f3426bce4fb7de4c2719e1d5ec31355.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/background/PAUSA.png"
-dest_files=["res://.godot/imported/PAUSA.png-2f3426bce4fb7de4c2719e1d5ec31355.ctex"]
 
 [params]
 

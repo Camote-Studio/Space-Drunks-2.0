@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://usu3j55d6dgc"
-path="res://.godot/imported/agent_melee_nuanced.png-653a64ea55e3175afadb5b209be8b1d0.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://demo/assets/agent_melee_nuanced.png"
-dest_files=["res://.godot/imported/agent_melee_nuanced.png-653a64ea55e3175afadb5b209be8b1d0.ctex"]
 
 [params]
 

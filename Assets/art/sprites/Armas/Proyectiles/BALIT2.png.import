@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvgvd26qrxocj"
-path="res://.godot/imported/BALIT2.png-3cc0e1eab181dc3cec86186fefbf5784.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Armas/Proyectiles/BALIT2.png"
-dest_files=["res://.godot/imported/BALIT2.png-3cc0e1eab181dc3cec86186fefbf5784.ctex"]
 
 [params]
 

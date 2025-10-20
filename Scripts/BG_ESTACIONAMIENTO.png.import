@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dt4w2krqhrqhn"
-path="res://.godot/imported/BG_ESTACIONAMIENTO.png-0a7752bd8d38569ef4da6e0e481a8c8d.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Scripts/BG_ESTACIONAMIENTO.png"
-dest_files=["res://.godot/imported/BG_ESTACIONAMIENTO.png-0a7752bd8d38569ef4da6e0e481a8c8d.ctex"]
 
 [params]
 

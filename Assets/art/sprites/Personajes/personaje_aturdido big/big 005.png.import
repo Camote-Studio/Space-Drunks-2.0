@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6yfm161c5s83"
-path="res://.godot/imported/big 005.png-33bc8807426734363c9e4853e0586ca4.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/personaje_aturdido big/big 005.png"
-dest_files=["res://.godot/imported/big 005.png-33bc8807426734363c9e4853e0586ca4.ctex"]
 
 [params]
 

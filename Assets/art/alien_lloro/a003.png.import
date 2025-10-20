@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bai0trkum7hcj"
-path="res://.godot/imported/a003.png-8212b716afa8723ff161107a87d20509.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/alien_lloro/a003.png"
-dest_files=["res://.godot/imported/a003.png-8212b716afa8723ff161107a87d20509.ctex"]
 
 [params]
 

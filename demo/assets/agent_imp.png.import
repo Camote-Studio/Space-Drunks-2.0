@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://h70okn6hmxum"
-path="res://.godot/imported/agent_imp.png-9fb23c43583296c91b2a8a01f05daad9.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://demo/assets/agent_imp.png"
-dest_files=["res://.godot/imported/agent_imp.png-9fb23c43583296c91b2a8a01f05daad9.ctex"]
 
 [params]
 

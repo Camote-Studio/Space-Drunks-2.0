@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://utiob1a6hkk0"
-path="res://.godot/imported/ET.png-646b364f8c820ff3423355bebf757ca3.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/ET.png"
-dest_files=["res://.godot/imported/ET.png-646b364f8c820ff3423355bebf757ca3.ctex"]
 
 [params]
 

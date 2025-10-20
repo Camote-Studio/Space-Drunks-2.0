@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bih1njcgtuxpr"
-path="res://.godot/imported/Bottle_menu_hover.png-86fff06018402fdc087e0f01ea2ec95d.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Interfaz/Bottle_menu_hover.png"
-dest_files=["res://.godot/imported/Bottle_menu_hover.png-86fff06018402fdc087e0f01ea2ec95d.ctex"]
 
 [params]
 

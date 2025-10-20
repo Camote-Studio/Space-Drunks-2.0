@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgtlosh2hldab"
-path="res://.godot/imported/Dirk_Laser.png-1ca803a60cee49f2384caed9f4894722.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://Assets/art/sprites/Armas/Proyectiles/Dirk_Laser.png"
-dest_files=["res://.godot/imported/Dirk_Laser.png-1ca803a60cee49f2384caed9f4894722.ctex"]
 
 [params]
 
