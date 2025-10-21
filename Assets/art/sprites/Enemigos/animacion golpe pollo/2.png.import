@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7rw3ji73y8rf"
-valid=false
+path="res://.godot/imported/2.png-94961451065733f3e41a151d31e04e34.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/Enemigos/animacion golpe pollo/2.png"
+dest_files=["res://.godot/imported/2.png-94961451065733f3e41a151d31e04e34.ctex"]
 
 [params]
 

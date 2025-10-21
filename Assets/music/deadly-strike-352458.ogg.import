@@ -3,11 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://c5270imqek6l0"
-valid=false
+path="res://.godot/imported/deadly-strike-352458.ogg-032c15b94d2f5542cae38d4d2c670dad.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/music/deadly-strike-352458.ogg"
+dest_files=["res://.godot/imported/deadly-strike-352458.ogg-032c15b94d2f5542cae38d4d2c670dad.oggvorbisstr"]
 
 [params]
 

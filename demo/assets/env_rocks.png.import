@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3g14elmg0m36"
-valid=false
+path="res://.godot/imported/env_rocks.png-12fea7b4727d1ddca76c06fd66910dd0.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://demo/assets/env_rocks.png"
+dest_files=["res://.godot/imported/env_rocks.png-12fea7b4727d1ddca76c06fd66910dd0.ctex"]
 
 [params]
 

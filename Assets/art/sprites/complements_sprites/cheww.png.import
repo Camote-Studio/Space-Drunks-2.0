@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c160xb6uem8gh"
-valid=false
+path="res://.godot/imported/cheww.png-e10336b494a5cb5d926de7d44e8bf458.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/cheww.png"
+dest_files=["res://.godot/imported/cheww.png-e10336b494a5cb5d926de7d44e8bf458.ctex"]
 
 [params]
 

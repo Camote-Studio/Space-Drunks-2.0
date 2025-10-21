@@ -3,11 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://bfuailexadywp"
-valid=false
+path="res://.godot/imported/punch-41105.mp3-8317790b64340dd596acc398937ea747.mp3str"
 
 [deps]
 
 source_file="res://Assets/sfx/punch-41105.mp3"
+dest_files=["res://.godot/imported/punch-41105.mp3-8317790b64340dd596acc398937ea747.mp3str"]
 
 [params]
 

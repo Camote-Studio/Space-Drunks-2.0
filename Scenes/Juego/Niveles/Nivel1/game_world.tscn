@@ -280,15 +280,15 @@ script = ExtResource("2_ygye0")
 
 [node name="Pared" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(242, 599.00006)
-scale = Vector2(1, 1.5784314)
+position = Vector2(242, 599)
+scale = Vector2(1, 1.57843)
 texture = ExtResource("3_pe6h5")
 
 [node name="Floor" type="Sprite2D" parent="."]
 z_index = -3
 texture_filter = 1
 position = Vector2(-456, -11)
-scale = Vector2(1.4632499, 1.085294)
+scale = Vector2(1.46325, 1.08529)
 texture = ExtResource("5_gf2tg")
 centered = false
 
@@ -413,7 +413,7 @@ shape = SubResource("RectangleShape2D_nmac2")
 position = Vector2(0, 164)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(5267.9995, 380)
+position = Vector2(5268, 380)
 rotation = 1.56824
 shape = SubResource("RectangleShape2D_4asma")
 
@@ -428,22 +428,22 @@ shape = SubResource("RectangleShape2D_tpm8x")
 script = ExtResource("10_nmac2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Portal"]
-position = Vector2(5128, 633.75073)
+position = Vector2(5128, 633.751)
 scale = Vector2(0.627704, 1.10168)
 texture = ExtResource("11_4asma")
 
 [node name="mensaje_portal" type="Label" parent="Portal"]
 offset_left = 4853.0
-offset_top = 471.50064
+offset_top = 471.501
 offset_right = 5062.0
-offset_bottom = 625.50073
+offset_bottom = 625.501
 theme_override_font_sizes/font_size = 30
 text = "mata a todos
  los enemigos 
 para pasar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
-position = Vector2(5127, 646.50073)
+position = Vector2(5127, 646.501)
 shape = SubResource("CapsuleShape2D_o87y8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -567,10 +567,10 @@ vertical_alignment = 1
 anchors_preset = -1
 anchor_right = 0.76378
 anchor_bottom = 0.0555556
-offset_left = 127.49997
-offset_top = 59.499985
+offset_left = 127.5
+offset_top = 59.5
 offset_right = 219.625
-offset_bottom = 92.499985
+offset_bottom = 92.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.12157, 0.612286)
@@ -581,10 +581,10 @@ texture_progress = ExtResource("16_8sajs")
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 132.49997
-offset_top = 98.499985
-offset_right = 225.49997
-offset_bottom = 114.499985
+offset_left = 132.5
+offset_top = 98.5
+offset_right = 225.5
+offset_bottom = 114.5
 show_percentage = false
 
 [node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
@@ -593,17 +593,17 @@ anchors_preset = -1
 anchor_top = -0.0169753
 anchor_bottom = -0.0169753
 offset_left = 132.0
-offset_top = 136.33333
+offset_top = 136.333
 offset_right = 225.0
-offset_bottom = 152.33333
+offset_bottom = 152.333
 show_percentage = false
 
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 326.49997
-offset_top = 98.499985
-offset_right = 404.49997
-offset_bottom = 114.499985
+offset_left = 326.5
+offset_top = 98.5
+offset_right = 404.5
+offset_bottom = 114.5
 max_value = 200.0
 show_percentage = false
 
@@ -634,30 +634,30 @@ texture_under = ExtResource("15_dcn6k")
 texture_progress = ExtResource("16_8sajs")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(106.49997, 86.499985)
+position = Vector2(106.5, 86.5)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("20_jqqi2")
 
 [node name="Characater1Profile" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(109.49997, 86.499985)
+position = Vector2(109.5, 86.5)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("21_krfk8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(293.49997, 93.499985)
+position = Vector2(293.5, 93.5)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("20_jqqi2")
 
 [node name="Character2Profile" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(294.49997, 85.499985)
+position = Vector2(294.5, 85.5)
 scale = Vector2(0.21, 0.21)
 texture = ExtResource("22_thxnh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(106.49997, 153.49998)
+position = Vector2(106.5, 153.5)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
@@ -665,7 +665,7 @@ frame_progress = 0.711345
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(296.49997, 156.49998)
+position = Vector2(296.5, 156.5)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
@@ -685,9 +685,9 @@ anchor_top = 0.179
 anchor_right = 0.109
 anchor_bottom = 0.179
 offset_left = -67.28
-offset_top = -53.320007
-offset_right = -41.992004
-offset_bottom = -28.64801
+offset_top = -53.32
+offset_right = -41.992
+offset_bottom = -28.648
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 15
@@ -703,10 +703,10 @@ anchor_left = 0.276
 anchor_top = 0.18
 anchor_right = 0.276
 anchor_bottom = 0.18
-offset_left = -200.91998
-offset_top = -54.400024
-offset_right = -173.91998
-offset_bottom = -31.40001
+offset_left = -200.92
+offset_top = -54.4
+offset_right = -173.92
+offset_bottom = -31.4
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 10
@@ -716,7 +716,7 @@ text = "0"
 
 [node name="Label2" type="Label" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
-offset_left = 369.49997
+offset_left = 369.5
 offset_top = 306.5
 offset_right = 772.5
 offset_bottom = 349.5

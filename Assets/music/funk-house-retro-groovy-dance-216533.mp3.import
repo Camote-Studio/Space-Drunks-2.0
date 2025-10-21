@@ -3,11 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://ci4xlj6tkvct6"
-valid=false
+path="res://.godot/imported/funk-house-retro-groovy-dance-216533.mp3-c42a9b62b8413681ae82977bbc0c46ca.mp3str"
 
 [deps]
 
 source_file="res://Assets/music/funk-house-retro-groovy-dance-216533.mp3"
+dest_files=["res://.godot/imported/funk-house-retro-groovy-dance-216533.mp3-c42a9b62b8413681ae82977bbc0c46ca.mp3str"]
 
 [params]
 

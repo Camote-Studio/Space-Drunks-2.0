@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckmdotrho4pxr"
-valid=false
+path="res://.godot/imported/veneno4.png-257fcf46095525f5a0a44e0ce03639c3.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/abilities/veneno/veneno4.png"
+dest_files=["res://.godot/imported/veneno4.png-257fcf46095525f5a0a44e0ce03639c3.ctex"]
 
 [params]
 

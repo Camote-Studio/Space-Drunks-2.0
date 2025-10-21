@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2wggx3w4wwt"
-valid=false
+path="res://.godot/imported/BG2_TUBO.png-c1755c8aa110105248b4c558a43c4bb5.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/background/BG2_TUBO.png"
+dest_files=["res://.godot/imported/BG2_TUBO.png-c1755c8aa110105248b4c558a43c4bb5.ctex"]
 
 [params]
 

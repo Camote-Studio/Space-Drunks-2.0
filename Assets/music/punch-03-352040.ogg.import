@@ -3,11 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://bsmninlvow06v"
-valid=false
+path="res://.godot/imported/punch-03-352040.ogg-061ee5cd5094e28d9161b4f2b3a09706.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/music/punch-03-352040.ogg"
+dest_files=["res://.godot/imported/punch-03-352040.ogg-061ee5cd5094e28d9161b4f2b3a09706.oggvorbisstr"]
 
 [params]
 

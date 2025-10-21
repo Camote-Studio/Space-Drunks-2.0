@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b88yc67onjo6d"
-valid=false
+path="res://.godot/imported/muerto_kirk.png-fcb08dc13718db3dd5230e62290d95e3.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/muerto_kirk.png"
+dest_files=["res://.godot/imported/muerto_kirk.png-fcb08dc13718db3dd5230e62290d95e3.ctex"]
 
 [params]
 

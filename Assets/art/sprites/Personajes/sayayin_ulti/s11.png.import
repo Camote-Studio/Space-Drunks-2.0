@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c07xgr7hqadmj"
-valid=false
+path="res://.godot/imported/s11.png-a9e1814b482aab2788e19f28045a7a2b.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/sayayin_ulti/s11.png"
+dest_files=["res://.godot/imported/s11.png-a9e1814b482aab2788e19f28045a7a2b.ctex"]
 
 [params]
 

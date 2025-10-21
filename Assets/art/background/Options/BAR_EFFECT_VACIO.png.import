@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dngq85lr2q0kv"
-valid=false
+path="res://.godot/imported/BAR_EFFECT_VACIO.png-2b0bba1c4284ec50fd762c2e3ec81d71.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png"
+dest_files=["res://.godot/imported/BAR_EFFECT_VACIO.png-2b0bba1c4284ec50fd762c2e3ec81d71.ctex"]
 
 [params]
 

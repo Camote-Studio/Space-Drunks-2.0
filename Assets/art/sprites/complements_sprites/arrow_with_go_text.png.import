@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://625cpyvd5d2a"
-valid=false
+path="res://.godot/imported/arrow_with_go_text.png-978b103f77c751e8a26a6138cdbafba8.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png"
+dest_files=["res://.godot/imported/arrow_with_go_text.png-978b103f77c751e8a26a6138cdbafba8.ctex"]
 
 [params]
 

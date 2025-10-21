@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjakugmqbbtw7"
-valid=false
+path="res://.godot/imported/arrow_right.png-21f7ddc963756a50bd3974181b5e0d02.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://demo/assets/arrow_right.png"
+dest_files=["res://.godot/imported/arrow_right.png-21f7ddc963756a50bd3974181b5e0d02.ctex"]
 
 [params]
 

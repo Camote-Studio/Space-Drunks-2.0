@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://rq0mwrl4053j"
-valid=false
+path="res://.godot/imported/box_1.png-caf059b191042292cfccf26ea562f327.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/box_1.png"
+dest_files=["res://.godot/imported/box_1.png-caf059b191042292cfccf26ea562f327.ctex"]
 
 [params]
 

@@ -3,11 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://cxt1byewr6l0x"
-valid=false
+path="res://.godot/imported/laser-shot-ingame-230500.ogg-51fad0c24ab9e8c94094dde118805a34.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/music/laser-shot-ingame-230500.ogg"
+dest_files=["res://.godot/imported/laser-shot-ingame-230500.ogg-51fad0c24ab9e8c94094dde118805a34.oggvorbisstr"]
 
 [params]
 

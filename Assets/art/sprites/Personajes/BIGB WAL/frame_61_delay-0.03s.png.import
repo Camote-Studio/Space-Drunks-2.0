@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnvc8rlj37e5i"
-valid=false
+path="res://.godot/imported/frame_61_delay-0.03s.png-d5e3996b9d3512fc83aebfa9518a20e5.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/BIGB WAL/frame_61_delay-0.03s.png"
+dest_files=["res://.godot/imported/frame_61_delay-0.03s.png-d5e3996b9d3512fc83aebfa9518a20e5.ctex"]
 
 [params]
 

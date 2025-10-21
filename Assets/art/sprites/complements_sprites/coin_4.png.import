@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bd3b6n6yc4blk"
-valid=false
+path="res://.godot/imported/coin_4.png-e5ac97d9634138ad754dacc51a00df7a.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/complements_sprites/coin_4.png"
+dest_files=["res://.godot/imported/coin_4.png-e5ac97d9634138ad754dacc51a00df7a.ctex"]
 
 [params]
 

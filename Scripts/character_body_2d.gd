@@ -37,8 +37,8 @@ var _electro_instance: Node2D = null
 var _revert_timer: Timer
 var _electro_active := false
 
+@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
 
-@onready var bar: TextureProgressBar = $"../../CanvasLayer/ProgressBar_alien_1"
 @onready var animated_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 @onready var bar_ability_1: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_1"
 @onready var coin_label: Label = $"../../CanvasLayer/cont monedas"

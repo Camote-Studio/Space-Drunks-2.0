@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clxxi2lxjmmqw"
-valid=false
+path="res://.godot/imported/NIVEL.png-0134d225404e47fc6b599d2ebf7eadec.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/background/Options/NIVEL.png"
+dest_files=["res://.godot/imported/NIVEL.png-0134d225404e47fc6b599d2ebf7eadec.ctex"]
 
 [params]
 

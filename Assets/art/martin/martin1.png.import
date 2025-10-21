@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://da1c16bf2xdk5"
-valid=false
+path="res://.godot/imported/martin1.png-15b87b637cebcfb49a614db9289b453b.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/martin/martin1.png"
+dest_files=["res://.godot/imported/martin1.png-15b87b637cebcfb49a614db9289b453b.ctex"]
 
 [params]
 

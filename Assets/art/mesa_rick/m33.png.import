@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4r7icstqfy6a"
-valid=false
+path="res://.godot/imported/m33.png-4a4855fbc1b7e0ca7ff5dcf6adbc57db.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/mesa_rick/m33.png"
+dest_files=["res://.godot/imported/m33.png-4a4855fbc1b7e0ca7ff5dcf6adbc57db.ctex"]
 
 [params]
 

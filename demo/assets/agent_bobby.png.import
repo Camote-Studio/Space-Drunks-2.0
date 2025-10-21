@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dlo1ine6p5di4"
-valid=false
+path="res://.godot/imported/agent_bobby.png-8c7c0553d4eefdb06245554fd2603238.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://demo/assets/agent_bobby.png"
+dest_files=["res://.godot/imported/agent_bobby.png-8c7c0553d4eefdb06245554fd2603238.ctex"]
 
 [params]
 

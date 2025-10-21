@@ -7,8 +7,8 @@ var poison_max_charge: int = 10
 var poison_ready: bool = false
 var selecting_poison: bool = false
 var poison_preview: Node2D = null
+@onready var veneno_couldown: ProgressBar = $"../CanvasLayer/Veneno_p2"
 
-@onready var veneno_couldown: ProgressBar = $"../../CanvasLayer/Veneno_p2"
 @export var poison_area_scene: PackedScene
 @export var poison_cursor_speed := 700.0
 @export var poison_cooldown_duration := 20.0
@@ -60,7 +60,7 @@ var punch_base_dmg := {
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
 @onready var sonido_ulti: AudioStreamPlayer2D = $sonido_ulti
-@onready var bar: TextureProgressBar = $"../../CanvasLayer/ProgressBar_alien_2"
+@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_2: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_2"
 @onready var coin_label: Label = $"../../CanvasLayer/cont monedas2"
@@ -102,17 +102,9 @@ var _base_right := Vector2.ZERO    # posición base de Punch_right mirando a la 
 # ======================
 @export var espada_scene: PackedScene         # arrástrala en el inspector
 @export var espada_duracion: float = 15.0     # por defecto 15 s
-
 var _sword_instance: Node2D = null
 var _sword_active := false
 var _sword_timer: Timer
-
-
-
-
-
-
-
 @onready var punchs: AudioStreamPlayer2D = $punchs
 var _punch_variations := [0.5, 1.0, 1.5]
 # ======================
@@ -208,25 +200,39 @@ func _set_facing(sign_dir: int) -> void:
 	# Re-ancle arma / espada si está activa
 	_update_sword_transform()
 
-func _punch_alternate()-> void:
+func _punch_alternate() -> void:
 	if _punch_lock:
 		return
 	_punch_lock = true
 	_play_punch_sfx()
+
 	if _use_left:
-		var base_l = punch_left.position
-		var dir_l = -1.0 if $Punch_left.flip_h else 1.0
-		var t = create_tween()
-		t.tween_property(punch_left, "position", base_l + Vector2(45.0 * dir_l, 0.0), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		if not is_instance_valid(punch_left):
+			push_error("Punch_left no encontrado")
+			_on_punch_done()
+			return
+		var base_l := punch_left.position
+		var dir_l := 1.0
+		if punch_left.flip_h:
+			dir_l = -1.0
+		var t := create_tween()
+		t.tween_property(punch_left, "position", base_l + Vector2(105.0 * dir_l, 0.0), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		t.tween_property(punch_left, "position", base_l, 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		t.tween_callback(Callable(self, "_on_punch_done"))
 	else:
-		var base_r = punch_right.position
-		var dir_r = -1.0 if $Punch_right.flip_h else 1.0
-		var t_r = create_tween()
-		t_r.tween_property(punch_right, "position", base_r + Vector2(45.0 * dir_r, 0.0), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		if not is_instance_valid(punch_right):
+			push_error("Punch_right no encontrado")
+			_on_punch_done()
+			return
+		var base_r := punch_right.position
+		var dir_r := 1.0
+		if punch_right.flip_h:
+			dir_r = -1.0
+		var t_r := create_tween()
+		t_r.tween_property(punch_right, "position", base_r + Vector2(75.0 * dir_r, 0.0), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		t_r.tween_property(punch_right, "position", base_r, 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		t_r.tween_callback(Callable(self, "_on_punch_done"))
+
 	_use_left = not _use_left
 
 func _on_punch_done()-> void:
@@ -706,12 +712,7 @@ func _start_ulti() -> void:
 	if dead:
 		return
 	
-	# 1. "Gastamos" la carga del ulti
 	ulti_ready = false
-
-	# 2. YA NO reiniciamos la barra de habilidad aquí. La dejamos llena.
-	# if bar_ability_2:
-	#	 bar_ability_2.value = bar_ability_2.min_value
 
 	if estado_actual == Estado.ATURDIDO:
 		estado_actual = Estado.NORMAL

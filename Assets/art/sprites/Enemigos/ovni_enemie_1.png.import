@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0mx71mgpebym"
-valid=false
+path="res://.godot/imported/ovni_enemie_1.png-e415f7f4972e876e50b539efb62d21f0.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/Enemigos/ovni_enemie_1.png"
+dest_files=["res://.godot/imported/ovni_enemie_1.png-e415f7f4972e876e50b539efb62d21f0.ctex"]
 
 [params]
 

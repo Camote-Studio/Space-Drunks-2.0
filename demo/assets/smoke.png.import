@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdusy0qqtw0th"
-valid=false
+path="res://.godot/imported/smoke.png-d041a59b8025f6af550257daa38b3580.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://demo/assets/smoke.png"
+dest_files=["res://.godot/imported/smoke.png-d041a59b8025f6af550257daa38b3580.ctex"]
 
 [params]
 

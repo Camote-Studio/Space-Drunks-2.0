@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvju0ci6ny1as"
-valid=false
+path="res://.godot/imported/frame_11_delay-0.03s.png-6e1188f419540a06333604976f8aea88.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/Personajes/WALK DIRK/frame_11_delay-0.03s.png"
+dest_files=["res://.godot/imported/frame_11_delay-0.03s.png-6e1188f419540a06333604976f8aea88.ctex"]
 
 [params]
 

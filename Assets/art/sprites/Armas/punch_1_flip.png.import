@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxfomktac6dib"
-valid=false
+path="res://.godot/imported/punch_1_flip.png-6602e9e95dfa6a7ed8b88a8de2346dd7.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/sprites/Armas/punch_1_flip.png"
+dest_files=["res://.godot/imported/punch_1_flip.png-6602e9e95dfa6a7ed8b88a8de2346dd7.ctex"]
 
 [params]
 

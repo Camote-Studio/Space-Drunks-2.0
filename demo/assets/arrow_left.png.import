@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dc1wu244fnetf"
-valid=false
+path="res://.godot/imported/arrow_left.png-a7d3530ca98c17c281c9ef74dcdcb927.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://demo/assets/arrow_left.png"
+dest_files=["res://.godot/imported/arrow_left.png-a7d3530ca98c17c281c9ef74dcdcb927.ctex"]
 
 [params]
 

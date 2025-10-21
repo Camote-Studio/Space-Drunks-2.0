@@ -3,11 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dq3rs4occ64n5"
-valid=false
+path="res://.godot/imported/m10.png-efd0bd93a5495af3c885caa0793c5cc5.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/art/mesa_rick/m10.png"
+dest_files=["res://.godot/imported/m10.png-efd0bd93a5495af3c885caa0793c5cc5.ctex"]
 
 [params]
 
