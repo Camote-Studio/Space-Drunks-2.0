@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b03y7nj5n2fk4"]
+
+[ext_resource type="Script" uid="uid://c2875cm1wdoyj" path="res://Scripts/electric_bullet.gd" id="1_l6gfu"]
+[ext_resource type="Texture2D" uid="uid://cruufcspx1yey" path="res://Assets/art/sprites/Armas/Proyectiles/bullet.png" id="2_jlm26"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
+
+[node name="electric_bullet" type="Node2D" groups=["player_1_electric_bullet"]]
+script = ExtResource("1_l6gfu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 1, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_jlm26")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_oduel")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
