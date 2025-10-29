@@ -459,8 +459,10 @@ func _do_punch(dir: Vector2) -> void:
 			_face_dir(direction_to_player.x)
 		
 		if target_in_range.has_method("emit_signal"):
-			target_in_range.emit_signal("damage", punch_damage)
-	
+			target_in_range.emit_signal("damage", punch_damage, "golpe")
+		if target_in_range.has_method("_apply_knockback_from"):
+			target_in_range.call_deferred("_apply_knockback_from", global_position)
+
 	if audio_ataque:
 		audio_ataque.stop()
 		audio_ataque.play()
