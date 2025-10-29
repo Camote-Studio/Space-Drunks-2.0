@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bais04mbjwsil"
+path="res://.godot/imported/580122__annyew__confirm-button-2 (1).wav-4ca2cd2d651f8f0fa9cdbf6d6fe710f4.sample"
+
+[deps]
+
+source_file="res://Assets/sfx/580122__annyew__confirm-button-2 (1).wav"
+dest_files=["res://.godot/imported/580122__annyew__confirm-button-2 (1).wav-4ca2cd2d651f8f0fa9cdbf6d6fe710f4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

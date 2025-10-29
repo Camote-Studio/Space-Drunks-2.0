@@ -73,6 +73,7 @@ height = 120.0
 radius = 81.2219
 
 [node name="Enemy_SuperPato" type="CharacterBody2D" groups=["enemies", "enemy_3"]]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_jssh4")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

@@ -3,7 +3,7 @@ var _flotar_sound_played := false
 
 signal damage(amount: float, source: String)
 signal muerte
-@onready var shop: Control = $"../../CanvasLayer/UI_abilities"
+@onready var shop: Control = $"../CanvasLayer/UI_abilities"
 @export var bomb_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/bomba.tscn")
 # --- GUN / ULTI ---
 @onready var gun = $Gun
@@ -32,10 +32,13 @@ var _360_active := false
 var _electro_instance: Node2D = null
 var _revert_timer: Timer
 var _electro_active := false
-@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
-@onready var animated_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
-@onready var bar_ability_1: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_1"
-@onready var coin_label: Label = $"../../CanvasLayer/cont monedas"
+
+@export_group("UI del jugador")
+@export var bar: TextureProgressBar 
+@export	 var animated_sprite: AnimatedSprite2D 
+@export var bar_ability_1: ProgressBar 
+@export var coin_label: Label
+
 var has_chicken_pony := false
 var has_jet_punches := false
 var has_sleepy_gun := false

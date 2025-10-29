@@ -544,8 +544,11 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
+[node name="Player_1" parent="." node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("5_ygye0")]
 position = Vector2(-127, 624)
+bar = NodePath("../CanvasLayer/ProgressBar_alien_1")
+bar_ability_1 = NodePath("../CanvasLayer/ProgressBar_ability_1")
+coin_label = NodePath("../CanvasLayer/cont monedas")
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
 position = Vector2(319, 403)
@@ -699,6 +702,8 @@ texture = ExtResource("31_jqqi2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
@@ -723,10 +728,10 @@ vertical_alignment = 1
 anchors_preset = -1
 anchor_right = 0.76378
 anchor_bottom = 0.0555556
-offset_left = 127.5
-offset_top = 59.5
-offset_right = 219.625
-offset_bottom = 92.5
+offset_left = 82.833336
+offset_top = 25.500004
+offset_right = 174.95837
+offset_bottom = 58.499996
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.12157, 0.612286)
@@ -737,10 +742,10 @@ texture_progress = ExtResource("16_8sajs")
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 132.5
-offset_top = 98.5
-offset_right = 225.5
-offset_bottom = 114.5
+offset_left = 87.83333
+offset_top = 64.5
+offset_right = 180.83333
+offset_bottom = 80.5
 show_percentage = false
 
 [node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
@@ -748,18 +753,18 @@ modulate = Color(0.487039, 0.591995, 0.0805549, 1)
 anchors_preset = -1
 anchor_top = -0.0169753
 anchor_bottom = -0.0169753
-offset_left = 132.0
-offset_top = 136.333
-offset_right = 225.0
-offset_bottom = 152.333
+offset_left = 88.667
+offset_top = 100.66632
+offset_right = 181.66699
+offset_bottom = 116.66632
 show_percentage = false
 
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 326.5
-offset_top = 98.5
-offset_right = 404.5
-offset_bottom = 114.5
+offset_left = 307.5
+offset_top = 64.833336
+offset_right = 385.5
+offset_bottom = 80.833336
 max_value = 200.0
 show_percentage = false
 
@@ -768,20 +773,20 @@ modulate = Color(0.479864, 0.105582, 0.500942, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 323.0
-offset_top = 116.0
-offset_right = -1516.0
-offset_bottom = -948.0
+offset_left = 308.667
+offset_top = 82.333
+offset_right = -1530.333
+offset_bottom = -981.66705
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 200.0
 show_percentage = false
 
 [node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 313.0
-offset_top = 59.0
-offset_right = 1285.0
-offset_bottom = 128.0
+offset_left = 294.0
+offset_top = 25.333334
+offset_right = 1266.0
+offset_bottom = 94.333336
 rotation = -0.00284467
 scale = Vector2(0.122, 0.612)
 max_value = 400.0
@@ -790,30 +795,30 @@ texture_under = ExtResource("15_dcn6k")
 texture_progress = ExtResource("16_8sajs")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(106.5, 86.5)
+position = Vector2(61.833332, 52.5)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("20_jqqi2")
 
 [node name="Characater1Profile" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(109.5, 86.5)
+position = Vector2(64.83333, 52.5)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("21_krfk8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(293.5, 93.5)
+position = Vector2(274.5, 59.833332)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("20_jqqi2")
 
 [node name="Character2Profile" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(294.5, 85.5)
+position = Vector2(275.5, 51.833336)
 scale = Vector2(0.21, 0.21)
 texture = ExtResource("22_thxnh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(106.5, 153.5)
+position = Vector2(61.833336, 119.5)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
@@ -821,7 +826,7 @@ frame_progress = 0.711345
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(296.5, 156.5)
+position = Vector2(277.5, 122.833336)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
@@ -830,7 +835,7 @@ frame_progress = 0.515691
 [node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-position = Vector2(1605, 221.5)
+position = Vector2(1560.3334, 187.5)
 scale = Vector2(1, 0.4)
 texture = ExtResource("25_cfgxb")
 
@@ -840,10 +845,10 @@ anchor_left = 0.109
 anchor_top = 0.179
 anchor_right = 0.109
 anchor_bottom = 0.179
-offset_left = -67.28
-offset_top = -53.32
-offset_right = -41.992
-offset_bottom = -28.648
+offset_left = -111.94667
+offset_top = -87.32001
+offset_right = -86.658676
+offset_bottom = -62.647995
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 15
@@ -859,10 +864,10 @@ anchor_left = 0.276
 anchor_top = 0.18
 anchor_right = 0.276
 anchor_bottom = 0.18
-offset_left = -200.92
-offset_top = -54.4
-offset_right = -173.92
-offset_bottom = -31.4
+offset_left = -219.91998
+offset_top = -88.06667
+offset_right = -192.91998
+offset_bottom = -65.066666
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 10

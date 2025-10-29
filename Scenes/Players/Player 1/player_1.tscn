@@ -874,10 +874,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player_1" type="CharacterBody2D" groups=["player"]]
+[node name="Player_1" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite") groups=["player"]]
 z_index = 1
-collision_mask = 3
+scale = Vector2(1.5, 1.5)
+collision_mask = 11
 script = ExtResource("1_p0e4v")
+animated_sprite = NodePath("Visuals/AnimatedSprite2D")
+knockback_force = 600.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 15)
