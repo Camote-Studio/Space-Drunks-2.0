@@ -6,6 +6,13 @@ signal muerte
 @onready var shop: Control = $"../../CanvasLayer/UI_abilities"
 @export var bomb_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/bomba.tscn")
 
+# ==============================
+# VARIABLES DE BOMBA Y RECARGA
+# ==============================
+@export var bomb_cooldown := 5.0   # Tiempo de recarga completa (segundos)
+
+var bomb_ready := false
+var bomb_timer := 0.0
 
 # --- GUN / ULTI ---
 @onready var gun = $Gun
@@ -38,10 +45,11 @@ var _revert_timer: Timer
 var _electro_active := false
 
 
-@onready var bar: TextureProgressBar = $"../../CanvasLayer/ProgressBar_alien_1"
+@onready var bomba_p1: ProgressBar = $"../CanvasLayer/bomba_p1"
+@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_1"
 @onready var animated_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
-@onready var bar_ability_1: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_1"
-@onready var coin_label: Label = $"../../CanvasLayer/cont monedas"
+@onready var bar_ability_1: ProgressBar = $"../CanvasLayer/ProgressBar_ability_1"
+@onready var coin_label: Label = $"../CanvasLayer/cont monedas"
 
 var has_chicken_pony := false
 var has_jet_punches := false
@@ -131,8 +139,25 @@ func _ready() -> void:
 # =============== FUNCIÓN PHYSICS PROCEES ===================================
 func _physics_process(delta: float) -> void:
 	if dead:
-		velocity = Vector2.ZERO
 		return
+
+	# Recarga de la barra
+	if not bomb_ready:
+		bomb_timer += delta
+		bomba_p1.value = clamp((bomb_timer / bomb_cooldown) * bomba_p1.max_value, 0, bomba_p1.max_value)
+		
+		if bomb_timer >= bomb_cooldown:
+			bomb_ready = true
+			bomba_p1.value = bomba_p1.max_value
+	else:
+		if Input.is_action_just_pressed("bomba"):
+			_throw_bomb()
+			# Reiniciar la recarga
+			bomb_ready = false
+			bomb_timer = 0.0
+			bomba_p1.value = 0
+
+
 	# --- LÓGICA DEL ULTI ACTIVO ---
 	if is_using_ulti:
 		# Reducir el valor de la barra con el tiempo
@@ -152,8 +177,7 @@ func _physics_process(delta: float) -> void:
 			velocity = _dash_dir * dash_speed
 			move_and_slide()
 		return
-	if Input.is_action_just_pressed("bomba") and not dead and allow_input:
-		_throw_bomb()
+	
 	if _dash_cooldown_timer > 0.0:
 		_dash_cooldown_timer -= delta
 	var direction = Vector2.ZERO

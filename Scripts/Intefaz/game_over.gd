@@ -1,8 +1,8 @@
 extends Node
 
 func _ready():
-	$"../Gameworld/Player_1".muerte.connect(_on_player_died)
-	$"../Gameworld/Player_2".muerte.connect(_on_player_died)
+	$"../Player_1".muerte.connect(_on_player_died)
+	$"../Player_2".muerte.connect(_on_player_died)
 
 var dead_count = 0
 
