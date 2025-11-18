@@ -2,7 +2,7 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://xrh2ke3d1khs"
+uid="uid://cvh75iidsig0y"
 path="res://.godot/imported/Slackey-Regular.ttf-15bf36c9abe83677a40347f1ec2eaba4.fontdata"
 
 [deps]
@@ -21,10 +21,7 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-<<<<<<< HEAD
-=======
 modulate_color_glyphs=false
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 hinting=1
 subpixel_positioning=4
 keep_rounding_remainders=true

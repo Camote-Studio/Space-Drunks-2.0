@@ -6,6 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
 
 [node name="bullet" type="Area2D" groups=["player_1_bullet"]]
+scale = Vector2(2, 2)
 script = ExtResource("1_e45ae")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

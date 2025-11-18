@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/Enemies/System/Spawns/enemies_final.tscn" id="27_v4p21"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/Enemies/System/Spawns/enemie_spawn_5.tscn" id="28_s0j4o"]
 [ext_resource type="Script" uid="uid://ma121f682hnw" path="res://Scripts/next_scene_path_area.gd" id="29_a7g42"]
-[ext_resource type="Script" path="res://Scripts/block_collider_body.gd" id="30_s0j4o"]
+[ext_resource type="Script" uid="uid://c8gc0vqsrgeyv" path="res://Scripts/block_collider_body.gd" id="30_s0j4o"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="31_a7g42"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_qtle1"]
 
@@ -267,8 +267,11 @@ scale = Vector2(1.52675, 1)
 texture = ExtResource("4_efrga")
 centered = false
 
-[node name="Player_1" parent="." instance=ExtResource("2_sv6kg")]
+[node name="Player_1" parent="." node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("2_sv6kg")]
 position = Vector2(278, 528)
+bar = NodePath("../CanvasLayer/ProgressBar_alien_1")
+bar_ability_1 = NodePath("../CanvasLayer/ProgressBar_ability_1")
+coin_label = NodePath("../CanvasLayer/cont monedas")
 
 [node name="Player_2" parent="." instance=ExtResource("3_c5os2")]
 position = Vector2(266, 669)
@@ -303,6 +306,8 @@ position = Vector2(2713.75, 419.5)
 shape = SubResource("RectangleShape2D_15ly5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
@@ -346,10 +351,22 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 98.0
+offset_left = 103.333336
 offset_top = 62.0
-offset_right = 191.0
+offset_right = 196.33334
 offset_bottom = 78.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.487039, 0.591995, 0.0805549, 1)
+anchors_preset = -1
+anchor_top = -0.0169753
+anchor_bottom = -0.0169753
+offset_left = 104.0
+offset_top = 100.33333
+offset_right = 196.99998
+offset_bottom = 116.33333
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
@@ -358,9 +375,9 @@ modulate = Color(0.479864, 0.105582, 0.500942, 1)
 anchors_preset = -1
 anchor_top = -0.0169753
 anchor_bottom = -0.0169753
-offset_left = 287.0
+offset_left = 295.33334
 offset_top = 102.33333
-offset_right = 380.0
+offset_right = 388.33334
 offset_bottom = 118.33333
 max_value = 200.0
 show_percentage = false
@@ -368,9 +385,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 289.0
+anchors_preset = -1
+anchor_right = 0.0078125
+offset_left = 294.33334
 offset_top = 63.0
-offset_right = 367.0
+offset_right = 372.33334
 offset_bottom = 79.0
 max_value = 200.0
 show_percentage = false

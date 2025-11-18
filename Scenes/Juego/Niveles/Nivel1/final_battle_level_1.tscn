@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=3 uid="uid://boerlu017qoxc"]
 
-[ext_resource type="Script" path="res://Scripts/final_battle_level_1.gd" id="1_nkr87"]
+[ext_resource type="Script" uid="uid://dn5ueuys22ugd" path="res://Scripts/final_battle_level_1.gd" id="1_nkr87"]
 [ext_resource type="Texture2D" uid="uid://xenlds0o8ci6" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tk0fa"]
 [ext_resource type="Texture2D" uid="uid://c8ctvirugussx" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2-2.png" id="3_f1e4r"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/Players/Player 1/player_1.tscn" id="4_f60m1"]
@@ -129,8 +129,11 @@ position = Vector2(-104, 213)
 position = Vector2(844, 637)
 shape = SubResource("RectangleShape2D_gbu76")
 
-[node name="Player_1" parent="Gameworld" instance=ExtResource("4_f60m1")]
+[node name="Player_1" parent="Gameworld" node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("4_f60m1")]
 position = Vector2(288, 519)
+bar = NodePath("../../CanvasLayer/ProgressBar_alien_1")
+bar_ability_1 = NodePath("../../CanvasLayer/ProgressBar_ability_1")
+coin_label = NodePath("../../CanvasLayer/cont monedas")
 
 [node name="Player_2" parent="Gameworld" instance=ExtResource("5_hvwlt")]
 position = Vector2(314, 686)
@@ -153,6 +156,8 @@ shape = SubResource("RectangleShape2D_0jhcm")
 [node name="Sombras_transición2" parent="Gameworld" instance=ExtResource("29_qwisf")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
@@ -182,17 +187,16 @@ texture_progress = ExtResource("8_0jhcm")
 metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_alien_2" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 273.0
-offset_top = 24.0
-offset_right = 1245.0
-offset_bottom = 93.0
+offset_left = 294.83334
+offset_top = 23.833334
+offset_right = 1266.8334
+offset_bottom = 92.833336
 rotation = -0.00284467
 scale = Vector2(0.122, 0.612)
 max_value = 400.0
 value = 400.0
 texture_under = ExtResource("7_0mfdm")
 texture_progress = ExtResource("8_0jhcm")
-metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_boss" type="TextureProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 0, 1, 1)
@@ -213,10 +217,22 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 98.0
-offset_top = 69.0
-offset_right = 191.0
-offset_bottom = 85.0
+offset_left = 104.0
+offset_top = 64.0
+offset_right = 197.0
+offset_bottom = 80.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.487039, 0.591995, 0.0805549, 1)
+anchors_preset = -1
+anchor_top = -0.0169753
+anchor_bottom = -0.0169753
+offset_left = 104.0
+offset_top = 100.33333
+offset_right = 196.99998
+offset_bottom = 116.33333
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
@@ -225,10 +241,10 @@ modulate = Color(0.479864, 0.105582, 0.500942, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 292.0
-offset_top = 91.0
-offset_right = -1547.0
-offset_bottom = -973.0
+offset_left = 314.0
+offset_top = 82.0
+offset_right = -1525.0
+offset_bottom = -982.0
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 200.0
@@ -236,10 +252,12 @@ show_percentage = false
 
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 289.0
-offset_top = 69.0
-offset_right = 367.0
-offset_bottom = 85.0
+anchors_preset = -1
+anchor_right = 0.0013888995
+offset_left = 314.0
+offset_top = 64.0
+offset_right = 392.0
+offset_bottom = 80.0
 max_value = 150.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
@@ -250,7 +268,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_214cm")
 
 [node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(264, 58)
+position = Vector2(285.83334, 57.833332)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_214cm")
 
@@ -273,7 +291,7 @@ texture = ExtResource("10_vrfk5")
 
 [node name="Character2Profile" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(265, 50)
+position = Vector2(286.83334, 49.833332)
 scale = Vector2(0.21, 0.21)
 texture = ExtResource("11_csxv4")
 
@@ -283,14 +301,13 @@ anchor_left = 0.155
 anchor_top = 0.198
 anchor_right = 0.155
 anchor_bottom = 0.198
-offset_left = 23.727997
-offset_top = -104.632
-offset_right = 50.727997
-offset_bottom = -57.632004
+offset_left = 45.56134
+offset_top = -104.79867
+offset_right = 72.56134
+offset_bottom = -57.798676
 theme_override_fonts/font = ExtResource("12_32j16")
 theme_override_font_sizes/font_size = 33
 text = "0"
-metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
@@ -301,7 +318,7 @@ autoplay = "default"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(267, 121)
+position = Vector2(288.83334, 120.833336)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_8fis1")
 autoplay = "default"

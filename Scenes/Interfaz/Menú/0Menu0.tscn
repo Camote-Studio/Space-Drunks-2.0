@@ -227,6 +227,18 @@ tracks/0/keys = {
 "update": 1,
 "values": ["", "Press start to begin..."]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.51),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
 
 [sub_resource type="Animation" id="Animation_v3a1p"]
 length = 0.001
@@ -241,6 +253,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6c2wg"]
@@ -268,10 +292,11 @@ offset_top = 3.0
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 1
-offset_left = 285.0
-offset_top = 377.0
-offset_right = 1080.0
-offset_bottom = 448.0
+offset_left = 509.00003
+offset_top = 631.0
+offset_right = 1304.0
+offset_bottom = 702.0
+scale = Vector2(1.5, 1.5)
 theme_override_colors/font_color = Color(1, 0.4, 0.101961, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0.662745, 0.360784, 0.301961, 1)
@@ -286,3 +311,5 @@ theme_override_font_sizes/font_size = 50
 libraries = {
 &"": SubResource("AnimationLibrary_6c2wg")
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

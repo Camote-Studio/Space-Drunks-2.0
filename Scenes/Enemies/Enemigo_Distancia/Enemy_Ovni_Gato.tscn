@@ -90,6 +90,7 @@ _data = {
 [node name="Enemie_1" type="CharacterBody2D" groups=["enemies", "enemy_1"]]
 z_index = 2
 rotation = 0.736588
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_wg4lw")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

@@ -1070,17 +1070,11 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_prblm"]
-<<<<<<< HEAD
-radius = 44.2923
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
-radius = 40.5518
-=======
 radius = 57.0574
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_58h14"]
 radius = 56.6667
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dfurs"]
 a = Vector2(-6.08382, 0.201834)
@@ -1088,6 +1082,7 @@ b = Vector2(4.81887, 8.14064)
 
 [node name="Player_2" type="CharacterBody2D" groups=["player_2", "puño_player2"]]
 z_index = 1
+scale = Vector2(1.5, 1.5)
 collision_mask = 3
 script = ExtResource("1_a3adp")
 
@@ -1119,26 +1114,18 @@ autoplay = "explosion_death"
 [node name="venenoTimer" type="Timer" parent="."]
 
 [node name="Punch_left" type="Sprite2D" parent="." groups=["puño_player2"]]
-<<<<<<< HEAD
-position = Vector2(-31, -21)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("219_4x7fj")
-=======
+
 position = Vector2(-20, -13)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("219_4x7fj")
 flip_h = true
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 [node name="Area2D" type="Area2D" parent="Punch_left"]
 position = Vector2(6.66667, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_left/Area2D"]
-<<<<<<< HEAD
-position = Vector2(16.6667, 0)
-=======
+
 position = Vector2(10, -3.33333)
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 shape = SubResource("CircleShape2D_prblm")
 
 [node name="Punch_right" type="Sprite2D" parent="." groups=["puño_player2"]]
@@ -1149,11 +1136,8 @@ texture = ExtResource("220_58h14")
 [node name="Area2D" type="Area2D" parent="Punch_right" groups=["puño_player2"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch_right/Area2D"]
-<<<<<<< HEAD
-position = Vector2(-3.33333, -6.66667)
-=======
+
 position = Vector2(20, -6.66667)
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 shape = SubResource("CircleShape2D_58h14")
 
 [node name="alabarda" type="Sprite2D" parent="."]

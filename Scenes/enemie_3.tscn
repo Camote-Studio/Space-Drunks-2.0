@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-[gd_scene load_steps=18 format=3 uid="uid://bsinjh17be72e"]
-=======
+
 [gd_scene load_steps=18 format=3 uid="uid://dfu27juntq4el"]
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 [ext_resource type="Texture2D" uid="uid://pp8a2uy8ep1o" path="res://Assets/art/sprites/Enemigos/DukaLIEN_2.png" id="1_8g4sv"]
 [ext_resource type="Script" uid="uid://b44jyob5e48n2" path="res://Scripts/Enemies/enemie_3.gd" id="1_jssh4"]
