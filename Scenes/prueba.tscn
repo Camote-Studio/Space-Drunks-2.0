@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=48 format=3 uid="uid://b0axgdu0b3kqu"]
+=======
+[gd_scene load_steps=48 format=3 uid="uid://b53vv8578jv7p"]
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_j428k"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_pkve7"]

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=194 format=3 uid="uid://c3egt0yjxsvrn"]
+=======
+[gd_scene load_steps=200 format=3 uid="uid://c3egt0yjxsvrn"]
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 [ext_resource type="Script" uid="uid://bdhp1kotcfxg8" path="res://Scripts/character_body_2d.gd" id="1_p0e4v"]
 [ext_resource type="Texture2D" uid="uid://t1sr0p1gcjrw" path="res://Assets/art/sprites/Personajes/personaje_aturdido/mareado drik 001.png" id="2_qo81y"]
@@ -163,14 +167,30 @@
 [ext_resource type="Texture2D" uid="uid://f6jba3ncsvjh" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_79_delay-0.03s.png" id="82_wd7t2"]
 [ext_resource type="Texture2D" uid="uid://t3n80u2temcy" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 006.png" id="83_8hk8e"]
 [ext_resource type="Texture2D" uid="uid://cvtrkambovyio" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_80_delay-0.03s.png" id="83_y30uo"]
+<<<<<<< HEAD
+=======
+[ext_resource type="Texture2D" uid="uid://dod0u45bk8j0y" path="res://Assets/art/sprites/Personajes/Dirk_Damage/1.png" id="84_0xwhk"]
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 [ext_resource type="Texture2D" uid="uid://v02sryg75bjc" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_81_delay-0.03s.png" id="84_qo81y"]
 [ext_resource type="Texture2D" uid="uid://cqtgir7n1w83a" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 007.png" id="84_uq7cj"]
 [ext_resource type="Texture2D" uid="uid://cxb553uwhp66x" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_82_delay-0.03s.png" id="85_35b2c"]
 [ext_resource type="Texture2D" uid="uid://fcnr12k3ggci" path="res://Assets/art/sprites/Personajes/enfermo dirk/env dirk 008.png" id="85_b26ls"]
+<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://c16rxha1su4my" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_83_delay-0.03s.png" id="86_2aarq"]
 [ext_resource type="Texture2D" uid="uid://cv258o8ddmu6k" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_84_delay-0.03s.png" id="87_hh556"]
 [ext_resource type="Texture2D" uid="uid://cv22mu278lbdi" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_85_delay-0.03s.png" id="88_qnjfm"]
 [ext_resource type="Texture2D" uid="uid://b0y755sk068t7" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_86_delay-0.03s.png" id="89_fk1js"]
+=======
+[ext_resource type="Texture2D" uid="uid://bxnrx564lncsv" path="res://Assets/art/sprites/Personajes/Dirk_Damage/2.png" id="85_xa3fc"]
+[ext_resource type="Texture2D" uid="uid://c16rxha1su4my" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_83_delay-0.03s.png" id="86_2aarq"]
+[ext_resource type="Texture2D" uid="uid://xpgckhkencq8" path="res://Assets/art/sprites/Personajes/Dirk_Damage/3.png" id="86_hrdls"]
+[ext_resource type="Texture2D" uid="uid://cv258o8ddmu6k" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_84_delay-0.03s.png" id="87_hh556"]
+[ext_resource type="Texture2D" uid="uid://bv3opbs7dhmge" path="res://Assets/art/sprites/Personajes/Dirk_Damage/4.png" id="87_i601q"]
+[ext_resource type="Texture2D" uid="uid://cv22mu278lbdi" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_85_delay-0.03s.png" id="88_qnjfm"]
+[ext_resource type="Texture2D" uid="uid://b7yv2d80q08jo" path="res://Assets/art/sprites/Personajes/Dirk_Damage/5.png" id="88_umk7k"]
+[ext_resource type="Texture2D" uid="uid://b0y755sk068t7" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_86_delay-0.03s.png" id="89_fk1js"]
+[ext_resource type="Texture2D" uid="uid://bpxuii7x4i7io" path="res://Assets/art/sprites/Personajes/Dirk_Damage/6.png" id="89_u0uyc"]
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 [ext_resource type="Texture2D" uid="uid://bpeenrs3q5i2k" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_87_delay-0.03s.png" id="90_uy6aw"]
 [ext_resource type="Texture2D" uid="uid://2ddjoxyinhx5" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_88_delay-0.03s.png" id="91_p4vhd"]
 [ext_resource type="Texture2D" uid="uid://ugcdoxkyf2aw" path="res://Assets/art/sprites/Personajes/IDLE DIRK/frame_89_delay-0.03s.png" id="92_rrb1e"]
@@ -526,6 +546,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+<<<<<<< HEAD
+=======
+"texture": ExtResource("84_0xwhk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_xa3fc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_hrdls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_i601q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_umk7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_u0uyc")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 "texture": ExtResource("32_esulk")
 }],
 "loop": true,
@@ -884,10 +930,19 @@ volume_db = 20.0
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+<<<<<<< HEAD
 position = Vector2(2, 2.52435e-29)
 scale = Vector2(0.3, 0.307)
 sprite_frames = SubResource("SpriteFrames_k774p")
 animation = &"caminar"
+=======
+texture_filter = 1
+position = Vector2(2, 2.52435e-29)
+scale = Vector2(0.3, 0.307)
+sprite_frames = SubResource("SpriteFrames_k774p")
+animation = &"damage"
+frame_progress = 0.58752966
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 [node name="Gun" parent="." instance=ExtResource("3_aatkl")]
 position = Vector2(17, 0)
@@ -904,6 +959,16 @@ volume_db = 24.0
 stream = ExtResource("187_unmkb")
 volume_db = 24.0
 
+<<<<<<< HEAD
 [connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
 [connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
 [connection signal="animation_finished" from="Visuals/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+=======
+[node name="GolpeTimer" type="Timer" parent="."]
+wait_time = 0.35
+
+[connection signal="timeout" from="AturdidoTimer" to="." method="_on_aturdido_timer_timeout"]
+[connection signal="timeout" from="venenoTimer" to="." method="_on_veneno_timer_timeout"]
+[connection signal="animation_finished" from="Visuals/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="GolpeTimer" to="." method="_on_golpe_timer_timeout"]
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771

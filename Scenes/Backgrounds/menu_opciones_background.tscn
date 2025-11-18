@@ -8,6 +8,10 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 position = Vector2(2, -3)
+<<<<<<< HEAD
 scale = Vector2(1, 1.0990196)
+=======
+scale = Vector2(1, 1.09902)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 texture = ExtResource("1_q4rga")
 centered = false

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+<<<<<<< HEAD
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 var player: CharacterBody2D
@@ -32,3 +33,5 @@ func _process(delta: float) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	$AnimationPlayer.play("idle")
+=======
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771

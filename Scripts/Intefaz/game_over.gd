@@ -1,6 +1,10 @@
 extends Node
 
 func _ready():
+<<<<<<< HEAD
+=======
+	
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	$"../Player_1".muerte.connect(_on_player_died)
 	$"../Player_2".muerte.connect(_on_player_died)
 

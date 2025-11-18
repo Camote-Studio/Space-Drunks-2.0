@@ -253,7 +253,11 @@ _data = {
 script = ExtResource("1_43v56")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+<<<<<<< HEAD
 scale = Vector2(0.9732323, 1.0666667)
+=======
+scale = Vector2(0.973232, 1.06667)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 sprite_frames = SubResource("SpriteFrames_a6dcp")
 autoplay = "default"
 frame_progress = 0.0871329

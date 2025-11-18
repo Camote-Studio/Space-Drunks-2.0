@@ -1,3 +1,30 @@
+<<<<<<< HEAD
 # Godot 4+ specific ignores
 .godot/
 /android/
+=======
+# Godot 4 (cache/editor)
+.godot/
+
+# Godot 3 legacy cache
+.import/
+
+# Builds/exportados
+/export/
+/bin/
+*.pck
+*.exe
+*.apk
+*.aab
+*.zip
+*.html
+*.wasm
+
+# IDE/OS basura
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
