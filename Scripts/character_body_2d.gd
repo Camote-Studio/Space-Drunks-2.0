@@ -158,7 +158,7 @@ func _physics_process(delta: float) -> void:
 			bomb_ready = true
 			bomba_p1.value = bomba_p1.max_value
 	else:
-		if Input.is_action_just_pressed("bomba"):
+		if Input.is_action_just_pressed("bomba") and not dead and allow_input and bomb_ready:
 			_throw_bomb()
 			# Reiniciar la recarga
 			bomb_ready = false
@@ -187,8 +187,7 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 		return
 
-	if Input.is_action_just_pressed("bomba") and not dead and allow_input:
-		_throw_bomb()
+
 	if _dash_cooldown_timer > 0.0:
 		_dash_cooldown_timer -= delta
 	var direction = Vector2.ZERO

@@ -152,6 +152,7 @@ func _ready() -> void:
 	label.visible = false
 	if anim and not anim.is_connected("animation_finished", Callable(self, "_on_AnimatedSprite2D_animation_finished")):
 		anim.connect("animation_finished", Callable(self, "_on_AnimatedSprite2D_animation_finished"))
+	anim.play("idle")
 	rng.randomize()
 	if rng.randf() < 0.5: 
 		orbit_dir = -1.0 

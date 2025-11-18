@@ -64,8 +64,7 @@ var _combo_count := 0
 var _original_color: Color
 var _hitstun_tween: Tween
 
-<<<<<<< HEAD
-=======
+
 # === EMBESTIDA (Toro) ===
 @export var charge_enabled: bool = true
 @export var charge_trigger_min: float = 120.0
@@ -107,7 +106,6 @@ var _charge_timer: Timer
 var _shove_body: Node2D = null
 var _shove_time_left: float = 0.0
 
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 const MONEDA = preload("res://Scenes/Items/items_interectables/moneda.tscn")
 
 func _ready() -> void:
@@ -145,10 +143,7 @@ func _ready() -> void:
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 	
-<<<<<<< HEAD
-	# Electroshock
-=======
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
+
 	_base_speed = speed
 	_shock_timer = Timer.new()
 	_shock_timer.one_shot = true
@@ -156,13 +151,6 @@ func _ready() -> void:
 	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
 		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
 
-<<<<<<< HEAD
-	# Sistema de hitstun
-	_ready_hitstun_system()
-
-func _ready_hitstun_system() -> void:
-	# Timer para duración del hitstun
-=======
 	_ready_hitstun_system()
 
 	# Timers embestida
@@ -181,25 +169,17 @@ func _ready_hitstun_system() -> void:
 	_charge_timer.connect("timeout", Callable(self, "_on_charge_timeout"))
 
 func _ready_hitstun_system() -> void:
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	_hitstun_timer = Timer.new()
 	_hitstun_timer.one_shot = true
 	add_child(_hitstun_timer)
 	_hitstun_timer.connect("timeout", Callable(self, "_end_hitstun"))
 	
-<<<<<<< HEAD
-	# Timer para ventana de combo
-=======
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
+
 	_combo_timer = Timer.new()
 	_combo_timer.one_shot = true
 	add_child(_combo_timer)
 	_combo_timer.connect("timeout", Callable(self, "_reset_combo"))
-	
-<<<<<<< HEAD
-	# Guardar color original del sprite
-=======
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
+
 	if sprite_2d:
 		_original_color = sprite_2d.modulate
 
@@ -212,24 +192,7 @@ func _physics_process(delta: float) -> void:
 
 	var to_player := player.global_position - global_position
 	var dist := to_player.length()
-<<<<<<< HEAD
-	var dir := to_player.normalized()
-	var target_vel := Vector2.ZERO
-	walk_phase += delta
-	var offset := Vector2.ZERO
 
-	if dist > max_range * 0.9:
-		var phase := walk_phase * TAU
-		offset = Vector2(sin(phase * walk_freq + walk_seed) * side_amp, sin(phase * up_freq + walk_seed * 0.73) * up_amp)
-
-	# === MODIFICACIÓN: Movimiento reducido durante hitstun ===
-	var movement_multiplier = 1.0
-	if _in_hitstun:
-		movement_multiplier = 0.15  # 15% velocidad durante hitstun (muy lento para melee)
-		offset *= 0.2  # Reducir oscilaciones también
-
-	if _attack_lock and not _in_hitstun:  # Solo bloquear si NO está en hitstun
-=======
 	var dir := Vector2.ZERO
 	if dist > 0.0:
 		dir = to_player / dist
@@ -304,7 +267,6 @@ func _physics_process(delta: float) -> void:
 						 sin(phase * up_freq + walk_seed * 0.73) * up_amp)
 
 	if _attack_lock and not _in_hitstun:
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 		if dist > attack_range or target_in_range == null:
 			target_vel = Vector2.ZERO
 	else:
@@ -321,22 +283,7 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(target_vel, accel * delta)
 	rotation = 0.0
 
-<<<<<<< HEAD
-	# Flip invertido (enemigo mira al lado contrario del jugador)
-	if abs(dir.x) > 0.1:
-		face_sign = sign(dir.x)
-		sprite_2d.flip_h = face_sign > 0.0
 
-	move_and_slide()
-
-	# === MODIFICACIÓN: No atacar durante hitstun ===
-	if (dist <= attack_range and target_in_range and punch_timer.time_left <= 0.0 
-		and not dead and not _attack_lock and not _attack_anim_lock and not _in_hitstun):
-		_do_punch(dir)
-
-func _do_punch(dir: Vector2) -> void:
-	# No atacar si está en hitstun
-=======
 	if abs(dir.x) > 0.1:
 		_face_dir(dir.x)
 
@@ -508,22 +455,12 @@ func _try_charge_hit() -> void:
 
 # ========= MELEE normal =========
 func _do_punch(dir: Vector2) -> void:
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	if _in_hitstun:
 		return
 		
 	if target_in_range:
 		var direction_to_player = (target_in_range.global_position - global_position).normalized()
-<<<<<<< HEAD
-		if direction_to_player.x != 0:
-			face_sign = sign(direction_to_player.x)
-			sprite_2d.flip_h = face_sign > 0.0
-		
-		if target_in_range.has_method("emit_signal"):
-			target_in_range.emit_signal("damage", punch_damage)
-	
-	# Reproducir sonido de golpe
-=======
+
 		if direction_to_player.x != 0.0:
 			_face_dir(direction_to_player.x)
 		
@@ -532,7 +469,6 @@ func _do_punch(dir: Vector2) -> void:
 		if target_in_range.has_method("_apply_knockback_from"):
 			target_in_range.call_deferred("_apply_knockback_from", global_position)
 
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	if audio_ataque:
 		audio_ataque.stop()
 		audio_ataque.play()
@@ -545,10 +481,7 @@ func _do_punch(dir: Vector2) -> void:
 	if _tween and _tween.is_running():
 		_tween.kill()
 	
-<<<<<<< HEAD
-	# Movimiento de embestida (solo si no está en hitstun)
-=======
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
+
 	if not _in_hitstun:
 		var start := global_position
 		var end := start + dir * lunge_dist
@@ -564,27 +497,18 @@ func _on_punch_timer_timeout() -> void:
 func _on_sprite_2d_animation_finished() -> void:
 	if sprite_2d.animation == "ataque":
 		_attack_anim_lock = false
-<<<<<<< HEAD
-		sprite_2d.play("idle")
-=======
+
 		_play_anim_if_exists("idle")
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	elif sprite_2d.animation == "explosion":
 		if explosion_timer and explosion_timer.time_left > 0.0:
 			explosion_timer.stop()
 		if _is_shocked:
 			_end_electroshock()
 		if not reported_dead:
-<<<<<<< HEAD
-			# Registrar eliminación
-			var killer_id = _determine_killer()
-			if killer_id != "":
-				# KillTracker.register_kill(killer_id, "enemy_3")  # Descomentar si tienes KillTracker
-=======
+
 			var killer_id = _determine_killer()
 			if killer_id != "":
 				# KillTracker.register_kill(killer_id, "enemy_3")
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 				pass
 			reported_dead = true
 			_drop_coin()
@@ -592,10 +516,7 @@ func _on_sprite_2d_animation_finished() -> void:
 		queue_free()
 
 func _determine_killer() -> String:
-<<<<<<< HEAD
-	"""Determina qué jugador mató a este enemigo basado en proximidad"""
-=======
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
+
 	var players = []
 	players += get_tree().get_nodes_in_group("player")
 	players += get_tree().get_nodes_in_group("player_2")
@@ -605,15 +526,10 @@ func _determine_killer() -> String:
 	
 	for p in players:
 		if p and p is Node2D:
-<<<<<<< HEAD
-			var dist = global_position.distance_to(p.global_position)
-			if dist < closest_dist and dist < 200.0:
-				closest_dist = dist
-=======
+
 			var d = global_position.distance_to(p.global_position)
 			if d < closest_dist and d < 200.0:
 				closest_dist = d
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 				closest_player = p
 	
 	if closest_player:
@@ -628,8 +544,6 @@ func _determine_killer() -> String:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if dead:
 		return
-<<<<<<< HEAD
-=======
 
 	# Si está embistiendo y toca al player: inicia SHOVE (empuje continuo)
 	if _is_charging and ( _charge_state == CHARGE_RUN or _charge_state == CHARGE_SHOVE ):
@@ -637,15 +551,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			_on_charge_contact(body)
 			return
 
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	if body.is_in_group("player") or body.is_in_group("player_2"):
 		target_in_range = body as CharacterBody2D
 		if body.has_method("emit_signal"):
 			body.emit_signal("damage", punch_damage)
-<<<<<<< HEAD
-=======
 
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	if body.is_in_group("player_1_bullet"):
 		emit_signal("damage", 30.0)
 		if body.has_method("queue_free"):
@@ -696,49 +606,26 @@ func _on_damage(amount: float) -> void:
 	_stack_timer.start(0.4)
 	random_pitch_variations_gun()
 
-<<<<<<< HEAD
-	# === NUEVO: SISTEMA DE HITSTUN ===
-=======
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	_process_hitstun(amount)
 
 	if not dead and bar_5 and bar_5.value <= bar_5.min_value:
 		_die()
 
 func _process_hitstun(damage_amount: float) -> void:
-<<<<<<< HEAD
-	# Solo activa hitstun si el daño es suficiente
+
 	if damage_amount < hitstun_threshold:
 		return
 	
-	# Incrementa combo si estamos en ventana de combo
-=======
-	if damage_amount < hitstun_threshold:
-		return
-	
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	if _combo_timer.time_left > 0.0:
 		_combo_count += 1
 	else:
 		_combo_count = 1
 	
-<<<<<<< HEAD
-	# Reinicia timer de combo
-	_combo_timer.start(combo_window)
-	
-	# Activa/extiende hitstun
-	_enter_hitstun()
-	
-	# Duración del hitstun se extiende con combos
-	var extended_duration = hitstun_duration + (_combo_count * 0.15)
-	_hitstun_timer.start(extended_duration)
-	
-=======
+
 	_combo_timer.start(combo_window)
 	_enter_hitstun()
 	var extended_duration = hitstun_duration + (_combo_count * 0.15)
 	_hitstun_timer.start(extended_duration)
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 func _enter_hitstun() -> void:
 	if dead:
@@ -746,30 +633,7 @@ func _enter_hitstun() -> void:
 		
 	_in_hitstun = true
 	
-<<<<<<< HEAD
-	# Para el timer de ataque melee
-	if punch_timer:
-		punch_timer.paused = true
-	
-	# Si estaba atacando, cancelar el ataque
-	if _attack_lock:
-		_cancel_current_attack()
-	
-	# Cambia color a rojo con animación suave
-	if _hitstun_tween:
-		_hitstun_tween.kill()
-	
-	_hitstun_tween = create_tween()
-	_hitstun_tween.tween_property(sprite_2d, "modulate", hitstun_color, 0.08)
-	
-	# Reducir velocidad durante hitstun
-	speed *= 0.25  # 25% de velocidad
-	
-	# Efecto de sacudida
-	_screen_shake_effect_melee()
-	
-	# Reproducir animación de hitstun si existe
-=======
+
 	if punch_timer:
 		punch_timer.paused = true
 	
@@ -787,7 +651,6 @@ func _enter_hitstun() -> void:
 	speed *= 0.25
 	_screen_shake_effect_melee()
 	
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	if sprite_2d and sprite_2d.sprite_frames.has_animation("hitstun"):
 		sprite_2d.play("hitstun")
 
@@ -797,38 +660,7 @@ func _end_hitstun() -> void:
 		
 	_in_hitstun = false
 	
-<<<<<<< HEAD
-	# Reactiva ataque
-	if punch_timer and not dead:
-		punch_timer.paused = false
-	
-	# Restaura color original
-	if _hitstun_tween:
-		_hitstun_tween.kill()
-	
-	_hitstun_tween = create_tween()
-	_hitstun_tween.tween_property(sprite_2d, "modulate", _original_color, 0.15)
-	
-	# Restaura velocidad (si no está en electroshock)
-	if not _is_shocked:
-		speed = _base_speed
-	
-	# Volver a animación idle
-	if not dead and sprite_2d and sprite_2d.sprite_frames.has_animation("idle"):
-		sprite_2d.play("idle")
-	
 
-func _cancel_current_attack() -> void:
-	# Cancela ataque en progreso
-	_attack_lock = false
-	_attack_anim_lock = false
-	
-	# Para cualquier tween de movimiento de ataque
-	if _tween and _tween.is_running():
-		_tween.kill()
-	
-	# Para timer de ataque
-=======
 	if punch_timer and not dead:
 		punch_timer.paused = false
 	
@@ -848,7 +680,6 @@ func _cancel_current_attack() -> void:
 	_attack_anim_lock = false
 	if _tween and _tween.is_running():
 		_tween.kill()
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	if punch_timer:
 		punch_timer.stop()
 
@@ -858,17 +689,7 @@ func _reset_combo() -> void:
 	_combo_count = 0
 
 func _screen_shake_effect_melee() -> void:
-<<<<<<< HEAD
-	# Efecto de sacudida del sprite
-	var shake_tween = create_tween()
-	var original_pos = sprite_2d.position
-	
-	# Sacudida intensa
-	for i in range(5):
-		var offset = Vector2(randf_range(-6, 6), randf_range(-6, 6))
-		shake_tween.tween_property(sprite_2d, "position", original_pos + offset, 0.03)
-		shake_tween.tween_property(sprite_2d, "position", original_pos, 0.03)
-=======
+
 	var shake_tween = create_tween()
 	var original_pos = sprite_2d.position
 	var i := 0
@@ -877,7 +698,6 @@ func _screen_shake_effect_melee() -> void:
 		shake_tween.tween_property(sprite_2d, "position", original_pos + offset, 0.03)
 		shake_tween.tween_property(sprite_2d, "position", original_pos, 0.03)
 		i += 1
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 func _on_stack_timeout() -> void:
 	_stack_value = 0.0
@@ -886,10 +706,7 @@ func _on_stack_timeout() -> void:
 func _die() -> void:
 	dead = true
 	
-<<<<<<< HEAD
-	# Limpia hitstun antes de morir
-=======
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
+
 	if _hitstun_timer:
 		_hitstun_timer.stop()
 	if _combo_timer:
@@ -925,30 +742,19 @@ func _update_target() -> void:
 	var nearest_dist := INF
 	for p in players:
 		if p and p is Node2D:
-<<<<<<< HEAD
-			var dist = global_position.distance_to(p.global_position)
-			if dist < nearest_dist:
-				nearest_dist = dist
-=======
+
 			var d := global_position.distance_to(p.global_position)
 			if d < nearest_dist:
 				nearest_dist = d
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 				nearest = p
 	player = nearest
 
 func _drop_coin() -> void:
-<<<<<<< HEAD
-	var coin_instance = MONEDA.instantiate()
-	get_parent().add_child(coin_instance)
-	coin_instance.global_position = global_position
-	var sprite = coin_instance.get_node("AnimatedSprite2D")
-=======
+
 	var coin_instance := MONEDA.instantiate()
 	get_parent().add_child(coin_instance)
 	coin_instance.global_position = global_position
 	var sprite := coin_instance.get_node("AnimatedSprite2D")
->>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 	if sprite:
 		sprite.play("idle")
 

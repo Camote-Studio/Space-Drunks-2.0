@@ -61,7 +61,7 @@
 [ext_resource type="PackedScene" uid="uid://b8tjfgcynpqgj" path="res://Scenes/Npcs/Level1_1/martin_fondo.tscn" id="42_7hocu"]
 [ext_resource type="PackedScene" uid="uid://bkguq30cybuhk" path="res://Scenes/Npcs/Level1_1/alien_fondo.tscn" id="43_cjtyq"]
 [ext_resource type="PackedScene" uid="uid://cxsmi37r8jgfg" path="res://Scenes/Npcs/Level1_1/bender_fondo.tscn" id="44_pjdg7"]
-[ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/enemie_1.tscn" id="45_m7xit"]
+[ext_resource type="PackedScene" uid="uid://dfu27juntq4el" path="res://Scenes/enemie_3.tscn" id="63_g71bd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5699, 20)
@@ -543,11 +543,8 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="Player_1" parent="." node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("5_ygye0")]
-position = Vector2(-127, 624)
-bar = NodePath("../CanvasLayer/ProgressBar_alien_1")
-bar_ability_1 = NodePath("../CanvasLayer/ProgressBar_ability_1")
-coin_label = NodePath("../CanvasLayer/cont monedas")
+[node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
+position = Vector2(120, 655)
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
 position = Vector2(319, 403)
@@ -740,10 +737,10 @@ texture_progress = ExtResource("16_8sajs")
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 132.49997
-offset_top = 98.499985
-offset_right = 225.49997
-offset_bottom = 114.499985
+offset_left = 90.666664
+offset_top = 90.66667
+offset_right = 183.66666
+offset_bottom = 106.66667
 show_percentage = false
 
 [node name="bomba_p1" type="ProgressBar" parent="CanvasLayer"]
@@ -751,18 +748,18 @@ modulate = Color(0.487039, 0.591995, 0.0805549, 1)
 anchors_preset = -1
 anchor_top = -0.0169753
 anchor_bottom = -0.0169753
-offset_left = 88.667
-offset_top = 100.66632
-offset_right = 181.66699
-offset_bottom = 116.66632
+offset_left = 89.33333
+offset_top = 88.33333
+offset_right = 182.33331
+offset_bottom = 104.33333
 show_percentage = false
 
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 326.49997
-offset_top = 98.499985
-offset_right = 404.49997
-offset_bottom = 114.499985
+offset_left = 316.6667
+offset_top = 90.00001
+offset_right = 394.6667
+offset_bottom = 106.00001
 max_value = 200.0
 show_percentage = false
 
@@ -771,10 +768,10 @@ modulate = Color(0.479864, 0.105582, 0.500942, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 308.667
-offset_top = 82.333
-offset_right = -1530.333
-offset_bottom = -981.66705
+offset_left = 313.33334
+offset_top = 68.66667
+offset_right = -1525.6666
+offset_bottom = -995.3334
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 200.0
@@ -793,13 +790,13 @@ texture_under = ExtResource("15_dcn6k")
 texture_progress = ExtResource("16_8sajs")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(106.49997, 86.499985)
+position = Vector2(52.666676, 53.333336)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("20_jqqi2")
 
 [node name="Characater1Profile" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(64.83333, 52.5)
+position = Vector2(53.333332, 44.666668)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("21_krfk8")
 
@@ -816,7 +813,7 @@ texture = ExtResource("22_thxnh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(106.49997, 153.49998)
+position = Vector2(105.33333, 158)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
@@ -824,7 +821,7 @@ frame_progress = 0.711345
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(296.5, 156.5)
+position = Vector2(331.33334, 158.66666)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
@@ -862,10 +859,10 @@ anchor_left = 0.276
 anchor_top = 0.18
 anchor_right = 0.276
 anchor_bottom = 0.18
-offset_left = -219.91998
-offset_top = -88.06667
-offset_right = -192.91998
-offset_bottom = -65.066666
+offset_left = -203.25333
+offset_top = -82.40001
+offset_right = -176.25333
+offset_bottom = -59.40001
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 10
@@ -891,10 +888,11 @@ offset_right = 342.0
 offset_bottom = -3.0
 
 [node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
-offset_left = 435.0
-offset_top = -8.0
+visible = true
+offset_left = 347.0
+offset_top = 121.0
 offset_right = 1293.0
-offset_bottom = 638.0
+offset_bottom = 828.0
 mouse_filter = 2
 
 [node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
@@ -945,12 +943,6 @@ position = Vector2(5233, 437)
 position = Vector2(-203, 201)
 shape = SubResource("RectangleShape2D_m7xit")
 
-[node name="Enemie_2" parent="." instance=ExtResource("45_m7xit")]
-position = Vector2(874, 454)
-
-[node name="Enemie_4" parent="." instance=ExtResource("45_m7xit")]
-position = Vector2(503, 534)
-
 [node name="UI2" type="CanvasLayer" parent="."]
 
 [node name="Vortex" type="AnimatedSprite2D" parent="UI2"]
@@ -960,7 +952,10 @@ position = Vector2(765.0001, 544)
 scale = Vector2(0.5808383, 0.50931096)
 sprite_frames = SubResource("SpriteFrames_4gpkr")
 autoplay = "default"
-frame_progress = 0.6265552
+frame_progress = 0.5719317
+
+[node name="enemie_3" parent="." instance=ExtResource("63_g71bd")]
+position = Vector2(394, 699)
 
 [connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="Portal" method="_on_animation_player_animation_finished"]
