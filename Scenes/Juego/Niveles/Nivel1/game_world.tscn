@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://dkt37yghdsm2q"]
+[gd_scene load_steps=80 format=3 uid="uid://dkt37yghdsm2q"]
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
@@ -62,7 +62,6 @@
 [ext_resource type="PackedScene" uid="uid://b8tjfgcynpqgj" path="res://Scenes/Npcs/Level1_1/martin_fondo.tscn" id="42_7hocu"]
 [ext_resource type="PackedScene" uid="uid://bkguq30cybuhk" path="res://Scenes/Npcs/Level1_1/alien_fondo.tscn" id="43_cjtyq"]
 [ext_resource type="PackedScene" uid="uid://cxsmi37r8jgfg" path="res://Scenes/Npcs/Level1_1/bender_fondo.tscn" id="44_pjdg7"]
-[ext_resource type="PackedScene" uid="uid://dsxrf7s0exvt7" path="res://Scenes/Enemies/Enemigo_Distancia/Enemy_Ovni_Gato.tscn" id="45_m7xit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5699, 20)
@@ -421,7 +420,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("29_js3kd")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 10.0
 }]
@@ -946,12 +945,6 @@ position = Vector2(5233, 437)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="final_nivel"]
 position = Vector2(-203, 201)
 shape = SubResource("RectangleShape2D_m7xit")
-
-[node name="Enemie_2" parent="." instance=ExtResource("45_m7xit")]
-position = Vector2(874, 454)
-
-[node name="Enemie_4" parent="." instance=ExtResource("45_m7xit")]
-position = Vector2(503, 534)
 
 [node name="UI2" type="CanvasLayer" parent="."]
 
