@@ -1,6 +1,4 @@
 extends CharacterBody2D
-# player 2
-
 # =========================
 # Señales
 # =========================
@@ -11,16 +9,15 @@ signal muerte
 # Constantes / Utilidades
 # =========================
 const ENEMY_GROUPS := ["enemy_1","enemy_2","enemy_3","enemy_4","enemy_5","boss"]
-
 # =========================
 # Nodos
 # =========================
 @onready var TimerGolpeUlti: Timer = Timer.new()
-@onready var veneno_couldown: ProgressBar = $"../CanvasLayer/Veneno_p2"
+@onready var veneno_couldown: ProgressBar = $"../../CanvasLayer/Veneno_p2"
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
 @onready var sonido_ulti: AudioStreamPlayer2D = $sonido_ulti
-@onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
+@onready var bar: TextureProgressBar = $"../../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_2: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_2"
 @onready var coin_label: Label = $"../../CanvasLayer/cont monedas2"
@@ -176,14 +173,17 @@ func _ready() -> void:
 # Helpers genéricos
 # ======================
 func _set_facing(sign_dir: int) -> void:
-	if sign_dir == 0: return
+	if sign_dir == 0:
+		return
+	# Si ya estoy mirando en esa dirección, no hagas nada
+	if sign_dir == _facing:
+		return
 	_facing = sign_dir
+	# Solo flip visual, NO tocar posiciones
 	animated_sprite.flip_h = (_facing < 0)
 	punch_left.flip_h  = animated_sprite.flip_h
 	punch_right.flip_h = animated_sprite.flip_h
-	if not _punch_lock:
-		punch_left.position  = Vector2(_base_left.x  * _facing, _base_left.y)
-		punch_right.position = Vector2(_base_right.x * _facing, _base_right.y)
+	# La espada sí puede seguir usando el facing si quieres
 	_update_sword_transform()
 
 func _set_punches_visible(v: bool) -> void:
@@ -354,7 +354,7 @@ func _physics_process(delta: float) -> void:
 		_start_ulti()
 	if abs(direction.x) > 0.01:
 		_set_facing(sign(direction.x))
-	if Input.is_action_just_pressed("fired_2") and not selecting_poison and not floating:
+	if Input.is_action_just_pressed("fired_2") and not selecting_poison and not floating and not dead:
 		_punch_alternate()
 	# Animaciones por estado
 	if selecting_poison:
@@ -401,26 +401,23 @@ func _physics_process(delta: float) -> void:
 			sonido_flotando.stop()
 	else:
 		_handle_floating(delta)
-
+		
 # ======================
 # Utilidad de empuje
 # ======================
 func push_temp(offset: Vector2) -> void:
 	global_position += offset
-
 # ======================
 # Daño recibido
 # ======================
 func _on_damage(amount: float, source: String = "desconocido") -> void:
 	if dead: return
-
 	if bar:
 		bar.value = clamp(bar.value - amount, bar.min_value, bar.max_value)
 		GameState.set_vida(player_id, bar.value)
 		if bar.value <= bar.min_value:
 			_die()
 			return
-
 	match source:
 		"veneno":
 			if estado_actual == Estado.NORMAL:
@@ -467,7 +464,7 @@ func _die() -> void:
 	$Timer.stop()
 	$venenoTimer.stop()
 	_revert_sword()
-
+	_set_punches_visible(false)
 	if is_in_group("player_2"):
 		remove_from_group("player_2")
 	if is_in_group("players"):
@@ -477,8 +474,8 @@ func _die() -> void:
 	if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
 		animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"), CONNECT_ONE_SHOT)
 
-	$"../CanvasLayer/Sprite2D2".self_modulate = Color(1, 0, 0, 1)
-	$"../CanvasLayer/Character2Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_big.png")
+	$"../../CanvasLayer/Sprite2D2".self_modulate = Color(1, 0, 0, 1)
+	$"../../CanvasLayer/Characater1Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_big.png")
 	emit_signal("muerte")
 
 func _on_death_finished() -> void:

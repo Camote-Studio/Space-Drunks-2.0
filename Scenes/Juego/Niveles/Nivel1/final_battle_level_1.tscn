@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://boerlu017qoxc"]
+[gd_scene load_steps=34 format=3 uid="uid://boerlu017qoxc"]
 
 [ext_resource type="Script" uid="uid://dn5ueuys22ugd" path="res://Scripts/final_battle_level_1.gd" id="1_nkr87"]
 [ext_resource type="Texture2D" uid="uid://xenlds0o8ci6" path="res://Assets/art/background/BACKGROUND_ART_SKETCH_2.png" id="2_tk0fa"]
@@ -7,10 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/Players/Player 2/player_2.tscn" id="5_hvwlt"]
 [ext_resource type="PackedScene" uid="uid://cy7nosfcmj6l0" path="res://Scenes/Juego/Niveles/Nivel1/final_boss.tscn" id="6_reli8"]
 [ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="7_0mfdm"]
-[ext_resource type="PackedScene" uid="uid://cj0wechyf4nf1" path="res://Scenes/Players/Player 2/Armas_P2/poison_cloud.tscn" id="7_214cm"]
 [ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="8_0jhcm"]
 [ext_resource type="Texture2D" uid="uid://ch6hbtjs06x3l" path="res://Assets/art/sprites/complements_sprites/shape_character.png" id="9_214cm"]
-[ext_resource type="Texture2D" uid="uid://ccfvct5yvy3y4" path="res://Assets/art/sprites/Enemigos/1.png" id="10_0jhcm"]
+[ext_resource type="Texture2D" uid="uid://ccfvct5yvy3y4" path="res://Assets/art/sprites/Enemigos/Boss_idle/1.png" id="10_0jhcm"]
 [ext_resource type="Texture2D" uid="uid://wgdd4pjcahpm" path="res://Assets/art/sprites/complements_sprites/characater_1_profile.png" id="10_vrfk5"]
 [ext_resource type="Texture2D" uid="uid://3i466vl6hlny" path="res://Assets/art/sprites/complements_sprites/character_2_profile.png" id="11_csxv4"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="12_32j16"]
@@ -22,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="18_5xp07"]
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="19_drcxw"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="20_3xxpn"]
-[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/Interfaz/UI/ui_abilities.tscn" id="21_g6gy1"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="22_xt53k"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_8hkf8"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="24_wnopm"]
@@ -97,11 +95,13 @@ position = Vector2(817, 171)
 texture = ExtResource("2_tk0fa")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Gameworld"]
+z_index = -3
 texture_filter = 1
 position = Vector2(1344, 151)
 texture = ExtResource("2_tk0fa")
 
 [node name="PISO" type="Sprite2D" parent="Gameworld"]
+z_index = -2
 texture_filter = 1
 position = Vector2(-345, 56)
 scale = Vector2(1.084, 1)
@@ -139,11 +139,8 @@ coin_label = NodePath("../../CanvasLayer/cont monedas")
 position = Vector2(314, 686)
 
 [node name="Final_Boss" parent="Gameworld" instance=ExtResource("6_reli8")]
-position = Vector2(1298, 597)
+position = Vector2(822, 571)
 scale = Vector2(1, 1)
-frames_face_right = false
-default_anim = "default"
-poison_scene = ExtResource("7_214cm")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Gameworld"]
 position = Vector2(-317.00003, 99)
@@ -343,9 +340,6 @@ offset_bottom = -45.320007
 theme_override_fonts/font = ExtResource("12_32j16")
 theme_override_font_sizes/font_size = 33
 text = "0"
-metadata/_edit_use_anchors_ = true
-
-[node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("21_g6gy1")]
 metadata/_edit_use_anchors_ = true
 
 [node name="GameOver" parent="." instance=ExtResource("23_8hkf8")]

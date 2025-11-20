@@ -1,0 +1,177 @@
+[gd_resource type="BehaviorTree" load_steps=58 format=3 uid="uid://bedkv143ysrli"]
+
+[ext_resource type="Script" uid="uid://2vnhnaid0kpj" path="res://ai/tasks/choose_random_pos.gd" id="1_wkl7e"]
+[ext_resource type="Script" uid="uid://dlbp8lfodkrjq" path="res://ai/tasks/move_to_position.gd" id="2_sf326"]
+[ext_resource type="Script" uid="uid://cdrlg5uamutrf" path="res://ai/tasks/find_target.gd" id="3_hqlaa"]
+[ext_resource type="Script" uid="uid://4snkwf6ey1b4" path="res://ai/tasks/move_to_target.gd" id="4_acp1d"]
+[ext_resource type="Script" uid="uid://c71rd6qdep4r8" path="res://ai/tasks/CanAttackTarget.gd" id="5_0ca5l"]
+[ext_resource type="Script" uid="uid://05g3bgoyfn6p" path="res://ai/tasks/BossDashForward.gd" id="6_0mfcw"]
+[ext_resource type="Script" uid="uid://yvcpmt5eaokl" path="res://ai/tasks/BossAttackAction.gd" id="6_tnuqd"]
+[ext_resource type="Script" uid="uid://cco0ce0rd6exf" path="res://ai/tasks/BossPoisonAction.gd" id="8_6spu4"]
+[ext_resource type="Script" uid="uid://7nsfx5ftloih" path="res://ai/tasks/BossShoutAction.gd" id="9_0mfcw"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_e34go"]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_arxy5"]
+text = "combat"
+
+[sub_resource type="BTAction" id="BTAction_0ca5l"]
+script = ExtResource("3_hqlaa")
+group = &"player_1"
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_0mfcw"]
+text = "attack"
+
+[sub_resource type="BTAction" id="BTAction_0mfcw"]
+script = ExtResource("5_0ca5l")
+
+[sub_resource type="BTAction" id="BTAction_3i1ix"]
+script = ExtResource("6_tnuqd")
+
+[sub_resource type="BTWait" id="BTWait_3i1ix"]
+duration = 3.0
+
+[sub_resource type="BTSequence" id="BTSequence_m61i3"]
+custom_name = "Attack Sequence"
+children = [SubResource("BTConsolePrint_0mfcw"), SubResource("BTAction_0mfcw"), SubResource("BTAction_3i1ix"), SubResource("BTWait_3i1ix")]
+
+[sub_resource type="BTProbability" id="BTProbability_m61i3"]
+run_chance = 0.25
+children = [SubResource("BTSequence_m61i3")]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_m61i3"]
+text = "shout"
+
+[sub_resource type="BTAction" id="BTAction_ho4vp"]
+script = ExtResource("9_0mfcw")
+
+[sub_resource type="BTWait" id="BTWait_l5mta"]
+duration = 2.0
+
+[sub_resource type="BBNode" id="BBNode_0mfcw"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_3i1ix"]
+animation_player = SubResource("BBNode_0mfcw")
+animation_name = &"attack"
+
+[sub_resource type="BTSequence" id="BTSequence_olyli"]
+custom_name = "Shout Sequence"
+children = [SubResource("BTConsolePrint_m61i3"), SubResource("BTAction_ho4vp"), SubResource("BTWait_l5mta"), SubResource("BTPlayAnimation_3i1ix")]
+
+[sub_resource type="BTProbability" id="BTProbability_wts3m"]
+run_chance = 0.4
+children = [SubResource("BTSequence_olyli")]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_3i1ix"]
+text = "poison"
+
+[sub_resource type="BTAction" id="BTAction_wts3m"]
+script = ExtResource("8_6spu4")
+
+[sub_resource type="BTWait" id="BTWait_ub5xd"]
+
+[sub_resource type="BBNode" id="BBNode_m61i3"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_wts3m"]
+animation_player = SubResource("BBNode_m61i3")
+animation_name = &"poison"
+
+[sub_resource type="BTSequence" id="BTSequence_7tese"]
+custom_name = "Poison Sequence"
+children = [SubResource("BTConsolePrint_3i1ix"), SubResource("BTAction_wts3m"), SubResource("BTWait_ub5xd"), SubResource("BTPlayAnimation_wts3m")]
+
+[sub_resource type="BTProbability" id="BTProbability_cyl34"]
+run_chance = 0.3
+children = [SubResource("BTSequence_7tese")]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_wts3m"]
+text = "dash"
+
+[sub_resource type="BTWait" id="BTWait_wts3m"]
+
+[sub_resource type="BBNode" id="BBNode_3i1ix"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_m61i3"]
+animation_player = SubResource("BBNode_3i1ix")
+animation_name = &"dash"
+
+[sub_resource type="BTAction" id="BTAction_m61i3"]
+script = ExtResource("6_0mfcw")
+
+[sub_resource type="BTSequence" id="BTSequence_cyl34"]
+custom_name = "Dash Sequence"
+children = [SubResource("BTConsolePrint_wts3m"), SubResource("BTWait_wts3m"), SubResource("BTPlayAnimation_m61i3"), SubResource("BTAction_m61i3")]
+
+[sub_resource type="BTProbability" id="BTProbability_3i1ix"]
+run_chance = 0.25
+children = [SubResource("BTSequence_cyl34")]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_sf326"]
+
+[sub_resource type="BTSequence" id="BTSequence_hqlaa"]
+custom_name = "Idle Sequence"
+children = [SubResource("BTRandomWait_sf326")]
+
+[sub_resource type="BTProbability" id="BTProbability_ub5xd"]
+run_chance = 0.05
+children = [SubResource("BTSequence_hqlaa")]
+
+[sub_resource type="BTSelector" id="BTSelector_0mfcw"]
+custom_name = "Ability Selector"
+children = [SubResource("BTProbability_m61i3"), SubResource("BTProbability_wts3m"), SubResource("BTProbability_cyl34"), SubResource("BTProbability_3i1ix"), SubResource("BTProbability_ub5xd")]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_acp1d"]
+text = "moving to enemy"
+
+[sub_resource type="BTAction" id="BTAction_arxy5"]
+script = ExtResource("3_hqlaa")
+
+[sub_resource type="BTAction" id="BTAction_tnuqd"]
+script = ExtResource("4_acp1d")
+
+[sub_resource type="BTWait" id="BTWait_6spu4"]
+duration = 6.0
+
+[sub_resource type="BTSequence" id="BTSequence_arxy5"]
+custom_name = "Move To Enemy Sequence"
+children = [SubResource("BTConsolePrint_acp1d"), SubResource("BTAction_arxy5"), SubResource("BTAction_tnuqd"), SubResource("BTWait_6spu4")]
+
+[sub_resource type="BTProbability" id="BTProbability_7tese"]
+children = [SubResource("BTSequence_arxy5")]
+
+[sub_resource type="BTSequence" id="BTSequence_3i1ix"]
+custom_name = "Combat Sequence"
+children = [SubResource("BTConsolePrint_arxy5"), SubResource("BTAction_0ca5l"), SubResource("BTSelector_0mfcw"), SubResource("BTProbability_7tese")]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_sf326"]
+text = "random move"
+
+[sub_resource type="BTAction" id="BTAction_hqlaa"]
+script = ExtResource("1_wkl7e")
+
+[sub_resource type="BTAction" id="BTAction_acp1d"]
+script = ExtResource("2_sf326")
+
+[sub_resource type="BTWait" id="BTWait_arxy5"]
+duration = 5.0
+
+[sub_resource type="BTSequence" id="BTSequence_acp1d"]
+custom_name = "Random Move Sequence"
+children = [SubResource("BTConsolePrint_sf326"), SubResource("BTAction_hqlaa"), SubResource("BTAction_acp1d"), SubResource("BTWait_arxy5")]
+
+[sub_resource type="BTProbability" id="BTProbability_0mfcw"]
+run_chance = 0.2
+children = [SubResource("BTSequence_acp1d")]
+
+[sub_resource type="BTSelector" id="BTSelector_wkl7e"]
+children = [SubResource("BTSequence_3i1ix"), SubResource("BTProbability_0mfcw")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_e34go")
+root_task = SubResource("BTSelector_wkl7e")

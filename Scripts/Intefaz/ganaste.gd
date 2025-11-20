@@ -5,21 +5,14 @@ extends Control # Make sure it's still a Control node
 @export var win_animation_player: AnimationPlayer
 @export var transition_animation_player: AnimationPlayer
 @export var scene_change_timer: Timer
+@export var mundo_del_juego: Node2D
+@export var interfaz_juego: CanvasLayer # El nodo CanvasLayer que tiene la vida, etc.
 
 var is_changing_scene: bool = false
 
 func _ready():
 	hide()
-	# This node and its children will run even when the game is paused.
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	
-	if final_boss:
-		final_boss.died.connect(on_boss_died)
-	else:
-		print("ERROR: El jefe no ha sido asignado al script de Ganaste en el Inspector.")
-
-@export var mundo_del_juego: Node2D
-@export var interfaz_juego: CanvasLayer # El nodo CanvasLayer que tiene la vida, etc.
 
 func on_boss_died():
 	# 1. Oculta TODO el juego y su UI con solo dos líneas.

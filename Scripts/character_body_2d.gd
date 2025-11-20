@@ -3,7 +3,7 @@ var _flotar_sound_played := false
 
 signal damage(amount: float, source: String)
 signal muerte
-@onready var shop: Control = $"../CanvasLayer/UI_abilities"
+#@onready var shop: Control = $"../CanvasLayer/UI_abilities"
 @export var bomb_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/bomba.tscn")
 # --- GUN / ULTI ---
 @onready var gun = $Gun
@@ -472,11 +472,11 @@ func _set_gun_active(g: Node, active: bool) -> void:
 	if "visible" in g:
 		g.visible = active
 
-func _show_shop() -> void:
-	if shop:
-		shop.open_for(self)
-	else:
-		push_warning("[P1] No encontré la tienda (UI_abilities)")
+#func _show_shop() -> void:
+	#if shop:
+		#shop.open_for(self)
+	#else:
+		#push_warning("[P1] No encontré la tienda (UI_abilities)")
 
 # ====================== FUNCIÓN PARA ULTI =======================
 func _activate_ulti() -> void:
