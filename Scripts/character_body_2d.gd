@@ -72,6 +72,7 @@ var _knockback_vel: Vector2 = Vector2.ZERO
 
 # =============== FUNCIÓN READY =============================
 func _ready() -> void:
+
 	_disable_stream_loop(sonido_flotando)
 
 	# --- Recuperar monedas ---
@@ -101,6 +102,8 @@ func _ready() -> void:
 	if animated_sprite:
 		animated_sprite.play("idle")
 
+	if not is_in_group("player"):
+		add_to_group("player")
 	if not is_in_group("players"):
 		add_to_group("players")
 
