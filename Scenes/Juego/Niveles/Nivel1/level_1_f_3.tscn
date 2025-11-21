@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b0kmfdbxre0tx"]
+[gd_scene load_steps=45 format=3 uid="uid://b0kmfdbxre0tx"]
 
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="1_gupyi"]
 [ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/Players/Player 1/player_1.tscn" id="2_sv6kg"]
@@ -10,7 +10,9 @@
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="6_tii1t"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="7_efrga"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="8_6nii4"]
+[ext_resource type="PackedScene" uid="uid://bcumd4ca72ik2" path="res://Scenes/Players/Player 2/Armas_P2/PoisonArea.tscn" id="8_ftfec"]
 [ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="9_6nii4"]
+[ext_resource type="PackedScene" uid="uid://b616wuo0wkbh5" path="res://Scenes/Players/Player 2/Armas_P2/sword.tscn" id="9_iy2m7"]
 [ext_resource type="Texture2D" uid="uid://ch6hbtjs06x3l" path="res://Assets/art/sprites/complements_sprites/shape_character.png" id="9_sij3j"]
 [ext_resource type="Texture2D" uid="uid://wgdd4pjcahpm" path="res://Assets/art/sprites/complements_sprites/characater_1_profile.png" id="10_r84mv"]
 [ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="10_sij3j"]
@@ -24,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="18_m74wh"]
 [ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="19_fnwrx"]
 [ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="21_r84mv"]
-[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/Interfaz/UI/ui_abilities.tscn" id="22_v4p21"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="23_d1i85"]
 [ext_resource type="PackedScene" uid="uid://c668cr3fwfjdu" path="res://Scenes/Enemies/System/Spawns/enemies_final.tscn" id="27_v4p21"]
 [ext_resource type="PackedScene" uid="uid://bqgpuoigd3t4p" path="res://Scenes/Enemies/System/Spawns/enemie_spawn_5.tscn" id="28_s0j4o"]
@@ -38,12 +39,6 @@ size = Vector2(5588.5, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0fq8"]
 size = Vector2(15, 1115)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4neb"]
-size = Vector2(1232.99, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_15ly5"]
-size = Vector2(5563.5, 3)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3k20b"]
 animations = [{
@@ -232,8 +227,8 @@ script = ExtResource("1_gupyi")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
-position = Vector2(2226.5, 201.5)
-scale = Vector2(1.70475, 1.059804)
+position = Vector2(4825.5, 201.5)
+scale = Vector2(3.00425, 1.059804)
 texture = ExtResource("2_tii1t")
 
 [node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
@@ -250,7 +245,7 @@ scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("2_tii1t")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(1819, 121)
+position = Vector2(1854, 176)
 texture = ExtResource("3_sij3j")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
@@ -263,7 +258,7 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 [node name="PISO" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-441, 67)
-scale = Vector2(1.52675, 1)
+scale = Vector2(2.8182502, 1)
 texture = ExtResource("4_efrga")
 centered = false
 
@@ -275,6 +270,8 @@ coin_label = NodePath("../CanvasLayer/cont monedas")
 
 [node name="Player_2" parent="." instance=ExtResource("3_c5os2")]
 position = Vector2(266, 669)
+poison_area_scene = ExtResource("8_ftfec")
+espada_scene = ExtResource("9_iy2m7")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-317, 178)
@@ -288,22 +285,6 @@ shape = SubResource("RectangleShape2D_b0kl2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(-415, 296)
 shape = SubResource("RectangleShape2D_u0fq8")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-visible = false
-position = Vector2(0, 94)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(5507.51, 146.503)
-rotation = 1.56824
-shape = SubResource("RectangleShape2D_f4neb")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="StaticBody2D4"]
-position = Vector2(0, 112)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4/StaticBody2D2"]
-position = Vector2(2713.75, 419.5)
-shape = SubResource("RectangleShape2D_15ly5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 scale = Vector2(1.5, 1.5)
@@ -476,9 +457,6 @@ theme_override_font_sizes/font_size = 33
 text = "0"
 metadata/_edit_use_anchors_ = true
 
-[node name="UI_abilities" parent="CanvasLayer" instance=ExtResource("22_v4p21")]
-metadata/_edit_use_anchors_ = true
-
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
@@ -609,6 +587,8 @@ shape = SubResource("RectangleShape2D_tv5bt")
 
 [node name="Sombras_transición" parent="." instance=ExtResource("32_qtle1")]
 visible = true
+offset_left = 4.0
+offset_right = 1927.0
 
 [connection signal="body_entered" from="next_scene_path_area" to="next_scene_path_area" method="_on_body_entered"]
 [connection signal="body_entered" from="BlockColliderBody" to="BlockColliderBody" method="_on_body_entered"]

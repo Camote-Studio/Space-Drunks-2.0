@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0t34vkk714yg"
-path="res://.godot/imported/FINALboz.png-02f7908ce697e47792b05be4c2eae7cc.ctex"
+uid="uid://c48q81hv7dorh"
+path="res://.godot/imported/3.png-18d98cee8cf0f0a36de35abbf58f7aff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/sprites/Enemigos/FINALboz.png"
-dest_files=["res://.godot/imported/FINALboz.png-02f7908ce697e47792b05be4c2eae7cc.ctex"]
+source_file="res://Assets/art/sprites/Enemigos/Boss_idle/3.png"
+dest_files=["res://.godot/imported/3.png-18d98cee8cf0f0a36de35abbf58f7aff.ctex"]
 
 [params]
 

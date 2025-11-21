@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://clyhgbpfpmtw7"]
+[gd_scene load_steps=17 format=3 uid="uid://clyhgbpfpmtw7"]
 
 [ext_resource type="Script" uid="uid://bwhv180m71qs4" path="res://demo/scenes/game.gd" id="1_qw71e"]
 [ext_resource type="Theme" uid="uid://boqtjf88xcpu4" path="res://demo/assets/ui.theme" id="2_r21q3"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bsig1usigbbuy" path="res://demo/scenes/base/arena.tscn" id="9_k3uu1"]
 [ext_resource type="PackedScene" uid="uid://bpd1wmw2f7bvg" path="res://demo/props/gong.tscn" id="10_tftjb"]
 [ext_resource type="PackedScene" uid="uid://d07ag5dcje13i" path="res://demo/agents/player/player.tscn" id="11_bndob"]
+[ext_resource type="PackedScene" uid="uid://730bthc0ywhd" path="res://demo/agents/03_agent_imp.tscn" id="12_iqqhs"]
+[ext_resource type="PackedScene" uid="uid://g1pnvanyxcpa" path="res://demo/agents/02_agent_charger.tscn" id="13_jldad"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qvxvp"]
 font = ExtResource("4_w0vii")
@@ -191,6 +193,12 @@ position = Vector2(629, 417)
 
 [node name="SpawnPosition10" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1859, 3)
+
+[node name="AgentImp" parent="." instance=ExtResource("12_iqqhs")]
+position = Vector2(93, 687)
+
+[node name="AgentCharger" parent="." instance=ExtResource("13_jldad")]
+position = Vector2(197, 316)
 
 [connection signal="pressed" from="UI Layer/Control/Toolbar/HBoxContainer/Switch to Showcase" to="." method="_on_switch_to_showcase_pressed"]
 [connection signal="gong_struck" from="Gong" to="." method="_on_gong_gong_struck"]

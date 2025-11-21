@@ -34,7 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://qw118bx7ms4l" path="res://Assets/art/sprites/Particulas/EXPLO_6.png" id="29_o6ca6"]
 [ext_resource type="Texture2D" uid="uid://cv8kpsuyk8cko" path="res://Assets/art/sprites/Enemigos/ALien_Cuchillas.png" id="30_b2oo7"]
 [ext_resource type="Texture2D" uid="uid://bj8kvsqukofap" path="res://Assets/art/sprites/Armas/gUN2.png" id="31_2cfp8"]
-[ext_resource type="Texture2D" uid="uid://ckvb4w6t1iqik" path="res://Assets/art/sprites/Enemigos/FINALboz.png" id="32_ju7et"]
+[ext_resource type="Texture2D" uid="uid://ckvb4w6t1iqik" path="res://Assets/art/sprites/Enemigos/Boss_idle/FINALboz.png" id="32_ju7et"]
 [ext_resource type="Texture2D" uid="uid://pp8a2uy8ep1o" path="res://Assets/art/sprites/Enemigos/DukaLIEN_2.png" id="32_lxjpj"]
 [ext_resource type="Texture2D" uid="uid://dib0ibvxgvi7y" path="res://Assets/art/sprites/Enemigos/PulpAlien.png" id="36_g7s15"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="38_g7s15"]

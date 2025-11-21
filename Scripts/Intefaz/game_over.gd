@@ -1,15 +1,14 @@
 extends Node
 
 func _ready():
-
-	$"../Player_1".muerte.connect(_on_player_died)
-	$"../Player_2".muerte.connect(_on_player_died)
+	$"../Gameworld/Player_1".muerte.connect(_on_player_died)
+	$"../Gameworld/Player_2".muerte.connect(_on_player_died)
 
 var dead_count = 0
 
 func _on_player_died():
 	dead_count += 1
-	if dead_count >= 2:  # Ambos jugadores muertos
+	if dead_count >= 2:  
 		_game_over()
 
 func _game_over():

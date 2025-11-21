@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bma6w4p6xhc1v"
-path="res://.godot/imported/2.png-06c1d6804f1300a7ac189c6a7ff06d51.ctex"
+path="res://.godot/imported/2.png-3f421022e85d9e0655ef7702d8181b4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/sprites/Enemigos/2.png"
-dest_files=["res://.godot/imported/2.png-06c1d6804f1300a7ac189c6a7ff06d51.ctex"]
+source_file="res://Assets/art/sprites/Enemigos/Boss_idle/2.png"
+dest_files=["res://.godot/imported/2.png-3f421022e85d9e0655ef7702d8181b4b.ctex"]
 
 [params]
 
