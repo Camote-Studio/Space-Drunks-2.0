@@ -88,7 +88,10 @@ motion_mirroring = Vector2(1149, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxBackground/Espacio"]
 texture_filter = 1
+<<<<<<< HEAD
+=======
 scale = Vector2(1, 1.1805557)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 texture = ExtResource("2_1xh45")
 centered = false
 
@@ -109,7 +112,11 @@ centered = false
 
 [node name="Fondo" type="Sprite2D" parent="."]
 position = Vector2(1.9999924, -372)
+<<<<<<< HEAD
+scale = Vector2(1.1454546, 1.4245099)
+=======
 scale = Vector2(1.2333333, 1.6137255)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 texture = ExtResource("6_i7q02")
 centered = false
 
@@ -275,15 +282,23 @@ wait_time = 2.0
 autostart = true
 
 [node name="Players" type="Sprite2D" parent="."]
+<<<<<<< HEAD
+position = Vector2(384, 122.00001)
+scale = Vector2(0.8, 0.8)
+=======
 position = Vector2(283, 113)
 scale = Vector2(0.97878784, 1.0029411)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 texture = ExtResource("12_1xh45")
 centered = false
 
 [node name="Sombras_transición" parent="." instance=ExtResource("10_t8o0a")]
 layout_mode = 0
+<<<<<<< HEAD
+=======
 offset_right = 2065.0
 offset_bottom = 1280.0
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 
 [node name="Sombra_time" type="Timer" parent="Sombras_transición"]
 

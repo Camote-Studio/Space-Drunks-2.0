@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal damage(value: float)
 signal died
 
+
 @onready var audio_laser : AudioStreamPlayer2D = $laser
 var speed: float = 300.0
 var accel: float = 1200.0
@@ -13,6 +14,7 @@ const BULLET_ENEMY_1 = preload("res://Scenes/Enemies/System/Weapons/gun_enemy_1.
 @onready var bar_3: ProgressBar = $ProgressBar_enemy
 @onready var anim: AnimatedSprite2D = $Sprite2D
 const MONEDA = preload("res://Scenes/Items/items_interectables/moneda.tscn")
+
 
 # ===== Seguimiento =====
 @export var horizontal_only: bool = false        # false = mueve X e Y
@@ -92,13 +94,16 @@ var _is_shocked: bool = false
 @export var hitstun_threshold: float = 15.0
 @export var combo_window: float = 1.2
 @export var hitstun_color: Color = Color(1.0, 0.3, 0.3, 1.0)
+
 var _in_hitstun: bool = false
 var _hitstun_timer: Timer
 var _combo_timer: Timer
 var _combo_count: int = 0
 var _original_color: Color
 var _hitstun_tween: Tween
-
+var orbit_dir: float = 1.0 
+var strafe_timer: Timer
+@export var swap_interval: float = 3.5  # Tiempo que dura cada dirección de strafe
 # ===== PD (flotación) =====
 @export var pd_stiffness: float = 14.0
 @export var pd_damping: float  = 2.2
@@ -132,6 +137,7 @@ func _ready() -> void:
 	if players.size() > 0:
 		player = players[0]
 
+
 	$gun_timer.start()
 	add_to_group("enemy_1")
 
@@ -142,12 +148,23 @@ func _ready() -> void:
 	_stack_timer.one_shot = true
 	add_child(_stack_timer)
 	_stack_timer.connect("timeout", Callable(self, "_on_stack_timeout"))
-
 	_label_base_pos = label.position
 	label.visible = false
-
 	if anim and not anim.is_connected("animation_finished", Callable(self, "_on_AnimatedSprite2D_animation_finished")):
 		anim.connect("animation_finished", Callable(self, "_on_AnimatedSprite2D_animation_finished"))
+	anim.play("idle")
+	rng.randomize()
+	if rng.randf() < 0.5: 
+		orbit_dir = -1.0 
+	else: 
+		orbit_dir = 1.0
+	strafe_timer = Timer.new()
+	strafe_timer.wait_time = swap_interval
+	add_child(strafe_timer)
+	strafe_timer.connect("timeout", Callable(self, "_on_strafe_swap"))
+	strafe_timer.start()
+	
+	# Electroshock
 
 	_base_speed = speed
 	_shock_timer = Timer.new()
@@ -155,6 +172,7 @@ func _ready() -> void:
 	add_child(_shock_timer)
 	if not _shock_timer.is_connected("timeout", Callable(self, "_end_electroshock")):
 		_shock_timer.connect("timeout", Callable(self, "_end_electroshock"))
+
 
 	_ready_hitstun_system()
 
@@ -469,6 +487,7 @@ func _on_gun_timer_timeout() -> void:
 	_update_target()
 	if dead or player == null:
 		return
+
 	if assault_pause_shooting and _is_assaulting:
 		return
 	var to_player: Vector2 = player.global_position - global_position
@@ -483,6 +502,7 @@ func _on_gun_timer_timeout() -> void:
 		audio_laser.play()
 
 
+
 # ===== Daño / muerte =====
 func _on_damage(amount: float) -> void:
 	if bar_3:
@@ -493,6 +513,7 @@ func _on_damage(amount: float) -> void:
 	label.visible = true
 	label.position = _label_base_pos
 	label.scale = Vector2.ONE
+
 
 	var sum := int(_stack_value)
 	var col := Color(1, 1, 1, 1)
@@ -511,6 +532,7 @@ func _on_damage(amount: float) -> void:
 	_tween.parallel().tween_property(label, "scale", Vector2(1.25, 1.25), 0.18)
 	_tween.parallel().tween_property(label, "modulate:a", 0.0, 0.35).set_delay(0.05)
 
+
 	_stack_timer.start(0.4)
 	random_pitch_variations_gun()
 	_process_hitstun(amount)
@@ -519,6 +541,7 @@ func _on_damage(amount: float) -> void:
 		dead = true
 		_end_hitstun()
 		label.visible = false
+
 		if has_node("gun_timer"):
 			$gun_timer.stop()
 		velocity = Vector2.ZERO
@@ -533,6 +556,7 @@ func _on_stack_timeout() -> void:
 	label.visible = false
 
 func _on_damage_enemy_body_entered(body: Node2D) -> void:
+
 	if body.is_in_group("player_1_bullet") or body.is_in_group("puño_player2"):
 		$AnimationPlayer.play("hit")
 		emit_signal("damage", 10.0)
@@ -541,6 +565,7 @@ func _report_dead() -> void:
 	if reported_dead:
 		return
 	reported_dead = true
+
 	if _hitstun_timer:
 		_hitstun_timer.stop()
 	if _combo_timer:
@@ -562,13 +587,13 @@ func _on_explosion_timer_timeout() -> void:
 	_report_dead()
 
 
-# ===== Target =====
 func _update_target() -> void:
 	var players := []
 	players += get_tree().get_nodes_in_group("player")
 	players += get_tree().get_nodes_in_group("player_2")
 	var nearest: CharacterBody2D = null
 	var nearest_dist := INF
+
 	var i := 0
 	while i < players.size():
 		var p = players[i]
@@ -588,6 +613,7 @@ func _drop_coin():
 	get_parent().add_child(coin_instance)
 	coin_instance.global_position = global_position
 	var sprite = coin_instance.get_node("AnimatedSprite2D")
+
 	if sprite:
 		sprite.play("idle")
 
@@ -600,9 +626,13 @@ func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 		duration = shock_duration
 	if factor <= 0.0:
 		factor = shock_factor
-	if not _is_shocked:
-		_base_speed = speed
-		_is_shocked = true
+	if _is_shocked:
+		_shock_timer.start(duration)
+		return
+	_is_shocked = true
+	speed *= factor
+	accel *= factor
+	_in_hitstun = true  # Opcional: paraliza movimientos agresivos
 	if speed > _base_speed * factor:
 		speed = _base_speed * factor
 	if _shock_timer:
@@ -611,9 +641,13 @@ func electroshock(duration: float = -1.0, factor: float = -1.0) -> void:
 func _end_electroshock() -> void:
 	_is_shocked = false
 	speed = _base_speed
+	_is_shocked = false
+	speed = _base_speed
+	accel = 1200.0  # o tu valor original real
+	_in_hitstun = false
 
 
-# ===== Hitstun =====
+
 func _ready_hitstun_system() -> void:
 	_hitstun_timer = Timer.new()
 	_hitstun_timer.one_shot = true
@@ -624,6 +658,7 @@ func _ready_hitstun_system() -> void:
 	_combo_timer.one_shot = true
 	add_child(_combo_timer)
 	_combo_timer.connect("timeout", Callable(self, "_reset_combo"))
+
 
 	if anim:
 		_original_color = anim.modulate
@@ -637,11 +672,13 @@ func _process_hitstun(damage_amount: float) -> void:
 		_combo_count = 1
 	_combo_timer.start(combo_window)
 	_enter_hitstun()
+
 	var extended_duration := hitstun_duration + (_combo_count * 0.2)
 	_hitstun_timer.start(extended_duration)
 	print("🥊 Combo x", _combo_count, " - Hitstun: ", extended_duration, "s")
 
 func _enter_hitstun() -> void:
+
 	if dead:
 		return
 	_in_hitstun = true
@@ -655,6 +692,7 @@ func _enter_hitstun() -> void:
 	_screen_shake_effect()
 
 func _end_hitstun() -> void:
+
 	if not _in_hitstun:
 		return
 	_in_hitstun = false
@@ -675,6 +713,7 @@ func _reset_combo() -> void:
 
 func _screen_shake_effect() -> void:
 	var shake_tween = create_tween()
+
 	var original_pos := anim.position
 	var i := 0
 	while i < 3:

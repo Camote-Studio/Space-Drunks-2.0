@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+# Godot 4+ specific ignores
+.godot/
+/android/
+=======
 # Godot 4 (cache/editor)
 .godot/
 
@@ -22,3 +27,4 @@
 Thumbs.db
 *.tmp
 *.log
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771

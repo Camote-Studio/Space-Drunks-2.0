@@ -260,7 +260,11 @@ centered = false
 position = Vector2(0, 154)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+<<<<<<< HEAD
+position = Vector2(2520.375, 107)
+=======
 position = Vector2(2520.38, 107)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 shape = SubResource("RectangleShape2D_wq78c")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
@@ -281,7 +285,11 @@ shape = SubResource("RectangleShape2D_wxuq6")
 position = Vector2(0, 112)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4/StaticBody2D2"]
+<<<<<<< HEAD
+position = Vector2(2572.875, 668)
+=======
 position = Vector2(2572.88, 668)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 shape = SubResource("RectangleShape2D_e2b77")
 
 [node name="Player_1" parent="." node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("3_vti5k")]
@@ -558,7 +566,11 @@ position = Vector2(19, -19)
 
 [node name="Bocinas" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(-195.5748, 813.6382)
+=======
 position = Vector2(-195.575, 813.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.264713, 0.266854)
 texture = ExtResource("25_gnd3l")
 
@@ -570,7 +582,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Mesa" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(-196.89981, 253.00021)
+=======
 position = Vector2(-196.9, 253)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.291315, 0.333051)
 texture = ExtResource("28_6ftvt")
 
@@ -584,7 +600,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Tubo" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(60.10019, 235.00021)
+=======
 position = Vector2(60.1002, 235)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.275943, 0.363809)
 texture = ExtResource("29_8fs40")
 
@@ -598,7 +618,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Bocinas2" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(324.1002, 221.00021)
+=======
 position = Vector2(324.1, 221)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.440192, 0.498127)
 texture = ExtResource("25_gnd3l")
 
@@ -612,7 +636,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Mesa2" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(279.42517, 822.6382)
+=======
 position = Vector2(279.425, 822.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.33169, 0.349788)
 texture = ExtResource("28_6ftvt")
 
@@ -625,7 +653,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Tubo2" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(577.67615, 234.54822)
+=======
 position = Vector2(577.676, 234.548)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.276, 0.364)
 texture = ExtResource("29_8fs40")
 
@@ -639,7 +671,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Bocinas3" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(779.4252, 768.6382)
+=======
 position = Vector2(779.425, 768.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.373924, 0.412734)
 texture = ExtResource("25_gnd3l")
 
@@ -650,7 +686,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Mesa3" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(822.1002, 232.00021)
+=======
 position = Vector2(822.1, 232)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.291, 0.333)
 texture = ExtResource("28_6ftvt")
 
@@ -664,7 +704,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Bocinas4" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1145.1002, 129.00021)
+=======
 position = Vector2(1145.1, 129)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.575598, 0.694382)
 texture = ExtResource("25_gnd3l")
 
@@ -676,7 +720,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas5" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1323.1002, 214.00021)
+=======
 position = Vector2(1323.1, 214)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.331313, 0.482166)
 texture = ExtResource("25_gnd3l")
 
@@ -688,7 +736,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas6" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1348.1002, 83.00021)
+=======
 position = Vector2(1348.1, 83.0002)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.253256, 0.262997)
 texture = ExtResource("25_gnd3l")
 
@@ -700,7 +752,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Mesa4" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1145.4252, 810.6382)
+=======
 position = Vector2(1145.43, 810.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.291, 0.333)
 texture = ExtResource("28_6ftvt")
 
@@ -713,7 +769,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Tubo3" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1507.1002, 230.00021)
+=======
 position = Vector2(1507.1, 230)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.283371, 0.389546)
 texture = ExtResource("29_8fs40")
 
@@ -727,7 +787,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Tubo4" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1630.1002, 264.0002)
+=======
 position = Vector2(1630.1, 264)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.146282, 0.197601)
 texture = ExtResource("29_8fs40")
 
@@ -741,7 +805,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Tubo5" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1767.1002, 229.00021)
+=======
 position = Vector2(1767.1, 229)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.283, 0.39)
 texture = ExtResource("29_8fs40")
 
@@ -755,7 +823,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Mesa5" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1643.4252, 792.6382)
+=======
 position = Vector2(1643.43, 792.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.289906, 0.444915)
 texture = ExtResource("28_6ftvt")
 
@@ -768,7 +840,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Mesa6" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(1983.1002, 252.00021)
+=======
 position = Vector2(1983.1, 252)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.284124, 0.411377)
 texture = ExtResource("28_6ftvt")
 
@@ -781,7 +857,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Bocinas7" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(2327.425, 810.6382)
+=======
 position = Vector2(2327.43, 810.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.440191, 0.402247)
 texture = ExtResource("25_gnd3l")
 
@@ -793,7 +873,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas8" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(2498.425, 814.6383)
+=======
 position = Vector2(2498.43, 814.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.331313, 0.372169)
 texture = ExtResource("25_gnd3l")
 
@@ -805,7 +889,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas9" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(2626.425, 772.6382)
+=======
 position = Vector2(2626.43, 772.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.223996, 0.186555)
 texture = ExtResource("25_gnd3l")
 
@@ -818,7 +906,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Mesa7" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(2252.1, 263.0002)
+=======
 position = Vector2(2252.1, 263)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.284124, 0.411377)
 texture = ExtResource("28_6ftvt")
 
@@ -831,7 +923,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Tubo6" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(2518.1, 215.37122)
+=======
 position = Vector2(2518.1, 215.371)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.398612, 0.427673)
 texture = ExtResource("29_8fs40")
 
@@ -845,7 +941,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Bocinas10" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(2787.6, 187.50021)
+=======
 position = Vector2(2787.6, 187.5)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.59091, 0.737828)
 texture = ExtResource("25_gnd3l")
 
@@ -859,7 +959,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Tubo7" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(2993.1, 236.00021)
+=======
 position = Vector2(2993.1, 236)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.233698, 0.372377)
 texture = ExtResource("29_8fs40")
 
@@ -873,7 +977,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Tubo9" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(3095.1, 235.00021)
+=======
 position = Vector2(3095.1, 235)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.190043, 0.31017)
 texture = ExtResource("29_8fs40")
 
@@ -887,7 +995,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Mesa8" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(3248.425, 789.6382)
+=======
 position = Vector2(3248.43, 789.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.411557, 0.600161)
 texture = ExtResource("28_6ftvt")
 
@@ -900,7 +1012,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Mesa9" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(3832.4253, 800.6383)
+=======
 position = Vector2(3832.43, 800.638)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.301735, 0.378184)
 texture = ExtResource("28_6ftvt")
 
@@ -913,7 +1029,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Tubo8" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(3556.73, 207.74422)
+=======
 position = Vector2(3556.73, 207.744)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.348173, 0.45221)
 texture = ExtResource("29_8fs40")
 
@@ -927,7 +1047,11 @@ polygon = PackedVector2Array(-140.823, -72.9339, -107.5, -87.5, -45, -102.5, -2.
 
 [node name="Mesa10" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(3884.1099, 224.21022)
+=======
 position = Vector2(3884.11, 224.21)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.349798, 0.471231)
 texture = ExtResource("28_6ftvt")
 
@@ -940,7 +1064,11 @@ polygon = PackedVector2Array(-156.497, -66.938, -107.5, -87.5, -45, -102.5, -2.5
 
 [node name="Bocinas11" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(3343.6, 234.27121)
+=======
 position = Vector2(3343.6, 234.271)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.346888, 0.399036)
 texture = ExtResource("25_gnd3l")
 
@@ -954,7 +1082,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas12" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(4287.1, 252.00021)
+=======
 position = Vector2(4287.1, 252)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.430884, 0.455032)
 texture = ExtResource("25_gnd3l")
 
@@ -966,7 +1098,11 @@ polygon = PackedVector2Array(-150, -55, -107.5, -87.5, -45, -102.5, -2.5, -102.5
 
 [node name="Bocinas13" type="Sprite2D" parent="."]
 z_index = 3
+<<<<<<< HEAD
+position = Vector2(4590.4253, 815.3882)
+=======
 position = Vector2(4590.43, 815.388)
+>>>>>>> d981ae4c943863d705e04fed50700f9a292b1771
 scale = Vector2(0.423445, 0.395131)
 texture = ExtResource("25_gnd3l")
 

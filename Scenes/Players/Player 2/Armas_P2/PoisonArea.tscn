@@ -54,6 +54,7 @@ script = ExtResource("1_ok5wx")
 
 [node name="audio_v" type="AudioStreamPlayer2D" parent="Area2D"]
 stream = ExtResource("2_khq8d")
+volume_db = 9.541
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2, -1)

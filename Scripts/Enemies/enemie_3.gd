@@ -64,6 +64,7 @@ var _combo_count := 0
 var _original_color: Color
 var _hitstun_tween: Tween
 
+
 # === EMBESTIDA (Toro) ===
 @export var charge_enabled: bool = true
 @export var charge_trigger_min: float = 120.0
@@ -142,6 +143,7 @@ func _ready() -> void:
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 	
+
 	_base_speed = speed
 	_shock_timer = Timer.new()
 	_shock_timer.one_shot = true
@@ -172,11 +174,12 @@ func _ready_hitstun_system() -> void:
 	add_child(_hitstun_timer)
 	_hitstun_timer.connect("timeout", Callable(self, "_end_hitstun"))
 	
+
 	_combo_timer = Timer.new()
 	_combo_timer.one_shot = true
 	add_child(_combo_timer)
 	_combo_timer.connect("timeout", Callable(self, "_reset_combo"))
-	
+
 	if sprite_2d:
 		_original_color = sprite_2d.modulate
 
@@ -189,6 +192,7 @@ func _physics_process(delta: float) -> void:
 
 	var to_player := player.global_position - global_position
 	var dist := to_player.length()
+
 	var dir := Vector2.ZERO
 	if dist > 0.0:
 		dir = to_player / dist
@@ -278,6 +282,7 @@ func _physics_process(delta: float) -> void:
 
 	velocity = velocity.move_toward(target_vel, accel * delta)
 	rotation = 0.0
+
 
 	if abs(dir.x) > 0.1:
 		_face_dir(dir.x)
@@ -455,6 +460,7 @@ func _do_punch(dir: Vector2) -> void:
 		
 	if target_in_range:
 		var direction_to_player = (target_in_range.global_position - global_position).normalized()
+
 		if direction_to_player.x != 0.0:
 			_face_dir(direction_to_player.x)
 		
@@ -475,6 +481,7 @@ func _do_punch(dir: Vector2) -> void:
 	if _tween and _tween.is_running():
 		_tween.kill()
 	
+
 	if not _in_hitstun:
 		var start := global_position
 		var end := start + dir * lunge_dist
@@ -490,6 +497,7 @@ func _on_punch_timer_timeout() -> void:
 func _on_sprite_2d_animation_finished() -> void:
 	if sprite_2d.animation == "ataque":
 		_attack_anim_lock = false
+
 		_play_anim_if_exists("idle")
 	elif sprite_2d.animation == "explosion":
 		if explosion_timer and explosion_timer.time_left > 0.0:
@@ -497,6 +505,7 @@ func _on_sprite_2d_animation_finished() -> void:
 		if _is_shocked:
 			_end_electroshock()
 		if not reported_dead:
+
 			var killer_id = _determine_killer()
 			if killer_id != "":
 				# KillTracker.register_kill(killer_id, "enemy_3")
@@ -507,6 +516,7 @@ func _on_sprite_2d_animation_finished() -> void:
 		queue_free()
 
 func _determine_killer() -> String:
+
 	var players = []
 	players += get_tree().get_nodes_in_group("player")
 	players += get_tree().get_nodes_in_group("player_2")
@@ -516,6 +526,7 @@ func _determine_killer() -> String:
 	
 	for p in players:
 		if p and p is Node2D:
+
 			var d = global_position.distance_to(p.global_position)
 			if d < closest_dist and d < 200.0:
 				closest_dist = d
@@ -601,6 +612,7 @@ func _on_damage(amount: float) -> void:
 		_die()
 
 func _process_hitstun(damage_amount: float) -> void:
+
 	if damage_amount < hitstun_threshold:
 		return
 	
@@ -609,6 +621,7 @@ func _process_hitstun(damage_amount: float) -> void:
 	else:
 		_combo_count = 1
 	
+
 	_combo_timer.start(combo_window)
 	_enter_hitstun()
 	var extended_duration = hitstun_duration + (_combo_count * 0.15)
@@ -620,6 +633,7 @@ func _enter_hitstun() -> void:
 		
 	_in_hitstun = true
 	
+
 	if punch_timer:
 		punch_timer.paused = true
 	
@@ -646,6 +660,7 @@ func _end_hitstun() -> void:
 		
 	_in_hitstun = false
 	
+
 	if punch_timer and not dead:
 		punch_timer.paused = false
 	
@@ -674,6 +689,7 @@ func _reset_combo() -> void:
 	_combo_count = 0
 
 func _screen_shake_effect_melee() -> void:
+
 	var shake_tween = create_tween()
 	var original_pos = sprite_2d.position
 	var i := 0
@@ -690,6 +706,7 @@ func _on_stack_timeout() -> void:
 func _die() -> void:
 	dead = true
 	
+
 	if _hitstun_timer:
 		_hitstun_timer.stop()
 	if _combo_timer:
@@ -725,6 +742,7 @@ func _update_target() -> void:
 	var nearest_dist := INF
 	for p in players:
 		if p and p is Node2D:
+
 			var d := global_position.distance_to(p.global_position)
 			if d < nearest_dist:
 				nearest_dist = d
@@ -732,6 +750,7 @@ func _update_target() -> void:
 	player = nearest
 
 func _drop_coin() -> void:
+
 	var coin_instance := MONEDA.instantiate()
 	get_parent().add_child(coin_instance)
 	coin_instance.global_position = global_position

@@ -2,66 +2,66 @@
 
 [ext_resource type="Script" uid="uid://bd5et0dk2fy3l" path="res://Scripts/Level1/Level1_F1.gd" id="1_8d0et"]
 [ext_resource type="Script" uid="uid://bfgake2tn2svk" path="res://Scripts/parallax_background.gd" id="2_ygye0"]
-[ext_resource type="Texture2D" uid="uid://c2l228yhewe1p" path="res://Assets/art/background/BG_1.png" id="3_pe6h5"]
-[ext_resource type="Texture2D" uid="uid://db3pthaj5icay" path="res://Assets/art/background/FL_1.png" id="5_gf2tg"]
-[ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/Players/Player 1/player_1.tscn" id="5_ygye0"]
-[ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/Players/Player 2/player_2.tscn" id="6_f8pys"]
-[ext_resource type="Texture2D" uid="uid://capb2ldwe3yo7" path="res://Assets/art/background/MESAS1.png" id="6_gf2tg"]
-[ext_resource type="Texture2D" uid="uid://c0h4nq4245hx5" path="res://Assets/art/background/SILLA_MESA1.png" id="7_kpup2"]
-[ext_resource type="PackedScene" uid="uid://bcumd4ca72ik2" path="res://Scenes/Players/Player 2/Armas_P2/PoisonArea.tscn" id="9_m7xit"]
+[ext_resource type="Texture2D" uid="uid://duj5hcjpwrjio" path="res://Assets/art/background/BG_1.png" id="3_pe6h5"]
+[ext_resource type="Texture2D" uid="uid://dbvwvqqgv4el" path="res://Assets/art/background/FL_1.png" id="5_gf2tg"]
+[ext_resource type="PackedScene" uid="uid://c3egt0yjxsvrn" path="res://Scenes/player_1.tscn" id="5_ygye0"]
+[ext_resource type="PackedScene" uid="uid://b4fwndsghnvmc" path="res://Scenes/player_2.tscn" id="6_f8pys"]
+[ext_resource type="Texture2D" uid="uid://cj1dy58ttxi0f" path="res://Assets/art/background/MESAS1.png" id="6_gf2tg"]
+[ext_resource type="Texture2D" uid="uid://c6rk5ikmljffy" path="res://Assets/art/background/SILLA_MESA1.png" id="7_kpup2"]
 [ext_resource type="Script" uid="uid://cpufpisex7oqp" path="res://Scripts/Level1/portal.gd" id="10_nmac2"]
-[ext_resource type="Texture2D" uid="uid://bg7a0x7n1spia" path="res://Assets/art/sprites/Portales/portal.png" id="11_4asma"]
+[ext_resource type="Texture2D" uid="uid://ejcgmsk6h8kc" path="res://Assets/art/sprites/Portales/portal.png" id="11_4asma"]
 [ext_resource type="Texture2D" uid="uid://bpexw0nsitld3" path="res://Assets/art/background/Cinematic_1/vortice0.png" id="12_g71bd"]
 [ext_resource type="Texture2D" uid="uid://dm24oxev4g2l0" path="res://Assets/art/background/Cinematic_1/vortice1.png" id="13_8apxk"]
 [ext_resource type="Script" uid="uid://c0ceds5i5fjas" path="res://Scripts/Camera/camera_2d.gd" id="13_n6wrj"]
 [ext_resource type="AudioStream" uid="uid://7t50crxvlos8" path="res://Assets/sfx/ready-set-go-sound-268353.mp3" id="14_o87y8"]
 [ext_resource type="Texture2D" uid="uid://dfju05i1ascsb" path="res://Assets/art/background/Cinematic_1/vortice2.png" id="14_sbhyk"]
 [ext_resource type="Texture2D" uid="uid://cq324o6mn6jbw" path="res://Assets/art/background/Cinematic_1/vortice3.png" id="15_4exmg"]
-[ext_resource type="Texture2D" uid="uid://dngq85lr2q0kv" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="15_dcn6k"]
-[ext_resource type="Texture2D" uid="uid://dy4f2nu1pdv8p" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="16_8sajs"]
+[ext_resource type="Texture2D" uid="uid://bqnytps28365a" path="res://Assets/art/background/Options/BAR_EFFECT_VACIO.png" id="15_dcn6k"]
+[ext_resource type="Texture2D" uid="uid://cglamgsbeiaah" path="res://Assets/art/background/Options/MUSIC_EFFECT.png" id="16_8sajs"]
 [ext_resource type="Texture2D" uid="uid://bkgenp5q5dph1" path="res://Assets/art/background/Cinematic_1/vortice4.png" id="16_e5bp4"]
 [ext_resource type="Texture2D" uid="uid://dth6kff3ubuyr" path="res://Assets/art/background/Cinematic_1/vortice5.png" id="17_dsjnt"]
 [ext_resource type="Texture2D" uid="uid://cm84qmjaq0dvt" path="res://Assets/art/background/Cinematic_1/vortice6.png" id="18_4a1lp"]
 [ext_resource type="Texture2D" uid="uid://xg5rqeupyw74" path="res://Assets/art/background/Cinematic_1/vortice7.png" id="19_y61ym"]
-[ext_resource type="Texture2D" uid="uid://ch6hbtjs06x3l" path="res://Assets/art/sprites/complements_sprites/shape_character.png" id="20_jqqi2"]
+[ext_resource type="Texture2D" uid="uid://c2b4oocyx4jx2" path="res://Assets/art/sprites/complements_sprites/shape_character.png" id="20_jqqi2"]
 [ext_resource type="Texture2D" uid="uid://cpb48dghipe7k" path="res://Assets/art/background/Cinematic_1/vortice8.png" id="20_rkokp"]
-[ext_resource type="Texture2D" uid="uid://wgdd4pjcahpm" path="res://Assets/art/sprites/complements_sprites/characater_1_profile.png" id="21_krfk8"]
+[ext_resource type="Texture2D" uid="uid://bo5lksuotegyg" path="res://Assets/art/sprites/complements_sprites/characater_1_profile.png" id="21_krfk8"]
 [ext_resource type="Texture2D" uid="uid://ckeu35a6krlhr" path="res://Assets/art/background/Cinematic_1/vortice9.png" id="21_l0bd3"]
 [ext_resource type="Texture2D" uid="uid://rvyggn5w8xwh" path="res://Assets/art/background/Cinematic_1/vortice10.png" id="22_8c27s"]
-[ext_resource type="Texture2D" uid="uid://3i466vl6hlny" path="res://Assets/art/sprites/complements_sprites/character_2_profile.png" id="22_thxnh"]
-[ext_resource type="Texture2D" uid="uid://78uicu7sheov" path="res://Assets/art/sprites/complements_sprites/coin_1.png" id="23_8d0et"]
+[ext_resource type="Texture2D" uid="uid://tm0tfdl3h6u6" path="res://Assets/art/sprites/complements_sprites/character_2_profile.png" id="22_thxnh"]
+[ext_resource type="Texture2D" uid="uid://dc1hyu6umr02y" path="res://Assets/art/sprites/complements_sprites/coin_1.png" id="23_8d0et"]
 [ext_resource type="Texture2D" uid="uid://diq718lwbohdl" path="res://Assets/art/background/Cinematic_1/vortice11.png" id="23_hno3f"]
-[ext_resource type="Texture2D" uid="uid://dn3imkkyfogyt" path="res://Assets/art/sprites/complements_sprites/coin_2.png" id="24_74kcl"]
+[ext_resource type="Texture2D" uid="uid://dpfqjgwy01ujg" path="res://Assets/art/sprites/complements_sprites/coin_2.png" id="24_74kcl"]
 [ext_resource type="Texture2D" uid="uid://mm4ihtaj6q80" path="res://Assets/art/background/Cinematic_1/vortice12.png" id="24_mxgbx"]
-[ext_resource type="Texture2D" uid="uid://c5udsfo1kf8ja" path="res://Assets/art/sprites/complements_sprites/coin_3.png" id="25_3ssdm"]
-[ext_resource type="Texture2D" uid="uid://625cpyvd5d2a" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="25_cfgxb"]
+[ext_resource type="Texture2D" uid="uid://n0gmp31wcsfn" path="res://Assets/art/sprites/complements_sprites/coin_3.png" id="25_3ssdm"]
+[ext_resource type="Texture2D" uid="uid://60np54l3qjng" path="res://Assets/art/sprites/complements_sprites/arrow_with_go_text.png" id="25_cfgxb"]
 [ext_resource type="Texture2D" uid="uid://oaj0du3qsfwi" path="res://Assets/art/background/Cinematic_1/vortice13.png" id="25_pgeao"]
 [ext_resource type="Texture2D" uid="uid://cihi2oquqofsv" path="res://Assets/art/background/Cinematic_1/vortice14.png" id="26_bpp31"]
-[ext_resource type="Texture2D" uid="uid://bd3b6n6yc4blk" path="res://Assets/art/sprites/complements_sprites/coin_4.png" id="26_ufeic"]
+[ext_resource type="Texture2D" uid="uid://bon2p0lnvojo1" path="res://Assets/art/sprites/complements_sprites/coin_4.png" id="26_ufeic"]
 [ext_resource type="Texture2D" uid="uid://boqj21km38ou4" path="res://Assets/art/background/Cinematic_1/vortice15.png" id="27_jswqd"]
-[ext_resource type="Texture2D" uid="uid://cyuhv8fianx7e" path="res://Assets/art/sprites/complements_sprites/coin_5.png" id="27_q00ib"]
-[ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/System/Spawns/enemy_spawn.tscn" id="28_0ic24"]
-[ext_resource type="Texture2D" uid="uid://cs77h4duywogo" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="28_jy7da"]
+[ext_resource type="Texture2D" uid="uid://dlvai1jwucfo2" path="res://Assets/art/sprites/complements_sprites/coin_5.png" id="27_q00ib"]
+[ext_resource type="PackedScene" uid="uid://bsxmlfrj88uac" path="res://Scenes/Enemies/enemy_spawn.tscn" id="28_0ic24"]
+[ext_resource type="Texture2D" uid="uid://chsws18veqnoj" path="res://Assets/art/sprites/complements_sprites/coin_6.png" id="28_jy7da"]
 [ext_resource type="Texture2D" uid="uid://jgkyc7uyajkt" path="res://Assets/art/background/Cinematic_1/vortice16.png" id="28_mn6eb"]
-[ext_resource type="Texture2D" uid="uid://dgejrxmm660e8" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="29_408q8"]
+[ext_resource type="Texture2D" uid="uid://d2khlqefpf61j" path="res://Assets/art/sprites/complements_sprites/coin_7.png" id="29_408q8"]
 [ext_resource type="Texture2D" uid="uid://drk4umxn7rq3q" path="res://Assets/art/background/Cinematic_1/vortice17.png" id="29_js3kd"]
-[ext_resource type="FontFile" uid="uid://xrh2ke3d1khs" path="res://Assets/fonts/Slackey-Regular.ttf" id="29_q27iu"]
+[ext_resource type="FontFile" uid="uid://cvh75iidsig0y" path="res://Assets/fonts/Slackey-Regular.ttf" id="29_q27iu"]
 [ext_resource type="PackedScene" uid="uid://doypp8bxp7xwd" path="res://Scenes/Interfaz/PAUSA.tscn" id="30_8yf3i"]
-[ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/System/Spawns/enemy_spawn_2.tscn" id="30_nswfa"]
-[ext_resource type="Texture2D" uid="uid://rq0mwrl4053j" path="res://Assets/art/sprites/complements_sprites/box_1.png" id="31_jqqi2"]
+[ext_resource type="PackedScene" uid="uid://duh6t7qea1p1u" path="res://Scenes/Enemies/enemy_spawn_2.tscn" id="30_nswfa"]
+[ext_resource type="Texture2D" uid="uid://dnqrg2ujj4u8d" path="res://Assets/art/sprites/complements_sprites/box_1.png" id="31_jqqi2"]
 [ext_resource type="PackedScene" uid="uid://ded5rvlm7p5bl" path="res://Scenes/Interfaz/GameOver.tscn" id="31_pe6h5"]
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="32_gf2tg"]
 [ext_resource type="Script" uid="uid://rgf34aen2wn0" path="res://Scripts/Shaders/offscreen_peek_hud.gd" id="32_thxnh"]
 [ext_resource type="Shader" uid="uid://o2t650ukqie6" path="res://Scripts/Shaders/game_world.gdshader" id="33_8d0et"]
-[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/Interfaz/UI/ui_abilities.tscn" id="35_8sajs"]
-[ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/Enemies/System/Spawns/spawn_chicken.tscn" id="37_lmfx7"]
-[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/Enemigo_CuerpoaCuerpo/Enemy_Pato.tscn" id="38_p5xse"]
+[ext_resource type="PackedScene" uid="uid://c274vlvelf5gf" path="res://Scenes/ui_abilities.tscn" id="35_8sajs"]
+[ext_resource type="PackedScene" uid="uid://jej05omgom5m" path="res://Scenes/spawn_chicken.tscn" id="37_lmfx7"]
+[ext_resource type="PackedScene" uid="uid://ct0hclkx0o8kc" path="res://Scenes/Enemies/enemie_2.tscn" id="38_p5xse"]
 [ext_resource type="PackedScene" uid="uid://cv7d5uk4kvkke" path="res://Scenes/Npcs/Level1_1/among_fondo.tscn" id="39_p5xse"]
 [ext_resource type="PackedScene" uid="uid://beif8ubpee3oa" path="res://Scenes/Npcs/Level1_1/rick_fondo.tscn" id="40_6kdy0"]
 [ext_resource type="PackedScene" uid="uid://cdrh8t72fkp5a" path="res://Scenes/Npcs/Level1_1/pato_fondo.tscn" id="41_7hocu"]
 [ext_resource type="PackedScene" uid="uid://b8tjfgcynpqgj" path="res://Scenes/Npcs/Level1_1/martin_fondo.tscn" id="42_7hocu"]
 [ext_resource type="PackedScene" uid="uid://bkguq30cybuhk" path="res://Scenes/Npcs/Level1_1/alien_fondo.tscn" id="43_cjtyq"]
 [ext_resource type="PackedScene" uid="uid://cxsmi37r8jgfg" path="res://Scenes/Npcs/Level1_1/bender_fondo.tscn" id="44_pjdg7"]
+[ext_resource type="PackedScene" uid="uid://dfu27juntq4el" path="res://Scenes/enemie_3.tscn" id="63_g71bd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m887"]
 size = Vector2(5699, 20)
@@ -420,7 +420,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("29_js3kd")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 10.0
 }]
@@ -543,15 +543,11 @@ position = Vector2(914, 338)
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-143.333, -76.6666, -30, -130, 63.3335, -130, 146.667, -103.333, 190, -60, 196.667, -26.6666, 190, 6.66663, 173.333, 36.6666, 146.667, 60, 110, 76.6666, 40, 93.3334, 46.6667, 103.333, 76.6667, 110, 100, 120, 90, 136.667, 66.6667, 146.667, 23.3335, 150, -53.3333, 140, -66.6665, 126.667, -56.6665, 113.333, -16.6665, 106.667, 3.3335, 106.667, 3.3335, 96.6666, -93.3333, 86.6666, -163.333, 40, -183.333, -6.66663, -173.333, -46.6666)
 
-[node name="Player_1" parent="." node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("5_ygye0")]
-position = Vector2(-127, 624)
-bar = NodePath("../CanvasLayer/ProgressBar_alien_1")
-bar_ability_1 = NodePath("../CanvasLayer/ProgressBar_ability_1")
-coin_label = NodePath("../CanvasLayer/cont monedas")
+[node name="Player_1" parent="." instance=ExtResource("5_ygye0")]
+position = Vector2(120, 655)
 
 [node name="Player_2" parent="." instance=ExtResource("6_f8pys")]
 position = Vector2(319, 403)
-poison_area_scene = ExtResource("9_m7xit")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 3
@@ -741,29 +737,29 @@ texture_progress = ExtResource("16_8sajs")
 
 [node name="ProgressBar_ability_1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 87.83333
-offset_top = 64.5
-offset_right = 180.83333
-offset_bottom = 80.5
+offset_left = 90.666664
+offset_top = 90.66667
+offset_right = 183.66666
+offset_bottom = 106.66667
 show_percentage = false
 
-[node name="Electro_gun_p1" type="ProgressBar" parent="CanvasLayer"]
+[node name="bomba_p1" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(0.487039, 0.591995, 0.0805549, 1)
 anchors_preset = -1
 anchor_top = -0.0169753
 anchor_bottom = -0.0169753
-offset_left = 88.667
-offset_top = 100.66632
-offset_right = 181.66699
-offset_bottom = 116.66632
+offset_left = 89.33333
+offset_top = 88.33333
+offset_right = 182.33331
+offset_bottom = 104.33333
 show_percentage = false
 
 [node name="ProgressBar_ability_2" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
-offset_left = 307.5
-offset_top = 64.833336
-offset_right = 385.5
-offset_bottom = 80.833336
+offset_left = 316.6667
+offset_top = 90.00001
+offset_right = 394.6667
+offset_bottom = 106.00001
 max_value = 200.0
 show_percentage = false
 
@@ -772,10 +768,10 @@ modulate = Color(0.479864, 0.105582, 0.500942, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 308.667
-offset_top = 82.333
-offset_right = -1530.333
-offset_bottom = -981.66705
+offset_left = 313.33334
+offset_top = 68.66667
+offset_right = -1525.6666
+offset_bottom = -995.3334
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 200.0
@@ -794,13 +790,13 @@ texture_under = ExtResource("15_dcn6k")
 texture_progress = ExtResource("16_8sajs")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(61.833332, 52.5)
+position = Vector2(52.666676, 53.333336)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("20_jqqi2")
 
 [node name="Characater1Profile" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(64.83333, 52.5)
+position = Vector2(53.333332, 44.666668)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("21_krfk8")
 
@@ -817,7 +813,7 @@ texture = ExtResource("22_thxnh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(61.833336, 119.5)
+position = Vector2(105.33333, 158)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
@@ -825,7 +821,7 @@ frame_progress = 0.711345
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(277.5, 122.833336)
+position = Vector2(331.33334, 158.66666)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_yyss1")
 autoplay = "default"
@@ -863,10 +859,10 @@ anchor_left = 0.276
 anchor_top = 0.18
 anchor_right = 0.276
 anchor_bottom = 0.18
-offset_left = -219.91998
-offset_top = -88.06667
-offset_right = -192.91998
-offset_bottom = -65.066666
+offset_left = -203.25333
+offset_top = -82.40001
+offset_right = -176.25333
+offset_bottom = -59.40001
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 10
@@ -892,10 +888,11 @@ offset_right = 342.0
 offset_bottom = -3.0
 
 [node name="Sombras_transición" parent="." instance=ExtResource("32_gf2tg")]
-offset_left = 435.0
-offset_top = -8.0
+visible = true
+offset_left = 347.0
+offset_top = 121.0
 offset_right = 1293.0
-offset_bottom = 638.0
+offset_bottom = 828.0
 mouse_filter = 2
 
 [node name="Enemy_spawn" parent="." instance=ExtResource("28_0ic24")]
@@ -919,22 +916,22 @@ script = ExtResource("13_n6wrj")
 
 [node name="ScaredBackgroundCharacter" parent="." instance=ExtResource("39_p5xse")]
 z_index = 3
-position = Vector2(1318, 618)
+position = Vector2(1092, 388)
 
 [node name="RickFondo" parent="." instance=ExtResource("40_6kdy0")]
-position = Vector2(1982, 501)
+position = Vector2(1831, 396)
 
 [node name="PatoFondo" parent="." instance=ExtResource("41_7hocu")]
-position = Vector2(2794, 757)
+position = Vector2(2899, 351)
 
 [node name="MartinFondo" parent="." instance=ExtResource("42_7hocu")]
-position = Vector2(200, 746)
+position = Vector2(183, 346)
 
 [node name="AlienFondo" parent="." instance=ExtResource("43_cjtyq")]
-position = Vector2(3628, 604)
+position = Vector2(3758, 412)
 
 [node name="BenderFondo" parent="." instance=ExtResource("44_pjdg7")]
-position = Vector2(4399, 591)
+position = Vector2(4520, 412)
 
 [node name="enemie_9" parent="." instance=ExtResource("38_p5xse")]
 position = Vector2(731, 661)
@@ -955,7 +952,10 @@ position = Vector2(765.0001, 544)
 scale = Vector2(0.5808383, 0.50931096)
 sprite_frames = SubResource("SpriteFrames_4gpkr")
 autoplay = "default"
-frame_progress = 0.6265552
+frame_progress = 0.5719317
+
+[node name="enemie_3" parent="." instance=ExtResource("63_g71bd")]
+position = Vector2(394, 699)
 
 [connection signal="body_entered" from="Portal" to="Portal" method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="Portal" method="_on_animation_player_animation_finished"]

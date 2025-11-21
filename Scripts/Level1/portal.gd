@@ -1,6 +1,7 @@
-extends Area2D
+extends Node2D
 
 @onready var mensaje_portal = $mensaje_portal
+
 @onready var vortex_sprite: AnimatedSprite2D = $"../UI2/Vortex"
 
 @export var next_scene_path: String = "res://Scenes/Level1_F2.tscn"

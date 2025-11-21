@@ -12,6 +12,7 @@ var player: CharacterBody2D = null
 @onready var punch_timer: Timer = $Punch_timer
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_ataque: AudioStreamPlayer2D = $ataque_golpe
+
 @onready var golpe_timer: Timer = $GolpeTimer
 
 var min_range := 70.0
@@ -91,6 +92,7 @@ func apply_knockback(force: Vector2, duration: float = 0.25) -> void:
 func _end_knockback() -> void:
 	_knockback_velocity = Vector2.ZERO
 
+
 func random_pitch_variations_gun():
 	var random_pitch = pitch_variations_gun[randi() % pitch_variations_gun.size()]
 	$hit.pitch_scale = random_pitch
@@ -143,8 +145,7 @@ func _ready() -> void:
 	random_move_timer.one_shot = true
 	add_child(random_move_timer)
 	random_move_timer.connect("timeout", Callable(self, "_end_random_move"))
-	
-	
+
 func _update_target() -> void:
 	var players := []
 	players += get_tree().get_nodes_in_group("player")
@@ -269,6 +270,7 @@ func _do_punch(dir: Vector2) -> void:
 		return
 
 	if target_in_range:
+
 		target_in_range.emit_signal("damage", punch_damage, "golpe")
 		if target_in_range.has_method("_apply_knockback_from"):
 			target_in_range.call_deferred("_apply_knockback_from", global_position)

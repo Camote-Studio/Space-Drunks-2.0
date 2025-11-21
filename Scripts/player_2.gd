@@ -1,6 +1,7 @@
 extends CharacterBody2D
 # player 2
 
+
 # =========================
 # Señales
 # =========================
@@ -22,6 +23,7 @@ const ENEMY_GROUPS := ["enemy_1","enemy_2","enemy_3","enemy_4","enemy_5","boss"]
 @onready var sonido_ulti: AudioStreamPlayer2D = $sonido_ulti
 @onready var bar: TextureProgressBar = $"../CanvasLayer/ProgressBar_alien_2"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 @onready var bar_ability_2: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_2"
 @onready var coin_label: Label = $"../../CanvasLayer/cont monedas2"
 @onready var punch_right: Sprite2D = $Punch_right
@@ -108,6 +110,7 @@ func _ready() -> void:
 	veneno_couldown.max_value = poison_max_charge
 	veneno_couldown.value = 0
 
+
 	# Carga automática de veneno
 	poison_timer.wait_time = 1.0
 	poison_timer.one_shot = false
@@ -125,6 +128,7 @@ func _ready() -> void:
 	if not TimerGolpeUlti.is_connected("timeout", Callable(self, "_ulti_punch")):
 		TimerGolpeUlti.connect("timeout", Callable(self, "_ulti_punch"))
 
+
 	# Alabarda: arrancar desactivada
 	var alabarda := $alabarda
 	var hitbox := alabarda.get_node("Hitbox")
@@ -135,6 +139,7 @@ func _ready() -> void:
 	GameState.set_coins(player_id, coins)
 	if coin_label:
 		coin_label.text = str(coins)
+
 
 	# Vida
 	var vida_guardada = GameState.get_vida(player_id)
@@ -150,12 +155,12 @@ func _ready() -> void:
 		bar_ability_2.max_value = 150
 		bar_ability_2.value = bar_ability_2.min_value
 
-	# Puños bases
+
 	_base_left  = punch_left.position
 	_base_right = punch_right.position
 	_use_left = (randi() & 1) == 0
 
-	# Señales
+
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 
@@ -163,7 +168,7 @@ func _ready() -> void:
 	if not is_in_group("players"):
 		add_to_group("players")
 
-	# Timer espada
+
 	_sword_timer = Timer.new()
 	_sword_timer.one_shot = true
 	add_child(_sword_timer)
@@ -235,6 +240,7 @@ func _punch_alternate() -> void:
 	_punch_lock = true
 	_play_punch_sfx()
 	if _use_left:
+
 		var base_l := punch_left.position
 		var dir_l := 1.0
 		if punch_left.flip_h:
@@ -272,6 +278,7 @@ func _handle_floating(delta: float) -> void:
 		_flotar_sound_played = false
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
+
 	var target_y
 	var current_lerp_speed
 	var current_rotation_speed
@@ -287,6 +294,7 @@ func _handle_floating(delta: float) -> void:
 		current_rotation_speed = 0.0
 		if not is_in_group("player_2"):
 			add_to_group("player_2")
+
 	global_position.y = lerp(global_position.y, target_y, current_lerp_speed * delta)
 	rotation += current_rotation_speed * delta
 	set_collision_layer(0)
@@ -299,6 +307,7 @@ func _handle_floating(delta: float) -> void:
 		global_position.y = float_start_y
 		set_collision_layer(1)
 		set_collision_mask(1)
+
 # ======================
 # Physics process
 # ======================
@@ -308,6 +317,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		return
 	if ulti_active:
+
 		bar_ability_2.value -= ulti_drain_rate * delta
 		if bar:
 			var regen = 20 * delta
@@ -323,6 +333,7 @@ func _physics_process(delta: float) -> void:
 			velocity = _dash_dir * dash_speed
 			move_and_slide()
 		return
+
 	if _dash_cooldown_timer > 0.0:
 		_dash_cooldown_timer -= delta
 	# Modo de apuntado del veneno
@@ -332,6 +343,7 @@ func _physics_process(delta: float) -> void:
 			poison_preview.global_position += joy_cursor_vector * poison_cursor_speed * delta
 		else:
 			poison_preview.global_position = get_global_mouse_position()
+
 		if Input.is_action_just_pressed("veneno_activo") or Input.is_action_just_pressed("confirm_action_p2"):
 			_activate_poison()
 			_cancel_poison_selection()
@@ -339,6 +351,7 @@ func _physics_process(delta: float) -> void:
 			poison_charge = 0
 			veneno_couldown.value = 0
 			poison_in_selection = false
+
 	# Movimiento e inputs
 	var direction := Vector2.ZERO
 	if allow_input:
@@ -347,6 +360,7 @@ func _physics_process(delta: float) -> void:
 		if direction != Vector2.ZERO:
 			_start_dash(direction)
 		else:
+
 			_start_dash(Vector2(_facing, 0))
 	if Input.is_action_just_pressed("jump_2") and not floating:
 		_power()
@@ -375,6 +389,7 @@ func _physics_process(delta: float) -> void:
 				if not sonido_aturdido.playing:
 					sonido_aturdido.play()
 				direction = -direction
+
 				_play_anim_safe("aturdido")
 				if abs(direction.x) > abs(direction.y):
 					animated_sprite.flip_h = direction.x < 0
@@ -382,6 +397,7 @@ func _physics_process(delta: float) -> void:
 				if sonido_aturdido.playing:
 					sonido_aturdido.stop()
 				if ulti_active:
+
 					_play_anim_safe("ulti_pose")
 				else:
 					if direction == Vector2.ZERO:
@@ -401,6 +417,7 @@ func _physics_process(delta: float) -> void:
 			sonido_flotando.stop()
 	else:
 		_handle_floating(delta)
+
 
 # ======================
 # Utilidad de empuje
@@ -426,6 +443,7 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 			if estado_actual == Estado.NORMAL:
 				estado_actual = Estado.VENENO
 				$venenoTimer.start(0.2)
+
 				_play_anim_safe("envenenado")
 		"bala":
 			if estado_actual == Estado.NORMAL and not ulti_active:
@@ -443,16 +461,11 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 				invulnerable = true
 				invul_timer = invul_duration
 
-# ======================
-# Colisiones salientes
-# ======================
 func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
 		emit_signal("damage", 20.0, "bala")
 
-# ======================
-# Muerte
-# ======================
+
 func _die() -> void:
 	dead = true
 	allow_input = false
@@ -473,6 +486,7 @@ func _die() -> void:
 	if is_in_group("players"):
 		remove_from_group("players")
 
+
 	_play_anim_safe("death")
 	if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_death_finished")):
 		animated_sprite.connect("animation_finished", Callable(self, "_on_death_finished"), CONNECT_ONE_SHOT)
@@ -489,9 +503,7 @@ func _on_timer_timeout() -> void:
 	if estado_actual == Estado.ATURDIDO:
 		estado_actual = Estado.NORMAL
 
-# ======================
-# Monedas
-# ======================
+
 func collect_coin(amount: int = 1) -> void:
 	coins += amount
 	if coin_label:
@@ -499,6 +511,7 @@ func collect_coin(amount: int = 1) -> void:
 	GameState.set_coins(player_id, coins)
 	if coins >= 20:
 		bar.value = clamp(bar.value + 200, bar.min_value, bar.max_value)
+
 		GameState.set_vida(player_id, bar.value)
 		coins = 0
 		if coin_label:
@@ -508,6 +521,7 @@ func collect_coin(amount: int = 1) -> void:
 func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
 		estado_actual = Estado.NORMAL
+
 
 # ======================
 # Área de puños / daño a enemigos
@@ -529,6 +543,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		dmg *= 2.0
 
 	if dmg > 0.0 and body.has_signal("damage"):
+
 		body.emit_signal("damage", dmg)
 		gain_ability_from_attack_2(dmg)
 
@@ -565,9 +580,11 @@ func activate_sword_for(seconds: float = -1.0) -> void:
 	if seconds <= 0.0:
 		seconds = espada_duracion
 
+
 	if _sword_active and is_instance_valid(_sword_instance):
 		_sword_timer.start(seconds)
 		return
+
 
 	_sword_instance = espada_scene.instantiate() as Node2D
 	add_child(_sword_instance)
@@ -587,11 +604,13 @@ func _revert_sword() -> void:
 		_sword_instance.queue_free()
 		_sword_instance = null
 	_sword_active = false
+
 	_set_punches_visible(true)
 
 func _update_sword_transform() -> void:
 	if not _sword_active or not is_instance_valid(_sword_instance):
 		return
+
 	var anchor := Vector2(abs(_base_right.x) * _facing, _base_right.y)
 	_sword_instance.position = anchor
 	_sword_instance.scale.x = abs(_sword_instance.scale.x) * float(_facing)
@@ -615,6 +634,7 @@ func _power() -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
+
 	var alabarda := $alabarda
 	var hitbox := alabarda.get_node("Hitbox")
 	alabarda.visible = true
@@ -645,6 +665,7 @@ func _start_ulti() -> void:
 		estado_actual = Estado.NORMAL
 		if not $Timer.is_stopped():
 			$Timer.stop()
+
 	ulti_active = true
 	_play_anim_safe("ulti_pose")
 	_set_punches_visible(false)
@@ -740,6 +761,7 @@ func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
 	elif "loop_enabled" in s_copy:
 		s_copy.loop_enabled = false
 	player.stream = s_copy
+
 # ======================
 # Dash
 # ======================
@@ -748,6 +770,7 @@ func _start_dash(direction: Vector2) -> void:
 	_dash_timer = dash_duration
 	_dash_cooldown_timer = dash_cooldown
 	_dash_dir = direction.normalized()
+
 	invulnerable = true
 	if animated_sprite.animation != "dash":
 		animated_sprite.play("dash")
