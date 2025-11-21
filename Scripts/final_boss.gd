@@ -152,13 +152,12 @@ func flip_sprite(dir: float) -> void:
 	elif dir < 0.0:
 		$Sprite2D.flip_h = false
 
-func move(dir: float, speed: float) -> void:
+func move(dir, speed):
 	if dead:
 		return
 	if using_ability or is_dashing:
 		return
 	velocity.x = dir * speed
-	flip_sprite(dir)
 
 func start_attack() -> void:
 	if dead:
@@ -209,6 +208,24 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 	move_and_slide()
+	_check_static_collisions()
+	
+func _check_static_collisions() -> void:
+	var count := get_slide_collision_count()
+	if count == 0:
+		return
+	for i in range(count):
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		if collider == null:
+			continue
+		if collider is StaticBody2D or collider is TileMap:
+			velocity = Vector2.ZERO
+			is_dashing = false
+			using_ability = false
+			_hitbox_off()
+			main_sm.dispatch(&"state_ended")
+			break
 
 func _hitbox_on(dmg: float, src: String) -> void:
 	if not hitbox:

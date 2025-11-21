@@ -29,10 +29,10 @@
 [ext_resource type="PackedScene" uid="uid://clgowavqodxut" path="res://Scenes/Animaciones/Sombras.tscn" id="29_qwisf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_082u5"]
-size = Vector2(139, 666)
+size = Vector2(139, 1028)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwh8s"]
-size = Vector2(139, 661)
+size = Vector2(139, 1026.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbu76"]
 size = Vector2(1722, 20)
@@ -84,7 +84,7 @@ interfaz_juego = NodePath("../CanvasLayer")
 [node name="Gameworld" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="Gameworld" groups=["camara", "main_camera"]]
-position = Vector2(706, 301)
+position = Vector2(705, 539)
 position_smoothing_enabled = true
 script = ExtResource("22_xt53k")
 
@@ -104,7 +104,7 @@ texture = ExtResource("2_tk0fa")
 z_index = -2
 texture_filter = 1
 position = Vector2(-345, 56)
-scale = Vector2(1.084, 1)
+scale = Vector2(1.084, 1.1392157)
 texture = ExtResource("3_f1e4r")
 centered = false
 
@@ -112,21 +112,21 @@ centered = false
 position = Vector2(-249, 212)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D"]
-position = Vector2(59.5, 317)
+position = Vector2(59.5, 498)
 shape = SubResource("RectangleShape2D_082u5")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Gameworld"]
 position = Vector2(420, 223)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D2"]
-position = Vector2(1247, 297)
+position = Vector2(1247, 479.75)
 shape = SubResource("RectangleShape2D_dwh8s")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Gameworld"]
 position = Vector2(-104, 213)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D3"]
-position = Vector2(844, 637)
+position = Vector2(837, 786)
 shape = SubResource("RectangleShape2D_gbu76")
 
 [node name="Player_1" parent="Gameworld" node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("4_f60m1")]
@@ -139,8 +139,7 @@ coin_label = NodePath("../../CanvasLayer/cont monedas")
 position = Vector2(314, 686)
 
 [node name="Final_Boss" parent="Gameworld" instance=ExtResource("6_reli8")]
-position = Vector2(822, 571)
-scale = Vector2(1, 1)
+position = Vector2(969, 613)
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Gameworld"]
 position = Vector2(-317.00003, 99)

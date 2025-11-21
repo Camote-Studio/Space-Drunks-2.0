@@ -1,13 +1,18 @@
 extends BTAction
 
 @export var target_var: StringName = &"target"
-@export var attack_range: float = 50.0
+@export var attack_range = 120.0
 
-func _tick(_delta: float) -> Status:
-	var target: CharacterBody2D = blackboard.get_var(target_var)
+func _tick(_delta):
+	var target = blackboard.get_var(target_var)
 	if target == null:
 		return FAILURE
-	var dx = target.global_position.x - agent.global_position.x
-	if abs(dx) <= attack_range:
+
+	if not (target is Node2D):
+		return FAILURE
+
+	var d = agent.global_position.distance_to(target.global_position)
+	if d <= attack_range:
 		return SUCCESS
+
 	return FAILURE

@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=58 format=3 uid="uid://bedkv143ysrli"]
+[gd_resource type="BehaviorTree" load_steps=55 format=3 uid="uid://bedkv143ysrli"]
 
 [ext_resource type="Script" uid="uid://2vnhnaid0kpj" path="res://ai/tasks/choose_random_pos.gd" id="1_wkl7e"]
 [ext_resource type="Script" uid="uid://dlbp8lfodkrjq" path="res://ai/tasks/move_to_position.gd" id="2_sf326"]
@@ -17,7 +17,6 @@ text = "combat"
 
 [sub_resource type="BTAction" id="BTAction_0ca5l"]
 script = ExtResource("3_hqlaa")
-group = &"player_1"
 
 [sub_resource type="BTConsolePrint" id="BTConsolePrint_0mfcw"]
 text = "attack"
@@ -103,51 +102,23 @@ animation_name = &"dash"
 
 [sub_resource type="BTAction" id="BTAction_m61i3"]
 script = ExtResource("6_0mfcw")
+dash_speed = 800.0
 
 [sub_resource type="BTSequence" id="BTSequence_cyl34"]
 custom_name = "Dash Sequence"
 children = [SubResource("BTConsolePrint_wts3m"), SubResource("BTWait_wts3m"), SubResource("BTPlayAnimation_m61i3"), SubResource("BTAction_m61i3")]
 
 [sub_resource type="BTProbability" id="BTProbability_3i1ix"]
-run_chance = 0.25
+run_chance = 0.15
 children = [SubResource("BTSequence_cyl34")]
-
-[sub_resource type="BTRandomWait" id="BTRandomWait_sf326"]
-
-[sub_resource type="BTSequence" id="BTSequence_hqlaa"]
-custom_name = "Idle Sequence"
-children = [SubResource("BTRandomWait_sf326")]
-
-[sub_resource type="BTProbability" id="BTProbability_ub5xd"]
-run_chance = 0.05
-children = [SubResource("BTSequence_hqlaa")]
 
 [sub_resource type="BTSelector" id="BTSelector_0mfcw"]
 custom_name = "Ability Selector"
-children = [SubResource("BTProbability_m61i3"), SubResource("BTProbability_wts3m"), SubResource("BTProbability_cyl34"), SubResource("BTProbability_3i1ix"), SubResource("BTProbability_ub5xd")]
-
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_acp1d"]
-text = "moving to enemy"
-
-[sub_resource type="BTAction" id="BTAction_arxy5"]
-script = ExtResource("3_hqlaa")
-
-[sub_resource type="BTAction" id="BTAction_tnuqd"]
-script = ExtResource("4_acp1d")
-
-[sub_resource type="BTWait" id="BTWait_6spu4"]
-duration = 6.0
-
-[sub_resource type="BTSequence" id="BTSequence_arxy5"]
-custom_name = "Move To Enemy Sequence"
-children = [SubResource("BTConsolePrint_acp1d"), SubResource("BTAction_arxy5"), SubResource("BTAction_tnuqd"), SubResource("BTWait_6spu4")]
-
-[sub_resource type="BTProbability" id="BTProbability_7tese"]
-children = [SubResource("BTSequence_arxy5")]
+children = [SubResource("BTProbability_m61i3"), SubResource("BTProbability_wts3m"), SubResource("BTProbability_cyl34"), SubResource("BTProbability_3i1ix")]
 
 [sub_resource type="BTSequence" id="BTSequence_3i1ix"]
 custom_name = "Combat Sequence"
-children = [SubResource("BTConsolePrint_arxy5"), SubResource("BTAction_0ca5l"), SubResource("BTSelector_0mfcw"), SubResource("BTProbability_7tese")]
+children = [SubResource("BTConsolePrint_arxy5"), SubResource("BTAction_0ca5l"), SubResource("BTSelector_0mfcw")]
 
 [sub_resource type="BTConsolePrint" id="BTConsolePrint_sf326"]
 text = "random move"
@@ -159,18 +130,38 @@ script = ExtResource("1_wkl7e")
 script = ExtResource("2_sf326")
 
 [sub_resource type="BTWait" id="BTWait_arxy5"]
-duration = 5.0
+duration = 2.0
 
 [sub_resource type="BTSequence" id="BTSequence_acp1d"]
 custom_name = "Random Move Sequence"
 children = [SubResource("BTConsolePrint_sf326"), SubResource("BTAction_hqlaa"), SubResource("BTAction_acp1d"), SubResource("BTWait_arxy5")]
 
 [sub_resource type="BTProbability" id="BTProbability_0mfcw"]
-run_chance = 0.2
+run_chance = 0.4
 children = [SubResource("BTSequence_acp1d")]
 
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_acp1d"]
+text = "moving to enemy"
+
+[sub_resource type="BTAction" id="BTAction_arxy5"]
+script = ExtResource("3_hqlaa")
+
+[sub_resource type="BTAction" id="BTAction_tnuqd"]
+script = ExtResource("4_acp1d")
+
+[sub_resource type="BTWait" id="BTWait_6spu4"]
+duration = 0.5
+
+[sub_resource type="BTSequence" id="BTSequence_arxy5"]
+custom_name = "Move To Enemy Sequence"
+children = [SubResource("BTConsolePrint_acp1d"), SubResource("BTAction_arxy5"), SubResource("BTAction_tnuqd"), SubResource("BTWait_6spu4")]
+
+[sub_resource type="BTProbability" id="BTProbability_7tese"]
+run_chance = 0.6
+children = [SubResource("BTSequence_arxy5")]
+
 [sub_resource type="BTSelector" id="BTSelector_wkl7e"]
-children = [SubResource("BTSequence_3i1ix"), SubResource("BTProbability_0mfcw")]
+children = [SubResource("BTSequence_3i1ix"), SubResource("BTProbability_0mfcw"), SubResource("BTProbability_7tese")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_e34go")
