@@ -1,13 +1,13 @@
-extends CharacterBody2D # player 1
+extends CharacterBody2D
+
 var _flotar_sound_played := false
 
 signal damage(amount: float, source: String)
 signal muerte
-#@onready var shop: Control = $"../CanvasLayer/UI_abilities"
+
 @export var bomb_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/bomba.tscn")
-# --- GUN / ULTI ---
 @onready var gun = $Gun
-# ====== DASH ======
+
 @export var dash_speed := 600.0
 @export var dash_duration := 0.2
 @export var dash_cooldown := 0.6
@@ -16,16 +16,19 @@ var _dash_timer := 0.0
 var _dash_cooldown_timer := 0.0
 var _dash_dir := Vector2.ZERO
 var coins: int = 0
-@export var player_id: String = "player1" # Identificador único
+
+@export var player_id: String = "player1"
 @onready var gun_node: Node = $Gun
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
 @onready var audio_disparo_metra: AudioStreamPlayer2D = $audio_disparo_metra
 @onready var audio_recarga: AudioStreamPlayer2D = $audio_recarga
+
 @export var gun_360_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/gun_360.tscn")
 var _360_instance: Node2D = null
 var _360_timer: Timer
 var _360_active := false
+
 @export var electro_gun_scene: PackedScene = preload("res://Scenes/Players/Player 1/Armas_P1/electro_gun.tscn")
 @export var electro_duration_min: float = 15.0
 @export var electro_duration_max: float = 20.0
@@ -35,7 +38,7 @@ var _electro_active := false
 
 @export_group("UI del jugador")
 @export var bar: TextureProgressBar 
-@export	 var animated_sprite: AnimatedSprite2D 
+@export var animated_sprite: AnimatedSprite2D 
 @export var bar_ability_1: ProgressBar 
 @export var coin_label: Label
 
@@ -43,8 +46,10 @@ var has_chicken_pony := false
 var has_jet_punches := false
 var has_sleepy_gun := false
 var speed := 200
+
 enum Estado { NORMAL, VENENO, ATURDIDO, ULTI, DEAD, FLOATING, GOLPE }
 var estado_actual : Estado = Estado.NORMAL
+
 var floating := false
 var invulnerable := false
 var invul_duration := 4.3
@@ -58,10 +63,9 @@ var return_lerp_speed := 3.0
 var dead := false
 var allow_input := true
 var is_using_ulti := false
-var ulti_ready := false 
-@export var ulti_drain_rate := 20.0 # Puntos de barra por segundo
+var ulti_ready := false
+@export var ulti_drain_rate := 20.0
 
-# ====== Poder de disparo potenciado ======
 var next_shot_powered := false
 var power_bullet_scale := 1.8
 var power_bullet_extra_damage := 20.0
@@ -70,25 +74,21 @@ var power_bullet_extra_damage := 20.0
 @export var knockback_falloff := 6.0
 var _knockback_vel: Vector2 = Vector2.ZERO
 
-# =============== FUNCIÓN READY =============================
 func _ready() -> void:
-
 	_disable_stream_loop(sonido_flotando)
 
-	# --- Recuperar monedas ---
 	coins = GameState.get_coins(player_id)
 	GameState.set_coins(player_id, coins)
 	if coin_label:
 		coin_label.text = str(coins)
 
-# --- Recuperar vida ---
 	var vida_guardada = GameState.get_vida(player_id)
 
 	if vida_guardada <= 0:
-		bar.value = bar.max_value   # vida completa al empezar el juego
+		bar.value = bar.max_value
 		GameState.set_vida(player_id, bar.value)
 	else:
-		bar.value = vida_guardada   # continuar con la vida guardada
+		bar.value = vida_guardada
 
 	coins = GameState.get_coins(player_id)
 	GameState.set_coins(player_id, coins)
@@ -98,7 +98,6 @@ func _ready() -> void:
 	if not is_connected("damage", Callable(self, "_on_damage")):
 		connect("damage", Callable(self, "_on_damage"))
 
-	# Animación por defecto
 	if animated_sprite:
 		animated_sprite.play("idle")
 
@@ -120,23 +119,18 @@ func _ready() -> void:
 		_360_timer.connect("timeout", Callable(self, "_360_gun_instance"))
 
 	_set_gun_active(gun_node, true)
-	
-# =============== FUNCIÓN PHYSICS PROCEES ===================================
+
 func _physics_process(delta: float) -> void:
 	if dead:
 		velocity = Vector2.ZERO
 		return
-	# --- LÓGICA DEL ULTI ACTIVO ---
+
 	if is_using_ulti:
-		# Reducir el valor de la barra con el tiempo
 		bar_ability_1.value -= ulti_drain_rate * delta
-		
-		# Si la barra se agota, desactivar el ulti
 		if bar_ability_1.value <= 0:
-			_deactivate_ulti() # Llamamos a una nueva función para terminarlo
-		# Detenemos el resto del procesamiento físico normal
+			_deactivate_ulti()
 		return
-	# --- DASH ---
+
 	if _is_dashing:
 		_dash_timer -= delta
 		if _dash_timer <= 0.0:
@@ -145,24 +139,27 @@ func _physics_process(delta: float) -> void:
 			velocity = _dash_dir * dash_speed
 			move_and_slide()
 		return
+
 	if Input.is_action_just_pressed("bomba") and not dead and allow_input:
 		_throw_bomb()
+
 	if _dash_cooldown_timer > 0.0:
 		_dash_cooldown_timer -= delta
+
 	var direction = Vector2.ZERO
 
 	if allow_input:
 		direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
+
 	if Input.is_action_just_pressed("dash") and not _is_dashing and _dash_cooldown_timer <= 0.0 and not floating:
-			if direction != Vector2.ZERO:
-				_start_dash(direction)
-			else:
-				_start_dash(Vector2.RIGHT) # default
+		if direction != Vector2.ZERO:
+			_start_dash(direction)
+		else:
+			_start_dash(Vector2.RIGHT)
 
 	if Input.is_action_just_pressed("jump") and ulti_ready and not is_using_ulti and not floating:
 		_activate_ulti()
 
-	# --- Animaciones solo si NO estamos en ulti y no muertos ---
 	if not is_using_ulti and not dead:
 		_update_animation(direction)
 
@@ -171,18 +168,12 @@ func _physics_process(delta: float) -> void:
 	if not floating:
 		velocity = direction * speed
 		velocity += _knockback_vel
-	# disipación suave del knockback
 		_knockback_vel = _knockback_vel.lerp(Vector2.ZERO, knockback_falloff * delta)
 		move_and_slide()
 		return
-		# detener sonido de flotación si estaba sonando
-		if sonido_flotando.playing:
-			sonido_flotando.stop()
 	else:
 		_handle_floating(delta)
 
-
-# ====================== FUNCIÓN UPDATE ANIMACIONES ===========================
 func _update_animation(direction: Vector2) -> void:
 	match estado_actual:
 		Estado.VENENO:
@@ -190,7 +181,6 @@ func _update_animation(direction: Vector2) -> void:
 				animated_sprite.play("envenenado")
 			if abs(direction.x) > 0:
 				animated_sprite.flip_h = direction.x < 0
-				
 		Estado.ATURDIDO:
 			var dir = -direction
 			if animated_sprite.animation != "aturdio":
@@ -199,11 +189,9 @@ func _update_animation(direction: Vector2) -> void:
 				animated_sprite.flip_h = dir.x < 0
 			if not sonido_aturdido.playing:
 				sonido_aturdido.play()
-
 		Estado.GOLPE:
 			if animated_sprite.animation != "damage":
 				animated_sprite.play("damage")
-			
 		Estado.NORMAL:
 			if direction == Vector2.ZERO:
 				animated_sprite.play("idle")
@@ -217,20 +205,18 @@ func _update_animation(direction: Vector2) -> void:
 					animated_sprite.play("caminar_subir")
 					$Gun.visible = false
 				else:
-					# si va hacia abajo, mostrar gun
 					animated_sprite.play("caminar")
 					$Gun.visible = true
-
 			if sonido_aturdido.playing:
 				sonido_aturdido.stop()
-		
-# ====================== FUNCIÓN DAÑO ===============================================
+
 func _on_damage(amount: float, source: String = "desconocido") -> void:
-	if dead: return
+	if dead:
+		return
 
 	if bar:
 		bar.value = clamp(bar.value - amount, bar.min_value, bar.max_value)
-		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
+		GameState.set_vida(player_id, bar.value)
 		if bar.value <= bar.min_value:
 			_die()
 			return
@@ -251,23 +237,28 @@ func _on_damage(amount: float, source: String = "desconocido") -> void:
 				sonido_flotando.stop()
 				if sonido_flotando.has_method("seek"):
 					sonido_flotando.seek(0.0)
-			_flotar_sound_played = false  # 🔹 fuerza a que vuelva a sonar la próxima vez
+			_flotar_sound_played = false
 			floating = true
 			invulnerable = true
 			invul_timer = invul_duration
 		"golpe":
 			if estado_actual == Estado.NORMAL:
 				estado_actual = Estado.GOLPE
-			var dir_x := 1 if animated_sprite.flip_h else -1
+			var dir_x := 1
+			if animated_sprite.flip_h:
+				dir_x = -1
 			_apply_knockback(Vector2(dir_x, 0))
 			if $GolpeTimer:
 				$GolpeTimer.start()
-			
+
+func apply_damage(amount: float, source: String = "desconocido") -> void:
+	_on_damage(amount, source)
+
 func _on_damage_enemy_body_entered(body: Node2D) -> void:
 	if body.is_in_group("gun_enemy") and not invulnerable and not dead:
 		animated_sprite.play("damage")
 		emit_signal("damage", 20.0, "bala")
-# ====================== FUNCIÓN FLOTAR ==========================================
+
 func _handle_floating(delta: float) -> void:
 	if floating:
 		if not _flotar_sound_played:
@@ -277,6 +268,7 @@ func _handle_floating(delta: float) -> void:
 		_flotar_sound_played = false
 		if sonido_flotando.playing:
 			sonido_flotando.stop()
+
 	var target_y
 	var current_lerp_speed
 	var current_rotation_speed
@@ -299,10 +291,9 @@ func _handle_floating(delta: float) -> void:
 
 	set_collision_layer(0)
 	set_collision_mask(0)
-		
+
 	global_position.x += _knockback_vel.x * delta
 	_knockback_vel = _knockback_vel.lerp(Vector2.ZERO, knockback_falloff * delta)
-	
 
 	invul_timer -= delta
 	if invul_timer <= 0.0 and abs(global_position.y - float_start_y) < 1.0:
@@ -313,51 +304,43 @@ func _handle_floating(delta: float) -> void:
 		set_collision_layer(1)
 		set_collision_mask(1)
 		_knockback_vel = Vector2.ZERO
-# ====================== FUNCIONES DE SOPORTE ============================= 
+
 func gain_ability_from_attack(damage_dealt: float) -> void:
-	if dead or bar_ability_1 == null: return
-	# 1. Comprobamos si podemos cargar la barra (si el ulti NO está listo)
+	if dead or bar_ability_1 == null:
+		return
 	if not ulti_ready:
-		# 2. Si podemos, cargamos la barra
 		bar_ability_1.value = clamp(bar_ability_1.value + max(0.0, damage_dealt), bar_ability_1.min_value, bar_ability_1.max_value)
-		
-		# 3. Y AHORA, DENTRO de este bloque, comprobamos si ESA carga la llenó
 		if bar_ability_1.value >= bar_ability_1.max_value:
 			ulti_ready = true
+
 func gain_ability_from_shot() -> void:
-	if dead or bar_ability_1 == null: return
+	if dead or bar_ability_1 == null:
+		return
 	var shots_required := 10.0
 	var gain := (bar_ability_1.max_value - bar_ability_1.min_value) / shots_required
-	# 1. Comprobamos si podemos cargar la barra
 	if not ulti_ready:
-		# 2. Si podemos, la cargamos
 		bar_ability_1.value = clamp(bar_ability_1.value + gain, bar_ability_1.min_value, bar_ability_1.max_value)
-		# 3. Y comprobamos si se llenó
 		if bar_ability_1.value >= bar_ability_1.max_value:
 			ulti_ready = true
-func _power() -> void:
-	if dead or next_shot_powered: 
-		return
 
+func _power() -> void:
+	if dead or next_shot_powered:
+		return
 	if bar_ability_1 and not is_using_ulti and bar_ability_1.value >= bar_ability_1.max_value:
 		next_shot_powered = true
 		bar_ability_1.value = bar_ability_1.min_value
 
-
 func apply_power_to_bullet(bullet: Node) -> void:
-	if not next_shot_powered: 
+	if not next_shot_powered:
 		return
-
 	if bullet is Node2D:
 		bullet.scale *= power_bullet_scale
 	if "damage" in bullet:
 		bullet.damage += power_bullet_extra_damage
 	elif bullet.has_method("set_damage"):
 		bullet.call("set_damage", power_bullet_extra_damage)
-
 	next_shot_powered = false
 
-# ====================== FUNCIONES DE MUERTE / ESTADO ATACADO =====================
 func _die() -> void:
 	if _electro_active:
 		_revert_gun_instance()
@@ -381,10 +364,6 @@ func _die() -> void:
 
 	if animated_sprite:
 		animated_sprite.play("death")
-		# NO detener la animación para que quede permanente
-
-	$"../CanvasLayer/Sprite2D".self_modulate = Color(1, 0, 0, 1)
-	$"../CanvasLayer/Characater1Profile".texture = preload("res://Assets/art/sprites/complements_sprites/muerto_kirk.png")
 	emit_signal("muerte")
 
 func _on_aturdido_timer_timeout() -> void:
@@ -397,7 +376,6 @@ func _on_veneno_timer_timeout() -> void:
 	if estado_actual == Estado.VENENO:
 		estado_actual = Estado.NORMAL
 
-# ====================== FUNCIÓN PARA COLECCIONAR MONEDAS =======================
 func collect_coin(amount: int = 1) -> void:
 	coins += amount
 	if coin_label:
@@ -405,19 +383,16 @@ func collect_coin(amount: int = 1) -> void:
 	GameState.set_coins(player_id, coins)
 	if coins >= 20:
 		bar.value = clamp(bar.value + 200, bar.min_value, bar.max_value)
-		GameState.set_vida(player_id, bar.value) # 🔹 Guardamos la vida actual
-		#_show_shop()
+		GameState.set_vida(player_id, bar.value)
 		coins = 0
 		if coin_label:
 			coin_label.text = str(coins)
 			GameState.set_coins(player_id, coins)
 
-# ====================== FUNCIÓN DE ARMAS ESPECIALES ================================
 func activate_electro_for(seconds: float = -1.0) -> void:
 	if seconds <= 0.0:
 		seconds = randf_range(electro_duration_min, electro_duration_max)
 	if electro_gun_scene == null:
-		push_warning("[P1] electro_gun_scene no asignada.")
 		return
 	if _electro_active and is_instance_valid(_electro_instance):
 		_revert_timer.start(seconds)
@@ -445,7 +420,6 @@ func activate_360_for(seconds: float = -1.0) -> void:
 	if seconds <= 0.0:
 		seconds = randf_range(electro_duration_min, electro_duration_max)
 	if gun_360_scene == null:
-		push_warning("[P1] 360_gun_scene no asignada.")
 		return
 	if _360_active and is_instance_valid(_360_instance):
 		_360_timer.start(seconds)
@@ -470,20 +444,15 @@ func _360_gun_instance() -> void:
 	_set_gun_active(gun_node, true)
 
 func _set_gun_active(g: Node, active: bool) -> void:
-	if not is_instance_valid(g): return
+	if not is_instance_valid(g):
+		return
 	g.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
 	if "visible" in g:
 		g.visible = active
 
-#func _show_shop() -> void:
-	#if shop:
-		#shop.open_for(self)
-	#else:
-		#push_warning("[P1] No encontré la tienda (UI_abilities)")
-
-# ====================== FUNCIÓN PARA ULTI =======================
 func _activate_ulti() -> void:
-	if not ulti_ready: return # Doble chequeo por si acaso
+	if not ulti_ready:
+		return
 	
 	ulti_ready = false
 	is_using_ulti = true
@@ -492,13 +461,6 @@ func _activate_ulti() -> void:
 	if gun:
 		gun.set_mode(gun.GunMode.TURRET)
 
-	is_using_ulti = true
-	allow_input = false
-
-	if gun:
-		gun.set_mode(gun.GunMode.TURRET)
-
-	# 🔊 Sonido de recarga al sacar ulti
 	if audio_recarga and not audio_recarga.playing:
 		audio_recarga.play()
 
@@ -507,26 +469,24 @@ func _activate_ulti() -> void:
 		if anim_sprite.sprite_frames.has_animation("ulti_pose"):
 			anim_sprite.stop()
 			anim_sprite.play("ulti_pose")
-		else:
-			push_warning("Animación 'ulti_pose' no existe en AnimatedSprite2D")
+
 func _deactivate_ulti() -> void:
 	is_using_ulti = false
 	allow_input = true
 	ulti_ready = false
 	if gun and gun.has_method("set_mode"):
 		gun.set_mode(gun.GunMode.PISTOL)
-	# Regresar a idle solo si no estamos muertos
 	if not dead and has_node("Visuals/AnimatedSprite2D"):
 		var anim_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 		if anim_sprite.sprite_frames and anim_sprite.sprite_frames.has_animation("idle"):
 			anim_sprite.play("idle")
-# Empuje temporal que no rompe la física
+
 func push_temp(offset: Vector2) -> void:
 	global_position += offset
-# En tu script player.gd
+
 func is_unable_to_act() -> bool:
-	# Aquí pones tu propia lógica.
 	return dead or not allow_input
+
 func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
 	if player == null:
 		return
@@ -541,7 +501,7 @@ func _disable_stream_loop(player: AudioStreamPlayer2D) -> void:
 	elif "loop_enabled" in s_copy:
 		s_copy.loop_enabled = false
 	player.stream = s_copy
-# ====================== DASH FUNCIONES =====================
+
 func _start_dash(direction: Vector2) -> void:
 	_is_dashing = true
 	_dash_timer = dash_duration
@@ -550,48 +510,43 @@ func _start_dash(direction: Vector2) -> void:
 	invulnerable = true
 	if animated_sprite and animated_sprite.sprite_frames.has_animation("dash"):
 		animated_sprite.play("dash")
+
 func _end_dash() -> void:
 	_is_dashing = false
 	invulnerable = false
 	velocity = Vector2.ZERO
 	if animated_sprite and animated_sprite.animation == "dash":
 		animated_sprite.play("idle")
+
 func _throw_bomb() -> void:
 	if bomb_scene == null:
-		push_warning("[P1] bomb_scene no asignada.")
 		return
 	var bomb = bomb_scene.instantiate()
 	get_parent().add_child(bomb)
 	bomb.global_position = gun.global_position
-	# Ángulo de lanzamiento
 	var angle = deg_to_rad(43)
 	var speed = 350.0
-	# Revisar si el sprite principal está volteado
 	var dir_x = 1
 	if animated_sprite.flip_h:
 		dir_x = -1
-	# Dirección con flip
 	var direction = Vector2(cos(angle) * dir_x, -sin(angle))
-	# Impulso inicial
 	bomb.linear_velocity = direction * speed
-	# Altura donde explota
-	bomb.target_y = global_position.y + 10
+	bomb.target_y = global_position.y + 10.0
+
 func _apply_knockback(dir: Vector2) -> void:
 	if dir == Vector2.ZERO:
 		return
 	_knockback_vel = dir.normalized() * knockback_force
 
 func _apply_knockback_from(world_pos: Vector2) -> void:
-	var dir := (global_position - world_pos)
+	var dir = global_position - world_pos
 	if dir == Vector2.ZERO:
 		dir = Vector2.RIGHT
 	_apply_knockback(dir)
 
-
 func _on_golpe_timer_timeout() -> void:
 	if estado_actual == Estado.GOLPE:
 		estado_actual = Estado.NORMAL
-		# si no estás muerto ni en ulti, refresca anim según input actual
 		if not dead and not is_using_ulti:
-			var direction := Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
+			var direction = Input.get_vector("left_player_1", "right_player_1", "up_player_1", "down_player_1")
 			_update_animation(direction)

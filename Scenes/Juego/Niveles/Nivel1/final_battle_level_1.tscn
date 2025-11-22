@@ -126,7 +126,7 @@ shape = SubResource("RectangleShape2D_dwh8s")
 position = Vector2(-104, 213)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D3"]
-position = Vector2(837, 786)
+position = Vector2(842, 859)
 shape = SubResource("RectangleShape2D_gbu76")
 
 [node name="Player_1" parent="Gameworld" node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("4_f60m1")]
