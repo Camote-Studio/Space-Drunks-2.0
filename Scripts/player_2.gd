@@ -13,14 +13,14 @@ const ENEMY_GROUPS := ["enemy_1","enemy_2","enemy_3","enemy_4","enemy_5","boss"]
 # Nodos
 # =========================
 @onready var TimerGolpeUlti: Timer = Timer.new()
-@onready var veneno_couldown: ProgressBar = $"../../CanvasLayer/Veneno_p2"
+@export var veneno_couldown: ProgressBar 
 @onready var sonido_aturdido: AudioStreamPlayer2D = $sonido_aturdido
 @onready var sonido_flotando: AudioStreamPlayer2D = $sonido_flotando
 @onready var sonido_ulti: AudioStreamPlayer2D = $sonido_ulti
-@onready var bar: TextureProgressBar = $"../../CanvasLayer/ProgressBar_alien_2"
+@export var bar: TextureProgressBar 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bar_ability_2: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_2"
-@onready var coin_label: Label = $"../../CanvasLayer/cont monedas2"
+@export var coin_label: Label 
 @onready var punch_right: Sprite2D = $Punch_right
 @onready var punch_left: Sprite2D = $Punch_left
 @onready var punchs: AudioStreamPlayer2D = $punchs

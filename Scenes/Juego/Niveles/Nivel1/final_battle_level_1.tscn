@@ -81,6 +81,18 @@ final_boss = NodePath("../Gameworld/Final_Boss")
 mundo_del_juego = NodePath("../Gameworld")
 interfaz_juego = NodePath("../CanvasLayer")
 
+[node name="Player_1" parent="." node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("4_f60m1")]
+position = Vector2(288, 519)
+bar = NodePath("../CanvasLayer/ProgressBar_alien_1")
+bar_ability_1 = NodePath("../CanvasLayer/ProgressBar_ability_1")
+coin_label = NodePath("../CanvasLayer/cont monedas")
+
+[node name="Player_2" parent="." node_paths=PackedStringArray("veneno_couldown", "bar", "coin_label") instance=ExtResource("5_hvwlt")]
+position = Vector2(314, 686)
+veneno_couldown = NodePath("../CanvasLayer/Veneno_p2")
+bar = NodePath("../CanvasLayer/ProgressBar_alien_2")
+coin_label = NodePath("../CanvasLayer/cont monedas2")
+
 [node name="Gameworld" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="Gameworld" groups=["camara", "main_camera"]]
@@ -128,15 +140,6 @@ position = Vector2(-104, 213)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gameworld/StaticBody2D3"]
 position = Vector2(842, 859)
 shape = SubResource("RectangleShape2D_gbu76")
-
-[node name="Player_1" parent="Gameworld" node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("4_f60m1")]
-position = Vector2(288, 519)
-bar = NodePath("../../CanvasLayer/ProgressBar_alien_1")
-bar_ability_1 = NodePath("../../CanvasLayer/ProgressBar_ability_1")
-coin_label = NodePath("../../CanvasLayer/cont monedas")
-
-[node name="Player_2" parent="Gameworld" instance=ExtResource("5_hvwlt")]
-position = Vector2(314, 686)
 
 [node name="Final_Boss" parent="Gameworld" instance=ExtResource("6_reli8")]
 position = Vector2(969, 613)

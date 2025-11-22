@@ -290,8 +290,11 @@ bar = NodePath("../CanvasLayer/ProgressBar_alien_1")
 bar_ability_1 = NodePath("../CanvasLayer/ProgressBar_ability_1")
 coin_label = NodePath("../CanvasLayer/cont monedas")
 
-[node name="Player_2" parent="." instance=ExtResource("4_ne1v2")]
+[node name="Player_2" parent="." node_paths=PackedStringArray("veneno_couldown", "bar", "coin_label") instance=ExtResource("4_ne1v2")]
 position = Vector2(711, 490)
+veneno_couldown = NodePath("../CanvasLayer/Veneno_p2")
+bar = NodePath("../CanvasLayer/ProgressBar_alien_2")
+coin_label = NodePath("../CanvasLayer/cont monedas2")
 poison_area_scene = ExtResource("8_5awdr")
 
 [node name="Portal_2" type="Node2D" parent="." groups=["portal"]]
