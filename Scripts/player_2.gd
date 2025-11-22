@@ -19,7 +19,7 @@ const ENEMY_GROUPS := ["enemy_1","enemy_2","enemy_3","enemy_4","enemy_5","boss"]
 @onready var sonido_ulti: AudioStreamPlayer2D = $sonido_ulti
 @export var bar: TextureProgressBar 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var bar_ability_2: ProgressBar = $"../../CanvasLayer/ProgressBar_ability_2"
+@onready var bar_ability_2: ProgressBar = $"../CanvasLayer/ProgressBar_ability_2"
 @export var coin_label: Label 
 @onready var punch_right: Sprite2D = $Punch_right
 @onready var punch_left: Sprite2D = $Punch_left
