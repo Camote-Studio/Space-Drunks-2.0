@@ -94,7 +94,7 @@ radius = 93.888794
 height = 271.11108
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xchk6"]
-radius = 142.618
+radius = 145.03104
 
 [sub_resource type="Animation" id="Animation_05g21"]
 length = 0.001
@@ -269,7 +269,6 @@ _data = {
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_r2g3u"]
 
 [node name="Final_Boss" type="CharacterBody2D" groups=["boss"]]
-position = Vector2(923, 503)
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_blxqn")

@@ -154,41 +154,34 @@ script = ExtResource("2_ok2xn")
 [node name="Sprite2D6" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
 position = Vector2(817, 171)
-scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("1_ngw7g")
 
 [node name="Sprite2D7" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
 position = Vector2(2445, 172)
-scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("1_ngw7g")
 
 [node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
 position = Vector2(2451, 172)
-scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("1_ngw7g")
 
 [node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
 position = Vector2(4085, 172)
-scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("1_ngw7g")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(717, 201.5)
-scale = Vector2(0.3115, 0.39902)
 texture = ExtResource("2_npmql")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
 position = Vector2(817, 171)
-scale = Vector2(0.4085, 0.37451)
 texture = ExtResource("1_ngw7g")
 
 [node name="Sprite2D5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(717, 201.5)
-scale = Vector2(0.3115, 0.39902)
 texture = ExtResource("2_npmql")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground"]
@@ -201,21 +194,27 @@ polygon = PackedVector2Array(53, 220, 57, 272, 64, 277, 69, 309, 104, 309, 112, 
 [node name="PISO" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-345, 67)
-scale = Vector2(1.08375, 0.566667)
 texture = ExtResource("3_b6u4q")
 centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-18, 244)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(45, 320)
 shape = SubResource("RectangleShape2D_xeu1h")
 
-[node name="Player_1" parent="." instance=ExtResource("4_e3l03")]
-position = Vector2(465, 330)
+[node name="Player_1" parent="." node_paths=PackedStringArray("bar", "bar_ability_1", "coin_label") instance=ExtResource("4_e3l03")]
+position = Vector2(450, 626)
+bar = NodePath("../CanvasLayer/ProgressBar_alien_1")
+bar_ability_1 = NodePath("../CanvasLayer/ProgressBar_ability_1")
+coin_label = NodePath("../CanvasLayer/cont monedas")
 
-[node name="Player_2" parent="." instance=ExtResource("5_gefvj")]
+[node name="Player_2" parent="." node_paths=PackedStringArray("veneno_couldown", "bar", "coin_label") instance=ExtResource("5_gefvj")]
 position = Vector2(458, 489)
+veneno_couldown = NodePath("../CanvasLayer/Veneno_p2")
+bar = NodePath("../CanvasLayer/ProgressBar_alien_2")
+coin_label = NodePath("../CanvasLayer/cont monedas2")
 
 [node name="cinamatic_level_1_f_3_camera" type="Camera2D" parent="."]
 position = Vector2(610, 333)
@@ -430,6 +429,7 @@ position = Vector2(3052, 382)
 shape = SubResource("CircleShape2D_gnga6")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-28, 164)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(1639, 259)
@@ -493,6 +493,7 @@ offset_right = 104.025
 offset_bottom = 564.0
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-18, 244)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(1695.5, 636)
@@ -502,7 +503,7 @@ shape = SubResource("RectangleShape2D_puveb")
 script = ExtResource("18_vx3yo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockCollider"]
-position = Vector2(1932, 408)
+position = Vector2(1936, 567)
 shape = SubResource("RectangleShape2D_0kg7m")
 
 [node name="warning_label" type="Label" parent="BlockCollider"]

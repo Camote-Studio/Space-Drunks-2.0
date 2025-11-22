@@ -19,7 +19,7 @@ func _ready() -> void:
 	_setup_mirroring()
 
 func _process(delta: float) -> void:
-	_auto_x += velocidad_scroll * delta
+	_auto_x += (velocidad_scroll * delta)*1.5
 	var dx := 0.0
 	var dy := 0.0
 	if cam:
